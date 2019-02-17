@@ -5,7 +5,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/', methods=['GET', 'POST'])
 def welcome():
-    return render_template('index.html', name=__name__)
+    return render_template('index.html', token=__name__)
 
 
 @main.route('/about')

@@ -1,3 +1,5 @@
 # Pycharm stuff
 .idea/
+__pycache__/
+*.pyc
 

@@ -8,7 +8,7 @@ web_api = Blueprint('web_api', __name__)
 
 @web_api.route('/')
 def test():
-    return '<h1>YOU HAVE REACHED THE WEB API!</h1>'
+    return render_template('index.html', token=__name__)
 
 
 
