@@ -1,14 +1,15 @@
-from flask import request, render_template, Blueprint
+"""
+Main routes
+"""
+from flask import render_template, Blueprint
+from flaskbank import bcrypt
+from flaskbank.model import clients
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/', methods=['GET', 'POST'])
-def welcome():
+def index():
     return render_template('index.html', token=__name__)
 
-
-@main.route('/about')
-def about():
-    return render_template('about.html', name=__name__)
 
