@@ -23,16 +23,11 @@ Now the working directory should be setup
 
 # React Setup
 
-Install [node.js](https://nodejs.org/en/) (npm), either LTS or latest version should work the same
+Install [Node.js](https://nodejs.org/en/) (npm), either LTS or latest version should work the same
 
+To install React dependencies open command line in react-app/ folder and run:
 
-in command line (avoid doing it in project folder if possible): 
-
-	npx create-react-app my-app
-
-Copy the node_modules folder from the generated my-app folder into flaskbank/react-app/
-
-You can now delete the my-app folder if you want
+	npm install
 
 You can test the react app using following in the react-app/ folder
 
