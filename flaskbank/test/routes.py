@@ -21,14 +21,14 @@ def test_main():
 def db_insert():
     if not clients.find_one({'username': 'dummy'}):
         clients.insert_one({
-            'name': {'first': 'Mr', 'middle': '', 'last': 'Dummy'},
+            'name': {'first': 'Yummy', 'middle': '', 'last': 'Dummy'},
             'username': 'dummy',
             'password': bcrypt.generate_password_hash('abc123'.encode(
                 'utf-8')),
             'accounts': {'checking': [1234567], 'saving': [7654321]}
         })
 
-    return '<h1>Inserted dummy user into database</h1>'
+    return '<h1>Inserted dummy users into database</h1>'
 
 
 @test.route('/db-update', methods=['GET', 'POST'])

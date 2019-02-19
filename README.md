@@ -7,7 +7,7 @@ Install [Git](https://git-scm.com/)
 
 Go to directory you want to work on
 
-Open Git bash/command line there and enter:
+Open Git bash/command-line there and enter:
 
     git init
 
@@ -25,30 +25,32 @@ Now the working directory should be setup
 
 Install [Node.js](https://nodejs.org/en/) (npm), either LTS or latest version should work the same
 
-To install React dependencies open command line in react-app/ folder and run:
+**All follwing command should be run in flaskbank/react-app/ folder**
+
+To install React dependencies, open command-line and run:
 
 	npm install
 
-You can test the react app using following in the react-app/ folder
+To test the react app, run:
 
 	npm start
 	
-Build the react app for flask to load using:
+To build the react app for flask to load, run:
 
 	npm run build
 
 # Flask Setup
 Install [Python](https://www.python.org/)
 
-Install packages: flask, flask-bcrypt, flask-pymongo
+Install [pip](https://pip.pypa.io/en/stable/installing/) (if it didn't come with python for some reason)
 
-Using command line:
+**Open command-line in project root folder for the following**
 
-	pip install Flask
-	pip install Flask-PyMongo
-	pip install flask-bcrypt
+Install dependencies:
 
-Now you should be able to run the flask server by running run.py
+	pip install -r requirements.txt
+
+To start flask:
 
 	python run.py
 
