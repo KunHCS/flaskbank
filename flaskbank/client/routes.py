@@ -1,8 +1,11 @@
-from flask import request, render_template, Blueprint
+"""
+Client routes
+"""
+from flask import Blueprint
 
 client = Blueprint('client', __name__)
 
 
 @client.route('/')
 def welcome():
-    return '<h1>Welcome to hell</h1>'
+    return '<h1>Client Route</h1>'

@@ -25,9 +25,9 @@ Now the working directory should be setup
 
 Install [Node.js](https://nodejs.org/en/) (npm), either LTS or latest version should work the same
 
-**All follwing command should be run in flaskbank/react-app/ folder**
+**Open command-line in flaskbank/react-app/ for the following**
 
-To install React dependencies, open command-line and run:
+To install React dependencies + [Redux](https://redux.js.org/introduction/getting-started) + [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
 
 	npm install
 

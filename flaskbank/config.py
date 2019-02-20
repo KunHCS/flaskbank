@@ -1,5 +1,5 @@
 """
-Configuration values for flask server
+Configuration values for flask
 """
 from pathlib import Path
 

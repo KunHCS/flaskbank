@@ -8,7 +8,7 @@ web_api = Blueprint('web_api', __name__)
 
 @web_api.route('/')
 def api_home():
-    return '<h1>API route</h1>'
+    return '<h1>API Route</h1>'
 
 
 

@@ -6,23 +6,30 @@ from flask_bcrypt import Bcrypt
 from flaskbank.config import Config
 from flask_pymongo import PyMongo
 
+mongo = PyMongo()
+bcrypt = Bcrypt()
 
-app = Flask(__name__, static_folder=Config.STATIC_PATH,
-            template_folder=Config.TEMPLATE_PATH)
 
-app.config.from_object(Config)
-mongo = PyMongo(app)
-bcrypt = Bcrypt(app)
+def create_app():
+    app = Flask(__name__, static_folder=Config.STATIC_PATH,
+                template_folder=Config.TEMPLATE_PATH)
 
-# Blueprints (moving to top will break it)
-from flaskbank.client.routes import client
-from flaskbank.main.routes import main
-from flaskbank.api.routes import web_api
-from flaskbank.manager.routes import manager
-from flaskbank.test.routes import test
+    app.config.from_object(Config)
 
-app.register_blueprint(main)
-app.register_blueprint(client, url_prefix='/client')
-app.register_blueprint(web_api, url_prefix='/api')
-app.register_blueprint(manager, url_prefix='/manager')
-app.register_blueprint(test, url_prefix='/test')
+    mongo.init_app(app)
+    bcrypt.init_app(app)
+
+    # Blueprints
+    from flaskbank.client.routes import client
+    from flaskbank.main.routes import main
+    from flaskbank.api.routes import web_api
+    from flaskbank.manager.routes import manager
+    from flaskbank.test.routes import test
+
+    app.register_blueprint(main)
+    app.register_blueprint(client, url_prefix='/client')
+    app.register_blueprint(web_api, url_prefix='/api')
+    app.register_blueprint(manager, url_prefix='/manager')
+    app.register_blueprint(test, url_prefix='/test')
+
+    return app

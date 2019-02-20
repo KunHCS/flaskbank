@@ -1,9 +1,12 @@
-from flask import request, render_template, Blueprint
+"""
+Manager routes
+"""
+from flask import Blueprint
 
 manager = Blueprint('manager', __name__)
 
 
 @manager.route('/')
 def welcome():
-    return '<h1>YOU HAVE REACHED THE MANAGER</h1>'
+    return '<h1>Manager Route</h1>'
 
