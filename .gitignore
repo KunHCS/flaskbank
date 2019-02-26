@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 venv/
 
+.eslintrc
 
 
 # Created by https://www.gitignore.io/api/pycharm,sublimetext,visualstudiocode
