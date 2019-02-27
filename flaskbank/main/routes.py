@@ -13,7 +13,7 @@ def index():
     return render_template('index.html', token=__name__)
 
 
-@main.route('/user/register', methods=['POST'])
+@main.route('/main/register', methods=['POST'])
 def signup():
     data = request.get_json()
     if data:

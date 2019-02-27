@@ -3,7 +3,7 @@ import axios from "axios";
 
 const register = newUser => {
   return axios
-    .post("/user/register", {
+    .post("/main/register", {
       first_name: newUser.first_name,
       last_name: newUser.last_name,
       email: newUser.email,
@@ -80,7 +80,7 @@ class register_test extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="name">username</label>
+                <label htmlFor="name">Username</label>
                 <input
                   type="text"
                   className="form-control"
