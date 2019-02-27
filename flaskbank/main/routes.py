@@ -1,20 +1,19 @@
 """
 Main routes, home page
 """
-from flask import render_template, Blueprint, request, make_response
+from pathlib import Path
+from flask import render_template, Blueprint, request, make_response, \
+    send_from_directory
 from flaskbank.model import clients
 from flaskbank import bcrypt
+from flaskbank.config import Config
 
 main = Blueprint('main', __name__)
 
 
-@main.route('/')
-def index():
-    return render_template('index.html', token=__name__)
-
-
+# user registration post route
 @main.route('/main/register', methods=['POST'])
-def signup():
+def register():
     data = request.get_json()
     if data:
 
@@ -43,3 +42,11 @@ def signup():
 
     return make_response(('Username already exist', 409))
 
+
+# Catch all
+@main.route('/', defaults={'path': ''})
+@main.route('/<path:path>')
+def catch_all(path):
+    if path and Path.exists(Path(str(Config.TEMPLATE_PATH) + path)):
+        return send_from_directory(Config.TEMPLATE_PATH, path)
+    return render_template('index.html')

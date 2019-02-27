@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {/* Additional routes & components here */}
-        <Route exact path="/" component={register_test} />
+        {/* <Route exact path="/" component={Mainpage} /> */}
+        <Route exact path="/test" component={register_test} />
       </Router>
     );
   }

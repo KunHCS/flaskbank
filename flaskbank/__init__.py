@@ -26,10 +26,9 @@ def create_app():
     from flaskbank.manager.routes import manager
     from flaskbank.test.routes import test
 
-    app.register_blueprint(main)
     app.register_blueprint(client, url_prefix='/client')
     app.register_blueprint(web_api, url_prefix='/api')
     app.register_blueprint(manager, url_prefix='/manager')
-    app.register_blueprint(test, url_prefix='/test')
+    app.register_blueprint(main)
 
     return app
