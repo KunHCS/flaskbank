@@ -33,8 +33,8 @@
             "password" : "<string>"
         }
 
-##Database Structure
-####Clients
+## Database Structure
+#### Clients
 
 	{
 		"first_name":<string>,
