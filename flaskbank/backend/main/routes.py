@@ -4,9 +4,9 @@ Main routes, home page ++ test
 from pathlib import Path
 from flask import render_template, Blueprint, request, make_response, \
     send_from_directory
-from flaskbank.model import clients
-from flaskbank import bcrypt
-from flaskbank.config import Config
+from flaskbank.backend.model import clients
+from flaskbank.backend import bcrypt
+from flaskbank.backend.config import Config
 
 main = Blueprint('main', __name__)
 

@@ -1,6 +1,6 @@
 from flask import jsonify, Blueprint, request, abort, Flask
-import bcrypt
-from pymongo import MongoClient
+from flaskbank.backend import bcrypt
+from flaskbank.backend.model import clients
 
 
 
