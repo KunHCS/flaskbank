@@ -1,9 +1,9 @@
 import flaskbank.backend.all_module as am
 
-register = am.Blueprint('register', __name__)
+register_bp = am.Blueprint('register', __name__)
 
 
-@register.route('/api/register', methods=['POST'])
+@register_bp.route('/api/register', methods=['POST'])
 def register():
     data = am.request.get_json()
     if data:

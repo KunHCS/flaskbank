@@ -23,9 +23,9 @@ def create_app():
 
     from flaskbank.backend.main.routes import main
     # from flaskbank.backend.api.routes import web_api
-    from flaskbank.backend.api.register import register
+    from flaskbank.backend.api.register import register_bp
 
-    app.register_blueprint(register)
+    app.register_blueprint(register_bp)
     app.register_blueprint(main)
 
     return app
