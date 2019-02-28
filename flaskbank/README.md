@@ -14,10 +14,12 @@
 #### http://127.0.0.1:5000/api/register (POST)
 
         {
-            "email": "<email>",
-            "password" : "<password>",
-            "user_id": "<user_id>",
-            "full_name": "<full_name>"
+            "first_name": <string>,
+            "last_name": <string>,
+            "email": "<string>",
+            "password" : "<string>",
+            "username": "<string>",
+            
         }
 
 
@@ -26,9 +28,37 @@
 #### http://127.0.0.1:5000/api/login (POST)
 
         {
-            "email": "<email>",
-            "password" : "<password>"
+            "email": "<string>",
+            "username": "<string>"
+            "password" : "<string>"
         }
+
+##Database Structure
+####Clients
+
+	{
+		"first_name":<string>,
+		"last_name":<string>,
+		"username":<string>,
+		"password":<string>,
+		"email":<string>,
+		
+		"accounts": [
+			{"alias":<string>,
+			 "type":<string>,
+			 "account_num": <integer>,
+			 "active": <boolean>}
+		]
+		
+		"transactions": [
+			{"date":<date>,
+			 "description":<string>,
+			 "amount":<double>,
+			 "from":<string>,
+			 "to":<string>}
+		]
+
+	}
 
 ### For testing in local
 - simply run main.py to start API on the terminal
