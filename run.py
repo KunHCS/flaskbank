@@ -1,7 +1,7 @@
 """
 Starts the flask server
 """
-from flaskbank import create_app
+from flaskbank.backend import create_app
 import sys
 
 app = create_app()
