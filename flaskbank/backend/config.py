@@ -8,7 +8,7 @@ db_name = 'bank_database'
 
 class Config:
     FLASK_ENV = 'development'
-    SECRET_KEY = 's5v8y/B?E(H+MbQe'
+    SECRET_KEY = 'dev'
     TEMPLATE_PATH = Path('../react-app/build')
     STATIC_PATH = Path('../react-app/build/static')
     MONGO_URI = 'mongodb://admin:admin@bank-cluster-shard-00-00-su85m' \
