@@ -2,9 +2,9 @@
 Initialization for flask server
 """
 from flask import Flask
-from flask_bcrypt import Bcrypt
-from flaskbank.backend.config import Config
 from flask_pymongo import PyMongo
+from flask_bcrypt import Bcrypt
+from .config import Config
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
@@ -20,12 +20,12 @@ def create_app():
     bcrypt.init_app(app)
 
     # Blueprints
+    from flaskbank.backend.api import API_BLUEPRINTS
+    from flaskbank.backend.main.routes import main_bp
 
-    from flaskbank.backend.main.routes import main
-    # from flaskbank.backend.api.routes import web_api
-    from flaskbank.backend.api.register import register_bp
+    for bp in API_BLUEPRINTS:
+        app.register_blueprint(bp, url_prefix='/api')
 
-    app.register_blueprint(register_bp)
-    app.register_blueprint(main)
+    app.register_blueprint(main_bp)
 
     return app

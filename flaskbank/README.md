@@ -1,5 +1,5 @@
- - [Backend](#backend)
- - [Frontend](#frontend)
+ - [**Backend**](#backend)
+ - [**Frontend**](#frontend)
 
 
 
@@ -9,21 +9,21 @@
 
 #### All request is passed by JSON
 
-## *signup*
+## *Registration*
 
 #### http://127.0.0.1:5000/api/register (POST)
 
         {
             "first_name": <string>,
             "last_name": <string>,
+            "username": "<string>",
             "email": "<string>",
             "password" : "<string>",
-            "username": "<string>",
-            
+
         }
 
 
-## *login*
+## *Login*
 
 #### http://127.0.0.1:5000/api/login (POST)
 
@@ -34,7 +34,7 @@
         }
 
 ## Database Structure
-#### Clients
+#### Clients collection
 
 	{
 		"first_name":<string>,
@@ -60,10 +60,15 @@
 
 	}
 
-### For testing in local
-- simply run main.py to start API on the terminal
+### For local testing
+- Simply run run.py to start API on the terminal
 
+        python run.py
+        or
         python3 run.py
+
+
+
 
 [RESTful Authentication with Flask](https://blog.miguelgrinberg.com/post/restful-authentication-with-flask)
 

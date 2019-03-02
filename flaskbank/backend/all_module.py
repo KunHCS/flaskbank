@@ -1,13 +1,14 @@
-from flaskbank.backend.config import Config
-from flaskbank.backend import mongo
-from flaskbank.backend import bcrypt
+"""
+Import all required modules
+"""
+from . import mongo
+from . import bcrypt
+from .config import Config
+from .model import clients
 
-from flask import render_template, Blueprint, request, make_response, \
-    send_from_directory
+from flask import (render_template, Blueprint, request, make_response,
+                   send_from_directory)
 
-from flaskbank.backend.model import clients
-from flask import Flask
-from flask_bcrypt import Bcrypt
-from flaskbank.backend.config import Config
-from flask_pymongo import PyMongo
+
+
 
