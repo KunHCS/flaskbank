@@ -2,7 +2,7 @@
 Main routes, home page ++ test
 """
 from pathlib import Path
-import flaskbank.backend.all_module as am
+from .. import all_module as am
 main_bp = am.Blueprint('main', __name__)
 
 
