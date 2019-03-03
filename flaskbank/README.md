@@ -23,6 +23,7 @@
 
 
 ## *Login*
+###### Note: pass either username or email based on input
 
 #### http://127.0.0.1:5000/api/login (POST)
 
@@ -39,13 +40,14 @@
 		"first_name":<string>,
 		"last_name":<string>,
 		"username":<string>,
-		"password":<string>,
 		"email":<string>,
-		
+		"password":<string>,
+
 		"accounts": [
-			{"alias":<string>,
+			{"account_num":<integer>,
+			 "alias":<string>,
+			 "balance":<double>
 			 "type":<string>,
-			 "account_num": <integer>,
 			 "active": <boolean>}
 		]
 		
@@ -56,7 +58,6 @@
 			 "from":<string>,
 			 "to":<string>}
 		]
-
 	}
 
 ### For local testing
