@@ -5,14 +5,12 @@ import Paper from '@material-ui/core/Paper';
 
 
 const Left = () => {
-
     const styleLeft = {
-        margin: '0px',
         backgroundColor: '#5F5F5F',
-        height: 400,
-        width: 1000,
+        height:'auto',
+        width: '30%',
+        textAlign: '-webkit-center'
     }
-
 
     return (
         <div className ="LeftContainer" style={styleLeft} >
@@ -24,18 +22,16 @@ const Left = () => {
 
 
 const Right = () => {
-
     const paperStyle = {
-        height:300,
-        width:200
+        height:'300px',
+        width:  '200px'
     };
-
     const styleRight = {
         backgroundColor: '#797979',
-        height:400,
-        width:1000,
+        height:'auto',
+        width: '70%',
+        textAlign: '-webkit-center'
     }
-
 
     return (
         <div className ="RightContainer" style={styleRight}>
@@ -50,12 +46,13 @@ const Right = () => {
 
 
 const Container = () => {
-
     const containerStyle = {
         backgroundColor: 'yellow',
         height:'100%',
         width:'100%',
-        display: 'inline-block',
+        display: 'flex',
+        position: 'absolute',
+        maxWidth: '3000px'
 
     }
 
