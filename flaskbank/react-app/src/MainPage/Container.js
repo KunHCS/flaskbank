@@ -53,8 +53,8 @@ const Container = () => {
 
     const containerStyle = {
         backgroundColor: 'yellow',
-        height:1400,
-        width:2000,
+        height:'100%',
+        width:'100%',
         display: 'inline-block',
 
     }
