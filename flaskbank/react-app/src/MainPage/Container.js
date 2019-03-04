@@ -1,5 +1,6 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
+import Pic from '../images/testImage.png'
 
 
 
@@ -15,6 +16,7 @@ const Left = () => {
     return (
         <div className ="LeftContainer" style={styleLeft} >
             <p> This is left side content</p>
+            <img src={Pic} alt="mypic" style={{witdh:'15%' ,height:'15%'}}/>
         </div>
 
     );
@@ -23,8 +25,8 @@ const Left = () => {
 
 const Right = () => {
     const paperStyle = {
-        height:'300px',
-        width:  '200px'
+        height:'45%',
+        width:  '25%'
     };
     const styleRight = {
         backgroundColor: '#797979',
@@ -52,14 +54,14 @@ const Container = () => {
         width:'100%',
         display: 'flex',
         position: 'absolute',
-        maxWidth: '3000px'
-
+        minWidth: '100%'
     }
 
     return (
         <div className ="container" style ={containerStyle}>
             <Left/>
             <Right/>
+
         </div>
     );
 }
