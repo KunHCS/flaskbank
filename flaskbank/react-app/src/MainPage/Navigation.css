@@ -1,8 +1,10 @@
 .Navigation {
     height:100%;
-    background-color: #808080;
-    border: 1px solid grey;
+    background-color: #404040;
+    text-align: right;
+
 }
 .Nav-text{
     color: white;
+    alignment: center;
 }
