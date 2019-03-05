@@ -9,6 +9,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Pic from "../images/logo.png";
 
 const styles = theme => ({
     root: {
@@ -76,12 +77,11 @@ const search = (props) =>{
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                        Material-UI
+
+                    <Typography className={classes.title} variant="h7" color="inherit" noWrap >
+                        SJSP
                     </Typography>
+                    <img src={Pic} alt="mypic" style={{witdh:50 ,height:50}}/>
                     <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>

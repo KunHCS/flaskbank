@@ -1,7 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import Pic from '../images/testImage.png'
-
+import Pic from '../images/testImage.png';
+import RegisterForm from '../components/register_test';
 
 
 
@@ -23,10 +23,10 @@ const Left = () => {
 }
 
 
-const Right = () => {
+const Right = (prop) => {
     const paperStyle = {
-        height:'45%',
-        width:  '25%'
+        height:'95%',
+        width:  '55%'
     };
     const styleRight = {
         backgroundColor: '#797979',
@@ -40,6 +40,7 @@ const Right = () => {
             <p>This is the right side</p>
             <Paper className ="paper" style={paperStyle}>
                 <p> This is paper</p>
+            <RegisterForm/>
             </Paper>
         </div>
     );
@@ -53,7 +54,7 @@ const Container = () => {
         height:'100%',
         width:'100%',
         display: 'flex',
-        position: 'absolute',
+        position: 'relative',
         minWidth: '100%'
     }
 
@@ -61,7 +62,6 @@ const Container = () => {
         <div className ="container" style ={containerStyle}>
             <Left/>
             <Right/>
-
         </div>
     );
 }

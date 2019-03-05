@@ -17,13 +17,3 @@ const navigation = (props) =>{
 
 export default navigation;
 
-
-
-// .Navigation {
-//     height:100%,background-color: #404040, text-align: right;
-//
-// }
-// .Nav-text{
-//     color: white;
-//     alignment: center;
-// }
