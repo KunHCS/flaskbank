@@ -5,9 +5,11 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from .config import Config
+from flask_jwt_extended import JWTManager
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
+f_jwt = JWTManager()
 
 
 def create_app():
@@ -18,6 +20,7 @@ def create_app():
 
     mongo.init_app(app)
     bcrypt.init_app(app)
+    f_jwt.init_app(app)
 
     # Blueprints
     from flaskbank.backend.api import API_BLUEPRINTS

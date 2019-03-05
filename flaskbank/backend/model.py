@@ -16,10 +16,15 @@ try:
         'count': 1000000
     })
 except pymongo.errors.DuplicateKeyError as e:
-    print('Initialized')
+    pass
 
 
 def get_next_id(key):
+    """
+    Get the next unique id for specific key
+    :param key: (string) key to access
+    :return: (number) unique ID
+    """
     new_id = uniqueID_db.find_one_and_update(
         {'id': key},
         {'$inc': {'count': 1}}
