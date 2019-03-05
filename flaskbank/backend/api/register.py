@@ -24,7 +24,7 @@ def register_user():
             'username': username,
             'email': email,
             'password': am.bcrypt.generate_password_hash(password.encode(
-                'utf-8')),
+                'UTF-8')),
 
             'accounts': [
                 {
