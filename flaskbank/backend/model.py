@@ -5,10 +5,10 @@ from . import mongo
 import pymongo
 
 clients = mongo.db.clients
-clients.create_index([("username", 'text')], unique=True)
+clients.create_index([("username", pymongo.ASCENDING)], unique=True)
 
 uniqueID_db = mongo.db.unique_counter
-uniqueID_db.create_index([('id', 'text')], unique=True)
+uniqueID_db.create_index([('id', pymongo.ASCENDING)], unique=True)
 
 try:
     uniqueID_db.insert_one({
