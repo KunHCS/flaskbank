@@ -1,18 +1,30 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
+import axios from "axios";
 
 
 class Login extends React.Component {
 
-     state = {username:"",password:""};
+      state = {username:"",password:""};
 
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        const user = {
+            username: this.state.username,
+            password: this.state.password
+        };
+
+        loginInfo (user);
+    }
 
     render(){
         return (
               <div>
                   <Paper className ="paper" style={paperStyle}>
-                  Sign On
+                       Sign On
                       <form>
                          <div>
                           <input
@@ -28,16 +40,11 @@ class Login extends React.Component {
                               value = {this.state.password}
                               onChange ={e=>this.setState({password:e.target.value})}
                           />
-
+                          <br/><br/>
                          </div>
-                          <button
-                              type="Sign On"
-                              // className="btn btn-lg btn-primary btn-block"
-                          >
+                          <Button variant="contained" type="submit" >
                               Sign On
-                          </button>
-
-
+                          </Button>
 
                       </form>
                   </Paper>
@@ -45,6 +52,22 @@ class Login extends React.Component {
          )
      };
 }
+
+
+
+const loginInfo =  userSignOn => {
+    return axios
+        .post("/api/user", {
+            // username: newUser.username,
+            // password: newUser.password
+        })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => console.log(error));
+};
+
+
 
 const paperStyle = {
     height: 400,
