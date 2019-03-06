@@ -6,10 +6,7 @@ import axios from "axios";
 
 class Login extends React.Component {
 
-
-
-      state = {username:"",password:""};
-
+    state = {username:"",password:""};
 
     onSumbit =(e) => {
         e.preventDefault();
@@ -35,14 +32,12 @@ class Login extends React.Component {
                                  value = {this.state.username}
                                  onChange ={e=>this.setState({username:e.target.value})}
                              />
-
                              <input
                                  type = "text"
                                  placeholder="Password"
                                  value = {this.state.password}
                                  onChange ={e=>this.setState({password:e.target.value})}
                              />
-
                           </div>
                           <Button variant="contained" type="submit"  >
                               Sign On
@@ -59,7 +54,7 @@ class Login extends React.Component {
 
 const loginInfo =  userSignOn => {
     return axios
-        .post("/api/user", {
+        .post("/api/login", {
             username: userSignOn.username,
             password: userSignOn.password
         })
