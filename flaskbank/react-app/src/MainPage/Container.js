@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Pic from '../images/testImage.png';
 import RegisterForm from '../components/register_test';
 import Login from './login';
+import BGimg from '../images/bg.jpeg';
 
 
 
@@ -11,7 +12,8 @@ const Left = () => {
         backgroundColor: '#5F5F5F',
         height:'auto',
         width: '30%',
-        textAlign: '-webkit-center'
+        textAlign: '-webkit-center',
+        opacity: '0.98'
     }
 
     return (
@@ -30,7 +32,8 @@ const Right = (prop) => {
         backgroundColor: '#797979',
         height:'auto',
         width: '70%',
-        textAlign: '-webkit-center'
+        textAlign: '-webkit-center',
+        opacity: '0.98'
     }
 
     return (
@@ -43,15 +46,20 @@ const Right = (prop) => {
 }
 
 
-
+// url('../images/bg.jpeg')
 const Container = () => {
+
     const containerStyle = {
-        backgroundColor: 'yellow',
+        backgroundImage: "url(" + BGimg + ")",
+        backgroundSize: 'cover',
+        backgroundRepeat:'no-repeat',
+        backgroundPosition:'center',
         height:'100%',
         width:'100%',
         display: 'flex',
-        position: 'relative',
-        minWidth: '100%'
+        position: 'absolute',
+        minWidth: '100%',
+
 
     }
 
@@ -59,6 +67,7 @@ const Container = () => {
         <div className ="container" style ={containerStyle}>
             <Left/>
             <Right/>
+            hi there
         </div>
     );
 }
