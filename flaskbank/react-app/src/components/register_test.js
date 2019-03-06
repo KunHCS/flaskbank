@@ -35,6 +35,7 @@ class register_test extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -113,6 +114,7 @@ class register_test extends Component {
                   onChange={this.onChange}
                 />
               </div>
+
               <button
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"
