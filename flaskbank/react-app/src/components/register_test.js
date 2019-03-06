@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Paper from '@material-ui/core/Paper';
 
 const register = newUser => {
   return axios
@@ -52,6 +53,7 @@ class register_test extends Component {
 
   render() {
     return (
+        <Paper className ="paper" style={paperStyle} >
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
@@ -125,7 +127,15 @@ class register_test extends Component {
           </div>
         </div>
       </div>
+        </Paper>
     );
   }
 }
+
+const paperStyle = {
+  height: 700,
+  width:  500,
+  boxShadow: '-5px 10px 25px, 5px 10px 25px',
+
+};
 export default register_test;
