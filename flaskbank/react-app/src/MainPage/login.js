@@ -6,10 +6,12 @@ import axios from "axios";
 
 class Login extends React.Component {
 
+
+
       state = {username:"",password:""};
 
 
-    onSumbit(e) {
+    onSumbit =(e) => {
         e.preventDefault();
         console.log('it just submit');
         const user = {
