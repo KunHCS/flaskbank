@@ -9,9 +9,9 @@ class Login extends React.Component {
       state = {username:"",password:""};
 
 
-    onSubmit(e) {
+    onSumbit(e) {
         e.preventDefault();
-
+        console.log('it just submit');
         const user = {
             username: this.state.username,
             password: this.state.password
@@ -23,31 +23,31 @@ class Login extends React.Component {
     render(){
         return (
               <div>
-                  <Paper className ="paper" style={paperStyle}>
-                       Sign On
-                      <form>
-                         <div>
-                          <input
-                              type = "text"
-                              placeholder="User Name"
-                              value = {this.state.username}
-                              onChange ={e=>this.setState({username:e.target.value})}
-                           />
+                  <form onSubmit={this.onSumbit}>
+                      <Paper className ="paper" style={paperStyle} >
+                              Sign On
+                          <div>
+                             <input
+                                 type = "text"
+                                 placeholder="User Name"
+                                 value = {this.state.username}
+                                 onChange ={e=>this.setState({username:e.target.value})}
+                             />
 
-                          <input
-                              type = "text"
-                              placeholder="Password"
-                              value = {this.state.password}
-                              onChange ={e=>this.setState({password:e.target.value})}
-                          />
-                          <br/><br/>
-                         </div>
-                          <Button variant="contained" type="submit" >
+                             <input
+                                 type = "text"
+                                 placeholder="Password"
+                                 value = {this.state.password}
+                                 onChange ={e=>this.setState({password:e.target.value})}
+                             />
+
+                          </div>
+                          <Button variant="contained" type="submit"  >
                               Sign On
                           </Button>
+                      </Paper>
+                  </form>
 
-                      </form>
-                  </Paper>
              </div>
          )
      };
@@ -58,8 +58,8 @@ class Login extends React.Component {
 const loginInfo =  userSignOn => {
     return axios
         .post("/api/user", {
-            // username: newUser.username,
-            // password: newUser.password
+            username: userSignOn.username,
+            password: userSignOn.password
         })
         .then(response => {
             console.log(response);

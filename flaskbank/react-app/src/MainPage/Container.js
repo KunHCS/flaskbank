@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import Pic from '../images/testImage.png';
 import RegisterForm from '../components/register_test';
 import Login from './login';
@@ -67,7 +66,6 @@ const Container = () => {
         <div className ="container" style ={containerStyle}>
             <Left/>
             <Right/>
-            hi there
         </div>
     );
 }
