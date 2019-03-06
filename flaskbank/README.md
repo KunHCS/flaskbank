@@ -13,25 +13,37 @@
 
 #### http://127.0.0.1:5000/api/register (POST)
 
-        {
-            "first_name": <string>,
-            "last_name": <string>,
-            "username": "<string>",
-            "email": "<string>",
-            "password" : "<string>",
-        }
+    {
+        "first_name": <string>,
+        "last_name": <string>,
+        "username": "<string>",
+        "email": "<string>",
+        "password" : "<string>",
+    }
+#### Responses:
+Status: 201 CREATED
 
+Status: 409 CONFLICT
+
+Status: 400 BAD REQUEST
 
 ## *Login*
-###### Note: pass either username or email based on input
-
 #### http://127.0.0.1:5000/api/login (POST)
 
-        {
-            "email": "<string>",
-            "username": "<string>"
-            "password" : "<string>"
-        }
+    {
+        "username": "<string>"
+        "password" : "<string>"
+    }
+#### Responses:
+Status: 201 CREATED
+
+    {
+        "access_token": <token>
+    }
+
+Status: 409 CONFLICT
+
+Status: 400 BAD REQUEST
 
 ## Database Structure
 #### Clients collection
