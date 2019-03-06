@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const navigation = (props) =>{
+const navigation = () =>{
     const navTextStyle = {
         color: 'white',
     };

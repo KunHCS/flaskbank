@@ -5,7 +5,7 @@ import Container from "./Container";
 
 
 
-const mainPage = (props) => {
+const mainPage = () => {
 
     return (
         <div >
