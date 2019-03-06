@@ -49,5 +49,31 @@ class APITestCase(unittest.TestCase):
         self.assertEquals(response.status_code, 400)
 
 
+    def test_signup_and_delete(self):
+        app = create_app().test_client()
+        # ------------------------------------------------------------------------------
+        # Check normal registration
+        response = app.post('http://127.0.0.1:5000/api/register',
+                            json={
+                                'first_name': 'some random',
+                                'last_name': 'some random',
+                                'email': 'some random',
+                                'username': 'some random',
+                                'password': 'some random'
+                            })
+        json_data = response.get_json()
+        self.assertEquals(response.status_code, 201)
+
+        # ------------------------------------------------------------------------------
+        # Check normal deletion
+        response = app.delete('http://127.0.0.1:5000/api/utils/!CLEAR_ONE_CLIENTS',
+                            json={
+                                'username': 'some random',
+                                'password': 'some random'
+                            })
+        json_data = response.get_json()
+        self.assertEquals(response.status_code, 200)
+
+
 if __name__ == '__main__':
     unittest.main()
