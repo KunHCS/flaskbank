@@ -3,17 +3,18 @@ import Navigation from "./Navigation";
 import Search from "./Search";
 import Container from "./Container";
 import Login from './login';
+import Register from '../components/register_test';
 
 
 
-const mainPage = () => {
+const openAccountPage = () => {
 
     return (
         <div >
             <Navigation/>
             <Search/>
             <Container>
-                <Login/>
+                <Register/>
             </Container>
         </div>
 
@@ -21,4 +22,4 @@ const mainPage = () => {
 }
 
 
-export default mainPage;
+export default openAccountPage;
