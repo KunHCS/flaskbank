@@ -69,7 +69,6 @@ const loginInfo =  userSignOn => {
 const paperStyle = {
     height: 400,
     width:  300,
-    boxShadow: '-5px 10px 25px, 5px 10px 25px',
-
+    boxShadow: '-5px 1px 10px, 5px 1px 10px',
 };
 export default Login;

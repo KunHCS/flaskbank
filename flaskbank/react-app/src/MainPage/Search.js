@@ -27,6 +27,7 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+        padding: 10,
     },
     search: {
         position: 'relative',
@@ -81,7 +82,9 @@ const search = (props) =>{
                     <Typography className={classes.title} variant="h7" color="inherit" noWrap >
                         SJSP
                     </Typography>
+                    <a href="/">
                     <img src={Pic} alt="mypic" style={{witdh:50 ,height:50}}/>
+                    </a>
                     <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
