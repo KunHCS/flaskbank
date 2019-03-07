@@ -1,5 +1,5 @@
 from .register import register_bp
-from .jwt_login import login_bp
+from .auth import login_bp
 from .get_client_info import get_client_bp
 from .utils_api import utils_bp
 
