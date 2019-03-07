@@ -33,7 +33,7 @@ class Login extends React.Component {
                                  onChange ={e=>this.setState({username:e.target.value})}
                              />
                              <input
-                                 type = "text"
+                                 type = "password"
                                  placeholder="Password"
                                  value = {this.state.password}
                                  onChange ={e=>this.setState({password:e.target.value})}

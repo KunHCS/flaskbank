@@ -2,7 +2,6 @@ import React from 'react';
 import Navigation from "./Navigation";
 import Search from "./Search";
 import Container from "./Container";
-import Login from './login';
 import Register from '../components/register_test';
 
 
