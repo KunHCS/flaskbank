@@ -8,16 +8,9 @@ def clear_db():
     return am.make_response('ALL CLIENTS DELETED', 200)
 
 
-@utils_bp.route('/utils/!CLEAR_ONE_CLIENTS', methods=['DELETE'])
-def delete_one_client():
-    data = am.request.get_json()
-    if not data:
-        return am.make_response("Bad Request, no data passed", 400)
-
-    try:
-        username = data['username']
-    except KeyError:
-        return am.make_response('Bad Request, missing/misspelled key', 400)
-
-    am.clients.delete_one({'username': username})
-    return am.jsonify({'user': username + ' is deleted'}), 200
+@utils_bp.route('/utils/!CLEAR_ONE_CLIENTS/<target>', methods=['DELETE'])
+def delete_one_client(target):
+    result = am.clients.delete_one({'username': target})
+    if result.deleted_count:
+        return am.jsonify({'msg': f'user <{target}> deleted'}), 200
+    return am.jsonify({'msg': f'user <{target}> does not exist'}), 409
