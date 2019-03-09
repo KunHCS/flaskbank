@@ -1,7 +1,6 @@
 import React from 'react';
-import Pic from '../images/testImage.png';
-import RegisterForm from './register_test';
-import BGimg from '../images/bg.jpeg';
+import Pic from '../../images/testImage.png';
+import BGimg from '../../images/bg.jpeg';
 
 
 const Left = () => {

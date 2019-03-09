@@ -9,7 +9,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import Pic from "../images/logo.png";
+import Pic from "../../images/logo.png";
 
 const styles = theme => ({
     root: {
