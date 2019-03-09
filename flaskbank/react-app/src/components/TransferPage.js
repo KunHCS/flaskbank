@@ -23,13 +23,21 @@ const Transfer = () => {
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
-                <InnerNavigationBar/>
+                <InnerNavigationBar active={activeElement}/>
                 <TransferDetails/>
             </Container>
         </div>
 
     );
 }
+
+const activeElement = {
+    act1: "nav-link ",
+    act2: "nav-link ",
+    act3: "nav-link active",
+    act4: "nav-link ",
+}
+
 
 
 const TransferDetailsStyle = {

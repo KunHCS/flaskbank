@@ -78,7 +78,7 @@ const ProfileSettingPage = () => {
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
-                <InnerNavigationBar/>
+                <InnerNavigationBar active={activeElement}/>
                 <Statement/>
             </Container>
         </div>
@@ -95,4 +95,10 @@ const StatementStyle = {
     margin: '20px'
 }
 
+const activeElement = {
+    act1: "nav-link ",
+    act2: "nav-link ",
+    act3: "nav-link ",
+    act4: "nav-link ",
+}
 export default ProfileSettingPage;
