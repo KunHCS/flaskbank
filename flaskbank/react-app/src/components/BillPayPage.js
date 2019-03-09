@@ -7,9 +7,6 @@ import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
 import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
 
-
-
-
 const CreditCardPayment= () => {
     return (
         <Paper  style={checkingContainerStyle}>
