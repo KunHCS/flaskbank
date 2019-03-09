@@ -43,10 +43,14 @@ const OverViewPage = () => {
 
 
 const StatementStyle = {
-    height: 400,
-    width:  500,
+    height: 350,
+    width:  600,
     boxShadow: '-2px 5px 25px, 2px 5px 25px',
     margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent:'center',
+    alignItems: 'center',
 
 }
 
@@ -55,7 +59,10 @@ const innerRowStyle= {
     height: 50,
     width:  400,
     margin: '20px',
-    textAlign: 'center'
+    display: 'flex',
+    textAlign: 'center',
+    justifyContent:'center',
+    alignItems: 'center',
 }
 
 export default OverViewPage;
