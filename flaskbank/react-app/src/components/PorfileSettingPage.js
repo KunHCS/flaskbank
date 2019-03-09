@@ -9,22 +9,12 @@ import {navInfo2} from "./FrameWorkUnity/NavDetails";
 const Statement= () => {
     return (
         <Paper  style={StatementStyle}>
-            <div style={{margin:'20px'}}>
-             Checking Account -2644
-            </div>
-
-            <div style={{margin:'20px'}}>
-              Saving Account -9642
-            </div>
-
-            <div style={{margin:'20px'}}>
-                SJSP Platinum Visa Card -5544
-            </div>
+            Profile Setting Page
         </Paper>
     );
 }
 
-const OverViewPage = () => {
+const ProfileSettingPage = () => {
     return (
         <div >
             <Navigation nav = {navInfo2}/>
@@ -47,4 +37,4 @@ const StatementStyle = {
     margin: '20px'
 }
 
-export default OverViewPage;
+export default ProfileSettingPage;
