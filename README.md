@@ -49,10 +49,14 @@ Install [pip](https://pip.pypa.io/en/stable/installing/) (if it didn't come with
 Install dependencies:
 
 	pip install -r requirements.txt
+	or
+	pip3 install -r requirements.txt
 
 To start flask:
 
 	python run.py
+	or
+	python3 run.py
 
 If everything is done correctly you should be able to see the same result as npm start by going to:
 
