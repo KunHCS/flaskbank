@@ -5,32 +5,29 @@ import Container from "./BaseFrameWork/Container";
 import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./NavigationDetails"
 
-const Statement= () => {
+
+
+
+
+const TransferDetails= () => {
     return (
-        <Paper  style={StatementStyle}>
+        <Paper  style={TransferDetailsStyle}>
             <div style={{margin:'20px'}}>
-             Checking Account -2644
-            </div>
-
-            <div style={{margin:'20px'}}>
-              Saving Account -9642
-            </div>
-
-            <div style={{margin:'20px'}}>
-                SJSP Platinum Visa Card -5544
+             Transfer Page
             </div>
         </Paper>
     );
 }
 
-const OverViewPage = () => {
+
+const Transfer = () => {
     return (
         <div >
             <Navigation/>
             <Search/>
             <Container>
                 <InnerNavigationBar/>
-                <Statement/>
+                <TransferDetails/>
             </Container>
         </div>
 
@@ -38,7 +35,7 @@ const OverViewPage = () => {
 }
 
 
-const StatementStyle = {
+const TransferDetailsStyle = {
     height: "auto",
     width:  500,
 
@@ -46,4 +43,4 @@ const StatementStyle = {
     margin: '20px'
 }
 
-export default OverViewPage;
+export default Transfer;

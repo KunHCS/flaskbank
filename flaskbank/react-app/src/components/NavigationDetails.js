@@ -6,16 +6,16 @@ const Nav =()=> {
         <Paper style ={navbarStyle}>
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Account Balance</a>
+                    <a className="nav-link" href="/overview">Account Balance</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Bill Pay</a>
+                    <a className="nav-link" href="/pay">Bill Pay</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Transfer</a>
+                    <a className="nav-link" href="/transfer">Transfer</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link " href="#">Deposit</a>
+                    <a className="nav-link " href="/deposit">Deposit</a>
                 </li>
             </ul>
         </Paper>
