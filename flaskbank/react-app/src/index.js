@@ -10,7 +10,7 @@ import DepositPage from "./components/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage";
 import ProfileSettingPage from "./components/PorfileSettingPage";
-
+import { Provider} from 'react-redux';
 
 
 
