@@ -24,17 +24,29 @@
 #### Responses:
 Status: 201 CREATED
 
+	{
+		"msg": <message>
+	}
+
 Status: 409 CONFLICT
 
+	{
+		"msg": <message>
+	}
+
 Status: 400 BAD REQUEST
+
+	{
+		"msg": <message>
+	}
 
 ## *Login*
 #### http://127.0.0.1:5000/api/login (POST)
 ##### Request Body:
-    {
-        "username": "<string>"
-        "password" : "<string>"
-    }
+	{
+		"username": "<string>"
+		"password" : "<string>"
+	}
 #### Responses:
 Status: 201 CREATED
 
@@ -44,7 +56,15 @@ Status: 201 CREATED
 
 Status: 409 CONFLICT
 
+	{
+		"msg": <message>
+	}
+
 Status: 400 BAD REQUEST
+
+	{
+		"msg": <message>
+	}
 
 ## *Logout*
 #### http://127.0.0.1:5000/api/logout (DELETE)
@@ -78,24 +98,24 @@ Status: 401 UNAUTHORIZED
 #### Responses:
 Status: 200 OK
 
-```json
-{
-    "accounts": [
-        {
-            "account_number": <account number>,
-            "active": <boolean>,
-            "alias": <account alias>,
-            "balance": <double>,
-            "type": <account type>
-        },
-    ],
-    "email": <email>,
-    "first_name": <first name>,
-    "last_name": <last name>,
-    "transactions": <transactions>,
-    "username": <username>
-}
-```
+
+	{
+		"accounts": [
+			{
+				"account_number": <account number>,
+				"active": <boolean>,
+				"alias": <account alias>,
+				"balance": <double>,
+				"type": <account type>
+			},
+		],
+		"email": <email>,
+		"first_name": <first name>,
+		"last_name": <last name>,
+		"transactions": <transactions>,
+		"username": <username>
+	}
+
 
 Status: 401 UNAUTHORIZED
 

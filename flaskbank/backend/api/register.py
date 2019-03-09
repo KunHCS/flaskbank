@@ -6,7 +6,7 @@ register_bp = am.Blueprint('register', __name__)
 def register_user():
     data = am.request.get_json()
     if not data:
-        return am.make_response("Bad Request, no data passed", 400)
+        return am.jsonify({'msg': 'Bad Request, no data passed'}), 400
 
     try:
         first = data["first_name"]
@@ -15,7 +15,7 @@ def register_user():
         username = data["username"]
         password = data['password']
     except KeyError:
-        return am.make_response("Bad Request, missing/misspelled key", 400)
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
     if not am.clients.find_one({"username": username}):
         am.clients.insert_one({
@@ -44,6 +44,6 @@ def register_user():
             ],
             'transactions': []
         })
-        return am.make_response(('Registered', 201))
+        return am.jsonify({'msg': 'User Registered'}), 201
 
-    return am.make_response(('Username already exist', 409))
+    return am.jsonify({'msg': 'Username already exist'}), 409

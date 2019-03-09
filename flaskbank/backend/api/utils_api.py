@@ -5,7 +5,7 @@ utils_bp = am.Blueprint('Utilities API', __name__)
 @utils_bp.route('/utils/!CLEAR-CLIENTS', methods=['DELETE'])
 def clear_db():
     am.clients.delete_many({})
-    return am.make_response('ALL CLIENTS DELETED', 200)
+    return am.jsonify({'msg': 'ALL CLIENTS DELETED'}), 200
 
 
 @utils_bp.route('/utils/!CLEAR_ONE_CLIENTS/<target>', methods=['DELETE'])
