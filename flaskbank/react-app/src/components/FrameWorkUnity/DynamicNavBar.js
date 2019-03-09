@@ -1,4 +1,5 @@
 import React from 'react';
+import Paper from "./StaticNavBar";
 
 
 const dynamicNavBar = (props) =>{
@@ -18,12 +19,14 @@ const dynamicNavBar = (props) =>{
 
     return (
         <nav className="Navigation" style={navBarStyle}>
+            <a className="Nav-text" style={navTextStyle} href={props.nav.url0}>{props.nav.name0}</a> |
             <a className="Nav-text" style={navTextStyle} href={props.nav.url1}>{props.nav.name1}</a> |
             <a className="Nav-text" style={navTextStyle} href={props.nav.url2}>{props.nav.name2}</a> |
             <a className="Nav-text" style={navTextStyle} href={props.nav.url3}>{props.nav.name3}</a> |
         </nav>
     )
 }
+
 
 export default dynamicNavBar;
 
