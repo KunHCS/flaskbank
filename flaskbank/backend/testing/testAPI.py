@@ -139,7 +139,7 @@ class TestGetClientInfo(unittest.TestCase):
             'http://127.0.0.1:5000/api/login', json={
                 'username': TestUtils.username,
                 'password': TestUtils.password
-            }).get_json().get('auth_token', 'bad')
+            }).get_json().get('access_token', 'bad')
         self.info_route = 'http://127.0.0.1:5000/api/client/info'
         self.get_client = lambda: self.test_client.get(self.info_route,
                                                        headers={
