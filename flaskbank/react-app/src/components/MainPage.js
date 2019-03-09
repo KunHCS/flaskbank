@@ -40,31 +40,40 @@ class Login extends React.Component {
 
     render(){
         return (
-            <div>
-                <form onSubmit={this.onSumbit}>
-                    <Paper className ="paper" style={paperStyle} >
+            <Paper style ={paperStyle}>
+            <div className ="wrapper fadeInDown" style={wrapper}>
+            <div id="formContent">
+                <form onSubmit={this.onSumbit} >
                         Sign On
+                    <hr/>
                         <div>
                             <input
+
                                 type = "text"
                                 placeholder="User Name"
                                 value = {this.state.username}
                                 onChange ={e=>this.setState({username:e.target.value})}
                             />
                             <input
+
                                 type = "password"
                                 placeholder="Password"
                                 value = {this.state.password}
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />
                         </div>
-                        <Button variant="contained" type="submit" href="/overview"  >
+
+                        <Button variant="contained" type="submit" href="/overview" style={{margin:'20px'}} >
                             Sign On
                         </Button>
-                    </Paper>
-                </form>
 
+                        <div id="formFooter" style={formFooter}>
+                            <a className="underlineHover" href="#">Forgot Password?</a>
+                        </div>
+                </form>
             </div>
+            </div>
+            </Paper>
         )
     };
 }
@@ -85,6 +94,37 @@ const loginInfo =  userSignOn => {
 
 
 
+const wrapper = {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection:'column',
+    justifyContent:'center',
+    minHeight: '100%',
+    width:'100%',
+    padding: '20px',
+}
+
+
+
+const formContent = {
+    webkitBorderRadius: '10px 10px 10px 10px',
+    borderRadius:'10px 10px 10px 10px',
+    background: '#fff',
+    padding: '30px',
+    width: '90%',
+    maxWidth: '450px',
+    position:'relative',
+    boxShadow: '0 30px 60px 0 rgba(0,0,0,0.3)',
+    textAlign:'center',
+}
+
+const formFooter = {
+    borderTop:'1px solid #dce8f1',
+    padding:'25px',
+    textAlign:'center',
+    webkitBorderRadius:'0 0 10px 10px',
+    borderRadius: '0 0 10px 10px',
+}
 const paperStyle = {
     height: 400,
     width:  300,
