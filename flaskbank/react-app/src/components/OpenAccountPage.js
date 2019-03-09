@@ -8,17 +8,6 @@ import {navInfo1} from "./FrameWorkUnity/NavDetails";
 
 
 
-const navInfo = {
-    name1:"ATM Location",
-    name2:"Open an Account",
-    name3:"Close an Account",
-    url1:" ",
-    url2:"/test",
-    url3:" ",
-
-}
-
-
 const openAccountPage = () => {
 
     return (

@@ -73,7 +73,7 @@ class Login extends React.Component {
 
 const loginInfo =  userSignOn => {
     return axios
-        .post("/api/login", {
+        .post("/api/auth", {
             username: userSignOn.username,
             password: userSignOn.password
         })
