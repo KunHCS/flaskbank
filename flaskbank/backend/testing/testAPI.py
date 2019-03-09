@@ -110,6 +110,22 @@ class TestAuthentication(unittest.TestCase):
         response = self.login()
         self.assertEqual(response.status_code, 409)
 
+    def test_logout(self):
+        """Tests token revoking, accessing revoked token should 401"""
+        token = self.login().get_json().get('access_token', None)
+        response = self.test_client.delete('http://127.0.0.1:5000/api/logout',
+                                           headers={
+                                               'Authorization': 'Bearer ' + token}
+                                           )
+        self.assertEqual(response.status_code, 200)
+
+        response2 = self.test_client.delete('http://127.0.0.1:5000/api/logout',
+                                            headers={
+                                                'Authorization': 'Bearer ' + token}
+                                            )
+
+        self.assertEqual(response2.status_code, 401)
+
 
 class TestGetClientInfo(unittest.TestCase):
     """
