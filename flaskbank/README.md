@@ -87,6 +87,13 @@ Status: 401 UNAUTHORIZED
 		"msg": <message>
 	}
 
+Status: 422 UNPROCESSABLE ENTITY
+
+	{
+		"msg": <message>
+	}
+
+
 ## *Get Client Detail*
 #### http://127.0.0.1:5000/api/client/info (GET)
 ##### Request header:
@@ -118,6 +125,12 @@ Status: 200 OK
 
 
 Status: 401 UNAUTHORIZED
+
+	{
+		"msg": <message>
+	}
+
+Status: 422 UNPROCESSABLE ENTITY
 
 	{
 		"msg": <message>
