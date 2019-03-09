@@ -4,6 +4,8 @@ Database initialization
 from . import mongo
 import pymongo
 
+jti_blacklist = set()
+
 clients = mongo.db.clients
 clients.create_index([("username", pymongo.ASCENDING)], unique=True)
 

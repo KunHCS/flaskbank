@@ -17,3 +17,6 @@ class Config:
                 'bank-cluster-shard-00-02-su85m.mongodb.net:27017' \
                 f'/{db_name}?ssl=true&replicaSet=Bank-Cluster-shard-0' \
                 '&authSource=admin&retryWrites=true'
+
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
