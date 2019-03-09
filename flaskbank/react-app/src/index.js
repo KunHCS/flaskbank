@@ -7,6 +7,9 @@ import OverViewPage from "./components/OverViewPage";
 import BillPayPage from "./components/BillPayPage";
 import TransferPage from "./components/TransferPage";
 import DepositPage from "./components/DepositPage";
+import CloseAccountPage from "./components/CloseAccountPage";
+import ATMLocationPage from "./components/ATMLocationPage";
+import ProfileSettingPage from "./components/PorfileSettingPage";
 
 
 
@@ -17,11 +20,17 @@ class App extends Component {
             <Router>
                 <div>
                     <Route exact path="/" component={MainPage} />
+                    <Route exact path="/atm" component={ATMLocationPage} />
+                    <Route exact path="/openAcc" component={OpenAccountPage} />
+                    <Route exact path="/closeAcc" component={CloseAccountPage} />
+                    <Route exact path="/profile" component={ProfileSettingPage} />
+
+
                     <Route exact path="/overview" component={OverViewPage} />
                     <Route exact path="/pay" component={BillPayPage} />
                     <Route exact path="/transfer" component={TransferPage} />
                     <Route exact path="/deposit" component={DepositPage} />
-                    <Route exact path="/test" component={OpenAccountPage} />
+
                 </div>
             </Router>
         );

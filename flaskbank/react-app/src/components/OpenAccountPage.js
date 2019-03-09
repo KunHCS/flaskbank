@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
-import Navigation from "./BaseFrameWork/Navigation";
-import Search from "./BaseFrameWork/Search";
-import Container from "./BaseFrameWork/Container";
+import Navigation from "./FrameWorkUnity/DynamicNavBar";
+import Search from "./FrameWorkUnity/Search";
+import Container from "./FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
+import {navInfo1} from "./FrameWorkUnity/NavDetails";
 
+
+
+const navInfo = {
+    name1:"ATM Location",
+    name2:"Open an Account",
+    name3:"Close an Account",
+    url1:" ",
+    url2:"/test",
+    url3:" ",
+
+}
 
 
 const openAccountPage = () => {
 
     return (
         <div >
-            <Navigation/>
+            <Navigation nav = {navInfo1}/>
             <Search/>
             <Container>
                 <Register/>

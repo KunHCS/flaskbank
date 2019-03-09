@@ -1,17 +1,18 @@
 import React from 'react';
-import Navigation from "./BaseFrameWork/Navigation";
-import Search from "./BaseFrameWork/Search";
-import Container from "./BaseFrameWork/Container";
+import Navigation from "./FrameWorkUnity/DynamicNavBar";
+import Search from "./FrameWorkUnity/Search";
+import Container from "./FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
+import {navInfo1} from "./FrameWorkUnity/NavDetails";
 
 
 
 const mainPage = () => {
     return (
         <div >
-            <Navigation/>
+            <Navigation nav = {navInfo1}/>
             <Search/>
             <Container>
                 <Login/>
@@ -57,7 +58,7 @@ class Login extends React.Component {
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />
                         </div>
-                        <Button variant="contained" type="submit"  >
+                        <Button variant="contained" type="submit" href="/overview"  >
                             Sign On
                         </Button>
                     </Paper>

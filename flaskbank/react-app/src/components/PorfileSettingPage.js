@@ -6,25 +6,22 @@ import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
 import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
-const TransferDetails= () => {
+const Statement= () => {
     return (
-        <Paper  style={TransferDetailsStyle}>
-            <div style={{margin:'20px'}}>
-             Transfer Page
-            </div>
+        <Paper  style={StatementStyle}>
+            Profile Setting Page
         </Paper>
     );
 }
 
-
-const Transfer = () => {
+const ProfileSettingPage = () => {
     return (
         <div >
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
                 <InnerNavigationBar/>
-                <TransferDetails/>
+                <Statement/>
             </Container>
         </div>
 
@@ -32,7 +29,7 @@ const Transfer = () => {
 }
 
 
-const TransferDetailsStyle = {
+const StatementStyle = {
     height: "auto",
     width:  500,
 
@@ -40,4 +37,4 @@ const TransferDetailsStyle = {
     margin: '20px'
 }
 
-export default Transfer;
+export default ProfileSettingPage;
