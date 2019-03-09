@@ -1,17 +1,18 @@
 import React from 'react';
-import Navigation from "./BaseFrameWork/Navigation";
-import Search from "./BaseFrameWork/Search";
-import Container from "./BaseFrameWork/Container";
+import Navigation from "./FrameWorkUnity/DynamicNavBar";
+import Search from "./FrameWorkUnity/Search";
+import Container from "./FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
+import {navInfo1} from "./FrameWorkUnity/NavDetails";
 
 
 
 const mainPage = () => {
     return (
         <div >
-            <Navigation name1="ATM Location" name2="Open an Account" name3="Close an Account"/>
+            <Navigation nav = {navInfo1}/>
             <Search/>
             <Container>
                 <Login/>

@@ -1,9 +1,10 @@
 import React from 'react';
-import Navigation from "./BaseFrameWork/Navigation";
-import Search from "./BaseFrameWork/Search";
-import Container from "./BaseFrameWork/Container";
+import Navigation from "./FrameWorkUnity/DynamicNavBar";
+import Search from "./FrameWorkUnity/Search";
+import Container from "./FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
-import InnerNavigationBar from "./NavigationDetails"
+import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
+import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
 const TransferDetails= () => {
     return (
@@ -19,7 +20,7 @@ const TransferDetails= () => {
 const Transfer = () => {
     return (
         <div >
-            <Navigation/>
+            <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
                 <InnerNavigationBar/>
