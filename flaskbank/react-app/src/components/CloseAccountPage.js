@@ -13,7 +13,7 @@ const CloseAccountPage = () => {
             <Navigation nav = {navInfo1}/>
             <Search/>
             <Container>
-                <ClosseAccountDetails/>
+                <CloseAccountDetails/>
             </Container>
         </div>
 
@@ -21,7 +21,7 @@ const CloseAccountPage = () => {
 }
 
 
-class ClosseAccountDetails extends React.Component {
+class CloseAccountDetails extends React.Component {
 
     render(){
         return (

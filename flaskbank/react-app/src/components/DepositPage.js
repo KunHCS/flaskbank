@@ -8,8 +8,6 @@ import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
 
 
-
-
 const DepositPageDetails = () => {
     return (
         <Paper  style={DepositPageStyle}>
@@ -39,7 +37,6 @@ const DepositPage = () => {
 const DepositPageStyle = {
     height: "auto",
     width:  500,
-
     boxShadow: '-2px 5px 25px, 2px 5px 25px',
     margin: '20px'
 }
