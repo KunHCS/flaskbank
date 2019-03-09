@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import MainPage from "./MainPage/MainPage";
+import MainPage from "./components/MainPage";
 import register_test from "./components/register_test";
-import OpenAccountPage from "./MainPage/OpenAccountPage";
-import OverView from "./MainPage/OverView";
+import OpenAccountPage from "./components/OpenAccountPage";
+import OverView from "./components/OverView";
 
 
 
