@@ -10,7 +10,9 @@ import DepositPage from "./components/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage";
 import ProfileSettingPage from "./components/PorfileSettingPage";
-import { Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
 
 
 
@@ -25,7 +27,6 @@ class App extends Component {
                     <Route exact path="/closeAcc" component={CloseAccountPage} />
                     <Route exact path="/profile" component={ProfileSettingPage} />
 
-
                     <Route exact path="/overview" component={OverViewPage} />
                     <Route exact path="/pay" component={BillPayPage} />
                     <Route exact path="/transfer" component={TransferPage} />
@@ -38,7 +39,11 @@ class App extends Component {
 }
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store ={createStore(reducers)}>
+        <App />
+    </Provider>
+    , document.getElementById('root'));
 
 
 
