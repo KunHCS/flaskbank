@@ -30,7 +30,7 @@ const OverViewPage = () => {
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
-                <InnerNavigationBar/>
+                <InnerNavigationBar active ={activeElement}/>
                 <div>
                     Personal Account
                 </div>
@@ -41,6 +41,12 @@ const OverViewPage = () => {
     );
 }
 
+const activeElement = {
+    act1: "nav-link active",
+    act2: "nav-link ",
+    act3: "nav-link ",
+    act4: "nav-link ",
+}
 
 const StatementStyle = {
     height: 350,

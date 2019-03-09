@@ -1,21 +1,21 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper';
 
-const Nav =()=> {
+const Nav =(props)=> {
     return (
         <Paper style ={navbarStyle}>
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
-                    <a className="nav-link" href="/overview">Account Balance</a>
+                    <a className={props.active.act1} href="/overview">Account Balance</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/pay">Bill Pay</a>
+                    <a className={props.active.act2} href="/pay">Bill Pay</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/transfer">Transfer</a>
+                    <a className={props.active.act3} href="/transfer">Transfer</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link " href="/deposit">Deposit</a>
+                    <a className={props.active.act4} href="/deposit">Deposit</a>
                 </li>
             </ul>
         </Paper>
@@ -23,6 +23,7 @@ const Nav =()=> {
 }
 
 
+//"nav-link active"//
 
 const navbarStyle = {
     height: "auto",

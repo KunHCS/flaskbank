@@ -25,7 +25,7 @@ const DepositPage = () => {
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
-                <InnerNavigationBar/>
+                <InnerNavigationBar active={activeElement}/>
                 <DepositPageDetails/>
             </Container>
         </div>
@@ -33,6 +33,12 @@ const DepositPage = () => {
     );
 }
 
+const activeElement = {
+    act1: "nav-link ",
+    act2: "nav-link ",
+    act3: "nav-link ",
+    act4: "nav-link active",
+}
 
 const DepositPageStyle = {
     height: "auto",

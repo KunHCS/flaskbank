@@ -24,7 +24,7 @@ const BillPay = () => {
             <Navigation nav = {navInfo2}/>
             <Search/>
             <Container>
-                <InnerNavigationBar/>
+                <InnerNavigationBar active={activeElement}/>
                 <CreditCardPayment/>
             </Container>
         </div>
@@ -32,6 +32,12 @@ const BillPay = () => {
     );
 }
 
+const activeElement = {
+    act1: "nav-link ",
+    act2: "nav-link active",
+    act3: "nav-link ",
+    act4: "nav-link ",
+}
 
 const checkingContainerStyle = {
     height: "auto",
