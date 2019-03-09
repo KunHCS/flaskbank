@@ -5,10 +5,6 @@ import Container from "./BaseFrameWork/Container";
 import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./NavigationDetails"
 
-
-
-
-
 const TransferDetails= () => {
     return (
         <Paper  style={TransferDetailsStyle}>

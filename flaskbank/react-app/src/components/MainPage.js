@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button'
 const mainPage = () => {
     return (
         <div >
-            <Navigation/>
+            <Navigation name1="ATM Location" name2="Open an Account" name3="Close an Account"/>
             <Search/>
             <Container>
                 <Login/>
@@ -57,7 +57,7 @@ class Login extends React.Component {
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />
                         </div>
-                        <Button variant="contained" type="submit"  >
+                        <Button variant="contained" type="submit" href="/overview"  >
                             Sign On
                         </Button>
                     </Paper>
