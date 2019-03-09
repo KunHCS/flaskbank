@@ -9,15 +9,15 @@ import {navInfo2} from "./FrameWorkUnity/NavDetails";
 const Statement= () => {
     return (
         <Paper  style={StatementStyle}>
-            <div style={{margin:'20px'}}>
+            <div style={innerRowStyle}>
              Checking Account -2644
             </div>
 
-            <div style={{margin:'20px'}}>
+            <div style={innerRowStyle}>
               Saving Account -9642
             </div>
 
-            <div style={{margin:'20px'}}>
+            <div style={innerRowStyle}>
                 SJSP Platinum Visa Card -5544
             </div>
         </Paper>
@@ -31,6 +31,9 @@ const OverViewPage = () => {
             <Search/>
             <Container>
                 <InnerNavigationBar/>
+                <div>
+                    Personal Account
+                </div>
                 <Statement/>
             </Container>
         </div>
@@ -40,11 +43,19 @@ const OverViewPage = () => {
 
 
 const StatementStyle = {
-    height: "auto",
+    height: 400,
     width:  500,
-
     boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    margin: '20px'
+    margin: 'auto',
+
+}
+
+const innerRowStyle= {
+    backgroundColor: '#797979',
+    height: 50,
+    width:  400,
+    margin: '20px',
+    textAlign: 'center'
 }
 
 export default OverViewPage;

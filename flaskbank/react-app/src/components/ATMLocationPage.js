@@ -26,23 +26,14 @@ class ATMDetails extends React.Component {
 
     render(){
         return (
-            <div>
-                    <Paper className ="paper" style={paperStyle} >
-                       ATM Page
-                    </Paper>
                 <div>
+                    ATM Page
                     <MyMap/>
                 </div>
-            </div>
         )
     };
 }
 
 
 
-const paperStyle = {
-    height: 400,
-    width:  300,
-    boxShadow: '-5px 1px 10px, 5px 1px 10px',
-};
 export default ATMLocationPage;
