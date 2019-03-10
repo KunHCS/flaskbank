@@ -1,12 +1,12 @@
 
 
 export const navInfo1 = {
-    name0:"Main Page",
-    name1:"ATM Location",
+    name0:"ATM Location",
+    name1:"Main Page",
     name2:"Open an Account",
     name3:"Close an Account",
-    url0:"/",
-    url1:"/atm ",
+    url0:"/atm",
+    url1:"/",
     url2:"/openAcc",
     url3:"/closeAcc",
 
@@ -19,7 +19,7 @@ export const navInfo2 = {
     name2:"Profile Setting",
     name3:"Sign Out",
     url0:"",
-    url1:"",
+    url1:"/overview",
     url2:"/profile",
     url3:"/",
 

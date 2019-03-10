@@ -1,6 +1,6 @@
 import React from 'react';
 import Paper from "./StaticNavBar";
-
+import {Link} from "react-router-dom";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {
@@ -20,9 +20,9 @@ const dynamicNavBar = (props) =>{
     return (
         <nav className="Navigation" style={navBarStyle}>
             <a className="Nav-text" style={navTextStyle} href={props.nav.url0}>{props.nav.name0}</a> |
-            <a className="Nav-text" style={navTextStyle} href={props.nav.url1}>{props.nav.name1}</a> |
-            <a className="Nav-text" style={navTextStyle} href={props.nav.url2}>{props.nav.name2}</a> |
-            <a className="Nav-text" style={navTextStyle} href={props.nav.url3}>{props.nav.name3}</a> |
+            <Link className="Nav-text" style={navTextStyle} to={props.nav.url1}>{props.nav.name1}</Link> |
+            <Link className="Nav-text" style={navTextStyle} to={props.nav.url2}>{props.nav.name2}</Link> |
+            <Link className="Nav-text" style={navTextStyle} to={props.nav.url3}>{props.nav.name3}</Link> |
         </nav>
     )
 }
