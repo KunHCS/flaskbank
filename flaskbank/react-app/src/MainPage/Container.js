@@ -15,7 +15,6 @@ const Left = () => {
 
     return (
         <div className ="LeftContainer" style={styleLeft} >
-            <p> This is left side content</p>
             <img src={Pic} alt="mypic" style={{witdh:'15%' ,height:'15%'}}/>
         </div>
 
@@ -35,7 +34,6 @@ const Right = (props) => {
 
     return (
         <div className ="RightContainer" style={styleRight}>
-            <p>This is the right side</p>
             {/*<RegisterForm/>*/}
             {props.children}
         </div>

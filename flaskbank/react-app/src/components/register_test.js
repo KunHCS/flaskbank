@@ -56,7 +56,7 @@ class register_test extends Component {
         <Paper className ="paper" style={paperStyle} >
       <div className="container">
         <div className="row">
-          <div className="col-md-6 mt-5 mx-auto">
+          <div className="col-6 mt-5 mx-auto">
             <form noValidate onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <div className="form-group">
@@ -133,7 +133,7 @@ class register_test extends Component {
 }
 
 const paperStyle = {
-  height: 700,
+  height: 615,
   width:  500,
   boxShadow: '-5px 10px 25px, 5px 10px 25px',
 
