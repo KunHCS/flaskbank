@@ -8,6 +8,7 @@ venv/
 .DS_Store
 .cache
 /package-lock.json
+/node_modules
 
 # Created by https://www.gitignore.io/api/pycharm,sublimetext,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=pycharm,sublimetext,visualstudiocode

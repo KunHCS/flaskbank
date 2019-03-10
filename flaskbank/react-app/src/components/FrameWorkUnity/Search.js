@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import Pic from "../images/logo.png";
+import Pic from "../../images/logo.png";
 
 const styles = theme => ({
     root: {
@@ -27,6 +25,7 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+        padding: 10,
     },
     search: {
         position: 'relative',
@@ -81,7 +80,9 @@ const search = (props) =>{
                     <Typography className={classes.title} variant="h7" color="inherit" noWrap >
                         SJSP
                     </Typography>
+                    <a href="/">
                     <img src={Pic} alt="mypic" style={{witdh:50 ,height:50}}/>
+                    </a>
                     <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>

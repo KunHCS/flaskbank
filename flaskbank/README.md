@@ -12,38 +12,129 @@
 ## *Registration*
 
 #### http://127.0.0.1:5000/api/register (POST)
+##### Request Body:
 
-    {
-        "first_name": <string>,
-        "last_name": <string>,
-        "username": "<string>",
-        "email": "<string>",
-        "password" : "<string>",
-    }
+	{
+		"first_name": <string>,
+		"last_name": <string>,
+		"username": "<string>",
+		"email": "<string>",
+		"password" : "<string>",
+	}
 #### Responses:
 Status: 201 CREATED
 
+	{
+		"msg": <message>
+	}
+
 Status: 409 CONFLICT
 
+	{
+		"msg": <message>
+	}
+
 Status: 400 BAD REQUEST
+
+	{
+		"msg": <message>
+	}
 
 ## *Login*
 #### http://127.0.0.1:5000/api/login (POST)
-
-    {
-        "username": "<string>"
-        "password" : "<string>"
-    }
+##### Request Body:
+	{
+		"username": "<string>"
+		"password" : "<string>"
+	}
 #### Responses:
 Status: 201 CREATED
 
-    {
-        "access_token": <token>
-    }
+	{
+		"access_token": <token>
+	}
 
 Status: 409 CONFLICT
 
+	{
+		"msg": <message>
+	}
+
 Status: 400 BAD REQUEST
+
+	{
+		"msg": <message>
+	}
+
+## *Logout*
+#### http://127.0.0.1:5000/api/logout (DELETE)
+##### Request header:
+
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+#### Responses:
+Status: 200 OK
+
+	{
+		"msg": <message>
+	}
+
+Status: 401 UNAUTHORIZED
+
+	{
+		"msg": <message>
+	}
+
+Status: 422 UNPROCESSABLE ENTITY
+
+	{
+		"msg": <message>
+	}
+
+
+## *Get Client Detail*
+#### http://127.0.0.1:5000/api/client/info (GET)
+##### Request header:
+
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+#### Responses:
+Status: 200 OK
+
+
+	{
+		"accounts": [
+			{
+				"account_number": <account number>,
+				"active": <boolean>,
+				"alias": <account alias>,
+				"balance": <double>,
+				"type": <account type>
+			},
+		],
+		"email": <email>,
+		"first_name": <first name>,
+		"last_name": <last name>,
+		"transactions": <transactions>,
+		"username": <username>
+	}
+
+
+Status: 401 UNAUTHORIZED
+
+	{
+		"msg": <message>
+	}
+
+Status: 422 UNPROCESSABLE ENTITY
+
+	{
+		"msg": <message>
+	}
 
 ## Database Structure
 #### Clients collection
@@ -86,3 +177,12 @@ Status: 400 BAD REQUEST
 
 
 # Frontend
+
+## Install react-redux library
+npm install redux react-redux
+
+## Install Google Map React 
+ npm npm install google-map-react
+
+## Install React on Created File
+ npm install react react-dom
