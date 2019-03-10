@@ -1,21 +1,22 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper';
+import {Link} from "react-router-dom";
 
 const Nav =(props)=> {
     return (
         <Paper style ={navbarStyle}>
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
-                    <a className={props.active.act1} href="/overview">Account Balance</a>
+                    <Link className={props.active.act1} to="/overview">Account Balance</Link>
                 </li>
                 <li className="nav-item">
-                    <a className={props.active.act2} href="/pay">Bill Pay</a>
+                    <Link className={props.active.act2} to="/pay">Bill Pay</Link>
                 </li>
                 <li className="nav-item">
-                    <a className={props.active.act3} href="/transfer">Transfer</a>
+                    <Link className={props.active.act3} to="/transfer">Transfer</Link>
                 </li>
                 <li className="nav-item">
-                    <a className={props.active.act4} href="/deposit">Deposit</a>
+                    <Link className={props.active.act4} to="/deposit">Deposit</Link>
                 </li>
             </ul>
         </Paper>
