@@ -54,11 +54,11 @@ class Login extends React.Component {
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
                 <form onSubmit={this.onSumbit} >
-                        Sign On
+                    <Typography variant="h6">Sign On</Typography>
                     <hr/>
-                        <div>
+                        <div style={{margin: '50px'}}>
                             <input
-
+                                style={{margin: '20px'}}
                                 type = "text"
                                 placeholder="User Name"
                                 value = {this.state.username}
@@ -73,7 +73,7 @@ class Login extends React.Component {
                             />
                         </div>
 
-                        <Button variant="contained" type="submit" href="/overview" style={{margin:'20px'}} >
+                        <Button variant="contained" type="submit" href="/overview" style={{margin:'10px'}} >
                             Sign On
                         </Button>
 
@@ -145,8 +145,8 @@ const formFooter = {
     borderRadius: '0 0 10px 10px',
 }
 const paperStyle = {
-    height: 400,
-    width:  300,
+    height: 450,
+    width:  330,
     boxShadow: '-5px 1px 10px, 5px 1px 10px',
 };
 export default mainPage;

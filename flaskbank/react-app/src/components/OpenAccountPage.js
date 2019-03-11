@@ -155,7 +155,7 @@ class Register extends Component {
 }
 
 const paperStyle = {
-    height: 700,
+    height: 600,
     width:  500,
     boxShadow: '-5px 10px 25px, 5px 10px 25px',
 
