@@ -125,11 +125,10 @@ OverViewPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// export default withStyles(styles)(OverViewPage);
 
  const mapStateToProps = (state) => {
      console.log(state);
-     return null //{song:state.songs};
+     return null
  }
 
 export default connect(mapStateToProps)(withStyles(styles)(OverViewPage));
