@@ -1,4 +1,6 @@
 from .. import all_module as am
+from .transaction import record_transaction
+
 deposit_bp = am.Blueprint('deposit', __name__)
 
 
@@ -20,4 +22,5 @@ def deposit():
     am.clients.find_one_and_update({'username': current_user, 'accounts.type': account_type},
                                    {'$inc': {'accounts.$.balance': amount}})
 
+    record_transaction(current_user, account_type, amount)
     return am.jsonify({'username': current_user, 'amount': amount, 'account_type': account_type}), 200
