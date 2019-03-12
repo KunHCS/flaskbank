@@ -1,4 +1,6 @@
 from .. import all_module as am
+from .transaction import record_transaction
+
 withdraw_bp = am.Blueprint('withdraw', __name__)
 
 
@@ -20,6 +22,7 @@ def withdraw():
     am.clients.find_one_and_update({'username': current_user, 'accounts.type': account_type},
                                    {'$inc': {'accounts.$.balance': amount * -1}})
 
+    record_transaction(current_user, account_type, amount)
     return am.jsonify({'username': current_user, 'amount': amount * -1, 'account_type': account_type}), 200
 
 

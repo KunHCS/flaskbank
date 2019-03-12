@@ -16,6 +16,7 @@ from .model import jti_blacklist
 from flask import (render_template, Blueprint, request, make_response,
                    send_from_directory, jsonify)
 
+from datetime import datetime
 
 
 
