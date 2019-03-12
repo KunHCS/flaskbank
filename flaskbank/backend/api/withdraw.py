@@ -4,5 +4,6 @@ withdraw_bp = am.Blueprint('withdraw', __name__)
 
 @withdraw_bp.route('/withdraw', methods=['POST'])
 def withdraw():
+    print('test')
     pass
 
