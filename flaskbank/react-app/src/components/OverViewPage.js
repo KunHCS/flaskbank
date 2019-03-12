@@ -12,6 +12,7 @@ import Container from "./FrameWorkUnity/Container";
 //import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
 import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import {connect} from "react-redux";
 
 const styles = theme => ({
     root: {
@@ -123,4 +124,13 @@ const innerRowStyle= {
 OverViewPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(OverViewPage);
+
+// export default withStyles(styles)(OverViewPage);
+
+ const mapStateToProps = (state) => {
+     console.log(state);
+     return null //{song:state.songs};
+ }
+
+export default connect(mapStateToProps)(withStyles(styles)(OverViewPage));
+

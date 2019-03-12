@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from "./StaticNavBar";
 import {Link} from "react-router-dom";
 
 const dynamicNavBar = (props) =>{
