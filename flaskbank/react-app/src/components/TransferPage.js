@@ -27,7 +27,7 @@ const TransferDetails= () => {
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        width: 150,
+        width: 300,
     },
     root: {
         width: '100%',
@@ -38,58 +38,72 @@ const styles = theme => ({
     },
 });
 
-function Transfer(props) {
-    const { classes } = props;
-    return (
-        <div >
-            <Navigation nav = {navInfo2}/>
-            <Search/>
-            <Container>
-                <InnerNavigationBar active ={activeElement}/>
-                <div className={classes.root}>
-                    <Typography variant="h4">Make a Transfer</Typography>
-                    <Typography variant="h6">This is the transfer page</Typography>
-                    <Typography variant="h6">Select the account that transfer from and the account transfer to</Typography>
-                    <br/>
-                    <br/>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Select Account</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>Checking Account -2644</Button>
-                        </ExpansionPanelDetails>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>Saving Account -9642</Button>
-                        </ExpansionPanelDetails>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Select Account</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>Checking Account -2644</Button>
-                        </ExpansionPanelDetails>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>Saving Account -9642</Button>
-                        </ExpansionPanelDetails>
-                        <ExpansionPanelDetails>
-                            <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                    <br/>
-                    <Button variant="contained" color="primary" className={classes.button}>
-                        Next
-                    </Button>
-                </div>
-                {/*<Statement/>*/}
-            </Container>
-        </div>
+class Transfer extends React.Component{
+    // state = {
+    //
+    // };
+    // selectAccount = () =>{
+    //     const labelFrom = document.getElementById('accountFrom');
+    //     labelFrom.innerHTML = ;
+    // };
 
-);
+    render() {
+        const {classes} = this.props;
+        return (
+            <div>
+                <Navigation nav={navInfo2}/>
+                <Search/>
+                <Container>
+                    <InnerNavigationBar active={activeElement}/>
+                    <div className={classes.root}>
+                        <Typography variant="h4">Make a Transfer</Typography>
+                        <Typography variant="h6">This is the transfer page</Typography>
+                        <Typography variant="h6">Select the account that transfer from and the account transfer
+                            to</Typography>
+                        <br/>
+                        <br/>
+                        <Typography variant="h6">Transfer from</Typography>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                <Typography className={classes.heading} id="accountFrom">Select Account</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button} conClick={this.selectAccount}>Checking Account
+                                    -2644</Button>
+                            </ExpansionPanelDetails>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button}>Saving Account -9642</Button>
+                            </ExpansionPanelDetails>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <Typography variant="h6">Transfer to</Typography>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                <Typography className={classes.heading} id="accountTo">Select Account</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button}>Checking Account -2644</Button>
+                            </ExpansionPanelDetails>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button}>Saving Account -9642</Button>
+                            </ExpansionPanelDetails>
+                            <ExpansionPanelDetails>
+                                <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <br/>
+                        <Button variant="contained" color="primary" className={classes.button}>
+                            Next
+                        </Button>
+                    </div>
+                    {/*<Statement/>*/}
+                </Container>
+            </div>
+
+        );
+    }
 }
 
 const activeElement = {

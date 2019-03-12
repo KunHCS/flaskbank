@@ -15,14 +15,14 @@ const Statement= () => {
                 <form class="form-horizontal" role="form">
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">First name:</label>
+                        <label class="col-lg-5 control-label">First name:</label>
                         <div class="col-lg-8">
                             <input class="form-control" type="text" placeholder="Jane"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Last name:</label>
+                        <label class="col-lg-5 control-label">Last name:</label>
                         <div class="col-lg-8">
                             <input class="form-control" type="text" placeholder="Bishop"/>
                         </div>
@@ -50,7 +50,7 @@ const Statement= () => {
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Confirm password:</label>
+                        <label class="col-md-7 control-label">Confirm password:</label>
                         <div class="col-md-8">
                             <input class="form-control" type="password" placeholder="123"/>
                         </div>
@@ -89,7 +89,7 @@ const ProfileSettingPage = () => {
 
 const StatementStyle = {
     height: 700,
-    width:  800,
+    width:  600,
     boxShadow: '-2px 5px 25px, 2px 5px 25px',
     margin: '20px'
 }
