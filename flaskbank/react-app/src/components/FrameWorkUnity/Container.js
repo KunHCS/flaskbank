@@ -48,7 +48,7 @@ const Container = (props) => {
         backgroundSize: 'cover',
         backgroundRepeat:'no-repeat',
         backgroundPosition:'center',
-        height:'100%',
+        minHeight:'100%',
         width:'100%',
         display: 'flex',
         position: 'absolute',
