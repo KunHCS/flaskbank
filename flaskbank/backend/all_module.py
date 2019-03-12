@@ -4,6 +4,7 @@ Import all required modules
 from . import mongo
 from . import bcrypt
 from . import f_jwt
+import jwt
 from flask_jwt_extended import (jwt_required, create_access_token,
     get_jwt_identity)
 from .config import Config
