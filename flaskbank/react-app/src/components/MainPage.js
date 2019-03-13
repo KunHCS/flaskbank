@@ -17,13 +17,11 @@ import {Link}from "react-router-dom";
 
 
 const mainPage = (props) => {
-    console.log(props);
     return (
         <div >
             <Button variant="contained" onClick={()=>props.logInAction(true)} >
                 Log In
             </Button>
-
             <Button variant="contained" onClick={()=>props.logInAction(false)} >
                 Log out
             </Button>
@@ -167,7 +165,6 @@ const paperStyle = {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return state;
 }
 
