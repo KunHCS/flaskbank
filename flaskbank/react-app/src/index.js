@@ -24,10 +24,6 @@ class App extends Component  {
         return (
             <Router>
                 <div>
-                    <Button  href="/overview" style={{margin:'10px'}} >
-                        Temp Test Button
-                    </Button>
-
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/atm" component={ATMLocationPage} />
                     <Route exact path="/openAcc" component={OpenAccountPage} />
