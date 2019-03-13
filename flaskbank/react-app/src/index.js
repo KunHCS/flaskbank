@@ -24,16 +24,17 @@ class App extends Component  {
         return (
             <Router>
                 <div>
+
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/atm" component={ATMLocationPage} />
                     <Route exact path="/openAcc" component={OpenAccountPage} />
                     <Route exact path="/closeAcc" component={CloseAccountPage} />
 
-                    <Route exact path="/profile" component={ProfileSettingPage} />
-                    <Route exact path="/overview" component={OverViewPage} />
-                    <Route exact path="/pay" component={BillPayPage} />
-                    <Route exact path="/transfer" component={TransferPage} />
-                    <Route exact path="/deposit" component={DepositPage} />
+                    <SecretRoute exact path="/profile" component={ProfileSettingPage} />
+                    <SecretRoute exact path="/overview" component={OverViewPage} />
+                    <SecretRoute exact path="/pay" component={BillPayPage} />
+                    <SecretRoute exact path="/transfer" component={TransferPage} />
+                    <SecretRoute exact path="/deposit" component={DepositPage} />
 
                 </div>
             </Router>
@@ -52,12 +53,14 @@ const AuthService = {
         this.isAuthenticated = false
         setTimeout(cb, 100)
     }
+
 };
 
 
 const SecretRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        AuthService.isAuthenticated === true
+        console.log(store.getState().auth),
+            store.getState().auth === true
             ? <Component {...props} />
             : <Redirect to={{
                 pathname: '/',
@@ -67,8 +70,11 @@ const SecretRoute = ({ component: Component, ...rest }) => (
 );
 
 
+
+const store = createStore(reducers);
+
 ReactDOM.render(
-    <Provider store = {createStore(reducers)}>
+    <Provider store={store}>
         <App />
     </Provider>
     , document.getElementById('root'));
