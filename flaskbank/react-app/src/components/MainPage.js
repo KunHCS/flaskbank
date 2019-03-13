@@ -11,11 +11,22 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
 import {navInfo1} from "./FrameWorkUnity/NavDetails";
 import ChangePassword from "./ChangePassword";
+import {connect} from "react-redux";
+import {logInAction} from "../actions/LoginAction";
+import {Link}from "react-router-dom";
 
 
-const mainPage = () => {
+const mainPage = (props) => {
+    console.log(props);
     return (
         <div >
+            <Button variant="contained" onClick={()=>props.logInAction(true)} >
+                Log In
+            </Button>
+
+            <Button variant="contained" onClick={()=>props.logInAction(false)} >
+                Log out
+            </Button>
             <Navigation nav = {navInfo1}/>
             <Search/>
             <Container>
@@ -73,8 +84,11 @@ class Login extends React.Component {
                             />
                         </div>
 
-                        <Button variant="contained" type="submit" href="/overview" style={{margin:'10px'}} >
-                            Sign On
+                        <Button variant="contained" type="submit"
+                                style={{margin:'10px'}} >
+
+                            <Link to = "/overview">Sign On </Link>
+
                         </Button>
 
                         <div id="formFooter" style={formFooter}>
@@ -149,4 +163,12 @@ const paperStyle = {
     width:  330,
     boxShadow: '-5px 1px 10px, 5px 1px 10px',
 };
-export default mainPage;
+
+
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return state;
+}
+
+export default connect(mapStateToProps,{logInAction:logInAction})(mainPage);
