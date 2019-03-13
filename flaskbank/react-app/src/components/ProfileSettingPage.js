@@ -5,6 +5,8 @@ import Container from "./FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
 import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import {connect} from "react-redux";
+
 
 const Statement= () => {
     return (
@@ -100,4 +102,8 @@ const activeElement = {
     act3: "nav-link ",
     act4: "nav-link ",
 }
-export default ProfileSettingPage;
+
+const mapStateToProps = (state) => {
+    return state;
+}
+export default connect(mapStateToProps)(ProfileSettingPage);

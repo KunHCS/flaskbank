@@ -10,7 +10,7 @@ import TransferPage from "./components/TransferPage";
 import DepositPage from "./components/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage";
-import ProfileSettingPage from "./components/PorfileSettingPage";
+import ProfileSettingPage from "./components/ProfileSettingPage";
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './reducers';
