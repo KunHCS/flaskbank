@@ -14,20 +14,17 @@ const profileReducer = () => {
   ]  ;
 };
 
-const authState = () => {
-  return {signInState: false }
-};
 
-const authentication = (valid = null, action) => {
-    if (action.type === 'valid') {
-        return action.pass;
+const authenticationState = ( authState=false, action) => {
+    if (action.type === 'TRUE') {
+        authState=true;
+        return authState;
     }
 
-    return valid;
+    return authState;
 };
 
 export default combineReducers( {
     myInfo: profileReducer,
-    myValidation: authentication,
-    isSignedIn: authState,
+    auth: authenticationState,
 });
