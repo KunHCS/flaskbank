@@ -1,11 +1,7 @@
-export const logInAction = () =>{
+export const logInAction = (payload) =>{
     return {
         type: 'TRUE',
+        payload: payload,
     };
 };
 
-export const logOutAction = () =>{
-    return {
-        type: 'FALSE',
-    };
-};

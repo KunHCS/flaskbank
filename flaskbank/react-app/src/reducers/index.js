@@ -15,10 +15,9 @@ const profileReducer = () => {
 };
 
 
-const authenticationState = ( authState=false, action) => {
+const authenticationStateReducer = ( authState=false, action) => {
     if (action.type === 'TRUE') {
-        authState=true;
-        return authState;
+        return action.payload;
     }
 
     return authState;
@@ -26,5 +25,5 @@ const authenticationState = ( authState=false, action) => {
 
 export default combineReducers( {
     myInfo: profileReducer,
-    auth: authenticationState,
+    auth: authenticationStateReducer,
 });

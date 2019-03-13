@@ -128,7 +128,7 @@ OverViewPage.propTypes = {
 
  const mapStateToProps = (state) => {
      console.log(state);
-     return null
+     return state;
  }
 
 export default connect(mapStateToProps)(withStyles(styles)(OverViewPage));
