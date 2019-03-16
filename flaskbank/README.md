@@ -136,6 +136,50 @@ Status: 422 UNPROCESSABLE ENTITY
 		"msg": <message>
 	}
 
+## *Open New Account*
+#### http://127.0.0.1:5000/api/accounts/open (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"alias": <string>,
+		"type": <"saving"/"checking">,
+		"deposit": <double>
+	}
+
+### Responses:
+Status: 201 CREATED
+
+	{
+		"account_number": <int>,
+		"msg": "Account created"
+	}
+
+Status: 400 BAD REQUEST
+
+## *Close Account*
+#### http://127.0.0.1:5000/api/accounts/close/{account_number}(POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+	{
+		"msg": "Account <account_number> closed"
+	}
+
+Status: 409 CONFLICT
+
+	{
+		"msg": "User <username> does not own account: <account_number>"
+	}
+
 ## Database Structure
 #### Clients collection
 

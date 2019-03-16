@@ -40,7 +40,7 @@ def open_account():
         record_transaction(current_user, acc_type, deposit)
 
     return am.jsonify({'msg': 'Account created', 'account_number':
-                      account_num}), 200
+                      account_num}), 201
 
 
 @accounts_bp.route('/accounts/close/<int:account_num>', methods=['DELETE'])
@@ -64,4 +64,4 @@ def close_account(account_num):
         return am.jsonify({'msg': f'User {current_user} does not own '
                           f'account: {account_num}'}), 409
 
-    return am.jsonify({'msg': f'Account {account_num} deleted'}), 200
+    return am.jsonify({'msg': f'Account {account_num} closed'}), 200
