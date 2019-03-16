@@ -16,6 +16,8 @@ class TestUtils:
     del_route = f'http://127.0.0.1:5000/api/utils' \
         f'/!CLEAR_ONE_CLIENTS/{username}'
 
+    login_route = 'http://127.0.0.1:5000/api/login'
+
     dummy = {
         'first_name': 'first',
         'last_name': 'last',
@@ -23,6 +25,7 @@ class TestUtils:
         'username': username,
         'password': password
     }
+    login_header = None
 
     @classmethod
     def delete_dummy(cls):
@@ -31,6 +34,16 @@ class TestUtils:
     @classmethod
     def insert_dummy(cls):
         create_app().test_client().post(cls.reg_route, json=cls.dummy)
+
+    @classmethod
+    def login_dummy(cls):
+        response = create_app().test_client().post(cls.login_route,
+                                                  json={
+                                                      'username': cls.username,
+                                                      'password': cls.password
+                                                  })
+        token = response.get_json()['access_token']
+        cls.login_header = {'Authorization': 'Bearer ' + token}
 
 
 class TestRegistrationAndDeletion(unittest.TestCase):
@@ -159,6 +172,31 @@ class TestGetClientInfo(unittest.TestCase):
         self.auth_token = 'bad.bad.bad'
         response = self.get_client()
         self.assertEqual(response.status_code, 422)
+
+
+class TestAccountsOperations(unittest.TestCase):
+
+    def setUp(self):
+        self.test_client = create_app().test_client()
+        TestUtils.insert_dummy()
+        TestUtils.login_dummy()
+        self.test_body = {
+            'alias': 'dummy test account',
+            'type': 'saving',
+            'deposit': 0.0
+        }
+
+    def tearDown(self):
+        TestUtils.delete_dummy()
+
+    def test_open_account_0(self):
+        """Test open new account with 0 deposit"""
+        response = self.test_client.post(
+            'http://127.0.0.1:5000/api/accounts/open', json=self.test_body,
+            headers=TestUtils.login_header)
+        self.temp_account = response.get_json().get('account_number', 0)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(self.temp_account, 0)
 
 
 if __name__ == '__main__':
