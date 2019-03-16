@@ -138,7 +138,7 @@ const wrapper = {
 
 
 const formContent = {
-    webkitBorderRadius: '10px 10px 10px 10px',
+    WebkitBorderRadius: '10px 10px 10px 10px',
     borderRadius:'10px 10px 10px 10px',
     background: '#fff',
     padding: '30px',
@@ -153,7 +153,7 @@ const formFooter = {
     borderTop:'1px solid #dce8f1',
     padding:'25px',
     textAlign:'center',
-    webkitBorderRadius:'0 0 10px 10px',
+    WebkitBorderRadius:'0 0 10px 10px',
     borderRadius: '0 0 10px 10px',
 }
 const paperStyle = {

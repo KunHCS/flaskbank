@@ -77,7 +77,7 @@ const search = (props) =>{
             <AppBar position="static">
                 <Toolbar>
 
-                    <Typography className={classes.title} variant="h7" color="inherit" noWrap >
+                    <Typography className={classes.title} variant="h6" color="inherit" noWrap >
                         SJSP
                     </Typography>
                     <a href="/">
