@@ -95,7 +95,9 @@ Status: 422 UNPROCESSABLE ENTITY
 
 
 ## *Get Client Detail*
-#### http://127.0.0.1:5000/api/client/info (GET)
+#### http://127.0.0.1:5000/api/client/{endpoint} (GET)
+	endpoint = ['all', 'transactions', 'accounts', 'contact',
+						  'id']
 ##### Request header:
 
 	{
@@ -104,7 +106,9 @@ Status: 422 UNPROCESSABLE ENTITY
 
 #### Responses:
 Status: 200 OK
+######Response body will be subset of /all based on endpoint
 
+#####/all
 
 	{
 		"accounts": [
@@ -119,10 +123,25 @@ Status: 200 OK
 		"email": <email>,
 		"first_name": <first name>,
 		"last_name": <last name>,
-		"transactions": <transactions>,
+		
+		"transactions": [
+			{"date":<date>,
+			 "account_type": <checking/saving>,
+			 "account_number": <account_number>,
+			 "description":<string>,
+			 "amount":<double>,
+			}
+		],
+		
 		"username": <username>
 	}
 
+Status: 400 BAD REQUEST
+
+	{
+		"allowed_endpoint": <endpoints>
+		"msg": <message>
+	}
 
 Status: 401 UNAUTHORIZED
 
@@ -134,6 +153,50 @@ Status: 422 UNPROCESSABLE ENTITY
 
 	{
 		"msg": <message>
+	}
+
+## *Open New Account*
+#### http://127.0.0.1:5000/api/accounts/open (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"alias": <string>,
+		"type": <"saving"/"checking">,
+		"deposit": <double>
+	}
+
+### Responses:
+Status: 201 CREATED
+
+	{
+		"account_number": <int>,
+		"msg": "Account created"
+	}
+
+Status: 400 BAD REQUEST
+
+## *Close Account*
+#### http://127.0.0.1:5000/api/accounts/close/{account_number}(POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+	{
+		"msg": "Account <account_number> closed"
+	}
+
+Status: 409 CONFLICT
+
+	{
+		"msg": "User <username> does not own account: <account_number>"
 	}
 
 ## Database Structure
@@ -156,10 +219,11 @@ Status: 422 UNPROCESSABLE ENTITY
 		
 		"transactions": [
 			{"date":<date>,
+			 "account_type": <saving/checking>,
+			 "account_number": <account_number>,
 			 "description":<string>,
 			 "amount":<double>,
-			 "from":<string>,
-			 "to":<string>}
+			 }
 		]
 	}
 
