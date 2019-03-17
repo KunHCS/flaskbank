@@ -19,7 +19,7 @@ def open_account():
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
     current_user = am.get_jwt_identity()['username']
-    account_num = am.get_next_id('account_number')
+    account_num = am.get_account_num(acc_type)
     am.clients.update_one(
         {'username': current_user},
         {
@@ -43,9 +43,12 @@ def open_account():
                       account_num}), 201
 
 
-@accounts_bp.route('/accounts/close/<int:account_num>', methods=['DELETE'])
+@accounts_bp.route('/accounts/close/<string:account_num>', methods=['DELETE'])
 @am.jwt_required
 def close_account(account_num):
+
+    if not am.verify(account_num):
+        return am.jsonify({'msg': 'Invalid account number checksum'}), 422
 
     current_user = am.get_jwt_identity()['username']
 
@@ -57,10 +60,10 @@ def close_account(account_num):
             }
         }
     )
-    index = next((index for (index, d) in enumerate(pre_update['accounts'])
+    exist = next((index for (index, d) in enumerate(pre_update['accounts'])
                   if d['account_number'] == account_num), None)
 
-    if not index:
+    if not exist:
         return am.jsonify({'msg': f'User {current_user} does not own '
                           f'account: {account_num}'}), 409
 

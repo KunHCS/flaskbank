@@ -28,14 +28,14 @@ def register_user():
 
             'accounts': [
                 {
-                    'account_number': am.get_next_id('account_number'),
+                    'account_number': am.get_account_num('checking'),
                     'alias': 'Checking Account',
                     'balance': 0.0,
                     'type': 'checking',
                     'active': True
                 },
                 {
-                    'account_number': am.get_next_id('account_number'),
+                    'account_number': am.get_account_num('saving'),
                     'alias': 'Saving Account',
                     'balance': 0.0,
                     'type': 'saving',
