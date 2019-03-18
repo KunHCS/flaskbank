@@ -6,8 +6,9 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import Radio from '@material-ui/core/Radio';
+//import Modal from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
+//import Radio from '@material-ui/core/Radio';
 import Navigation from "./FrameWorkUnity/DynamicNavBar";
 import Search from "./FrameWorkUnity/Search";
 import Container from "./FrameWorkUnity/Container";
@@ -18,18 +19,26 @@ import PropTypes from "prop-types";
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        width: 300,
+        width: '300px',
     },
     root: {
         width: '100%',
     },
     paper: {
         position: 'absolute',
-        width: theme.spacing.unit * 50,
+        marginLeft: theme.spacing.unit * 15,
+        width: theme.spacing.unit * 80,
+        height: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
+    },
+    innerPaper:{
+        width: theme.spacing.unit * 30,
+        height: theme.spacing.unit * 40,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
@@ -37,22 +46,25 @@ const styles = theme => ({
     },
 });
 
-function getModalStyle() {
-    const top = 50;
-    const left = 50;
-
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
+// function getModalStyle() {
+//     const top = 50;
+//     const left = 50;
+//
+//     return {
+//         top: `${top}%`,
+//         left: `${left}%`,
+//         transform: `translate(-${top}%, -${left}%)`,
+//     };
+// }
 
 class Transfer extends React.Component{
     state = {
         open1: false,
         open2: false,
-        open3: false,
+        // open3: false,
+        // selectedValue: 'a',
+        transferAmount: 500,
+        //minimum Payment Du
     };
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
@@ -82,14 +94,29 @@ class Transfer extends React.Component{
             this.setState({open2: true});
         }
     };
+    choiceHandler = () => {
+        const bankChoice = document.getElementById("bankChoice");
+        bankChoice.style.display = 'none';
+        const accountChoice = document.getElementById("accountChoice");
+        accountChoice.style.display = 'block';
+    }
+    previousHanlder = () => {
+        const bankChoice = document.getElementById("bankChoice");
+        bankChoice.style.display = 'block';
+        const accountChoice = document.getElementById("accountChoice");
+        accountChoice.style.display = 'none';
+    }
+    // handleOpen = () => {
+    //     this.setState({ open3: true });
+    // };
+    //
+    // handleClose = () => {
+    //     this.setState({ open3: false });
+    // };
 
-    handleOpen = () => {
-        this.setState({ open3: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open3: false });
-    };
+    // handleSelectorChange = event => {
+    //     this.setState({ selectedValue: event.target.value });
+    // };
     render() {
         const {classes} = this.props;
         return (
@@ -98,6 +125,7 @@ class Transfer extends React.Component{
                 <Search/>
                 <Container>
                     <InnerNavigationBar active={activeElement}/>
+
                     <div className={classes.root}>
                         <Typography variant="h4">Make a Transfer</Typography>
                         <Typography variant="h6">This is the transfer page</Typography>
@@ -105,68 +133,82 @@ class Transfer extends React.Component{
                             to</Typography>
                         <br/>
                         <br/>
-                        <Typography variant="h6">Transfer from</Typography>
-                        <ExpansionPanel expanded={this.state.open1}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                                <Typography
-                                    className={classes.heading}
-                                    id="firstLabel"
-                                >Select Account</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button} conClick={this.selectAccount}>Checking Account
-                                    -2644</Button>
-                            </ExpansionPanelDetails>
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button}>Saving Account -9642</Button>
-                            </ExpansionPanelDetails>
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <Typography variant="h6">Transfer to</Typography>
-                        <ExpansionPanel expanded={this.state.open2}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
-                                <Typography
-                                    className={classes.heading}
-                                    id="secondLabel"
-                                >Select Account</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                <Button className={classes.button}>Checking Account -2644</Button>
-                            </ExpansionPanelDetails>
-                            <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                <Button className={classes.button}>Saving Account -9642</Button>
-                            </ExpansionPanelDetails>
-                            <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <br/>
-                        <Button variant="contained" color="primary"
-                                className={classes.button}
-                                onClick={this.handleOpen}>
-                            Next
-                        </Button>
-                    </div>
-                    <Modal
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                        open={this.state.open3}
-                        onClose={this.handleClose}
-                    >
-                        <div  className={classes.paper} style={getModalStyle()}>
-                            <Radio
-                                checked={this.state.selectedValue === 'd'}
-                                onChange={this.handleChange}
-                                value="d"
-                                color="default"
-                                name="radio-button-demo"
-                                aria-label="D"
-                            />
+                        <div id="bankChoice" className={classes.paper}>
+                            <Paper className={classes.innerPaper} style={{float: 'left'}}>
+                                <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Chase Bank Card Transfer</button>
+                            </Paper>
+                            <Paper  className={classes.innerPaper}  style={{float: 'right'}}>
+                                <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Other Bank Card Transfer</button>
+                            </Paper>
                         </div>
-                    </Modal>
-                    {/*<Statement/>*/}
+                        <div id="accountChoice" style={{display:'none', margin: 'auto'}}>
+                            <Typography variant="h6">Transfer from</Typography>
+                            <ExpansionPanel expanded={this.state.open1}>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                                    <Typography
+                                        className={classes.heading}
+                                        id="firstLabel"
+                                    >Select Account</Typography>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                    <Button className={classes.button} conClick={this.selectAccount}>Checking Account
+                                        -2644</Button>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                    <Button className={classes.button}>Saving Account -9642</Button>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                    <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <Typography variant="h6">Transfer to</Typography>
+                            <ExpansionPanel expanded={this.state.open2}>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
+                                    <Typography
+                                        className={classes.heading}
+                                        id="secondLabel"
+                                    >Select Account</Typography>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+                                    <Button className={classes.button}>Checking Account -2644</Button>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+                                    <Button className={classes.button}>Saving Account -9642</Button>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+                                    <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <br/>
+                            <div>
+                            <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:  $</Typography>
+                                <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="amount"
+                                        placeholder= {this.state.transferAmount}
+                                    />
+                                </div>
+                            </div>
+                            <br/>
+                            <div>
+                                <Button variant="contained" color="primary"
+                                    className={classes.button}
+                                    onClick={this.previousHanlder}
+                                    style={{marginLeft: '250px', width: '15%', float: 'left'}}
+                                >
+                                    Previous
+                                </Button>
+                                <Button variant="contained" color="primary"
+                                    className={classes.button}
+                                    onClick={this.handleOpen}
+                                    style={{marginRight: '250px', width: '15%', float: 'right'}}>
+                                    Next
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </Container>
             </div>
         );
