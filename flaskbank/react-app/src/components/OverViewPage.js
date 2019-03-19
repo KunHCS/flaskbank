@@ -6,10 +6,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import {Link}from "react-router-dom";
 import Navigation from "./FrameWorkUnity/DynamicNavBar";
 import Search from "./FrameWorkUnity/Search";
 import Container from "./FrameWorkUnity/Container";
-//import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
 import {navInfo2} from "./FrameWorkUnity/NavDetails";
 import {connect} from "react-redux";
@@ -22,74 +23,74 @@ const styles = theme => ({
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
     },
+    margin: {
+        margin: theme.spacing.unit,
+    },
 });
-// const Statement= () => {
-//     return (
-//         {/*<Paper  style={StatementStyle}>*/}
-//             {/*<div style={innerRowStyle}>*/}
-//              {/*Checking Account -2644*/}
-//             {/*</div>*/}
-//
-//             {/*<div style={innerRowStyle}>*/}
-//               {/*Saving Account -9642*/}
-//             {/*</div>*/}
-//
-//             {/*<div style={innerRowStyle}>*/}
-//                 {/*SJSP Platinum Visa Card -5544*/}
-//             {/*</div>*/}
-//         {/*</Paper>*/}
-//
-//     );
-// }
 
-function OverViewPage (props){
-    const { classes } = props;
-    return (
-        <div >
-            <Navigation nav = {navInfo2}/>
-            <Search/>
-            <Container>
-                <InnerNavigationBar active ={activeElement}/>
-                <div className={classes.root}>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Checking Account -2644</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Saving Account -9642</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>SJSP Platinum Visa Card -5544</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                </div>
-                {/*<Statement/>*/}
-            </Container>
-        </div>
+class OverViewPage extends React.Component{
+    state={
+        checkingBalance: 5987.79,
+        savingBalance: 21568.23,
+        creditBalance: 666.75,
+    };
+    render() {
+        const { classes } = this.props;
+        return (
+            <div >
+                <Navigation nav = {navInfo2}/>
+                <Search/>
+                <Container>
+                    <InnerNavigationBar active ={activeElement}/>
+                    <div className={classes.root}>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography className={classes.heading}>Checking Account -2644</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <div style={{width: '90%'}}>
+                                    <Typography style={{float: 'left'}}>
+                                        Balance: $ {this.state.checkingBalance}
+                                    </Typography>
+                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
+                                            className={classes.margin}>Transactions</Button>
+                                </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography className={classes.heading}>Saving Account -9642</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <div style={{width: '90%'}}>
+                                    <Typography style={{float: 'left'}}>
+                                        Balance: $ {this.state.savingBalance}
+                                    </Typography>
+                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
+                                            className={classes.margin}>Transactions</Button>
+                                </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography className={classes.heading}>SJSP Platinum Visa Card -5544</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <div style={{width: '90%'}}>
+                                    <Typography style={{float: 'left'}}>
+                                        Balance: $ {this.state.creditBalance}
+                                    </Typography>
+                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
+                                            className={classes.margin}>Transactions</Button>
+                                </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    </div>
+                </Container>
+            </div>
 
-    );
+        );
+    }
 }
 
 const activeElement = {
@@ -99,28 +100,6 @@ const activeElement = {
     act4: "nav-link ",
 }
 
-const StatementStyle = {
-    height: 350,
-    width:  600,
-    boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    margin: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent:'center',
-    alignItems: 'center',
-
-}
-
-const innerRowStyle= {
-    backgroundColor: '#797979',
-    height: 50,
-    width:  400,
-    margin: '20px',
-    display: 'flex',
-    textAlign: 'center',
-    justifyContent:'center',
-    alignItems: 'center',
-}
 OverViewPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
