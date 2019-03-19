@@ -6,9 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-//import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-//import Radio from '@material-ui/core/Radio';
 import Navigation from "./FrameWorkUnity/DynamicNavBar";
 import Search from "./FrameWorkUnity/Search";
 import Container from "./FrameWorkUnity/Container";
@@ -46,25 +44,11 @@ const styles = theme => ({
     },
 });
 
-// function getModalStyle() {
-//     const top = 50;
-//     const left = 50;
-//
-//     return {
-//         top: `${top}%`,
-//         left: `${left}%`,
-//         transform: `translate(-${top}%, -${left}%)`,
-//     };
-// }
-
 class Transfer extends React.Component{
     state = {
         open1: false,
         open2: false,
-        // open3: false,
-        // selectedValue: 'a',
         transferAmount: 500,
-        //minimum Payment Du
     };
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
@@ -106,17 +90,6 @@ class Transfer extends React.Component{
         const accountChoice = document.getElementById("accountChoice");
         accountChoice.style.display = 'none';
     }
-    // handleOpen = () => {
-    //     this.setState({ open3: true });
-    // };
-    //
-    // handleClose = () => {
-    //     this.setState({ open3: false });
-    // };
-
-    // handleSelectorChange = event => {
-    //     this.setState({ selectedValue: event.target.value });
-    // };
     render() {
         const {classes} = this.props;
         return (
@@ -220,16 +193,6 @@ const activeElement = {
     act2: "nav-link ",
     act3: "nav-link active",
     act4: "nav-link ",
-}
-
-
-
-const TransferDetailsStyle = {
-    height: "auto",
-    width:  500,
-
-    boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    margin: '20px'
 }
 Transfer.propTypes = {
     classes: PropTypes.object.isRequired,
