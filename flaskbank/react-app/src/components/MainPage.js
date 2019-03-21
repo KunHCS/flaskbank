@@ -35,7 +35,7 @@ const mainPage = (props) => {
 
 
 class Login extends React.Component {
-    state = {username:"",password:"", open:false,};
+    state = {username:"",password:"", open:false};
     handleOpen = () => {
         this.setState({ open: true });
     };
@@ -44,7 +44,7 @@ class Login extends React.Component {
         this.setState({ open: false });
     };
 
-    onSumbit =(e) => {
+    onSubmit =(e) => {
         e.preventDefault();
         console.log('it just submit');
         const user = {
@@ -60,7 +60,7 @@ class Login extends React.Component {
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
-                <form onSubmit={this.onSumbit} >
+                <form onSubmit={this.onSubmit} >
                     <Typography variant="h6">Sign On</Typography>
                     <hr/>
                         <div style={{margin: '50px'}}>
@@ -131,6 +131,9 @@ const wrapper = {
     minHeight: '100%',
     width:'100%',
     padding: '20px',
+    border: '1.5px solid blue',
+    opacity: '.9',
+    paddingTop: '35px',
 }
 
 
@@ -138,26 +141,27 @@ const wrapper = {
 const formContent = {
     WebkitBorderRadius: '10px 10px 10px 10px',
     borderRadius:'10px 10px 10px 10px',
-    background: '#fff',
     padding: '30px',
     width: '90%',
     maxWidth: '450px',
     position:'relative',
-    boxShadow: '0 30px 60px 0 rgba(0,0,0,0.3)',
     textAlign:'center',
+    boxShadow: '0 30px 60px 0 rgba(0,0,50,0.3)',
 }
 
 const formFooter = {
-    borderTop:'1px solid #dce8f1',
+    position: 'relative',
     padding:'25px',
     textAlign:'center',
     WebkitBorderRadius:'0 0 10px 10px',
     borderRadius: '0 0 10px 10px',
 }
 const paperStyle = {
-    height: 450,
-    width:  330,
-    boxShadow: '-5px 1px 10px, 5px 1px 10px',
+    height: '20%',
+    width:  '40%',
+    boxShadow: '5px 1px 10px, 5px 1px 10px',
+    textAlign:'center',
+    position: 'relative',
 };
 
 
