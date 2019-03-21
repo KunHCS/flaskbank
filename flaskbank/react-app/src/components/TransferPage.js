@@ -68,7 +68,7 @@ class Transfer extends React.Component{
                                 <Typography className={classes.heading} id="accountFrom">Select Account</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Button className={classes.button} conClick={this.selectAccount}>Checking Account
+                                <Button className={classes.button} onClick={this.selectAccount}>Checking Account
                                     -2644</Button>
                             </ExpansionPanelDetails>
                             <ExpansionPanelDetails>
