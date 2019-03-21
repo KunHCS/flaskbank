@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
-import Button from '@material-ui/core/Button';
 import MainPage from "./components/MainPage";
 import OpenAccountPage from "./components/OpenAccountPage";
 import OverViewPage from "./components/OverViewPage";

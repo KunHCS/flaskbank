@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Navigation from "./FrameWorkUnity/DynamicNavBar";
@@ -141,7 +139,7 @@ const wrapper = {
 
 
 const formContent = {
-    webkitBorderRadius: '10px 10px 10px 10px',
+    WebkitBorderRadius: '10px 10px 10px 10px',
     borderRadius:'10px 10px 10px 10px',
     padding: '30px',
     width: '90%',
@@ -155,8 +153,8 @@ const formFooter = {
     position: 'relative',
     padding:'25px',
     textAlign:'center',
-    //webkitBorderRadius:'0 0 10px 10px',
-    //borderRadius: '0 0 10px 10px',
+    WebkitBorderRadius:'0 0 10px 10px',
+    borderRadius: '0 0 10px 10px',
 }
 const paperStyle = {
     height: '20%',

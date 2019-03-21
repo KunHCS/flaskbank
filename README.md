@@ -9,17 +9,7 @@ Go to directory you want to work on
 
 Open Git bash/command-line there and enter:
 
-    git init
-
-Followed by:
-
-	git remote add origin https://github.com/KunHCS/flaskbank.git
-	
-Lastly:
-
-	git pull origin master
-	
-Now the working directory should be setup
+	git clone https://github.com/KunHCS/flaskbank.git
 
 # React Setup
 
@@ -27,14 +17,14 @@ Install [Node.js](https://nodejs.org/en/) (npm), either LTS or latest version sh
 
 **Open command-line in flaskbank/react-app/ for the following**
 
-To install React dependencies + [Redux](https://redux.js.org/introduction/getting-started) + [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+To install React dependencies
 
 	npm install
 
 To test the react app, run:
 
 	npm start
-	
+
 To build the react app for flask to load, run:
 
 	npm run build
@@ -58,9 +48,25 @@ To start flask:
 	or
 	python3 run.py
 
-If everything is done correctly you should be able to see the same result as npm start by going to:
+To grant access to local network (if network permits)
 
+	python run.py -l
+	or
+	python3 run.py -l
+
+To see different options:
+
+	python run.py -h
+	or
+	python3 run.py -h
+
+If everything is done correctly you should be able access the website using:
+
+	On your own machine
 	http://localhost:5000
-	
+	or
+	Local hosting (others on same network can access, if allowed)
+	http://<your local IP>:5000
+
 
 
