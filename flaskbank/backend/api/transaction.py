@@ -7,8 +7,11 @@ def record_transaction(username, account_type, amount):
         {'username': username},
         {'$push': {
             'transactions': {
-                'time': time,
-                'account type': account_type,
-                'amount': amount
-        }}}
+                '$each': [{
+                    'time': time,
+                    'account type': account_type,
+                    'amount': amount
+                }],
+                '$position': 0}
+        }}
     )
