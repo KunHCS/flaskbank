@@ -80,7 +80,7 @@ class Register extends Component {
                     <div className="row">
                         <div className="col-md-6 mt-5 mx-auto">
                             <form noValidate onSubmit={this.onSubmit}>
-                                <h1 className="h3 mb-3 font-weight-normal">Register</h1>
+                                <h1 className="h3 mb-3 font-weight-bold f font-weight-normal">Register</h1>
                                 <div className="form-group">
                                     <label htmlFor="name">First name</label>
                                     <input
@@ -155,10 +155,13 @@ class Register extends Component {
 }
 
 const paperStyle = {
-    height: 600,
-    width:  500,
-    boxShadow: '-5px 10px 25px, 5px 10px 25px',
-
+    height: '100%',
+    width:  '100%',
+    fontWeight: 'bold',
+    WebkitBorderRadius:'10px 10px 10px 10px',
+    textAlign:'center',
+    font: 'Helvetica',
+    margin: 'auto',
 };
 
 export default openAccountPage;

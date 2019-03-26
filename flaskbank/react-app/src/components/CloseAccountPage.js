@@ -25,13 +25,12 @@ class CloseAccountDetails extends React.Component {
 
     render(){
         return (
-            <div>
                 <Paper className ="paper" style={paperStyle} >
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 mt-5 mx-auto">
                                 <form noValidate onSubmit={this.onSubmit}>
-                                    <h1 className="h3 mb-3 font-weight-normal">Close Account</h1>
+                                    <h1 className="h3 mb-3 font-weight-bold font-weight-normal">Close Account</h1>
 
                                     <div className="form-group">
                                         <label htmlFor="name">Username</label>
@@ -64,16 +63,13 @@ class CloseAccountDetails extends React.Component {
 
                                     <button
                                         type="submit"
-                                        className="btn btn-lg btn-primary btn-block"
-                                    >
-                                        Submit
+                                        className="btn btn-lg btn-primary btn-block"> Submit
                                     </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </Paper>
-            </div>
         )
     };
 }
@@ -81,8 +77,12 @@ class CloseAccountDetails extends React.Component {
 
 
 const paperStyle = {
-    height: 600,
-    width:  500,
-    boxShadow: '-5px 1px 10px, 5px 1px 10px',
+    height: '100%',
+    width:  '100%',
+    textAlign:'center',
+    margin: 'auto',
+    WebkitBorderRadius:'10px 10px 10px 10px',
+    fontWeight: 'bold',
+    font: 'Helvetica',
 };
 export default CloseAccountPage;

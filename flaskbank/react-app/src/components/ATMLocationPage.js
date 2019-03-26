@@ -2,7 +2,6 @@ import React from 'react';
 import Navigation from "./FrameWorkUnity/DynamicNavBar";
 import Search from "./FrameWorkUnity/Search";
 import Container from "./FrameWorkUnity/Container";
-//import Paper from '@material-ui/core/Paper';
 import {navInfo1} from "./FrameWorkUnity/NavDetails";
 import MyMap from "./FrameWorkUnity/GoogleMap"
 
@@ -27,13 +26,21 @@ class ATMDetails extends React.Component {
     render(){
         return (
                 <div>
-                    ATM Page
-                    <MyMap/>
+                  <p style = {textStyle}>ATM Page</p>
+                  <p> <MyMap/> </p>
                 </div>
         )
     };
 }
-
-
+const textStyle = {
+  fontSize: '30px',
+  paddingTop: '10px',
+  paddingBottom: '30px',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  margin: 'auto',
+  position: 'flex',
+  color: 'white',
+}
 
 export default ATMLocationPage;

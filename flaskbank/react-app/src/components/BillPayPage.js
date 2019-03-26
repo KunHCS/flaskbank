@@ -40,11 +40,18 @@ const activeElement = {
 }
 
 const checkingContainerStyle = {
-    height: "auto",
-    width:  500,
-
-    boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    margin: '20px'
+    // height: "auto",
+    // width:  500,
+    //
+    // boxShadow: '-2px 5px 25px, 2px 5px 25px',
+    // margin: '20px'
+  height: '100%',
+  width:  '100%',
+  textAlign:'center',
+  margin: 'auto',
+  WebkitBorderRadius:'10px 10px 10px 10px',
+  fontWeight: 'bold',
+  font: 'Helvetica',
 }
 
 export default BillPay;

@@ -12,7 +12,10 @@ import ChangePassword from "./ChangePassword";
 import {connect} from "react-redux";
 import {logInAction} from "../actions/LoginAction";
 import {Link}from "react-router-dom";
-
+import card from  '../images/card.png';
+import card2 from  '../images/card2.png';
+import card3 from  '../images/card3.png';
+import cards from  '../images/cards1.png';
 
 const mainPage = (props) => {
     return (
@@ -57,12 +60,16 @@ class Login extends React.Component {
 
     render(){
         return (
+          <div>
+              <div> <img src={cards} alt="card" style = {center}/> </div>
+              {/*<div> <img src={card2} alt="card" style = {center2}/> </div>*/}
+              {/*<div> <img src={card3} alt="card" style = {center3}/> </div>*/}
+              <p style= {para}> </p>
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
                 <form onSubmit={this.onSubmit} >
-                    <Typography variant="h6">Sign On</Typography>
-                    <hr/>
+                    <Typography variant="h6" >Sign On</Typography>
                         <div style={{margin: '50px'}}>
                             <input
                                 style={{margin: '20px'}}
@@ -102,12 +109,10 @@ class Login extends React.Component {
             </div>
             </div>
             </Paper>
-
+          </div>
         )
     };
 }
-
-
 
 const loginInfo =  userSignOn => {
     return axios
@@ -131,39 +136,80 @@ const wrapper = {
     minHeight: '100%',
     width:'100%',
     padding: '20px',
-    border: '1.5px solid blue',
+    border: '3px solid blue',
     opacity: '.9',
     paddingTop: '35px',
+    WebkitBorderRadius:'10px 10px 10px 10px',
 }
-
-
 
 const formContent = {
     WebkitBorderRadius: '10px 10px 10px 10px',
-    borderRadius:'10px 10px 10px 10px',
     padding: '30px',
     width: '90%',
     maxWidth: '450px',
     position:'relative',
     textAlign:'center',
-    boxShadow: '0 30px 60px 0 rgba(0,0,50,0.3)',
+    margin: 'auto',
 }
 
 const formFooter = {
     position: 'relative',
     padding:'25px',
     textAlign:'center',
-    WebkitBorderRadius:'0 0 10px 10px',
-    borderRadius: '0 0 10px 10px',
+    WebkitBorderRadius:'10px 10px 10px 10px',
+    borderRadius: '10px 10px 10px 10px',
 }
 const paperStyle = {
     height: '20%',
-    width:  '40%',
+    width:  '60%',
     boxShadow: '5px 1px 10px, 5px 1px 10px',
+    WebkitBorderRadius:'10px 10px 10px 10px',
     textAlign:'center',
-    position: 'relative',
+    margin: 'auto',
+    font: 'Helvetica',
 };
 
+const center = {
+    margin: '0',
+    position: 'absolute',
+    paddingTop: '15px',
+    whiteSpace: 'nowrap',
+    paddingLeft:'200px',
+    paddingBottom: '30px',
+    height:'40%',
+    width: '50%',
+    opacity: '0.98'
+}
+
+const center2 = {
+    margin: '50px',
+    position: 'absolute',
+    paddingTop: '20px',
+    whiteSpace: 'nowrap',
+    paddingLeft:'225px',
+    paddingBottom: '30px',
+    height:'25%',
+    width: '38%',
+    opacity: '0.98'
+}
+
+const center3 = {
+    margin: '100px',
+    position: 'absolute',
+    paddingTop: '20px',
+    whiteSpace: 'nowrap',
+    paddingLeft:'250px',
+    paddingBottom: '30px',
+    height:'25%',
+    width: '40%',
+    opacity: '0.98'
+
+}
+
+const para = {
+    paddingTop: '380px',
+    position: 'relative',
+}
 
 
 const mapStateToProps = (state) => {
