@@ -18,22 +18,19 @@ def transfer():
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
 
-    # current_user = am.get_jwt_identity()['username']
-    am.clients.find_one_and_update({'accounts.account_number': account_from},
+    acc_from = am.clients.find_one_and_update({'accounts.account_number': account_from},
                                    {'$inc': {'accounts.$.balance': amount * -1}})
 
-    am.clients.find_one_and_update({'accounts.account_number': account_to},
+    acc_to = am.clients.find_one_and_update({'accounts.account_number': account_to},
                                    {'$inc': {'accounts.$.balance': amount}})
 
-    account_type_from = am.clients.find_one({'accounts.account_number': account_from}, {'accounts.$': 1,
-                                                                                '_id': 0})['accounts'][0]['type']
-    user_to = am.clients.find_one({'accounts.account_number': account_to}, {'accounts.$': 1,
-                                                                                '_id': 0})
+    acc_type_from = next(acc for acc in acc_from['accounts'] if
+                         acc['account_number'] == account_from)['type']
 
-    print('from', account_type_from)
-    print('++++++++++++++++++++')
-    print('to', user_to)
+    acc_type_to = next(acc for acc in acc_to['accounts'] if
+                         acc['account_number'] == account_to)['type']
 
+    record_transaction(acc_from['username'], acc_type_from, amount*-1)
+    record_transaction(acc_to['username'], acc_type_to, amount)
 
-    # record_transaction(current_user, account_type, amount)
     return am.jsonify({'from': account_from, 'to': account_to, 'amount': amount}), 200
