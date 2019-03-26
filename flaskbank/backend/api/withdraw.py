@@ -22,7 +22,7 @@ def withdraw():
     am.clients.find_one_and_update({'username': current_user, 'accounts.type': account_type},
                                    {'$inc': {'accounts.$.balance': amount * -1}})
 
-    record_transaction(current_user, account_type, amount)
+    record_transaction(current_user, account_type, amount * -1)
     return am.jsonify({'username': current_user, 'amount': amount * -1, 'account_type': account_type}), 200
 
 
