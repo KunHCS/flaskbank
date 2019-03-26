@@ -106,11 +106,11 @@ class Transfer extends React.Component{
                             to</Typography>
                         <br/>
                         <br/>
-                        <div id="bankChoice" className={classes.paper}>
-                            <Paper className={classes.innerPaper} style={{float: 'left'}}>
+                        <div id="bankChoice">
+                            <Paper className={classes.innerPaper} style={{float: 'left', marginLeft: '100px'}}>
                                 <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Chase Bank Card Transfer</button>
                             </Paper>
-                            <Paper  className={classes.innerPaper}  style={{float: 'right'}}>
+                            <Paper  className={classes.innerPaper}  style={{float: 'right', marginRight: '100px'}}>
                                 <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Other Bank Card Transfer</button>
                             </Paper>
                         </div>

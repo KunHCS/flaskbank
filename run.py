@@ -22,11 +22,11 @@ def main():
     app = create_app()
 
     if debug_host:
-        app.run(host='0.0.0.0', debug=True)
+        app.run(host='0.0.0.0', debug=True, threaded=True)
     elif production:
-        app.run(host='0.0.0.0')
+        app.run(host='0.0.0.0', threaded=True)
     else:
-        app.run(debug=True)
+        app.run(debug=True, threaded=True)
 
 
 if __name__ == '__main__':

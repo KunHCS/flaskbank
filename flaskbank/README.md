@@ -199,6 +199,24 @@ Status: 409 CONFLICT
 		"msg": "User <username> does not own account: <account_number>"
 	}
 
+## *Check Image Deposit*
+#### http://127.0.0.1:5000/api/deposit/check (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+**[React image upload example](https://www.academind.com/learn/react/snippets/image-upload/ "React image upload example")**
+##### Request body (use form-data):
+	{
+		"image": <image file>,
+		"account": <account number>
+	}
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
 ## Database Structure
 #### Clients collection
 
