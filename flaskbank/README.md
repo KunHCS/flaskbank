@@ -96,7 +96,7 @@ Status: 422 UNPROCESSABLE ENTITY
 
 ## *Get Client Detail*
 #### http://127.0.0.1:5000/api/client/{endpoint} (GET)
-	endpoint = ['all', 'transactions', 'accounts', 'contact',
+	endpoint = ['all', 'accounts', 'contact',
 						  'id']
 ##### Request header:
 
