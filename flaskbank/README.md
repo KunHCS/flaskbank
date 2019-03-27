@@ -117,22 +117,19 @@ Status: 200 OK
 				"active": <boolean>,
 				"alias": <account alias>,
 				"balance": <double>,
-				"type": <account type>
+				"type": <account type>,
+				"transactions": [
+							{
+								"date":<date>,
+								"description":<string>,
+								"amount":<double>,
+							}
+						]
 			},
 		],
 		"email": <email>,
 		"first_name": <first name>,
 		"last_name": <last name>,
-		
-		"transactions": [
-			{"date":<date>,
-			 "account_type": <checking/saving>,
-			 "account_number": <account_number>,
-			 "description":<string>,
-			 "amount":<double>,
-			}
-		],
-		
 		"username": <username>
 	}
 
@@ -232,16 +229,15 @@ Status: 400 BAD REQUEST
 			 "alias":<string>,
 			 "balance":<double>
 			 "type":<string>,
-			 "active": <boolean>}
-		]
-		
-		"transactions": [
-			{"date":<date>,
-			 "account_type": <saving/checking>,
-			 "account_number": <account_number>,
-			 "description":<string>,
-			 "amount":<double>,
-			 }
+			 "active": <boolean>,
+			 		"transactions": [
+							{
+							"date":<date>,
+							"description":<string>,
+							"amount":<double>,
+							}
+					]
+			}
 		]
 	}
 
