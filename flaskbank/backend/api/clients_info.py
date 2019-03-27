@@ -1,8 +1,9 @@
 from .. import all_module as am
+from .utils import make_json_serializable
 
 get_client_bp = am.Blueprint('get client info', __name__)
 
-allowed_endpoints = ('/all', '/transactions', '/accounts', '/contact',
+allowed_endpoints = ('/all', '/accounts', '/contact',
                      '/id')
 
 
@@ -13,10 +14,9 @@ def client_detail(endpoint):
     client = am.clients.find_one({'username': current_user},
                                  {'_id': False, 'password': False})
 
+    make_json_serializable(client)
     if endpoint == 'all':
         return am.jsonify(client), 200
-    elif endpoint == 'transactions':
-        return am.jsonify({'transactions': client['transactions']}), 200
     elif endpoint == 'accounts':
         return am.jsonify({'accounts': client['accounts']}), 200
     elif endpoint == 'contact':

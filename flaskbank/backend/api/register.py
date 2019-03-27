@@ -1,4 +1,5 @@
 from .. import all_module as am
+from .utils import to_d128
 register_bp = am.Blueprint('register', __name__)
 
 
@@ -30,19 +31,20 @@ def register_user():
                 {
                     'account_number': am.get_account_num('checking'),
                     'alias': 'Checking Account',
-                    'balance': 0.0,
+                    'balance': to_d128(0.0),
                     'type': 'checking',
-                    'active': True
+                    'active': True,
+                    'transactions': []
                 },
                 {
                     'account_number': am.get_account_num('saving'),
                     'alias': 'Saving Account',
-                    'balance': 0.0,
+                    'balance': to_d128(0.0),
                     'type': 'saving',
-                    'active': True
+                    'active': True,
+                    'transactions': []
                 }
-            ],
-            'transactions': []
+            ]
         })
         return am.jsonify({'msg': 'User Registered'}), 201
 

@@ -1,5 +1,5 @@
 from .. import all_module as am
-from .utils import record_transaction
+from .utils import withdraw, deposit
 
 transfer_bp = am.Blueprint('transfer', __name__)
 
@@ -18,19 +18,12 @@ def transfer():
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
 
-    acc_from = am.clients.find_one_and_update({'accounts.account_number': account_from},
-                                   {'$inc': {'accounts.$.balance': amount * -1}})
+    from_description = f'Transfer to {account_to[-4:]}'
+    acc_from = withdraw({'$exists': True}, account_from, amount,
+                        from_description)
 
-    acc_to = am.clients.find_one_and_update({'accounts.account_number': account_to},
-                                   {'$inc': {'accounts.$.balance': amount}})
+    to_description = f'Transfer from {account_from[-4:]}'
+    acc_to = deposit({'$exists': True}, account_to, amount, to_description)
 
-    acc_type_from = next(acc for acc in acc_from['accounts'] if
-                         acc['account_number'] == account_from)['type']
-
-    acc_type_to = next(acc for acc in acc_to['accounts'] if
-                         acc['account_number'] == account_to)['type']
-
-    record_transaction(acc_from['username'], acc_type_from, amount*-1)
-    record_transaction(acc_to['username'], acc_type_to, amount)
-
-    return am.jsonify({'from': account_from, 'to': account_to, 'amount': amount}), 200
+    return am.jsonify(
+        {'from': account_from, 'to': account_to, 'amount': amount}), 200
