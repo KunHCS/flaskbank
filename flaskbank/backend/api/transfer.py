@@ -1,5 +1,5 @@
 from .. import all_module as am
-from .transaction import record_transaction
+from .utils import record_transaction
 
 transfer_bp = am.Blueprint('transfer', __name__)
 

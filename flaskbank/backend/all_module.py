@@ -12,6 +12,8 @@ from .model import clients
 from .model import get_account_num
 from .model import jti_blacklist
 from luhn import verify
+from bson.decimal128 import create_decimal128_context
+import decimal as decimal
 
 
 from flask import (render_template, Blueprint, request, make_response,

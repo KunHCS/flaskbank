@@ -1,29 +1,8 @@
 from .. import all_module as am
-from .transaction import record_transaction
 import random
-from pymongo import ReturnDocument
+from .utils import deposit
 
 deposit_bp = am.Blueprint('deposit', __name__)
-
-
-def deposit(user, account_number, amount):
-    """
-    deposit amount to account
-    :param user:
-    :param account_number:
-    :param amount:
-    :return: (dict) updated client
-    """
-    round_amount = round(amount, 2)
-    client = am.clients.find_one_and_update(
-        {'username': user, 'accounts.account_number': account_number},
-        {'$inc': {'accounts.$.balance': round_amount}},
-        return_document=ReturnDocument.AFTER)
-    if client:
-        acc_type = next(acc for acc in client['accounts'] if acc[
-            'account_number'] == account_number)['type']
-        record_transaction(user, acc_type, round_amount)
-    return client
 
 
 @deposit_bp.route('/deposit', methods=['POST'])
@@ -33,21 +12,21 @@ def deposit_route():
 
     if not data:
         return am.make_response("Bad Request, no data passed", 400)
-
     try:
         amount = data['amount']
-        account_type = data['type']
+        acc_num = data['account_num']
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
 
     current_user = am.get_jwt_identity()['username']
-    am.clients.find_one_and_update(
-        {'username': current_user, 'accounts.type': account_type},
-        {'$inc': {'accounts.$.balance': amount}})
-
-    record_transaction(current_user, account_type, amount)
+    post_update_client = deposit(current_user, acc_num, amount)
+    if not post_update_client:
+        return am.jsonify({'msg': 'client does not own the account'}), 400
+    ending_balance = next(acc['balance'] for acc in post_update_client[
+        'accounts'] if acc['account_number'] == str(acc_num))
     return am.jsonify({'username': current_user, 'amount': amount,
-                       'account_type': account_type}), 200
+                       'ending_balance': ending_balance,
+                       'account_number': acc_num}), 200
 
 
 @deposit_bp.route('/deposit/check', methods=['POST'])
