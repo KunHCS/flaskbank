@@ -16,28 +16,45 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
-        width: '300px',
+        margin: theme.spacing.unit * 2,
+        width: 'auto',
+        position: 'flex',
     },
     root: {
         width: '100%',
     },
     paper: {
-        position: 'absolute',
-        marginLeft: theme.spacing.unit * 15,
-        width: theme.spacing.unit * 80,
-        height: theme.spacing.unit * 50,
-        backgroundColor: theme.palette.background.paper,
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 20,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
+        padding: theme.spacing.unit * 2,
         outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
+        textAlign: 'center',
     },
     innerPaper:{
-        width: theme.spacing.unit * 30,
-        height: theme.spacing.unit * 40,
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 35,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
     },
+
+    innerPaper2:{
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 70,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
+    },
+
     heading: {
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
@@ -100,22 +117,24 @@ class Transfer extends React.Component{
                     <InnerNavigationBar active={activeElement}/>
 
                     <div className={classes.root}>
-                        <Typography variant="h4">Make a Transfer</Typography>
-                        <Typography variant="h6">This is the transfer page</Typography>
-                        <Typography variant="h6">Select the account that transfer from and the account transfer
-                            to</Typography>
-                        <br/>
-                        <br/>
                         <div id="bankChoice">
-                            <Paper className={classes.innerPaper} style={{float: 'left', marginLeft: '100px'}}>
-                                <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Chase Bank Card Transfer</button>
-                            </Paper>
-                            <Paper  className={classes.innerPaper}  style={{float: 'right', marginRight: '100px'}}>
-                                <button onClick={this.choiceHandler} style={{marginTop: '80px'}}>Other Bank Card Transfer</button>
+                            <Paper className={classes.innerPaper} style={{position: 'flex'}}>
+                                <br/>
+                                <Typography variant="h4" color = "secondary" ><strong>Make a Transfer</strong></Typography>
+                                <Typography variant="subtitle2">This is the transfer page. Select the account that you want to transfer from and the account you want to transfer
+                                    to.</Typography>
+                                <br/>
+                                <button onClick={this.choiceHandler}>Chase Bank Card Transfer</button>
+                                <br/>
+                                <br/>
+                                <button onClick={this.choiceHandler}>Other Bank(s) Card Transfer</button>
                             </Paper>
                         </div>
                         <div id="accountChoice" style={{display:'none', margin: 'auto'}}>
-                            <Typography variant="h6">Transfer from</Typography>
+                            <Paper className={classes.innerPaper2} style={{position: 'flex'}}>
+                                <br/>
+                            <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
+                                <br/>
                             <ExpansionPanel expanded={this.state.open1}>
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
                                     <Typography
@@ -134,7 +153,9 @@ class Transfer extends React.Component{
                                     <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
-                            <Typography variant="h6">Transfer to</Typography>
+                                <br/>
+                            <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
+                                <br/>
                             <ExpansionPanel expanded={this.state.open2}>
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
                                     <Typography
@@ -154,11 +175,12 @@ class Transfer extends React.Component{
                             </ExpansionPanel>
                             <br/>
                             <div>
-                            <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:  $</Typography>
+
                                 <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
+                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount: $</Typography>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={classes.button}
                                         name="amount"
                                         placeholder= {this.state.transferAmount}
                                     />
@@ -166,20 +188,22 @@ class Transfer extends React.Component{
                             </div>
                             <br/>
                             <div>
+                                <br/>
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
                                     onClick={this.previousHanlder}
-                                    style={{marginLeft: '250px', width: '15%', float: 'left'}}
+                                    //style={{marginLeft: '250px', width: '15%', float: 'left'}}
                                 >
                                     Previous
                                 </Button>
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
                                     onClick={this.handleOpen}
-                                    style={{marginRight: '250px', width: '15%', float: 'right'}}>
-                                    Next
+                                    //style={{marginRight: '250px', width: '15%', float: 'right'}}>
+                                   > Next
                                 </Button>
                             </div>
+                            </Paper>
                         </div>
                     </div>
                 </Container>
@@ -194,6 +218,7 @@ const activeElement = {
     act3: "nav-link active",
     act4: "nav-link ",
 }
+
 Transfer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
