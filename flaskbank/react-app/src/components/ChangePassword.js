@@ -24,11 +24,6 @@ const styles = theme => ({
         outline: 'none',
     },
 });
-// const paperStyle = {
-//     height: 600,
-//     width:  500,
-//     boxShadow: '-5px 1px 10px, 5px 1px 10px',
-// };
 
 class ChangePasswordForm extends React.Component {
     render() {
@@ -47,7 +42,7 @@ class ChangePasswordForm extends React.Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">New password</label>
+                        <label htmlFor="email">New Password</label>
                         <input
                             type="password"
                             className="form-control"
@@ -56,7 +51,7 @@ class ChangePasswordForm extends React.Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Enter passwrod again</label>
+                        <label htmlFor="password">Enter Password Again</label>
                         <input
                             type="password"
                             className="form-control"

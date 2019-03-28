@@ -10,21 +10,23 @@ import {connect} from "react-redux";
 
 const Statement= () => {
     return (
+      <div>
         <Paper style={StatementStyle}>
         <div class="container">
             <div class="col-md-9 personal-info">
-                <h3>Personal info</h3>
+                <br/>
+                <h3><strong>Personal Information</strong></h3>
                 <form class="form-horizontal" role="form">
 
                     <div class="form-group">
-                        <label class="col-lg-5 control-label">First name:</label>
+                        <label class="col-lg-5 control-label">First Name:</label>
                         <div class="col-lg-8">
                             <input class="form-control" type="text" placeholder="Jane"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-5 control-label">Last name:</label>
+                        <label class="col-lg-5 control-label">Last Name:</label>
                         <div class="col-lg-8">
                             <input class="form-control" type="text" placeholder="Bishop"/>
                         </div>
@@ -52,7 +54,7 @@ const Statement= () => {
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-7 control-label">Confirm password:</label>
+                        <label class="col-md-7 control-label">Confirm Password:</label>
                         <div class="col-md-8">
                             <input class="form-control" type="password" placeholder="123"/>
                         </div>
@@ -62,15 +64,16 @@ const Statement= () => {
                         <label class="col-md-3 control-label"></label>
                         <div className="col-md-8">
                             <input type="button" className="btn btn-primary" value="Save Changes"/>
-                                <span></span>
-                                <input type="reset" className="btn btn-default" value="Cancel"/>
+                                <span> </span>
+                                <input type="reset" className="btn btn-dark" value="Cancel"/>
                         </div>
                     </div>
-
+                    <br/>
                 </form>
             </div>
         </div>
         </Paper>
+      </div>
     );
 }
 
@@ -90,10 +93,11 @@ const ProfileSettingPage = () => {
 
 
 const StatementStyle = {
-    height: 700,
-    width:  600,
-    boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    margin: '20px'
+    position: 'flex',
+    height: '100%',
+    width:  '100%',
+    WebkitBorderRadius:'10px 10px 10px 10px',
+    font: 'Helvetica',
 }
 
 const activeElement = {

@@ -11,38 +11,42 @@ import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing.unit * 3,
         width: 'auto',
     },
     root: {
         width: '100%',
     },
     bgDiv: {
-        position: 'absolute',
+        position: 'flex',
         outline: 'none',
         textAlign: 'center',
     },
     top:{
-        marginLeft: theme.spacing.unit * 15,
+        position: 'flex',
+        font: 'Helvetica',
         marginBottom: theme.spacing.unit * 5,
-        width: theme.spacing.unit * 80,
-        height:"50vh",
+        width: '100%',
+        height: theme.spacing.unit * 30,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
         textAlign: 'center',
+        WebkitBorderRadius:'10px 10px 10px 10px',
     },
     bottom:{
-        marginLeft: theme.spacing.unit * 15,
+        position: 'flex',
+        font: 'Helvetica',
         marginBottom: theme.spacing.unit * 5,
-        width: theme.spacing.unit * 80,
-        height:"50vh",
+        width: '100%',
+        height: theme.spacing.unit * 30,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
         textAlign: 'center',
+        WebkitBorderRadius:'10px 10px 10px 10px',
     }
 });
 
@@ -61,11 +65,11 @@ class DepositPage extends React.Component{
                     <div className={classes.bgDiv}>
                         <div className={classes.top}>
                             <div style={{float: 'left', width:"50%"}}>
-                                <Typography variant="h6" color="secondary">Deposit to checking account</Typography>
+                              <Typography variant="h4" color="secondary"><strong>Deposit to Checking Account</strong></Typography>
                                 <Typography variant="subtitle2">Checking Account -2644</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
-                                <Typography variant="h6">Amount</Typography>
+                                <Typography variant="h5"><strong>Amount</strong></Typography>
                                 <input
                                     type="text"
                                     className="form-control"
@@ -84,11 +88,11 @@ class DepositPage extends React.Component{
 
                         <div className={classes.bottom}>
                             <div style={{float: 'left', width:"50%"}}>
-                                <Typography variant="h6" color="secondary">Deposit to saving account</Typography>
+                              <Typography variant="h4" color="secondary"><strong>Deposit to Saving Account</strong></Typography>
                                 <Typography variant="subtitle2">Saving Account -9642</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
-                                <Typography variant="h6">Amount</Typography>
+                                <Typography variant="h5"><strong>Amount</strong></Typography>
                                 <input
                                     type="text"
                                     className="form-control"

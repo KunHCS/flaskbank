@@ -45,7 +45,7 @@ class OverViewPage extends React.Component{
                     <div className={classes.root}>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Checking Account -2644</Typography>
+                                <Typography className={classes.heading}><strong>Checking Account -2644</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
@@ -59,7 +59,7 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Saving Account -9642</Typography>
+                                <Typography className={classes.heading}><strong>Saving Account -9642</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
@@ -73,7 +73,7 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>SJSP Platinum Visa Card -5544</Typography>
+                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card -5544</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>

@@ -23,7 +23,6 @@ const Left = () => {
     fontSize: '30px',
     textAlign: 'center',
     fontWeight: 'bold',
-    //display: "block",
     boxShadow: '0 30px 60px 0 rgba(0,0,255,0.3)',
     paddingBottom: '30px',
   }
