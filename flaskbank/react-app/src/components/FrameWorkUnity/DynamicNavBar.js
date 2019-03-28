@@ -14,8 +14,6 @@ const dynamicNavBar = (props) =>{
         letterSpacing: '1px',
         wordSpacing:'4px'
     };
-
-
     return (
         <nav className="Navigation" style={navBarStyle}>
             <a className="Nav-text" style={navTextStyle} href={props.nav.url0}>{props.nav.name0}</a> |
