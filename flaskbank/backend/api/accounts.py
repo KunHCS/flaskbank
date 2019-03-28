@@ -1,5 +1,5 @@
 from .. import all_module as am
-from .transaction import record_transaction
+from .utils import record_transaction
 
 accounts_bp = am.Blueprint('accounts_bp', __name__)
 
@@ -28,19 +28,22 @@ def open_account():
                 'accounts': {
                     'account_number': account_num,
                     'alias': alias,
-                    'balance': deposit,
+                    'balance': am.to_d128(deposit),
                     'type': acc_type,
-                    'active': True
+                    'active': True,
+                    'transactions': []
                 }
             }
         }
     )
 
     if deposit:
-        record_transaction(current_user, acc_type, deposit)
+        record_transaction(current_user, account_num, deposit, 'Initial '
+                                                               'deposit')
 
-    return am.jsonify({'msg': 'Account created', 'account_number':
-                      account_num}), 201
+    return am.jsonify({'msg': 'Account created',
+                       'account_number': account_num,
+                       'initial_deposit': deposit}), 201
 
 
 @accounts_bp.route('/accounts/close/<string:account_num>', methods=['DELETE'])

@@ -11,21 +11,23 @@ import {navInfo2} from "./FrameWorkUnity/NavDetails";
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing.unit * 3,
         width: 'auto',
     },
     root: {
         width: '100%',
     },
     paper: {
-        position: 'absolute',
-        marginLeft: theme.spacing.unit * 15,
-        width: theme.spacing.unit * 80,
+        position: 'flex',
+        font: 'Helvetica',
+        width: '100%',
+        height: theme.spacing.unit * 25,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
         textAlign: 'center',
+        WebkitBorderRadius:'10px 10px 10px 10px',
     },
 });
 
@@ -43,11 +45,11 @@ class BillPay extends React.Component{
                     <InnerNavigationBar active={activeElement}/>
                     <div className={classes.paper}>
                         <div style={{float: 'left', width:"40%"}}>
-                            <Typography variant="h6" color="secondary">SJSP Credit Card</Typography>
-                            <Typography variant="subtitle2">SJSP Platinum Visa card *5544</Typography>
+                            <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
+                            <Typography variant="subtitle2">SJSP Platinum Visa Card -5544</Typography>
                         </div>
                         <div style={{float: 'right', width:"30%"}}>
-                            <Typography variant="h6">Amount</Typography>
+                            <Typography variant="h5"><strong>Amount</strong></Typography>
                             <input
                                 type="text"
                                 className="form-control"
@@ -68,8 +70,6 @@ class BillPay extends React.Component{
 
         );
     }
-
-
 }
 
 const activeElement = {
@@ -78,6 +78,22 @@ const activeElement = {
     act3: "nav-link ",
     act4: "nav-link ",
 }
+
+const checkingContainerStyle = {
+    // height: "auto",
+    // width:  500,
+    //
+    // boxShadow: '-2px 5px 25px, 2px 5px 25px',
+    // margin: '20px'
+  height: '100%',
+  width:  '100%',
+  textAlign:'center',
+  margin: 'auto',
+  WebkitBorderRadius:'10px 10px 10px 10px',
+  fontWeight: 'bold',
+  font: 'Helvetica',
+}
+
 
 BillPay.propTypes = {
     classes: PropTypes.object.isRequired,

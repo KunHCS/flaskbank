@@ -1,28 +1,31 @@
 from .. import all_module as am
-from .transaction import record_transaction
+from .utils import withdraw
 
 withdraw_bp = am.Blueprint('withdraw', __name__)
 
 
 @withdraw_bp.route('/withdraw', methods=['POST'])
 @am.jwt_required
-def withdraw():
+def withdraw_route():
     data = am.request.get_json()
-
     if not data:
         return am.make_response("Bad Request, no data passed", 400)
 
     try:
         amount = data['amount']
-        account_type = data['type']
+        acc_num = data['account_number']
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
 
     current_user = am.get_jwt_identity()['username']
-    am.clients.find_one_and_update({'username': current_user, 'accounts.type': account_type},
-                                   {'$inc': {'accounts.$.balance': amount * -1}})
+    post_update_client = withdraw(current_user, acc_num, amount,
+                                  'Cash withdraw')
+    if not post_update_client:
+        return am.jsonify({'msg': 'Client does not own the account'}), 400
 
-    record_transaction(current_user, account_type, amount)
-    return am.jsonify({'username': current_user, 'amount': amount * -1, 'account_type': account_type}), 200
+    ending_balance = next(acc['balance'] for acc in post_update_client[
+        'accounts'] if acc['account_number'] == str(acc_num))
 
-
+    return am.jsonify({'username': current_user, 'amount': amount * -1,
+                       'ending_balance': float(ending_balance.to_decimal()),
+                       'account_number': acc_num}), 200
