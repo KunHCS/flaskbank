@@ -63,7 +63,7 @@ const Statement= () => {
                         <div className="col-md-8">
                             <input type="button" className="btn btn-primary" value="Save Changes"/>
                                 <span></span>
-                                <input type="reset" className="btn btn-default" value="Cancel"/>
+                            <input type="reset" className="btn btn-default" value="Cancel"/>
                         </div>
                     </div>
 
