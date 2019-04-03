@@ -3,7 +3,8 @@ import Navigation from "./FrameWorkUnity/DynamicNavBar";
 import Search from "./FrameWorkUnity/Search";
 import Container from "./FrameWorkUnity/Container";
 import {navInfo1} from "./FrameWorkUnity/NavDetails";
-import MyMap from "./FrameWorkUnity/GoogleMap"
+import MyMap from "./FrameWorkUnity/GoogleMap";
+//import MyMap from "./FrameWorkUnity/GoogleApiWrapper";
 
 
 

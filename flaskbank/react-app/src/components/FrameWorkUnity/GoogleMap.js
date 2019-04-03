@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Button from '@material-ui/core/Button';
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-class SimpleMap extends Component {
-    constructor() {
-        super()
+const style = {
+    width: '65%',
+    height: '80%'
+}
 
+export class MapContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        if (!props.hasOwnProperty('google')) {
+            throw new Error('You must include a `google` prop');
+        }
         this.state = {
-            center:[0, 0],
-            zoom: 14,
+            center:[37.335186, -121.881073],
+            zoom: 15,
+            open: false,
         };
         this.getMyLocation = this.getMyLocation.bind(this)
     }
-
-
-    componentDidMount(){
-        this.getMyLocation();
-    }
     getMyLocation() {
+        this.setState({open: true})
         const location = window.navigator && window.navigator.geolocation
 
         if (location) {
@@ -32,22 +36,38 @@ class SimpleMap extends Component {
         }
 
     }
-
     render() {
         return (
-            // Important! Always set the container height explicitly
-            <div style={{ height: '100vh', width: '100%' }}>
-                <Button onClick={this.getMyLocation()}>Get current location</Button>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'AIzaSyA0WRCYbwOJlu78I0uwsOuj54l8X9RIJqw' }}
-                    defaultCenter={this.state.center}
-                    defaultZoom={this.state.zoom}
+            <div>
+                <Button onClick={this.getMyLocation}>Get current location</Button>
+                <Map
+                    google={this.props.google}
+                    onReady={this.fetchPlaces}
+                    visible={this.state.open}
+                    style={style}
+                    center={{
+                        lat: this.state.center[0],
+                        lng: this.state.center[1]
+                    }}
+                    zoom={15}
                 >
+                    <Marker
+                        title={'The marker`s title will appear as a tooltip.'}
+                        name={'CurrentLocation'}
+                        position={{lat: this.state.center[0], lng: this.state.center[1]}}
+                    />
 
-                </GoogleMapReact>
+                    {/*<InfoWindow onClose={this.onInfoWindowClose}>*/}
+                    {/*<div>*/}
+                    {/*<h1>{this.state.selectedPlace.name}</h1>*/}
+                    {/*</div>*/}
+                    {/*</InfoWindow>*/}
+                </Map>
             </div>
         );
     }
 }
 
-export default SimpleMap;
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyA0WRCYbwOJlu78I0uwsOuj54l8X9RIJqw"),
+})(MapContainer)
