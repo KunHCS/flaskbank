@@ -4,6 +4,22 @@ from pymongo import ReturnDocument
 utils_bp = am.Blueprint('Utilities API', __name__)
 
 
+def make_serializable(client_dict):
+    """
+    Convert all decimal128 to float, more generic version
+    :param client_dict:
+    :return:
+    """
+    for key in client_dict:
+        if type(client_dict[key]) is am.Decimal128:
+            client_dict[key] = float(client_dict[key].to_decimal())
+        if type(client_dict[key]) is dict:
+            make_serializable(client_dict[key])
+        if type(client_dict[key]) is list:
+            for item in client_dict[key]:
+                make_serializable(item)
+
+
 def make_json_serializable(client_dict):
     """
     Convert types to json serializable

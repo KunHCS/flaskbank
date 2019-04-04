@@ -152,6 +152,41 @@ Status: 422 UNPROCESSABLE ENTITY
 		"msg": <message>
 	}
 
+## *Get client transactions (specific account)*
+#### http://127.0.0.1:5000/api/client/transaction/{account_number}/{year}/{month} (GET)
+Note: year and month are optional
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+	{
+		"transactions": <transaction array>
+	}
+
+## *Get client transactions (all account)*
+#### http://127.0.0.1:5000/api/client/transaction/all/{year}/{month} (GET)
+Note: year and month are **NOT** optional (for now)
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+	{
+		"accounts": [{
+            "account_number": <account number>,
+            "transactions": <transaction array>
+        }]
+	}
+
 ## *Open New Account*
 #### http://127.0.0.1:5000/api/accounts/open (POST)
 ##### Request header:
