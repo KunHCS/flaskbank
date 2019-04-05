@@ -8,11 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import {Link}from "react-router-dom";
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
-import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
+import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
+import {navInfo2} from "../FrameWorkUnity/NavDetails";
 import {connect} from "react-redux";
 
 const styles = theme => ({

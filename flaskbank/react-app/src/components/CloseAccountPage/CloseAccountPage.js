@@ -1,9 +1,9 @@
 import React from 'react';
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
-import {navInfo1} from "./FrameWorkUnity/NavDetails";
+import {navInfo1} from "../FrameWorkUnity/NavDetails";
 
 
 
