@@ -31,4 +31,7 @@ def create_app():
 
     app.register_blueprint(main_bp)
 
+    from .api.autopay import scheduler
+    scheduler.start()
+
     return app
