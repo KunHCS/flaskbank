@@ -7,38 +7,47 @@ import Container from "../FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
-import {navInfo1} from "../FrameWorkUnity/NavDetails";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
 import {logInAction} from "../../actions/LoginAction";
 import {Link}from "react-router-dom";
-import card from '../../images/card.png';
-import card2 from '../../images/card2.png';
-import card3 from '../../images/card3.png';
 import cards from '../../images/cards1.png';
+import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
+
+
 
 const mainPage = (props) => {
-    return (
-        <div >
-            <Button variant="contained" onClick={()=>props.logInAction(true)} >
-                Log In
-            </Button>
-            <Button variant="contained" onClick={()=>props.logInAction(false)} >
-                Log out
-            </Button>
-            <Navigation nav = {navInfo1}/>
-            <Search/>
-            <Container>
-                <Login/>
-            </Container>
-        </div>
+    console.log('I am in main page props ');
+    console.log(props);
+      if (props.auth == false) {
+        return (
+            <div>
+                <Button variant="contained" onClick={() => props.logInAction()}>
+                    Log In
+                </Button>
+                <Button variant="contained" onClick={() => props.logInAction()}>
+                    Log out
+                </Button>
+                <Navigation/>
+                <Search/>
+                <Container>
+                    <Login props={props}/>
+                </Container>
+            </div>
 
-    );
+        );}
+      else return (
+          <Redirect to={'/overview'} />
+      )
+
+
+
 }
 
 
 class Login extends React.Component {
     state = {username:"",password:"", open:false};
+
     handleOpen = () => {
         this.setState({ open: true });
     };
@@ -55,10 +64,17 @@ class Login extends React.Component {
             password: this.state.password
         };
 
-        loginInfo (user);
+        const temp =loginInfo (user);
+        this.props.props.logInAction()
+        console.log(temp);
+
+
+
     }
 
     render(){
+        console.log('I am in login page props ');
+        console.log(this.props);
         return (
           <div>
               <div> <img src={cards} alt="card" style = {center}/> </div>
@@ -68,7 +84,7 @@ class Login extends React.Component {
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
-                <form onSubmit={this.onSubmit} >
+                <form onClick={this.onSubmit}>
                     <Typography variant="h6" >Sign On</Typography>
                         <div style={{margin: '50px'}}>
                             <input
@@ -87,12 +103,11 @@ class Login extends React.Component {
                             />
                         </div>
 
-                        <Button variant="contained" type="submit"
-                                style={{margin:'10px'}} >
-
-                            <Link to = "/overview">Sign On </Link>
-
+                        <Button variant="contained" type="submit" style={{margin:'10px'}}>
+                              Sign On
                         </Button>
+
+
 
                         <div id="formFooter" style={formFooter}>
                             <a className="underlineHover" href= "#" onClick={this.handleOpen}>Forgot Password?</a>
@@ -129,6 +144,10 @@ const loginInfo =  userSignOn => {
             }
         })
         .catch(error => console.log(error));
+
+
+
+
 };
 
 
@@ -218,6 +237,8 @@ const para = {
 
 
 const mapStateToProps = (state) => {
+    console.log("I'm in map State to Props");
+    console.log(state);
     return state;
 }
 

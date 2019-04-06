@@ -4,7 +4,7 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
-import {navInfo1} from "../FrameWorkUnity/NavDetails";
+
 
 
 
@@ -12,7 +12,7 @@ const openAccountPage = () => {
 
     return (
         <div >
-            <Navigation nav = {navInfo1}/>
+            <Navigation/>
             <Search/>
             <Container>
                 <Register/>

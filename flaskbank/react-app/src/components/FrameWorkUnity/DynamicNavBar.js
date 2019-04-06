@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {logOutAction} from "../../actions/LoginAction";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {
@@ -14,16 +16,35 @@ const dynamicNavBar = (props) =>{
         letterSpacing: '1px',
         wordSpacing:'4px'
     };
-    return (
+
+    if (props.auth==false) {
+        return (
+
+            <nav className="Navigation" style={navBarStyle}>
+                <a className="Nav-text" style={navTextStyle} href="/atm">ATM Location</a> |
+                <Link className="Nav-text" style={navTextStyle} to="/">Main Page</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/openAcc">Open an Account</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/closeAcc">Close an Account</Link> |
+            </nav>
+        )
+    }
+    else if (props.auth==true) {
+        return (
         <nav className="Navigation" style={navBarStyle}>
-            <a className="Nav-text" style={navTextStyle} href={props.nav.url0}>{props.nav.name0}</a> |
-            <Link className="Nav-text" style={navTextStyle} to={props.nav.url1}>{props.nav.name1}</Link> |
-            <Link className="Nav-text" style={navTextStyle} to={props.nav.url2}>{props.nav.name2}</Link> |
-            <Link className="Nav-text" style={navTextStyle} to={props.nav.url3}>{props.nav.name3}</Link> |
+        <Link className="Nav-text" style={navTextStyle} to="/overview">Name</Link> |
+        <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
+        <Link className="Nav-text" style={navTextStyle} to="/" onClick={()=>props.logOutAction()}>Sign Out</Link> |
         </nav>
-    )
+    ) }
+}
+
+const mapStateToProps = (state) => {
+    console.log("I'm in map State to Props");
+    console.log(state);
+    return state;
 }
 
 
-export default dynamicNavBar;
+
+export default connect(mapStateToProps,{logOutAction:logOutAction})(dynamicNavBar);
 
