@@ -124,6 +124,8 @@ const loginInfo =  userSignOn => {
             if (response.status === 201) {
                 //store token somewhere
                 console.log(response.data.access_token)
+
+
             }
         })
         .catch(error => console.log(error));

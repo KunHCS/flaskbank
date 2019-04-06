@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux'
+import * as ACTION from "../static/action_type";
 
 
 const profileReducer = () => {
@@ -16,7 +17,7 @@ const profileReducer = () => {
 
 
 const authenticationStateReducer = ( authState=false, action) => {
-    if (action.type === 'TRUE') {
+    if (action.type === ACTION.SIGN_IN) {
         return action.payload;
     }
 
