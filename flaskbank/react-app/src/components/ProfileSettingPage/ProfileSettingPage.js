@@ -1,10 +1,10 @@
 import React from 'react';
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
-import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
+import {navInfo2} from "../FrameWorkUnity/NavDetails";
 import {connect} from "react-redux";
 
 

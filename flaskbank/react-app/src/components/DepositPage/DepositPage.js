@@ -3,11 +3,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
-import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
+import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
+import {navInfo2} from "../FrameWorkUnity/NavDetails";
 
 const styles = theme => ({
     button: {

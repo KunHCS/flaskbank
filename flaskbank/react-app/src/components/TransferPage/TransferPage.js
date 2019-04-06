@@ -7,11 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
-import InnerNavigationBar from "./FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "./FrameWorkUnity/NavDetails";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
+import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
+import {navInfo2} from "../FrameWorkUnity/NavDetails";
 import PropTypes from "prop-types";
 
 const styles = theme => ({

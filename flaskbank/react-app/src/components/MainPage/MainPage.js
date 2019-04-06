@@ -1,21 +1,21 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import Navigation from "./FrameWorkUnity/DynamicNavBar";
-import Search from "./FrameWorkUnity/Search";
-import Container from "./FrameWorkUnity/Container";
+import Navigation from "../FrameWorkUnity/DynamicNavBar";
+import Search from "../FrameWorkUnity/Search";
+import Container from "../FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
-import {navInfo1} from "./FrameWorkUnity/NavDetails";
-import ChangePassword from "./ChangePassword";
+import {navInfo1} from "../FrameWorkUnity/NavDetails";
+import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
-import {logInAction} from "../actions/LoginAction";
+import {logInAction} from "../../actions/LoginAction";
 import {Link}from "react-router-dom";
-import card from  '../images/card.png';
-import card2 from  '../images/card2.png';
-import card3 from  '../images/card3.png';
-import cards from  '../images/cards1.png';
+import card from '../../images/card.png';
+import card2 from '../../images/card2.png';
+import card3 from '../../images/card3.png';
+import cards from '../../images/cards1.png';
 
 const mainPage = (props) => {
     return (
@@ -116,12 +116,17 @@ class Login extends React.Component {
 
 const loginInfo =  userSignOn => {
     return axios
-        .post("/api/auth", {
+        .post("/api/login", {
             username: userSignOn.username,
             password: userSignOn.password
         })
         .then(response => {
-            console.log(response);
+            if (response.status === 201) {
+                //store token somewhere
+                console.log(response.data.access_token)
+
+
+            }
         })
         .catch(error => console.log(error));
 };
