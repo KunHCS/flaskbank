@@ -7,7 +7,7 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "../FrameWorkUnity/NavDetails";
+
 
 const styles = theme => ({
     button: {
@@ -58,7 +58,7 @@ class DepositPage extends React.Component{
         const {classes} = this.props;
         return (
             <div >
-                <Navigation nav = {navInfo2}/>
+                <Navigation/>
                 <Search/>
                 <Container>
                     <InnerNavigationBar active={activeElement}/>

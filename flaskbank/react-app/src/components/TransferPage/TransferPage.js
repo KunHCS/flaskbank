@@ -11,7 +11,6 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "../FrameWorkUnity/NavDetails";
 import PropTypes from "prop-types";
 
 const styles = theme => ({
@@ -111,7 +110,7 @@ class Transfer extends React.Component{
         const {classes} = this.props;
         return (
             <div>
-                <Navigation nav={navInfo2}/>
+                <Navigation/>
                 <Search/>
                 <Container>
                     <InnerNavigationBar active={activeElement}/>

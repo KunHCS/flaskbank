@@ -4,7 +4,6 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
-import {navInfo2} from "../FrameWorkUnity/NavDetails";
 import {connect} from "react-redux";
 
 
@@ -80,7 +79,7 @@ const Statement= () => {
 const ProfileSettingPage = () => {
     return (
         <div >
-            <Navigation nav = {navInfo2}/>
+            <Navigation/>
             <Search/>
             <Container>
                 <InnerNavigationBar active={activeElement}/>

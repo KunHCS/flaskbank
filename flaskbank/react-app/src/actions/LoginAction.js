@@ -1,10 +1,17 @@
 import * as ACTION from "../static/action_type";
 
 
-export const logInAction = (payload) =>{
+export const logInAction = () =>{
     return {
         type: ACTION.SIGN_IN,
-        payload: payload,
+        payload: true,
     };
 };
 
+
+export const logOutAction = () =>{
+    return {
+        type: ACTION.SIGN_IN,
+        payload: false,
+    };
+};

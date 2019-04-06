@@ -3,14 +3,14 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
-import {navInfo1} from "../FrameWorkUnity/NavDetails";
+
 
 
 
 const CloseAccountPage = () => {
     return (
         <div >
-            <Navigation nav = {navInfo1}/>
+            <Navigation/>
             <Search/>
             <Container>
                 <CloseAccountDetails/>
