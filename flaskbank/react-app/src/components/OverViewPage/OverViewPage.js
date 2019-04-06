@@ -35,6 +35,8 @@ class OverViewPage extends React.Component{
     };
     render() {
         const { classes } = this.props;
+        console.log("I;m in overview page")
+        console.log(this.props)
         return (
             <div >
                 <Navigation/>

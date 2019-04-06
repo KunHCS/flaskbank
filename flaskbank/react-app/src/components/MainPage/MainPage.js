@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
-import {logInAction} from "../../actions/LoginAction";
+import {logInAction,logInRequest} from "../../actions/LoginAction";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
@@ -64,9 +64,11 @@ class Login extends React.Component {
             password: this.state.password
         };
 
-        const temp =loginInfo (user);
-        this.props.props.logInAction()
-        console.log(temp);
+        //loginInfo (user);
+
+        this.props.props.logInRequest(this.state.username,this.state.password)
+        //this.props.props.logInAction()
+
 
 
 
@@ -84,7 +86,7 @@ class Login extends React.Component {
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
-                <form onClick={this.onSubmit}>
+                <form onSubmit={this.onSubmit}>
                     <Typography variant="h6" >Sign On</Typography>
                         <div style={{margin: '50px'}}>
                             <input
@@ -138,6 +140,7 @@ const loginInfo =  userSignOn => {
         .then(response => {
             if (response.status === 201) {
                 //store token somewhere
+                console.log(response)
                 console.log(response.data.access_token)
 
 
@@ -242,4 +245,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,{logInAction:logInAction})(mainPage);
+export default connect(mapStateToProps,{logInAction,logInRequest})(mainPage);
