@@ -44,7 +44,8 @@ def get_all_transactions(year, month):
         {'accounts': True,
          'accounts.account_number': True,
          'accounts.transactions': True})
-    print(client)
+    if not client:
+        return am.jsonify({'msg': 'client not found'}), 409
     for item in client['accounts']:
         print(item)
         make_serializable(item)
@@ -70,6 +71,8 @@ def get_transaction(account, year, month):
         'accounts.account_number': str(account)},
         {'accounts': {'$elemMatch': {'account_number': str(account)}},
          'accounts.transactions': True})
+    if not client:
+        return am.jsonify({'msg': 'no such account'}), 409
     transactions_list = client['accounts'][0]['transactions']
 
     for item in transactions_list:
