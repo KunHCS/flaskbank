@@ -19,15 +19,10 @@ export const logOutAction = () =>{
 
 
 
-export function logInRequest(username, password){
-    const request = userlogin => axios.post('api/login', {
-        username: username,
-        password: password
-    });
-    console.log(username);
+export function logInRequest(response){
     return {
         type: ACTION.LOG_IN,
-        payload: request
+        payload: response
     };
 }
 

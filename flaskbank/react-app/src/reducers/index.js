@@ -28,6 +28,7 @@ const authenticationRequestReducer = (state = '', action) => {
     if (action.type === ACTION.LOG_IN ) {
         console.log("yeah yeah eayh");
         console.log(action.payload);
+        console.log(action.payload.status)
         return action.payload.status == "201" ? action.payload.data.access_token : "yes";
     }
 

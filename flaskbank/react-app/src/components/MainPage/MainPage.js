@@ -63,15 +63,16 @@ class Login extends React.Component {
             username: this.state.username,
             password: this.state.password
         };
-
+        axios.post('api/login', {
+            username: this.state.username,
+            password: this.state.password
+        }).then(response => {
+            this.props.props.logInRequest(response)
+        }).catch(error => {
+            this.props.props.logInRequest(error.response)
+        });
         //loginInfo (user);
-
-        this.props.props.logInRequest(this.state.username,this.state.password)
         //this.props.props.logInAction()
-
-
-
-
     }
 
     render(){
