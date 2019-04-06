@@ -3,6 +3,7 @@
 __pycache__/
 *.pyc
 venv/
+bankenv/
 
 .eslintrc
 .DS_Store

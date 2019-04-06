@@ -8,30 +8,16 @@ allowed_endpoints = ('/all', '/accounts', '/contact',
                      '/id')
 
 
-@get_client_bp.route('/client/<string:endpoint>', methods=['GET'])
+@get_client_bp.route('/client/accounts/balance')
 @am.jwt_required
-def client_detail(endpoint):
+def get_account_balance():
     current_user = am.get_jwt_identity()['username']
     client = am.clients.find_one({'username': current_user},
-                                 {'_id': False, 'password': False})
-
-    make_json_serializable(client)
-    if endpoint == 'all':
-        return am.jsonify(client), 200
-    elif endpoint == 'accounts':
-        return am.jsonify({'accounts': client['accounts']}), 200
-    elif endpoint == 'contact':
-        return am.jsonify({'email': client['email']}), 200
-    elif endpoint == 'id':
-        identity = {
-            'first_name': client['first_name'],
-            'last_name': client['last_name'],
-            'username': client['username']
-        }
-        return am.jsonify(identity), 200
-    else:
-        return am.jsonify({'msg': f'no such endpoint /{endpoint}',
-                           'allowed_endpoints': allowed_endpoints}), 400
+                                 {'accounts': True, 'accounts.balance': True,
+                                  'accounts.account_number': True})
+    client.pop('_id')
+    make_serializable(client)
+    return am.jsonify(client), 200
 
 
 @get_client_bp.route('/client/transaction/all/<int:year>/<int:month>',
@@ -47,7 +33,6 @@ def get_all_transactions(year, month):
     if not client:
         return am.jsonify({'msg': 'client not found'}), 409
     for item in client['accounts']:
-        print(item)
         make_serializable(item)
     for account in client['accounts']:
         filtered = [trans for trans in account['transactions']
@@ -84,10 +69,35 @@ def get_transaction(account, year, month):
     filtered = [trans for trans in transactions_list
                 if datetime.strptime(trans['time'], '%c').year == year]
     if year and not month:
-        print(filtered)
         return am.jsonify({'transactions': filtered}), 200
     if year and month:
         result = [trans for trans in filtered
                   if datetime.strptime(trans['time'], '%c').month == month]
         return am.jsonify({'transactions': result}), 200
     return f'{year}, {month}', 200
+
+
+@get_client_bp.route('/client/<string:endpoint>', methods=['GET'])
+@am.jwt_required
+def client_detail(endpoint):
+    current_user = am.get_jwt_identity()['username']
+    client = am.clients.find_one({'username': current_user},
+                                 {'_id': False, 'password': False})
+
+    make_json_serializable(client)
+    if endpoint == 'all':
+        return am.jsonify(client), 200
+    elif endpoint == 'accounts':
+        return am.jsonify({'accounts': client['accounts']}), 200
+    elif endpoint == 'contact':
+        return am.jsonify({'email': client['email']}), 200
+    elif endpoint == 'id':
+        identity = {
+            'first_name': client['first_name'],
+            'last_name': client['last_name'],
+            'username': client['username']
+        }
+        return am.jsonify(identity), 200
+    else:
+        return am.jsonify({'msg': f'no such endpoint /{endpoint}',
+                           'allowed_endpoints': allowed_endpoints}), 400
