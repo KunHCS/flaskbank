@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
-import {logInAction,logInRequest} from "../../actions/LoginAction/LoginAction";
+import {loginAction,logInRequest} from "../../actions/LoginAction/loginAction";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
@@ -223,4 +223,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,{logInAction,logInRequest})(mainPage);
+export default connect(mapStateToProps,{logInAction: loginAction,logInRequest})(mainPage);

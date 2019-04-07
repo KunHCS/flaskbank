@@ -7,4 +7,5 @@ export const LOG_OUT  = "log_out";
 
 
 
-export const GET_PROFILE = "get_profile";
+export const GET_PROFILE   = "get_profile";
+export const CLEAN_PROFILE = "clean_profile";

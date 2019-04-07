@@ -15,7 +15,7 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
-import {logInAction, logInRequest} from "../../actions/LoginAction/LoginAction";
+import {loginAction, logInRequest} from "../../actions/LoginAction/loginAction";
 
 
 const styles = theme => ({

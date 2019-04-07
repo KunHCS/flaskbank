@@ -2,7 +2,7 @@ import * as ACTION from "../../static/action_type";
 import axios from "axios";
 const ROOT_URL = "http://localhost:5000/api";
 
-export const logInAction = () =>{
+export const loginAction = () =>{
     return {
         type: ACTION.SIGN_IN,
         payload: true,
