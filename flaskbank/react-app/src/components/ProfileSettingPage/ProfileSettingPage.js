@@ -53,14 +53,14 @@ class Statement extends React.Component {
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Password:</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" placeholder="123"/>
+                                        <input class="form-control" type="password" placeholder=""/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-7 control-label">Confirm Password:</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" placeholder="123"/>
+                                        <input class="form-control" type="password" placeholder=""/>
                                     </div>
                                 </div>
 
