@@ -13,6 +13,7 @@
 
 #### http://127.0.0.1:5000/api/register (POST)
 ##### Request Body:
+Note: the deposits are optional
 
 	{
 		"first_name": <string>,
@@ -20,6 +21,8 @@
 		"username": "<string>",
 		"email": "<string>",
 		"password" : "<string>",
+		"deposit_saving": <amount>,
+		"deposit_checking": <amount>
 	}
 #### Responses:
 Status: 201 CREATED
@@ -257,11 +260,11 @@ Status: 409 CONFLICT
 
 ## *Close All Accounts (remove client completely)*
 #### http://127.0.0.1:5000/api/accounts/delete (DELETE)
-##### Request header:
+##### Request Body:
 	{
-		"Authorization": "Bearer  <access_token>"
+		"username": "<string>"
+		"password" : "<string>"
 	}
-
 ### Responses:
 Status: 200 OK
 Status: 409 CONFLICT
