@@ -31,7 +31,8 @@ def login_user():
     if not valid:
         return am.jsonify({'msg': 'Invalid username/password'}), 409
 
-    token = am.create_access_token(identity={'username': username})
+    token = am.create_access_token(identity={'username': username,
+                                             'user_type': user['user_type']})
     return am.jsonify({'access_token': token}), 201
 
 
