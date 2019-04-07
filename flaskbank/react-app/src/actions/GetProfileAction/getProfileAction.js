@@ -7,3 +7,11 @@ export const getProfile = (payload) =>{
         payload: payload,
     };
 };
+
+
+export const cleanProfile = () =>{
+    return {
+        type: ACTION.CLEAN_PROFILE,
+        payload: " ",
+    };
+};

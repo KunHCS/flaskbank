@@ -15,7 +15,6 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
-import {logInAction, logInRequest} from "../../actions/LoginAction/LoginAction";
 
 
 const styles = theme => ({
@@ -36,6 +35,8 @@ class OverViewPage extends React.Component{
         checkingBalance: 5987.79,
         savingBalance: 21568.23,
         creditBalance: 666.75,
+        checkingAccount : "",
+        savingAccount :" =",
     };
 
 
@@ -47,15 +48,30 @@ class OverViewPage extends React.Component{
              .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
+                console.log(this.props.myInfo.accounts[0]);
+
+                 this.setState({checkingAccount : this.props.myInfo.accounts[0]});
+                 this.setState({savingAccount : this.props.myInfo.accounts[1]});
+
+
             }).catch (error => console.log(error.response.data.msg));
+
 
     }
 
 
+
     render() {
         const { classes } = this.props;
-        console.log("I;m in overview page");
-        console.log(this.props.myKey);
+        console.log("I am in overview page");
+        console.log(this.props.myInfo);
+        console.log(this.state.checkingAccount);
+
+        const cNumber =this.state.checkingAccount.account_number;
+        const sNumber =this.state.savingAccount.account_number;
+        const cBalance=this.state.checkingAccount.balance;
+        const sBalance=this.state.savingAccount.balance;
+
         return (
             <div >
                 <Navigation/>
@@ -65,12 +81,12 @@ class OverViewPage extends React.Component{
                     <div className={classes.root}>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Checking Account -2644</strong></Typography>
+                                <Typography className={classes.heading}><strong>Checking Account - {cNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {this.state.checkingBalance}
+                                        Balance: $ {cBalance}
                                     </Typography>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>
@@ -79,12 +95,12 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Saving Account -9642</strong></Typography>
+                                <Typography className={classes.heading}><strong>Saving Account - {sNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {this.state.savingBalance}
+                                        Balance: $ {sBalance}
                                     </Typography>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>

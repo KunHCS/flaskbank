@@ -9,8 +9,6 @@ export const authenticationStateReducer = ( authState=false, action) => {
 
 
 export const authenticationRequestReducer = (state = '', action) => {
-    console.log("yeah yeah eayh");
-    console.log(action.payload);
 
     switch(action.type){
         case ACTION.LOG_IN :
