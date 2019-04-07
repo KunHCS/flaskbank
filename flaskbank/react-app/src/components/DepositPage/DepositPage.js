@@ -55,20 +55,34 @@ const styles = theme => ({
 
 class DepositPage extends React.Component{
     state = {
-        payAmount: 67575,
         payAmount_checking: 0,
+        payAmount_saving: 0,
+        checkingAccountNumber :0,
+        savingAccountNumber : 0,
     };
+
+
+    componentDidMount() {
+        this.setState({checkingAccountNumber:  this.props.myInfo.accounts[0].account_number})
+        this.setState({savingAccountNumber:  this.props.myInfo.accounts[1].account_number})
+    }
+
 
     onSubmit1 =(e) => {
         e.preventDefault();
 
         console.log('it just submit');
+        console.log(e);
         console.log(this.state.payAmount_checking);
         console.log(this.props);
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.post("/api/deposit/check",{headers: req_headers})
+        axios.post('/api/deposit',
+            {amount: parseFloat(this.state.payAmount_checking),
+                  account_num: this.state.checkingAccountNumber},
+            {headers: req_headers}
+            )
             .then(response => {
                 console.log(response);
 
@@ -78,11 +92,27 @@ class DepositPage extends React.Component{
 
     }
 
+    onSubmit2 =(e) => {
+        e.preventDefault();
+        console.log('it just submit222');
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.post('/api/deposit',
+            {amount: parseFloat(this.state.payAmount_saving),
+                account_num: this.savingAccountNumber},
+            {headers: req_headers}
+        )
+            .then(response => {
+                console.log(response);
+
+            }).catch (error => console.log(error.response.data.msg));
+
+        this.setState({payAmount_saving: 0})
+
+    }
 
     render() {
         const {classes} = this.props;
-        const cNumber = this.props.myInfo.accounts[0].account_number;
-        const sNumber = this.props.myInfo.accounts[1].account_number;
 
         return (
             <div >
@@ -94,7 +124,7 @@ class DepositPage extends React.Component{
                         <div className={classes.top}>
                             <div style={{float: 'left', width:"50%"}}>
                               <Typography variant="h4" color="secondary"><strong>Deposit to Checking Account</strong></Typography>
-                                <Typography variant="subtitle2">Checking Account -{cNumber}</Typography>
+                                <Typography variant="subtitle2">Checking Account -{ this.state.checkingAccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <form onSubmit={this.onSubmit1}>
@@ -122,23 +152,28 @@ class DepositPage extends React.Component{
                         <div className={classes.bottom}>
                             <div style={{float: 'left', width:"50%"}}>
                               <Typography variant="h4" color="secondary"><strong>Deposit to Saving Account</strong></Typography>
-                                <Typography variant="subtitle2">Saving Account -{sNumber}</Typography>
+                                <Typography variant="subtitle2">Saving Account -{this.state.savingAccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
+                                <form onSubmit={this.onSubmit2}>
                                 <Typography variant="h5"><strong>Amount</strong></Typography>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control"
                                     name="amount"
-                                    placeholder= {'$' + this.state.payAmount}
+                                    //placeholder= {'$' + this.state.payAmount}
+                                    value = {this.state.payAmount_saving}
+                                    onChange ={e=>this.setState({payAmount_saving:e.target.value})}
                                 />
                                 <Button
                                     className={classes.button}
+                                    type = "submit"
                                     variant="contained"
                                     color="primary"
                                 >
                                     Submit
                                 </Button>
+                                </form>
                             </div>
                         </div>
 
