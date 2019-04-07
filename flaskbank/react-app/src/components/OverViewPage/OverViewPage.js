@@ -49,6 +49,8 @@ class OverViewPage extends React.Component{
                 this.props.getProfile(response.data);
             }).catch (error => console.log(error.response.data.msg));
 
+
+
     }
 
 

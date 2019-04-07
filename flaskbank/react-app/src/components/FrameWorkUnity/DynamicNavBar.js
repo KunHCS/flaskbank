@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logOutAction,logOutRequest} from "../../actions/LoginAction/loginAction";
 import {cleanProfile} from "../../actions/GetProfileAction/getProfileAction"
+import axios from "axios";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {
@@ -17,6 +18,18 @@ const dynamicNavBar = (props) =>{
         letterSpacing: '1px',
         wordSpacing:'4px'
     };
+
+    const logout = () => {
+        const req_headers = {Authorization: 'Bearer ' + props.myKey};
+
+        axios.delete("/api/logout ",{headers: req_headers})
+            .then(response => {
+                 if(response.status === 200) {
+                     console.log(response.data.msg);
+                 }
+            }).catch (error => console.log(error.response.data.msg));
+    }
+
 
     if (props.auth==false) {
         return (
@@ -35,7 +48,12 @@ const dynamicNavBar = (props) =>{
         <Link className="Nav-text" style={navTextStyle} to="/overview">{props.myInfo.first_name}</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/"
-              onClick={ ()=> {props.logOutRequest(); props.cleanProfile(); props.logOutAction(); }}   >Sign Out</Link> |
+              onClick={ ()=> {props.logOutRequest();
+                              props.cleanProfile();
+                              props.logOutAction();
+                              logout(); }  }>
+            Sign Out
+        </Link> |
         </nav>
     ) }
 }

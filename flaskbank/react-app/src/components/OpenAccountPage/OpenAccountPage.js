@@ -98,7 +98,7 @@ class Register extends Component {
                                         type="text"
                                         className="form-control"
                                         name="last_name"
-                                        placeholder="Enter your lastname name"
+                                        placeholder="Enter your last name"
                                         value={this.state.last_name}
                                         onChange={this.onChange}
                                     />
