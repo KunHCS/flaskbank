@@ -26,3 +26,10 @@ export function logInRequest(response){
     };
 }
 
+
+export function logOutRequest(){
+    return {
+        type: ACTION.LOG_OUT,
+        payload: " ",
+    };
+}

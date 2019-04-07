@@ -25,14 +25,18 @@ const authenticationStateReducer = ( authState=false, action) => {
 };
 
 const authenticationRequestReducer = (state = '', action) => {
-    if (action.type === ACTION.LOG_IN ) {
-        console.log("yeah yeah eayh");
-        console.log(action.payload);
-        console.log(action.payload.status)
-        return action.payload.status == "201" ? action.payload.data.access_token : "yes";
+    console.log("yeah yeah eayh");
+    console.log(action.payload);
+
+    switch(action.type){
+        case ACTION.LOG_IN :
+            return action.payload.status == "201" ? action.payload.data.access_token : " ";
+        case ACTION.LOG_OUT :
+            return " ";
+        default :
+            return state;
     }
 
-    return state;
 };
 
 export default combineReducers( {
