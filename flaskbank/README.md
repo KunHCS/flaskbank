@@ -7,7 +7,7 @@
 ## API instruction
 #### Please request with empty string if a field is empty.
 
-#### All request is passed by JSON
+#### All request is passed by JSON unless otherwise specified
 
 ## *Registration*
 
@@ -231,18 +231,73 @@ Status: 409 CONFLICT
 		"msg": "User <username> does not own account: <account_number>"
 	}
 
+## *Deposit*
+#### http://127.0.0.1:5000/api/deposit/ (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"amount": <amount>
+		"account_num": <account number>
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
 ## *Check Image Deposit*
 #### http://127.0.0.1:5000/api/deposit/check (POST)
 ##### Request header:
 	{
 		"Authorization": "Bearer  <access_token>"
 	}
-**[React image upload example](https://www.academind.com/learn/react/snippets/image-upload/ "React image upload example")**
+**=>[React image upload example](https://www.academind.com/learn/react/snippets/image-upload/ "React image upload example")<=**
 ##### Request body (use form-data):
 	{
 		"image": <image file>,
 		"account": <account number>
 	}
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+## *Withdraw*
+#### http://127.0.0.1:5000/api/withdraw (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"amount": <amount>,
+		"account_number": <account number>
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+## *Transfer*
+#### http://127.0.0.1:5000/api/transfer (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"account_from": <account number>,
+		"account_to": <account number>,
+		"amount": <float>
+	}
+
 ### Responses:
 Status: 200 OK
 
