@@ -74,12 +74,26 @@ def close_account(account_num):
 
 
 @accounts_bp.route('/accounts/delete', methods=['DELETE'])
-@am.jwt_required
 def delete_one_client():
-    current_user = am.get_jwt_identity()['username']
-    result = am.clients.delete_one({'username': current_user})
+    data = am.request.get_json()
+    if not data:
+        return am.jsonify({'msg': 'Bad Request, no data received'}), 400
+    try:
+        username = data['username']
+        password = data['password']
+    except KeyError:
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+
+    client = am.clients.find_one({'username': username})
+    if not client:
+        return am.jsonify({'msg': 'Invalid username/password'}), 409
+
+    valid = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
+                                          password)
+    if not valid:
+        return am.jsonify({'msg': 'Invalid username/password'}), 409
+
+    result = am.clients.delete_one({'username': username})
     if result.deleted_count:
-        jti = am.get_raw_jwt()['jti']
-        am.jti_blacklist.add(jti)
-        return am.jsonify({'msg': f'user <{current_user}> deleted'}), 200
-    return am.jsonify({'msg': f'user <{current_user}> does not exist'}), 409
+        return am.jsonify({'msg': f'user <{username}> deleted'}), 200
+    return am.jsonify({'msg': f'user <{username}> does not exist'}), 409
