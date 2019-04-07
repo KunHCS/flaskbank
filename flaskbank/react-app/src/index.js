@@ -10,6 +10,7 @@ import DepositPage from "./components/DepositPage/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage/ATMLocationPage";
 import ProfileSettingPage from "./components/ProfileSettingPage/ProfileSettingPage";
+import CheckingAccountDetail from "./components/CheckingAccountDetailPage/CheckingAccountDetail";
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './reducers';
@@ -28,12 +29,14 @@ class App extends Component  {
                     <Route exact path="/atm" component={ATMLocationPage} />
                     <Route exact path="/openAcc" component={OpenAccountPage} />
                     <Route exact path="/closeAcc" component={CloseAccountPage} />
+                    {/*<Route path="/deposit/check" component={CheckingAccountDetail} />*/}
 
                     <SecretRoute exact path="/profile" component={ProfileSettingPage} />
                     <SecretRoute exact path="/overview" component={OverViewPage} />
                     <SecretRoute exact path="/pay" component={BillPayPage} />
                     <SecretRoute exact path="/transfer" component={TransferPage} />
                     <SecretRoute exact path="/deposit" component={DepositPage} />
+
 
                 </div>
             </Router>
