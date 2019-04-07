@@ -81,6 +81,7 @@ def delete_one_client():
     try:
         username = data['username']
         password = data['password']
+        email = data['email']
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
@@ -90,8 +91,9 @@ def delete_one_client():
 
     valid = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
                                           password)
-    if not valid:
-        return am.jsonify({'msg': 'Invalid username/password'}), 409
+    
+    if not valid or email != client['email']:
+        return am.jsonify({'msg': 'Invalid username/email/password'}), 409
 
     result = am.clients.delete_one({'username': username})
     if result.deleted_count:
