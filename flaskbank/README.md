@@ -40,6 +40,30 @@ Status: 400 BAD REQUEST
 		"msg": <message>
 	}
 
+## *Update Client Information*
+
+#### http://127.0.0.1:5000/api/client/update (POST)
+**Note: if username is changed, access_token will be revoked, requiring new login**
+
+##### Request header:
+
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request Body (empty string if no update for that field):
+
+	{
+		"first_name": <string>,
+		"last_name": <string>,
+		"username": "<string>",
+		"email": "<string>",
+		"password" : "<string>",
+	}
+#### Responses:
+Status: 200 OK
+Status: 400 BAD REQUEST
+
 ## *Login*
 #### http://127.0.0.1:5000/api/login (POST)
 ##### Request Body:
@@ -211,7 +235,7 @@ Status: 201 CREATED
 
 Status: 400 BAD REQUEST
 
-## *Close Account*
+## *Close Specific Account*
 #### http://127.0.0.1:5000/api/accounts/close/{account_number}(POST)
 ##### Request header:
 	{
@@ -230,6 +254,19 @@ Status: 409 CONFLICT
 	{
 		"msg": "User <username> does not own account: <account_number>"
 	}
+
+## *Close All Accounts (remove client completely)*
+#### http://127.0.0.1:5000/api/accounts/delete (DELETE)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+Status: 409 CONFLICT
+
+
 
 ## *Deposit*
 #### http://127.0.0.1:5000/api/deposit/ (POST)

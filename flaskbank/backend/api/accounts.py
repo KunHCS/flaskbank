@@ -71,3 +71,15 @@ def close_account(account_num):
                           f'account: {account_num}'}), 409
 
     return am.jsonify({'msg': f'Account {account_num} closed'}), 200
+
+
+@accounts_bp.route('/accounts/delete', methods=['DELETE'])
+@am.jwt_required
+def delete_one_client():
+    current_user = am.get_jwt_identity()['username']
+    result = am.clients.delete_one({'username': current_user})
+    if result.deleted_count:
+        jti = am.get_raw_jwt()['jti']
+        am.jti_blacklist.add(jti)
+        return am.jsonify({'msg': f'user <{current_user}> deleted'}), 200
+    return am.jsonify({'msg': f'user <{current_user}> does not exist'}), 409

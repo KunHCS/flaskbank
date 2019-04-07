@@ -8,6 +8,64 @@ allowed_endpoints = ('/all', '/accounts', '/contact',
                      '/id')
 
 
+@get_client_bp.route('/client/update', methods=['POST'])
+@am.jwt_required
+def client_info_update_route():
+    data = am.request.get_json()
+    if not data:
+        return am.jsonify({'msg': 'Bad Request, no data passed'}), 400
+
+    try:
+        first = data["first_name"]
+        last = data["last_name"]
+        email = data["email"]
+        username = data["username"]
+        password = data['password']
+    except KeyError:
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+    current_user = am.get_jwt_identity()['username']
+
+    key_list = {'first_name': first, 'last_name': last, 'email': email,
+                'username': username}
+
+    client = am.clients.find_one({'username': current_user})
+    if not client:
+        return am.jsonify({'msg': 'user not found'}), 409
+
+    for key in key_list:
+        if not key_list[key]:
+            key_list[key] = client[key]
+
+    am.clients.update_one(
+        {'username': current_user},
+        {
+            '$set': {
+                'first_name': key_list['first_name'],
+                'last_name': key_list['last_name'],
+                'email': key_list['email'],
+                'username': key_list['username']
+            }
+        }
+    )
+    same = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
+                                         password)
+    if not same:
+        new_pw = am.bcrypt.generate_password_hash(password.encode('UTF-8'))
+        am.clients.update_one(
+            {'username': current_user},
+            {'$set': {'password': new_pw}}
+        )
+
+    extra_msg = ''
+    if not username == client['username']:
+        jti = am.get_raw_jwt()['jti']
+        am.jti_blacklist.add(jti)
+        extra_msg = ', username changed, re-login required.'
+
+    return am.jsonify(
+        {'msg': 'information updated successfully' + extra_msg}), 200
+
+
 @get_client_bp.route('/client/accounts/balance')
 @am.jwt_required
 def get_account_balance():
