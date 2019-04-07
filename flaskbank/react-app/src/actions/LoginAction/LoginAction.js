@@ -1,4 +1,4 @@
-import * as ACTION from "../static/action_type";
+import * as ACTION from "../../static/action_type";
 import axios from "axios";
 const ROOT_URL = "http://localhost:5000/api";
 

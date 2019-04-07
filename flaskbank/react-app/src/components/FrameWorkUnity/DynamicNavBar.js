@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {logOutAction,logOutRequest} from "../../actions/LoginAction";
+import {logOutAction,logOutRequest} from "../../actions/LoginAction/LoginAction";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {

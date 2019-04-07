@@ -13,6 +13,10 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
+import axios from "axios";
+import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
+import {logInAction, logInRequest} from "../../actions/LoginAction/LoginAction";
+
 
 const styles = theme => ({
     root: {
@@ -33,10 +37,25 @@ class OverViewPage extends React.Component{
         savingBalance: 21568.23,
         creditBalance: 666.75,
     };
+
+
+    componentDidMount() {
+        console.log("OverVIew Component Did Mount")
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.get("/api/client/all",{headers: req_headers})
+             .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
+
+    }
+
+
     render() {
         const { classes } = this.props;
-        console.log("I;m in overview page")
-        console.log(this.props)
+        console.log("I;m in overview page");
+        console.log(this.props.myKey);
         return (
             <div >
                 <Navigation/>
@@ -110,5 +129,8 @@ OverViewPage.propTypes = {
      return state;
  }
 
-export default connect(mapStateToProps)(withStyles(styles)(OverViewPage));
+
+
+
+export default connect(mapStateToProps,{getProfile}) (withStyles(styles)(OverViewPage));
 
