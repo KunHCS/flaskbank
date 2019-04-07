@@ -99,7 +99,7 @@ class DepositPage extends React.Component{
 
         axios.post('/api/deposit',
             {amount: parseFloat(this.state.payAmount_saving),
-                account_num: this.savingAccountNumber},
+                account_num: this.state.savingAccountNumber},
             {headers: req_headers}
         )
             .then(response => {
