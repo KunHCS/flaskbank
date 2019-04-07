@@ -7,9 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 
 
-
 const openAccountPage = () => {
-
     return (
         <div >
             <Navigation/>
@@ -18,7 +16,6 @@ const openAccountPage = () => {
                 <Register/>
             </Container>
         </div>
-
     );
 }
 

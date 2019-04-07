@@ -3,6 +3,7 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
+import axios from "axios";
 
 
 
@@ -22,6 +23,10 @@ const CloseAccountPage = () => {
 
 
 class CloseAccountDetails extends React.Component {
+
+    onSubmit =(e) => {
+
+    }
 
     render(){
         return (
