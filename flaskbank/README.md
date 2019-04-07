@@ -64,7 +64,9 @@ Status: 400 BAD REQUEST
 		"password" : "<string>",
 	}
 #### Responses:
+
 Status: 200 OK
+
 Status: 400 BAD REQUEST
 
 ## *Login*
@@ -133,9 +135,10 @@ Status: 422 UNPROCESSABLE ENTITY
 
 #### Responses:
 Status: 200 OK
-######Response body will be subset of /all based on endpoint
 
-#####/all
+###### Response body will be subset of /all based on endpoint ######
+
+/all
 
 	{
 		"accounts": [
@@ -144,6 +147,7 @@ Status: 200 OK
 				"active": <boolean>,
 				"alias": <account alias>,
 				"balance": <double>,
+				"credit_limit": <double> (credit account only),
 				"type": <account type>,
 				"transactions": [
 							{
@@ -358,6 +362,7 @@ Status: 400 BAD REQUEST
 			{"account_num":<integer>,
 			 "alias":<string>,
 			 "balance":<double>
+			 "credit_limit": <double> (credit account only),
 			 "type":<string>,
 			 "active": <boolean>,
 			 		"transactions": [
