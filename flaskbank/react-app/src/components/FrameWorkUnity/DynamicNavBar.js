@@ -59,8 +59,6 @@ const dynamicNavBar = (props) =>{
 }
 
 const mapStateToProps = (state) => {
-    console.log("I'm in map State to Props");
-    console.log(state);
     return state;
 }
 

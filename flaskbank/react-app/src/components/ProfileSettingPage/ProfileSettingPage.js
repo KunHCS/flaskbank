@@ -83,8 +83,6 @@ class Statement extends React.Component {
 }
 
 const ProfileSettingPage = (props) => {
-    console.log("hfhfghgfhfghfghfghfhfhfh");
-    console.log(props);
     return (
         <div >
             <Navigation/>
@@ -117,8 +115,7 @@ const activeElement = {
     act4: "nav-link ",
 }
 
-const mapStateToProps = (state) => {
-    console.log("lalalala");
+const mapStateToProps = (state) => {;
     console.log(state);
     return state.myInfo;
 
