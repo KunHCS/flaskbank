@@ -58,21 +58,22 @@ class Login extends React.Component {
 
     onSubmit =(e) => {
         e.preventDefault();
+
         console.log('it just submit');
-        const user = {
-            username: this.state.username,
-            password: this.state.password
-        };
+
         axios.post('api/login', {
             username: this.state.username,
             password: this.state.password
         }).then(response => {
-            this.props.props.logInRequest(response)
+            if (response.status === 201) {
+                this.props.props.logInRequest(response)
+                this.props.props.logInAction()
+            }
         }).catch(error => {
             this.props.props.logInRequest(error.response)
         });
-        //loginInfo (user);
-        //this.props.props.logInAction()
+
+
     }
 
     render(){
@@ -132,27 +133,6 @@ class Login extends React.Component {
     };
 }
 
-const loginInfo =  userSignOn => {
-    return axios
-        .post("/api/login", {
-            username: userSignOn.username,
-            password: userSignOn.password
-        })
-        .then(response => {
-            if (response.status === 201) {
-                //store token somewhere
-                console.log(response)
-                console.log(response.data.access_token)
-
-
-            }
-        })
-        .catch(error => console.log(error));
-
-
-
-
-};
 
 
 
