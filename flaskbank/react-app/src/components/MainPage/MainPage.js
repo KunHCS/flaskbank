@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
-import {logInAction,logInRequest} from "../../actions/LoginAction";
+import {logInAction,logInRequest} from "../../actions/LoginAction/LoginAction";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
@@ -24,9 +24,6 @@ const mainPage = (props) => {
             <div>
                 <Button variant="contained" onClick={() => props.logInAction()}>
                     Log In
-                </Button>
-                <Button variant="contained" onClick={() => props.logInAction()}>
-                    Log out
                 </Button>
                 <Navigation/>
                 <Search/>

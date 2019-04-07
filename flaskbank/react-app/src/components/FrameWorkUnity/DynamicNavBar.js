@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {logOutAction,logOutRequest} from "../../actions/LoginAction";
+import {logOutAction,logOutRequest} from "../../actions/LoginAction/LoginAction";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {
@@ -31,7 +31,7 @@ const dynamicNavBar = (props) =>{
     else if (props.auth==true) {
         return (
         <nav className="Navigation"style={navBarStyle}>
-        <Link className="Nav-text" style={navTextStyle} to="/overview">Name</Link> |
+        <Link className="Nav-text" style={navTextStyle} to="/overview">{props.myInfo.first_name}</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/"
               onClick={ ()=> {props.logOutRequest(); props.logOutAction();}}   >Sign Out</Link> |
