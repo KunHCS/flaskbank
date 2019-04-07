@@ -47,6 +47,7 @@ def get_account_num(acc_type):
     """
     checking_prefix = '2'
     saving_prefix = '3'
+    credit_prefix = '4'
 
     new_id = uniqueID_db.find_one_and_update(
         {'id': 'account_number'},
@@ -59,6 +60,8 @@ def get_account_num(acc_type):
         return luhn.append(checking_prefix + suffix)
     elif acc_type == 'saving':
         return luhn.append(saving_prefix + suffix)
+    elif acc_type == 'credit':
+        return luhn.append(credit_prefix + suffix)
     else:
         raise Exception('No account type specified')
 

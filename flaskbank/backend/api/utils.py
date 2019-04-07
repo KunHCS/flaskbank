@@ -32,6 +32,10 @@ def make_json_serializable(client_dict):
             account['balance'] = float(balance.to_decimal())
         except AttributeError:
             pass
+        try:
+            account['credit_limit'] = float(balance.to_decimal())
+        except (AttributeError, KeyError):
+            pass
         transactions = account.get('transactions', [])
         for transaction in transactions:
             amount = transaction['amount']
