@@ -8,7 +8,6 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
-import {loginAction, logInRequest} from "../../actions/LoginAction/loginAction";
 import axios from "axios";
 
 
