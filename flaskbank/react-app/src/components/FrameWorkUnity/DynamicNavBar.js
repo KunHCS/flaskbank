@@ -45,7 +45,7 @@ const dynamicNavBar = (props) =>{
     else if (props.auth==true) {
         return (
         <nav className="Navigation"style={navBarStyle}>
-        <Link className="Nav-text" style={navTextStyle} to="/overview">{props.myInfo.first_name}</Link> |
+        <Link className="Nav-text" style={navTextStyle} to="/overview">Hello! {props.myInfo.first_name}</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
         <Link className="Nav-text" style={navTextStyle} to="/"
               onClick={ ()=> {props.logOutRequest();

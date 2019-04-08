@@ -13,6 +13,7 @@ import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import axios from "axios";
 
 
 
@@ -20,10 +21,12 @@ class Transfer extends React.Component{
     state = {
         open1: false,
         open2: false,
-        transferAmount: 500,
+        transferAmount: 0,
         checkingAccount : "",
         savingAccount: "",
         creditAccount: "",
+        selectFrom: "",
+        selectTo:"",
     };
 
 
@@ -31,8 +34,36 @@ class Transfer extends React.Component{
         this.setState({checkingAccount:  this.props.myInfo.accounts[0]})
         this.setState({savingAccount:    this.props.myInfo.accounts[1]})
         this.setState({creditAccount:    this.props.myInfo.accounts[2]})
+
     }
 
+
+//     "account_from": <account number>,
+// "account_to": <account number>,
+// "amount": <float>
+    //amount: parseFloat(this.state.payAmount_checking
+
+    onSubmit  =(e) => {
+
+        e.preventDefault();
+        console.log("I just submit");
+
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.post('/api/transfer ',
+            { account_from: this.state.selectFrom,
+                   account_to: this.state.selectTo,
+                   amount : parseFloat(this.state.transferAmount)},
+            {headers: req_headers}
+        )
+            .then(response => {
+                console.log(response);
+
+            }).catch (error => console.log(error.response.data.msg));
+
+        this.setState({transferAmount: 0})
+    }
 
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
@@ -62,6 +93,7 @@ class Transfer extends React.Component{
             this.setState({open2: true});
         }
     };
+
     choiceHandler = () => {
         const bankChoice = document.getElementById("bankChoice");
         bankChoice.style.display = 'none';
@@ -75,7 +107,18 @@ class Transfer extends React.Component{
         accountChoice.style.display = 'none';
     }
     render() {
+
         const {classes} = this.props;
+        console.log("I am in Transfer Page")
+        console.log(this.props);
+        console.log(this.props.myKey);
+        console.log(this.state.selectFrom);
+        console.log(this.state.selectTo);
+        console.log(this.state.transferAmount);
+        const cNumber =  this.state.checkingAccount.account_number;
+        const sNumber =  this.state.savingAccount.account_number;
+        const creditNumber =  this.state.creditAccount.account_number;
+
         return (
             <div>
                 <Navigation/>
@@ -110,15 +153,20 @@ class Transfer extends React.Component{
                                     >Select Account</Typography>
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                    <Button className={classes.button} conClick={this.selectAccount}>Checking Account
-                                        -2644</Button>
+                                    <Button className={classes.button} onClick={this.selectAccount}
+                                             onClick={()=>this.setState({selectFrom:cNumber})}>
+                                        Checking Account - {cNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                    <Button className={classes.button}>Saving Account -9642</Button>
+                                    <Button className={classes.button}
+                                            onClick={()=>this.setState({selectFrom:sNumber})}
+                                           >Saving Account -{sNumber}</Button>
                                 </ExpansionPanelDetails>
-                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                    <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
-                                </ExpansionPanelDetails>
+                                {/*<ExpansionPanelDetails onClick={this.selectAccountOne}>*/}
+                                    {/*<Button className={classes.button}*/}
+                                            {/*onClick={()=>this.setState({selectFrom:creditNumber})}*/}
+                                         {/*>SJSP Platinum Visa Card -{creditNumber}</Button>*/}
+                                {/*</ExpansionPanelDetails>*/}
                             </ExpansionPanel>
                                 <br/>
                             <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
@@ -131,13 +179,18 @@ class Transfer extends React.Component{
                                     >Select Account</Typography>
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}>Checking Account -2644</Button>
+                                    <Button className={classes.button}
+                                            onClick={()=>this.setState({selectTo:cNumber})}>Checking Account -{cNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}>Saving Account -9642</Button>
+                                    <Button className={classes.button}
+                                            onClick={()=>this.setState({selectTo:sNumber})}
+                                    >Saving Account -{sNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}>SJSP Platinum Visa Card -5544</Button>
+                                    <Button className={classes.button}
+                                            onClick={()=>this.setState({selectTo:creditNumber})}
+                                    >SJSP Platinum Visa Card -{creditNumber}</Button>
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
                             <br/>
@@ -146,10 +199,12 @@ class Transfer extends React.Component{
                                 <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
                                     <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount: $</Typography>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={classes.button}
                                         name="amount"
                                         placeholder= {this.state.transferAmount}
+                                        value = {this.state.transferAmount}
+                                        onChange ={e=>this.setState({transferAmount:e.target.value})}
                                     />
                                 </div>
                             </div>
@@ -166,6 +221,7 @@ class Transfer extends React.Component{
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
                                     onClick={this.handleOpen}
+                                        onClick={this.onSubmit}
                                     //style={{marginRight: '250px', width: '15%', float: 'right'}}>
                                    > Next
                                 </Button>
