@@ -62,7 +62,8 @@ def register_user():
                 {
                     'account_number': am.get_account_num('credit'),
                     'alias': 'Credit Card Account',
-                    'balance': to_d128(5000.00),
+                    'balance': to_d128(0),
+                    'available_credit': to_d128(5000.00),
                     'credit_limit': to_d128(5000.00),
                     'type': 'credit',
                     'active': True,
