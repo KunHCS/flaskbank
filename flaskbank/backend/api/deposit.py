@@ -17,9 +17,12 @@ def deposit_route():
         acc_num = str(data['account_num'])
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
+    if not am.verify(acc_num):
+        return am.jsonify({'msg': 'invalid account number'}), 400
 
     current_user = am.get_jwt_identity()['username']
-    post_update_client = deposit(current_user, acc_num, amount, 'Cash deposit')
+    description = 'Bill pay' if acc_num[0] == '4' else 'Cash deposit'
+    post_update_client = deposit(current_user, acc_num, amount, description)
 
     if not post_update_client:
         return am.jsonify({'msg': 'client does not own the account'}), 400
@@ -37,6 +40,8 @@ def check_deposit():
     allowed_extension = ('.png', '.jpg', '.jpeg')
     file = am.request.files.get('image')
     account = str(am.request.form['account'])
+    if not am.verify(account):
+        return am.jsonify({'msg': 'invalid account number'}), 400
     deposit_amount = round(random.uniform(50, 501), 2)  # fake amount
     if not file or not file.filename.lower().endswith(allowed_extension):
         return am.jsonify({'msg': 'No file or invalid file type. File '

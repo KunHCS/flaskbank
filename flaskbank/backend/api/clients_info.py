@@ -140,7 +140,6 @@ def client_detail(endpoint):
     current_user = am.get_jwt_identity()['username']
     client = am.clients.find_one({'username': current_user},
                                  {'_id': False, 'password': False})
-    print(client)
     make_serializable(client)
     if endpoint == 'all':
         return am.jsonify(client), 200
