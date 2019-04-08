@@ -97,11 +97,21 @@ def deposit(user, account_number, amount, description=None):
     :param description:
     :return: (dict) updated client
     """
-    d128_amount = to_d128(abs(amount))
-    client = am.clients.find_one_and_update(
-        {'username': user, 'accounts.account_number': str(account_number)},
-        {'$inc': {'accounts.$.balance': d128_amount}},
-        return_document=ReturnDocument.AFTER)
+    if am.verify(str(account_number)) and str(account_number)[0] == '4':
+        neg_d128_amount = to_d128(abs(amount) * -1)
+        d128_amount = to_d128(abs(amount))
+        client = am.clients.find_one_and_update({
+            'username': user,
+            'accounts.account_number': str(account_number)},
+            {'$inc': {'accounts.$.balance': neg_d128_amount,
+                      'accounts.$.available_credit': d128_amount}},
+            return_document=ReturnDocument.AFTER)
+    else:
+        d128_amount = to_d128(abs(amount))
+        client = am.clients.find_one_and_update(
+            {'username': user, 'accounts.account_number': str(account_number)},
+            {'$inc': {'accounts.$.balance': d128_amount}},
+            return_document=ReturnDocument.AFTER)
     if client:
         record_transaction(user, account_number, d128_amount, description)
     return client
@@ -116,12 +126,23 @@ def withdraw(user, account_number, amount, description=None):
     :param description:
     :return:
     """
-    d128_amount = to_d128(abs(amount) * -1)
-    client = am.clients.find_one_and_update({
-        'username': user,
-        'accounts.account_number': str(account_number)},
-        {'$inc': {'accounts.$.balance': d128_amount}},
-        return_document=ReturnDocument.AFTER)
+    # if account is credit account
+    if am.verify(str(account_number)) and str(account_number)[0] == '4':
+        d128_amount = to_d128(abs(amount) * -1)
+        pos_d128 = to_d128(abs(amount))
+        client = am.clients.find_one_and_update({
+            'username': user,
+            'accounts.account_number': str(account_number)},
+            {'$inc': {'accounts.$.balance': pos_d128,
+                      'accounts.$.available_credit': d128_amount}},
+            return_document=ReturnDocument.AFTER)
+    else:
+        d128_amount = to_d128(abs(amount) * -1)
+        client = am.clients.find_one_and_update({
+            'username': user,
+            'accounts.account_number': str(account_number)},
+            {'$inc': {'accounts.$.balance': d128_amount}},
+            return_document=ReturnDocument.AFTER)
 
     if client:
         record_transaction(user, account_number, d128_amount, description)
