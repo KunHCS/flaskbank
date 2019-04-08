@@ -61,8 +61,10 @@ class AccountDetails extends React.Component{
                 <Container>
                     <InnerNavigationBar active={activeElement}/>
                     <Paper className="paper" style={detailStyle}>
-                        {this.state.myCurrentAccount.alias} Details
+                        <h1>{this.state.myCurrentAccount.alias} Details </h1>
+                        <div>
                         {this.renderList()}
+                        </div>
                     </Paper>
                 </Container>
 
