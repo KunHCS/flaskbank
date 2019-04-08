@@ -39,7 +39,8 @@ class CloseAccountDetails extends React.Component {
 
         axios.delete("/api/accounts/delete",
             { data:{username: this.state.username,
-                    password: this.state.password }} )
+                          password: this.state.password,
+                          email:this.state.email}} )
             .then(response => {
                 console.log(response);
 
@@ -81,6 +82,8 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="email"
                                             placeholder="Enter email"
+                                            value={this.state.email}
+                                            onChange ={e=>this.setState({email:e.target.value})}
                                         />
                                     </div>
                                     <div className="form-group">
