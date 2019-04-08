@@ -1,11 +1,8 @@
 from .. import all_module as am
-from .utils import make_json_serializable, make_serializable
+from .utils import make_serializable
 from datetime import datetime
 
 get_client_bp = am.Blueprint('get client info', __name__)
-
-allowed_endpoints = ('/all', '/accounts', '/contact',
-                     '/id')
 
 
 @get_client_bp.route('/client/update', methods=['POST'])
@@ -138,11 +135,13 @@ def get_transaction(account, year, month):
 @get_client_bp.route('/client/<string:endpoint>', methods=['GET'])
 @am.jwt_required
 def client_detail(endpoint):
+    allowed_endpoints = ('/all', '/accounts', '/contact',
+                         '/id')
     current_user = am.get_jwt_identity()['username']
     client = am.clients.find_one({'username': current_user},
                                  {'_id': False, 'password': False})
-
-    make_json_serializable(client)
+    print(client)
+    make_serializable(client)
     if endpoint == 'all':
         return am.jsonify(client), 200
     elif endpoint == 'accounts':
