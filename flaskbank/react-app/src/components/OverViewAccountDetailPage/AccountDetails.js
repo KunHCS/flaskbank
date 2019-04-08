@@ -6,10 +6,8 @@ import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import Button from '@material-ui/core/Button';
-import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import * as ACTION from "../../static/action_type";
-
 
 
 class AccountDetails extends React.Component{
@@ -54,24 +52,9 @@ class AccountDetails extends React.Component{
         console.log(this.props.myDetail);
         console.log(this.state.myCurrentAccount);
 
-        if (this.state.myCurrentAccount !== "") {
+
+        if ( (this.state.myCurrentAccount !== "")) {
             return (
-                <div>
-                    <Navigation/>
-                    <Search/>
-                    <Container>
-                        <InnerNavigationBar active={activeElement}/>
-                        <Paper className="paper" style={detailStyle}>
-                            {this.state.myCurrentAccount.alias} Details
-                            {/*{this.renderList()}*/}
-                        </Paper>
-                    </Container>
-
-                </div>
-
-            );
-        }
-        else if ( (this.state.myCurrentAccount !== "")) {return (
             <div>
                 <Navigation/>
                 <Search/>
@@ -84,7 +67,7 @@ class AccountDetails extends React.Component{
                 </Container>
 
             </div>
-        );};
+        ); } else { return (<div/>);}
     }
 
 
