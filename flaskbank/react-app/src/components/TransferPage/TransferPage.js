@@ -12,60 +12,28 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
-const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit * 2,
-        width: 'auto',
-        position: 'flex',
-    },
-    root: {
-        width: '100%',
-    },
-    paper: {
-        position: 'flex',
-        width: '100%',
-        height: theme.spacing.unit * 20,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 2,
-        outline: 'none',
-        WebkitBorderRadius:'10px 10px 10px 10px',
-        textAlign: 'center',
-    },
-    innerPaper:{
-        position: 'flex',
-        width: '100%',
-        height: theme.spacing.unit * 35,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        outline: 'none',
-        WebkitBorderRadius:'10px 10px 10px 10px',
-    },
 
-    innerPaper2:{
-        position: 'flex',
-        width: '100%',
-        height: theme.spacing.unit * 70,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        outline: 'none',
-        WebkitBorderRadius:'10px 10px 10px 10px',
-    },
-
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-});
 
 class Transfer extends React.Component{
     state = {
         open1: false,
         open2: false,
         transferAmount: 500,
+        checkingAccount : "",
+        savingAccount: "",
+        creditAccount: "",
     };
+
+
+    componentDidMount() {
+        this.setState({checkingAccount:  this.props.myInfo.accounts[0]})
+        this.setState({savingAccount:    this.props.myInfo.accounts[1]})
+        this.setState({creditAccount:    this.props.myInfo.accounts[2]})
+    }
+
+
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
         labelFrom.innerHTML = event.currentTarget.innerHTML;
@@ -211,6 +179,53 @@ class Transfer extends React.Component{
     }
 }
 
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit * 2,
+        width: 'auto',
+        position: 'flex',
+    },
+    root: {
+        width: '100%',
+    },
+    paper: {
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 20,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 2,
+        outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
+        textAlign: 'center',
+    },
+    innerPaper:{
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 35,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
+    },
+
+    innerPaper2:{
+        position: 'flex',
+        width: '100%',
+        height: theme.spacing.unit * 70,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        outline: 'none',
+        WebkitBorderRadius:'10px 10px 10px 10px',
+    },
+
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+});
+
 const activeElement = {
     act1: "nav-link ",
     act2: "nav-link ",
@@ -221,4 +236,14 @@ const activeElement = {
 Transfer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(Transfer);
+
+
+const mapStateToProps = (state) => {
+    console.log("I'm in map State to Props");
+    console.log(state);
+    return state;
+}
+
+
+
+export default connect(mapStateToProps)(withStyles(styles)(Transfer));
