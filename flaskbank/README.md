@@ -22,7 +22,8 @@ Note: the deposits are optional
 		"email": "<string>",
 		"password" : "<string>",
 		"deposit_saving": <amount>,
-		"deposit_checking": <amount>
+		"deposit_checking": <amount>,
+		"user_type": <manage/client>
 	}
 #### Responses:
 Status: 201 CREATED
