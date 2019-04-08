@@ -15,6 +15,8 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
+import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
+import * as ACTION from "../../static/action_type";
 
 
 const styles = theme => ({
@@ -89,8 +91,10 @@ class OverViewPage extends React.Component{
                                     <Typography style={{float: 'left'}}>
                                         Balance: $ {cBalance}
                                     </Typography>
+                                    <Link to = "/overview/account_detail"  onClick={()=>this.props.accountDetailAction(ACTION.CHECKING_DETAIL)}>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>
+                                    </Link>
                                 </div>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -103,8 +107,10 @@ class OverViewPage extends React.Component{
                                     <Typography style={{float: 'left'}}>
                                         Balance: $ {sBalance}
                                     </Typography>
+                                    <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.SAVING_DETAIL)} >
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>
+                                    </Link>
                                 </div>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -117,8 +123,10 @@ class OverViewPage extends React.Component{
                                     <Typography style={{float: 'left'}}>
                                         Balance: $ {creditBalance}
                                     </Typography>
+                                    <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.CREDIT_DETAIL)}>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>
+                                    </Link>
                                 </div>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -149,5 +157,5 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps,{getProfile}) (withStyles(styles)(OverViewPage));
+export default connect(mapStateToProps,{getProfile,accountDetailAction}) (withStyles(styles)(OverViewPage));
 

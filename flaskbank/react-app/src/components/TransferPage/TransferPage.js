@@ -38,10 +38,6 @@ class Transfer extends React.Component{
     }
 
 
-//     "account_from": <account number>,
-// "account_to": <account number>,
-// "amount": <float>
-    //amount: parseFloat(this.state.payAmount_checking
 
     onSubmit  =(e) => {
 

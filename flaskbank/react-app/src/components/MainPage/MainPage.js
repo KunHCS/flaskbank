@@ -118,8 +118,8 @@ class Login extends React.Component {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.open}
-                    onClose={this.handleClose}
-                >
+                    onClose={this.handleClose}>
+
                     <ChangePassword/>
                 </Modal>
             </div>
