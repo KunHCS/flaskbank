@@ -4,6 +4,8 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
 import axios from "axios";
+import {connect} from "react-redux";
+
 
 
 
@@ -14,7 +16,7 @@ const CloseAccountPage = () => {
             <Navigation/>
             <Search/>
             <Container>
-                <CloseAccountDetails/>
+                <CloseAccountDetails />
             </Container>
         </div>
 
@@ -23,12 +25,35 @@ const CloseAccountPage = () => {
 
 
 class CloseAccountDetails extends React.Component {
+    state={
+        username: "",
+        email: "",
+        password: "",
+    };
+
 
     onSubmit =(e) => {
 
+        e.preventDefault();
+        console.log("i just submit")
+
+        axios.delete("/api/accounts/delete",
+            { data:{username: this.state.username,
+                    password: this.state.password }} )
+            .then(response => {
+                console.log(response);
+
+            }).catch (error => console.log(error.response.data.msg));
+
+
     }
 
+
+
     render(){
+        console.log("I m in CloseAccountDetails Page")
+        console.log(this.state.username);
+        console.log(this.state.password);
         return (
                 <Paper className ="paper" style={paperStyle} >
                     <div className="container">
@@ -44,6 +69,8 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="username"
                                             placeholder="Enter your user name"
+                                            value={this.state.username}
+                                            onChange ={e=>this.setState({username:e.target.value})}
                                         />
                                     </div>
 
@@ -63,6 +90,8 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="password"
                                             placeholder="Password"
+                                            value={this.state.password}
+                                            onChange ={e=>this.setState({password:e.target.value})}
                                         />
                                     </div>
 
@@ -90,4 +119,8 @@ const paperStyle = {
     fontWeight: 'bold',
     font: 'Helvetica',
 };
+
+
+
+
 export default CloseAccountPage;

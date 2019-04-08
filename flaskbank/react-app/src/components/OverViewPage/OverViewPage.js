@@ -36,7 +36,7 @@ class OverViewPage extends React.Component{
         savingBalance: 21568.23,
         creditBalance: 666.75,
         checkingAccount : "",
-        savingAccount :" =",
+        savingAccount :"",
     };
 
 
