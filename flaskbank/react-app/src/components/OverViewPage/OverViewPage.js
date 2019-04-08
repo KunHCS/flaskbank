@@ -32,11 +32,9 @@ const styles = theme => ({
 
 class OverViewPage extends React.Component{
     state={
-        checkingBalance: 5987.79,
-        savingBalance: 21568.23,
-        creditBalance: 666.75,
         checkingAccount : "",
         savingAccount :"",
+        creditAccount:"",
     };
 
 
@@ -45,13 +43,14 @@ class OverViewPage extends React.Component{
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
         axios.get("/api/client/all",{headers: req_headers})
-             .then(response => {
+            .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
                 console.log(this.props.myInfo.accounts[0]);
 
-                 this.setState({checkingAccount : this.props.myInfo.accounts[0]});
-                 this.setState({savingAccount : this.props.myInfo.accounts[1]});
+                this.setState({checkingAccount : this.props.myInfo.accounts[0]});
+                this.setState({savingAccount : this.props.myInfo.accounts[1]});
+                this.setState({creditAccount : this.props.myInfo.accounts[2]});
 
 
             }).catch (error => console.log(error.response.data.msg));
@@ -69,8 +68,10 @@ class OverViewPage extends React.Component{
 
         const cNumber =this.state.checkingAccount.account_number;
         const sNumber =this.state.savingAccount.account_number;
+        const creditNumber = this.state.creditAccount.account_number;
         const cBalance=this.state.checkingAccount.balance;
         const sBalance=this.state.savingAccount.balance;
+        const creditBalance= this.state.creditAccount.balance;
 
         return (
             <div >
@@ -109,12 +110,12 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card -5544</strong></Typography>
+                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card - {creditNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {this.state.creditBalance}
+                                        Balance: $ {creditBalance}
                                     </Typography>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                             className={classes.margin}>Transactions</Button>
@@ -141,9 +142,9 @@ OverViewPage.propTypes = {
 };
 
 
- const mapStateToProps = (state) => {
-     return state;
- }
+const mapStateToProps = (state) => {
+    return state;
+}
 
 
 
