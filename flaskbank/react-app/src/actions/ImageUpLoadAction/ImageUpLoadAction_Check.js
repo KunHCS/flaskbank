@@ -3,7 +3,6 @@ import * as ACTION from "../../static/action_type";
 
 
 export const imageUpLoadAction_Check = (payload) =>{
-    console.log("img check");
     return {
         type: ACTION.IMAGE_UPLOAD_CHECK,
         payload: payload,
@@ -12,7 +11,6 @@ export const imageUpLoadAction_Check = (payload) =>{
 
 
 export const imageUpLoadAction_Save = (payload) =>{
-    console.log("img save");
     return {
         type: ACTION.IMAGE_UPLOAD_SAVE,
         payload: payload,
@@ -20,4 +18,9 @@ export const imageUpLoadAction_Save = (payload) =>{
 };
 
 
-
+export const imageUpLoadAction_Clean = () =>{
+    return {
+        type: ACTION.IMAGE_UPLOAD_CLEAN,
+        payload: "",
+    };
+};

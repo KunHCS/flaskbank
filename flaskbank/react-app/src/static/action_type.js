@@ -19,6 +19,7 @@ export const CREDIT_DETAIL   = "credit_Detail";
 
 export const IMAGE_UPLOAD_CHECK = "image_upload_check";
 export const IMAGE_UPLOAD_SAVE  = "image_upload_save";
+export const IMAGE_UPLOAD_CLEAN = "image_upload_clean";
 
 export const CHECKING = "checking";
 export const SAVING = "saving";

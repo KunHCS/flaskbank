@@ -8,6 +8,9 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
+import ImageUpLoader from "../FrameWorkUnity/ImageUpLoader/ImageUpLoader"
+import {imageUpLoadAction_Clean} from "../../actions/ImageUpLoadAction/ImageUpLoadAction_Check";
+import * as ACTION from "../../static/action_type";
 import axios from "axios";
 
 
@@ -29,7 +32,7 @@ const styles = theme => ({
         font: 'Helvetica',
         marginBottom: theme.spacing.unit * 5,
         width: '100%',
-        height: theme.spacing.unit * 30,
+        height: theme.spacing.unit * 60,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -42,7 +45,7 @@ const styles = theme => ({
         font: 'Helvetica',
         marginBottom: theme.spacing.unit * 5,
         width: '100%',
-        height: theme.spacing.unit * 30,
+        height: theme.spacing.unit * 60,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -77,18 +80,31 @@ class DepositPage extends React.Component{
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.post('/api/deposit',
-            {amount: parseFloat(this.state.payAmount_checking),
-                  account_num: this.state.checkingAccountNumber},
-            {headers: req_headers}
-            )
-            .then(response => {
-                console.log(response);
+        // axios.post('/api/deposit',
+        //     {amount: parseFloat(this.state.payAmount_checking),
+        //         account_num: this.state.checkingAccountNumber},
+        //     {headers: req_headers}
+        // )
+        //     .then(response => {
+        //         console.log(response);
+        //
+        //     }).catch (error => console.log(error.response.data.msg));
 
-            }).catch (error => console.log(error.response.data.msg));
+        let formData = new FormData();
+
+        formData.append("image", this.props.myImage.check);
+        formData.append("account", this.state.checkingAccountNumber);
+        formData.append("amount", parseFloat(this.state.payAmount_checking));
+
+        axios.post('api/deposit/check', formData, {headers: req_headers}
+        ).then(response => {
+           console.log(response);
+        }).catch(error => {
+            console.log(error.response);
+        });
 
         this.setState({payAmount_checking: 0})
-
+        this.props.imageUpLoadAction_Clean()
     }
 
     onSubmit2 =(e) => {
@@ -96,17 +112,23 @@ class DepositPage extends React.Component{
         console.log('it just submit222');
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.post('/api/deposit',
-            {amount: parseFloat(this.state.payAmount_saving),
-                account_num: this.state.savingAccountNumber},
-            {headers: req_headers}
-        )
-            .then(response => {
-                console.log(response);
+        let formData = new FormData();
 
-            }).catch (error => console.log(error.response.data.msg));
+        formData.append("image", this.props.myImage.save);
+        formData.append("account", this.state.savingAccountNumber);
+        formData.append("amount", parseFloat(this.state.payAmount_saving));
 
-        this.setState({payAmount_saving: 0})
+
+        axios.post('api/deposit/check', formData, {headers: req_headers}
+        ).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error.response);
+        });
+
+        this.setState({payAmount_save: 0})
+        this.props.imageUpLoadAction_Clean()
+
 
     }
 
@@ -146,6 +168,10 @@ class DepositPage extends React.Component{
                                 </Button>
                                 </form>
                             </div>
+                                <div style={{float: 'left', width:"50%"}}>
+                                    <ImageUpLoader checkType = {ACTION.CHECKING}/>
+                                </div>
+
                         </div>
 
                         <div className={classes.bottom}>
@@ -173,6 +199,9 @@ class DepositPage extends React.Component{
                                     Submit
                                 </Button>
                                 </form>
+                            </div>
+                            <div style={{float: 'left', width:"50%"}}>
+                                <ImageUpLoader checkType = {ACTION.SAVING}/>
                             </div>
                         </div>
 
@@ -206,4 +235,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(withStyles(styles)(DepositPage));
+export default connect(mapStateToProps,{imageUpLoadAction_Clean})(withStyles(styles)(DepositPage));

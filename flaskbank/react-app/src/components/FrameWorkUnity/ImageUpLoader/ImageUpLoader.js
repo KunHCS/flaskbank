@@ -15,9 +15,9 @@ class ImageUpload extends React.Component {
         this.state = {file: '',imagePreviewUrl: ''};
     }
 
-    _handleSubmit(e) {
-        e.preventDefault();
-        console.log('it just submit');
+    // _handleSubmit(e) {
+    //     e.preventDefault();
+    //     console.log('it just submit');
         // let formData = new FormData();
         //
         // formData.append("image", this.state.file);
@@ -37,9 +37,8 @@ class ImageUpload extends React.Component {
         //
         //
         // console.log('handle uploading-', this.state.file);
-        imageUpLoadAction_Check("1");
-        imageUpLoadAction_Save("2");
-    }
+    // }
+
 
     _handleImageChange(e) {
         e.preventDefault();
@@ -57,12 +56,10 @@ class ImageUpload extends React.Component {
         reader.readAsDataURL(file)
 
         if (this.props.checkType === ACTION.CHECKING) {
-            console.log("test1");
-            imageUpLoadAction_Check("1");
+            this.props.imageUpLoadAction_Check(file);
         }
         else if (this.props.checkType === ACTION.SAVING) {
-            console.log("test2");
-            imageUpLoadAction_Save("2")
+            this.props.imageUpLoadAction_Save(file);
         }
 
     }
@@ -78,6 +75,7 @@ class ImageUpload extends React.Component {
         }
 
         console.log("fgdgdgdgdgdgdfgdgd");
+        console.log(this.state);
         console.log(this.props);
 
         return (
@@ -93,9 +91,9 @@ class ImageUpload extends React.Component {
                     <input className="fileInput"
                            type="file"
                            onChange={(e)=>this._handleImageChange(e)} />
-                    <button className="submitButton"
-                    type="submit"
-                    onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                    {/*<button className="submitButton"*/}
+                    {/*type="submit"*/}
+                    {/*onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>*/}
                 </form>
 
             </div>
