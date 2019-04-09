@@ -73,6 +73,16 @@ class DepositPage extends React.Component{
     onSubmit1 =(e) => {
         e.preventDefault();
 
+        if(this.state.payAmount_checking === 0) {
+            alert("Amount Can't be 0, try again");
+            return
+        }
+
+        if(this.props.myImage.check === "") {
+            alert("The Check Image at Deposit to Checking Can't be Empty")
+            return
+        }
+
         console.log('it just submit');
         console.log(e);
         console.log(this.state.payAmount_checking);
@@ -111,6 +121,17 @@ class DepositPage extends React.Component{
 
     onSubmit2 =(e) => {
         e.preventDefault();
+
+        if(this.state.payAmount_saving === 0) {
+            alert("Amount Can't be 0, try again");
+            return
+        }
+
+        if(this.props.myImage.save === "") {
+            alert("The Check Image at Deposit to Saving Can't be Empty")
+            return
+        }
+
         console.log('it just submit222');
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 

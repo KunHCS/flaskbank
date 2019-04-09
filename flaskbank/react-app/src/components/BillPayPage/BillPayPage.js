@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class BillPay extends React.Component{
     state = {
-        payAmountCredit: 0,
+        payAmountCredit: " ",
         creditAccountNumber: "",
         availableCredit :"",
         currentBalance:"",
@@ -55,6 +55,11 @@ class BillPay extends React.Component{
 
         console.log('it just submit');
         console.log(this.props);
+
+        if(this.state.payAmountCredit === 0) {
+            alert("Bill Pay Amount Can't be 0, try again");
+            return
+        }
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
@@ -107,7 +112,7 @@ class BillPay extends React.Component{
                                     type="number"
                                     className="form-control"
                                     name="amount"
-                                    placeholder= {'$' + this.state.payAmountCredit}
+                                    placeholder= "$ Please Enter Your Amount"
                                     value = {this.state.payAmountCredit}
                                     onChange ={e=>this.setState({payAmountCredit:e.target.value})}
                                 />
