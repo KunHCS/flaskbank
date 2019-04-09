@@ -13,6 +13,7 @@ import {loginAction,logInRequest} from "../../actions/LoginAction/loginAction";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
+import PopUpWindow from "../FrameWorkUnity/DynamicPopUpWindow/PopUpWindow";
 
 
 
@@ -43,7 +44,12 @@ const mainPage = (props) => {
 
 
 class Login extends React.Component {
-    state = {username:"",password:"", open:false};
+    state = {
+        username:"",
+        password:"",
+        open:false,
+        message:"",
+    };
 
     handleOpen = () => {
         this.setState({ open: true });
@@ -67,7 +73,9 @@ class Login extends React.Component {
                 this.props.props.logInAction()
             }
         }).catch(error => {
+            alert("Log In Fail, Please Try Again");
             this.props.props.logInRequest(error.response)
+
         });
 
 

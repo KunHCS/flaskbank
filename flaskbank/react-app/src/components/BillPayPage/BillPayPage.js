@@ -59,8 +59,12 @@ class BillPay extends React.Component{
         )
             .then(response => {
                 console.log(response);
+                alert("Bill Pay Success")
 
-            }).catch (error => console.log(error.response.data.msg));
+            }).catch (error => {
+                console.log(error.response.data.msg);
+               alert("Bill Pay Fail");
+            });
 
         this.setState({payAmountCredit: 0})
 
