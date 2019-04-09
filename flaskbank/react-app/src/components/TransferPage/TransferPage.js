@@ -44,6 +44,11 @@ class Transfer extends React.Component{
         console.log("I just submit");
 
 
+        if(this.state.transferAmount === 0) {
+            alert("The Transfer Amount Cant be 0, Please Try Again");
+            return
+        }
+
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
         axios.post('/api/transfer ',
