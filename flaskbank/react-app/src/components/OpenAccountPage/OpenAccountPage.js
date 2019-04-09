@@ -32,8 +32,13 @@ const register = newUser => {
         })
         .then(response => {
             console.log(response);
+            alert("New Account Created");
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+        alert("Register Fail, Please Try Again");
+        this.props.props.logInRequest(error.response)
+
+    });
 };
 
 class Register extends Component {

@@ -55,8 +55,12 @@ class Transfer extends React.Component{
         )
             .then(response => {
                 console.log(response);
+                alert("Money Transfer success");
 
-            }).catch (error => console.log(error.response.data.msg));
+            }).catch (error => {
+                 alert("Money Transfer fail");
+                console.log(error.response.data.msg);
+            });
 
         this.setState({transferAmount: 0})
     }

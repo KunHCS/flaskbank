@@ -99,8 +99,10 @@ class DepositPage extends React.Component{
         axios.post('api/deposit/check', formData, {headers: req_headers}
         ).then(response => {
            console.log(response);
+            alert("Checking Account Deposit Success");
         }).catch(error => {
             console.log(error.response);
+            alert("Checking Account Deposit Fail");
         });
 
         this.setState({payAmount_checking: 0})
@@ -122,7 +124,9 @@ class DepositPage extends React.Component{
         axios.post('api/deposit/check', formData, {headers: req_headers}
         ).then(response => {
             console.log(response);
+            alert("Saving Account Deposit Success");
         }).catch(error => {
+            alert("Saving Account Deposit Fail");
             console.log(error.response);
         });
 

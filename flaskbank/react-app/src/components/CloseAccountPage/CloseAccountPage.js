@@ -42,9 +42,13 @@ class CloseAccountDetails extends React.Component {
                           password: this.state.password,
                           email:this.state.email}} )
             .then(response => {
+                alert("Account Closed");
                 console.log(response);
 
-            }).catch (error => console.log(error.response.data.msg));
+            }).catch (error => {
+                console.log(error.response.data.msg);
+                alert("Fail to Close the Account");
+            });
 
 
     }

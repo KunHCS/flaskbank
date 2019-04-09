@@ -38,9 +38,12 @@ class Statement extends React.Component {
                 {headers: req_headers}
             )
                 .then(response => {
+                    alert("Update Success")
                     console.log(response);
 
-                }).catch (error => console.log(error.response.data.msg));
+                }).catch (error => {
+                    alert("Update Fail");
+                    console.log(error.response.data.msg);});
     }
 
 
