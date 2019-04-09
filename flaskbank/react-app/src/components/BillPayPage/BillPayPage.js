@@ -23,7 +23,7 @@ const styles = theme => ({
         position: 'flex',
         font: 'Helvetica',
         width: '100%',
-        height: theme.spacing.unit * 25,
+        height: theme.spacing.unit * 40,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -48,8 +48,6 @@ class BillPay extends React.Component{
         this.setState({availableCredit:  this.props.myInfo.accounts[2].available_credit});
         this.setState({creditLimit:  this.props.myInfo.accounts[2].credit_limit});
     }
-
-
 
 
     onSubmit =(e) => {
@@ -81,14 +79,7 @@ class BillPay extends React.Component{
                 this.props.getProfile(response.data);
             }).catch (error => console.log(error.response.data.msg));
 
-
-        this.setState({payAmountCredit: 0});
-        this.setState({currentBalance:  this.props.myInfo.accounts[2].balance});
-        this.setState({availableCredit:  this.props.myInfo.accounts[2].available_credit});
-        this.setState({creditLimit:  this.props.myInfo.accounts[2].credit_limit});
-        this.forceUpdate();
-
-
+        this.setState({payAmountCredit:  0});
     }
 
 
@@ -103,12 +94,12 @@ class BillPay extends React.Component{
                     <form onSubmit={this.onSubmit}>
                         <InnerNavigationBar active={activeElement}/>
                         <div className={classes.paper}>
-                            <div style={{float: 'left', width:"40%"}}>
+                            <div style={{float: 'left', width:"60%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="subtitle2">SJSP Platinum Visa Card -$: {this.state.creditAccountNumber}</Typography>
-                                <Typography variant="subtitle2">Current Balance -$: {this.state.currentBalance}</Typography>
-                                <Typography variant="subtitle2">Credit Limit -$: {this.state.creditLimit}</Typography>
-                                <Typography variant="subtitle2">Available Credit -$: {this.state.availableCredit}</Typography>
+                                <Typography variant="subtitle1">SJSP Platinum Visa Card -$: {this.props.myInfo.accounts[2].account_number}</Typography>
+                                <Typography variant="subtitle1">Current Balance -$: {this.props.myInfo.accounts[2].balance}</Typography>
+                                <Typography variant="subtitle1">Credit Limit -$: {this.props.myInfo.accounts[2].credit_limit}</Typography>
+                                <Typography variant="subtitle1">Available Credit -$: {this.props.myInfo.accounts[2].available_credit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <Typography variant="h5"><strong>Amount</strong></Typography>
