@@ -84,7 +84,7 @@ const activeElement = {
 
 
 const detailStyle = {
-    height: '80%',
+    height: 'auto',
     width:  '100%',
     fontWeight: 'bold',
     WebkitBorderRadius:'10px 10px 10px 10px',
