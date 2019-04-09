@@ -38,7 +38,6 @@ class Transfer extends React.Component{
     }
 
 
-
     onSubmit  =(e) => {
 
         e.preventDefault();
@@ -131,8 +130,11 @@ class Transfer extends React.Component{
                             <Paper className={classes.innerPaper} style={{position: 'flex'}}>
                                 <br/>
                                 <Typography variant="h4" color = "secondary" ><strong>Make a Transfer</strong></Typography>
-                                <Typography variant="subtitle2">This is the transfer page. Select the account that you want to transfer from and the account you want to transfer
-                                    to.</Typography>
+                                <Typography variant="subtitle2">
+                                    This is the transfer page. Select the account
+                                    that you want to transfer from and the account
+                                    you want to transfer to.
+                                </Typography>
                                 <br/>
                                 <button onClick={this.choiceHandler}>Chase Bank Card Transfer</button>
                                 <br/>
@@ -197,7 +199,9 @@ class Transfer extends React.Component{
                             <div>
 
                                 <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
-                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount: $</Typography>
+                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>
+                                        Amount: $
+                                    </Typography>
                                     <input
                                         type="number"
                                         className={classes.button}

@@ -9,7 +9,7 @@ import Container from "../FrameWorkUnity/Container";
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
-
+import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
 
 const styles = theme => ({
     button: {
@@ -37,12 +37,20 @@ class BillPay extends React.Component{
     state = {
         payAmountCredit: 0,
         creditAccountNumber: "",
+        availableCredit :"",
+        currentBalance:"",
+        creditLimit:"",
     };
 
-
     componentDidMount() {
-        this.setState({creditAccountNumber:  this.props.myInfo.accounts[2].account_number})
+        this.setState({creditAccountNumber:  this.props.myInfo.accounts[2].account_number});
+        this.setState({currentBalance:  this.props.myInfo.accounts[2].balance});
+        this.setState({availableCredit:  this.props.myInfo.accounts[2].available_credit});
+        this.setState({creditLimit:  this.props.myInfo.accounts[2].credit_limit});
     }
+
+
+
 
     onSubmit =(e) => {
         e.preventDefault();
@@ -66,7 +74,20 @@ class BillPay extends React.Component{
                alert("Bill Pay Fail");
             });
 
-        this.setState({payAmountCredit: 0})
+
+        axios.get("/api/client/all",{headers: req_headers})
+            .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
+
+
+        this.setState({payAmountCredit: 0});
+        this.setState({currentBalance:  this.props.myInfo.accounts[2].balance});
+        this.setState({availableCredit:  this.props.myInfo.accounts[2].available_credit});
+        this.setState({creditLimit:  this.props.myInfo.accounts[2].credit_limit});
+        this.forceUpdate();
+
 
     }
 
@@ -84,7 +105,10 @@ class BillPay extends React.Component{
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"40%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="subtitle2">SJSP Platinum Visa Card - {this.state.creditAccountNumber}</Typography>
+                                <Typography variant="subtitle2">SJSP Platinum Visa Card -$: {this.state.creditAccountNumber}</Typography>
+                                <Typography variant="subtitle2">Current Balance -$: {this.state.currentBalance}</Typography>
+                                <Typography variant="subtitle2">Credit Limit -$: {this.state.creditLimit}</Typography>
+                                <Typography variant="subtitle2">Available Credit -$: {this.state.availableCredit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <Typography variant="h5"><strong>Amount</strong></Typography>
@@ -150,4 +174,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(withStyles(styles)(BillPay));
+export default connect(mapStateToProps,{getProfile})(withStyles(styles)(BillPay));
