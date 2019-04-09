@@ -11,7 +11,14 @@ export const GET_PROFILE   = "get_profile";
 export const CLEAN_PROFILE = "clean_profile";
 
 
-export const ACCOUNT_DETAIL = "account_Detail";
+export const ACCOUNT_DETAIL  = "account_Detail";
 export const CHECKING_DETAIL = "checking_Detail";
 export const SAVING_DETAIL   = "saving_Detail";
 export const CREDIT_DETAIL   = "credit_Detail";
+
+
+export const IMAGE_UPLOAD_CHECK = "image_upload_check";
+export const IMAGE_UPLOAD_SAVE  = "image_upload_save";
+
+export const CHECKING = "checking";
+export const SAVING = "saving";

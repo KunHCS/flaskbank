@@ -3,7 +3,7 @@ import * as ACTION from "../static/action_type";
 import {authenticationRequestReducer, authenticationStateReducer} from "./AuthenticationReducer/authenticationReducer";
 import {profileReducer} from "./ProfileReducer/profileReducer";
 import {accountDetailsReducer} from "./AccountDetailReducer/accountDetailsReducer";
-
+import {imageUpLoadReducer} from "./ImageUpLoadReducer/ImageUpLoadReducer";
 
 
 export default combineReducers( {
@@ -11,6 +11,7 @@ export default combineReducers( {
     auth     :  authenticationStateReducer,
     myKey    :  authenticationRequestReducer,
     myDetail :  accountDetailsReducer,
+    myImage  :  imageUpLoadReducer,
 });
 
 
