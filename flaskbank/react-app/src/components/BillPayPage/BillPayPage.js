@@ -50,6 +50,17 @@ class BillPay extends React.Component{
     }
 
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.get("/api/client/all",{headers: req_headers})
+            .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
+    }
+
     onSubmit =(e) => {
         e.preventDefault();
 
@@ -78,13 +89,9 @@ class BillPay extends React.Component{
             });
 
 
-        axios.get("/api/client/all",{headers: req_headers})
-            .then(response => {
-                console.log(response);
-                this.props.getProfile(response.data);
-            }).catch (error => console.log(error.response.data.msg));
 
-        this.setState({payAmountCredit:  0});
+
+        this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
     }
 
 
@@ -101,10 +108,10 @@ class BillPay extends React.Component{
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"60%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="subtitle1">SJSP Platinum Visa Card -$: {this.props.myInfo.accounts[2].account_number}</Typography>
-                                <Typography variant="subtitle1">Current Balance -$: {this.props.myInfo.accounts[2].balance}</Typography>
-                                <Typography variant="subtitle1">Credit Limit -$: {this.props.myInfo.accounts[2].credit_limit}</Typography>
-                                <Typography variant="subtitle1">Available Credit -$: {this.props.myInfo.accounts[2].available_credit}</Typography>
+                                <Typography variant="subtitle1">SJSP Platinum Visa Card $: {this.props.myInfo.accounts[2].account_number}</Typography>
+                                <Typography variant="subtitle1">Current Balance $: {this.props.myInfo.accounts[2].balance}</Typography>
+                                <Typography variant="subtitle1">Credit Limit $: {this.props.myInfo.accounts[2].credit_limit}</Typography>
+                                <Typography variant="subtitle1">Available Credit $: {this.props.myInfo.accounts[2].available_credit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <Typography variant="h5"><strong>Amount</strong></Typography>
@@ -112,6 +119,7 @@ class BillPay extends React.Component{
                                     type="number"
                                     className="form-control"
                                     name="amount"
+                                    step="0.01"
                                     placeholder= "$ Please Enter Your Amount"
                                     value = {this.state.payAmountCredit}
                                     onChange ={e=>this.setState({payAmountCredit:e.target.value})}

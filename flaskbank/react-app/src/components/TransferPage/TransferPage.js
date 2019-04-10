@@ -211,6 +211,7 @@ class Transfer extends React.Component{
                                         type="number"
                                         className={classes.button}
                                         name="amount"
+                                        step="0.01"
                                         placeholder= {this.state.transferAmount}
                                         value = {this.state.transferAmount}
                                         onChange ={e=>this.setState({transferAmount:e.target.value})}
