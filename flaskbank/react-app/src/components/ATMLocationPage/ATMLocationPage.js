@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
@@ -6,42 +6,40 @@ import Container from "../FrameWorkUnity/Container";
 import MyMap from "../FrameWorkUnity/GoogleMap";
 //import MyMap from "./FrameWorkUnity/GoogleApiWrapper";
 
-
-
 const ATMLocationPage = () => {
-    return (
-        <div >
-            <Navigation/>
-            <Search/>
-            <Container>
-                <ATMDetails />
-            </Container>
-        </div>
-
-    );
-}
-
+  return (
+    <div>
+      <Navigation />
+      <Search />
+      <Container>
+        <ATMDetails />
+      </Container>
+    </div>
+  );
+};
 
 class ATMDetails extends React.Component {
-
-    render(){
-        return (
-                <div>
-                  <p style = {textStyle}>ATM Page</p>
-                  <p> <MyMap/> </p>
-                </div>
-        )
-    };
+  render() {
+    return (
+      <div>
+        <p style={textStyle}>ATM Page</p>
+        <p>
+          {" "}
+          <MyMap />{" "}
+        </p>
+      </div>
+    );
+  }
 }
 const textStyle = {
-  fontSize: '30px',
-  paddingTop: '10px',
-  paddingBottom: '30px',
-  fontWeight: 'bold',
-  textAlign: 'center',
-  margin: 'auto',
-  position: 'flex',
-  color: 'white',
-}
+  fontSize: "30px",
+  paddingTop: "10px",
+  paddingBottom: "30px",
+  fontWeight: "bold",
+  textAlign: "center",
+  margin: "auto",
+  position: "flex",
+  color: "white"
+};
 
 export default ATMLocationPage;
