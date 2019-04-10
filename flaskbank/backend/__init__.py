@@ -13,9 +13,8 @@ f_jwt = JWTManager()
 
 
 def create_app(current_config=DevelopmentConfig):
-    app = Flask('G2-Banking', static_folder=current_config.STATIC_PATH,
+    app = Flask(__name__, static_folder=current_config.STATIC_PATH,
                 template_folder=current_config.TEMPLATE_PATH)
-
     app.config.from_object(current_config)
 
     mongo.init_app(app)

@@ -26,9 +26,11 @@ def withdraw_route():
     if not post_update_client:
         return am.jsonify({'msg': 'Client does not own the account'}), 400
 
-    ending_balance = next(acc['balance'] for acc in post_update_client[
+    post_acc = next(acc for acc in post_update_client[
         'accounts'] if acc['account_number'] == str(acc_num))
-
+    ending_balance = post_acc['balance']
+    acc_type = post_acc['type']
     return am.jsonify({'username': current_user, 'amount': amount * -1,
+                       'account_type': acc_type,
                        'ending_balance': float(ending_balance.to_decimal()),
                        'account_number': acc_num}), 200
