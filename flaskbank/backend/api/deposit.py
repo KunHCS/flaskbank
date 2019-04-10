@@ -1,5 +1,4 @@
 from .. import all_module as am
-import random
 from .utils import deposit
 
 deposit_bp = am.Blueprint('deposit', __name__)
@@ -26,9 +25,12 @@ def deposit_route():
 
     if not post_update_client:
         return am.jsonify({'msg': 'client does not own the account'}), 400
-    ending_balance = next(acc['balance'] for acc in post_update_client[
+    post_account = next(acc for acc in post_update_client[
         'accounts'] if acc['account_number'] == str(acc_num))
+    ending_balance = post_account['balance']
+    acc_type = post_account['type']
     return am.jsonify({'username': current_user, 'amount': amount,
+                       'account_type': acc_type,
                        'ending_balance': float(ending_balance.to_decimal()),
                        'account_number': acc_num}), 200
 
@@ -42,7 +44,7 @@ def check_deposit():
     account = str(am.request.form['account'])
     if not am.verify(account):
         return am.jsonify({'msg': 'invalid account number'}), 400
-    deposit_amount = round(random.uniform(50, 501), 2)  # fake amount
+    deposit_amount = float(am.request.form['amount'])
     if not file or not file.filename.lower().endswith(allowed_extension):
         return am.jsonify({'msg': 'No file or invalid file type. File '
                                   'must be an images in .png .jpg .jpeg '

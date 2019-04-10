@@ -88,15 +88,16 @@ def record_transaction(username, account_num, amount, description=None):
     )
 
 
-def deposit(user, account_number, amount, description=None):
+def deposit(user, account_number, deposit_amount, description=None):
     """
     deposit amount to account
     :param user:
     :param account_number:
-    :param amount:
+    :param deposit_amount:
     :param description:
     :return: (dict) updated client
     """
+    amount = float(deposit_amount)
     if am.verify(str(account_number)) and str(account_number)[0] == '4':
         neg_d128_amount = to_d128(abs(amount) * -1)
         d128_amount = to_d128(abs(amount))
@@ -117,15 +118,16 @@ def deposit(user, account_number, amount, description=None):
     return client
 
 
-def withdraw(user, account_number, amount, description=None):
+def withdraw(user, account_number, withdraw_amount, description=None):
     """
     withdraw amount from user account
     :param user:
     :param account_number:
-    :param amount:
+    :param withdraw_amount:
     :param description:
     :return:
     """
+    amount = float(withdraw_amount)
     # if account is credit account
     if am.verify(str(account_number)) and str(account_number)[0] == '4':
         d128_amount = to_d128(abs(amount) * -1)
