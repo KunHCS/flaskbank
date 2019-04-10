@@ -18,7 +18,7 @@ export class MapV2 extends Component {
     let init_pos = { lat: 37.335141, lng: -121.881093 };
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: init_pos,
-      zoom: 15
+      zoom: 14
     });
 
     let infowindow = new window.google.maps.InfoWindow();
