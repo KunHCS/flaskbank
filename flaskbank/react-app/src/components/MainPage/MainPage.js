@@ -23,9 +23,6 @@ const mainPage = (props) => {
       if (props.auth == false) {
         return (
             <div>
-                <Button variant="contained" onClick={() => props.logInAction()}>
-                    Log In
-                </Button>
                 <Navigation/>
                 <Search/>
                 <Container>
