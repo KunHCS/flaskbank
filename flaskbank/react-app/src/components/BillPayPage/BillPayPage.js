@@ -50,16 +50,7 @@ class BillPay extends React.Component{
     }
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
 
-        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
-
-        axios.get("/api/client/all",{headers: req_headers})
-            .then(response => {
-                console.log(response);
-                this.props.getProfile(response.data);
-            }).catch (error => console.log(error.response.data.msg));
-    }
 
     onSubmit =(e) => {
         e.preventDefault();
@@ -89,6 +80,11 @@ class BillPay extends React.Component{
             });
 
 
+        axios.get("/api/client/all",{headers: req_headers})
+            .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
 
 
         this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
