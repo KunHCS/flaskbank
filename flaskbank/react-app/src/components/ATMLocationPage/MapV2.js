@@ -13,7 +13,7 @@ export class MapV2 extends Component {
 
     window.initMap = this.initMap;
   };
-  //<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
   initMap = () => {
     let init_pos = { lat: 37.335141, lng: -121.881093 };
     const map = new window.google.maps.Map(document.getElementById("map"), {
@@ -21,12 +21,18 @@ export class MapV2 extends Component {
       zoom: 15
     });
 
+    let infowindow = new window.google.maps.InfoWindow();
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var new_pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        let myposwindow = new window.google.maps.InfoWindow();
+        myposwindow.setContent("You are here");
+        myposwindow.setPosition(new_pos);
+        myposwindow.open(map, this);
         map.setCenter(new_pos);
         getNearby(new_pos);
       });
@@ -45,11 +51,20 @@ export class MapV2 extends Component {
       service.nearbySearch(request, (result, status) => {
         for (let i = 0; i < result.length; i++) {
           let place = result[i];
-          let marker = new window.google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
+          createMarker(place);
         }
+      });
+    }
+
+    function createMarker(place) {
+      var marker = new window.google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      window.google.maps.event.addListener(marker, "click", function() {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
       });
     }
   };
