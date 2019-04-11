@@ -3,10 +3,12 @@
 }
 
 #auto-complete{
-    position: fixed;
+    position: relative;
     left: 200px;
-    top: 11px;
-    width: 400px;
+    top: 50px;
+    width: 30%;
+    max-width: 400px;
+    overflow: hidden;
     height: 40px;
     z-index: 5;
 }

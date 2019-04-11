@@ -3,8 +3,8 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 
-import MyMap from "../FrameWorkUnity/GoogleMap";
-//import MyMap from "./FrameWorkUnity/GoogleApiWrapper";
+//import MyMap from "../FrameWorkUnity/GoogleMap";
+import { MapV2 as MyMap } from "./MapV2";
 
 const ATMLocationPage = () => {
   return (
