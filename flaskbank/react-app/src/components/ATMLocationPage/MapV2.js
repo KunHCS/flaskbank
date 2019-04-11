@@ -7,8 +7,16 @@ export class MapV2 extends Component {
   }
 
   renderMap = () => {
+    //AIzaSyDidu8avH7LfiaBboFnGkJDpZXjCMFgsF8&libraries
+    //let API_KEY = process.env.API_KEY;
+    //console.log(process.env);
+    let API_KEY = "AIzaSyDidu8avH7LfiaBboFnGkJDpZXjCMFgsF8&libraries";
+    if (!API_KEY) {
+      alert("NO API_KEY SET IN ENVIRONMENT");
+      return;
+    }
     loadScript(
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyDidu8avH7LfiaBboFnGkJDpZXjCMFgsF8&libraries=places&callback=initMap"
+      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}=places&callback=initMap`
     );
 
     window.initMap = this.initMap;
@@ -16,36 +24,34 @@ export class MapV2 extends Component {
 
   initMap = () => {
     let init_pos = { lat: 37.335141, lng: -121.881093 };
+
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: init_pos,
       zoom: 14
     });
 
-    let infowindow = new window.google.maps.InfoWindow();
-
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var new_pos = {
+      navigator.geolocation.getCurrentPosition(position => {
+        let new_pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        let myposwindow = new window.google.maps.InfoWindow();
-        myposwindow.setContent("You are here");
-        myposwindow.setPosition(new_pos);
-        myposwindow.open(map, this);
-        map.setCenter(new_pos);
         getNearby(new_pos);
       });
     } else {
       alert("Browser does not support geolocation");
     }
+    initSearchBox();
+
+    const markerWindow = new window.google.maps.InfoWindow();
+    const userWindow = new window.google.maps.InfoWindow();
+    const service = new window.google.maps.places.PlacesService(map);
 
     function getNearby(pos) {
-      let service = new window.google.maps.places.PlacesService(map);
       let request = {
         location: new window.google.maps.LatLng(pos.lat, pos.lng),
-        radius: "3000",
-        type: "bank",
+        radius: "4000", //meters
+        type: ["bank", "ATM"],
         keyword: "chase+bank+atm"
       };
       service.nearbySearch(request, (result, status) => {
@@ -53,41 +59,75 @@ export class MapV2 extends Component {
           let place = result[i];
           createMarker(place);
         }
+        createUserWindow(pos);
       });
     }
 
+    function createUserWindow(pos) {
+      map.setCenter(pos);
+      userWindow.setContent("You are here");
+      userWindow.setPosition(pos);
+      userWindow.open(map, this);
+    }
     function createMarker(place) {
-      var marker = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         map: map,
         position: place.geometry.location
       });
 
       window.google.maps.event.addListener(marker, "click", function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
+        markerWindow.setContent(place.name);
+        markerWindow.open(map, this);
       });
+    }
+
+    function initSearchBox() {
+      let input = document.getElementById("auto-complete");
+      let options = {
+        types: ["establishment"]
+      };
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        input,
+        options
+      );
+      autocomplete.bindTo("bounds", map);
+      autocomplete.setFields(["geometry"]);
+      window.google.maps.event.addListener(
+        autocomplete,
+        "place_changed",
+        function() {
+          console.log("place changed");
+          let place = autocomplete.getPlace();
+          let pos = place.geometry.location;
+          getNearby({ lat: pos.lat(), lng: pos.lng() });
+        }
+      );
     }
   };
 
   render() {
     return (
-      <main>
+      <div>
+        <input
+          className="form-control"
+          id="auto-complete"
+          type="text"
+          placeholder="Search"
+        />
         <div id="map" />
-      </main>
+      </div>
     );
   }
 }
 
 function loadScript(url) {
   let index = window.document.getElementsByTagName("script")[0];
-  console.log(index);
   let script = window.document.createElement("script");
   script.src = url;
   script.async = true;
   script.defer = true;
   index.parentNode.insertBefore(script, index);
-  console.log(window.document.getElementsByTagName("script")[0]);
-  console.log(window.document.getElementsByTagName("script")[1]);
 }
 
 export default MapV2;
