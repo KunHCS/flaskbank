@@ -74,9 +74,9 @@ class ImageUpload extends React.Component {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
-        console.log("fgdgdgdgdgdgdfgdgd");
-        console.log(this.state);
-        console.log(this.props);
+        // console.log("fgdgdgdgdgdgdfgdgd");
+        // console.log(this.state);
+        // console.log(this.props);
 
         return (
 
@@ -102,8 +102,8 @@ class ImageUpload extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("I'm in map State to Props");
-    console.log(state);
+    // console.log("I'm in map State to Props");
+    // console.log(state);
     return state;
 }
 

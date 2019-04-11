@@ -70,6 +70,7 @@ class DepositPage extends React.Component{
     }
 
 
+
     onSubmit1 =(e) => {
         e.preventDefault();
 
@@ -179,7 +180,8 @@ class DepositPage extends React.Component{
                                     type="number"
                                     className="form-control"
                                     name="amount"
-                                    //placeholder= {'$' + this.state.payAmount}
+                                    step="0.01"
+                                    placeholder= "$ Enter the Amount"
                                     value = {this.state.payAmount_checking}
                                     onChange ={e=>this.setState({payAmount_checking:e.target.value})}
                                 />
@@ -211,7 +213,8 @@ class DepositPage extends React.Component{
                                     type="number"
                                     className="form-control"
                                     name="amount"
-                                    //placeholder= {'$' + this.state.payAmount}
+                                    step="0.01"
+                                    placeholder= "$ Enter the Amount"
                                     value = {this.state.payAmount_saving}
                                     onChange ={e=>this.setState({payAmount_saving:e.target.value})}
                                 />
