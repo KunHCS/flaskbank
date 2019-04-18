@@ -8,9 +8,8 @@ export class MapV2 extends Component {
 
   renderMap = () => {
     //AIzaSyDidu8avH7LfiaBboFnGkJDpZXjCMFgsF8&libraries
-    //let API_KEY = process.env.API_KEY;
-    //console.log(process.env);
     let API_KEY = "AIzaSyDidu8avH7LfiaBboFnGkJDpZXjCMFgsF8&libraries";
+    console.log(process.env);
     if (!API_KEY) {
       alert("NO API_KEY SET IN ENVIRONMENT");
       return;

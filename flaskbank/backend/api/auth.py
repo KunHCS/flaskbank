@@ -18,9 +18,7 @@ def login_user():
         username = data['username']
         password = data['password']
     except KeyError:
-
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
-
     user = am.clients.find_one({'username': username})
 
     if not user:

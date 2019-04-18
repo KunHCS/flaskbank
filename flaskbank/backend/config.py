@@ -15,12 +15,6 @@ class Config:
                 f'/{DB_NAME}?retryWrites=true'
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
-    # MONGO_URI = 'mongodb://admin:admin@bank-cluster-shard-00-00-su85m' \
-    #             '.mongodb.net:27017,' \
-    #             'bank-cluster-shard-00-01-su85m.mongodb.net:27017,' \
-    #             'bank-cluster-shard-00-02-su85m.mongodb.net:27017' \
-    #             f'/{db_name}?ssl=true&replicaSet=Bank-Cluster-shard-0' \
-    #             '&authSource=admin&retryWrites=true'
 
 
 class DevelopmentConfig(Config):
