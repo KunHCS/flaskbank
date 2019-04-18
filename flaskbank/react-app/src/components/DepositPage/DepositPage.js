@@ -171,7 +171,7 @@ class DepositPage extends React.Component{
                         <div className={classes.top}>
                             <div style={{float: 'left', width:"50%"}}>
                               <Typography variant="h4" color="secondary"><strong>Deposit to Checking Account</strong></Typography>
-                                <Typography variant="subtitle2">Checking Account -{ this.state.checkingAccountNumber}</Typography>
+                                <Typography variant="subtitle2">Checking Account: { this.state.checkingAccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <form onSubmit={this.onSubmit1}>
@@ -204,7 +204,7 @@ class DepositPage extends React.Component{
                         <div className={classes.bottom}>
                             <div style={{float: 'left', width:"50%"}}>
                               <Typography variant="h4" color="secondary"><strong>Deposit to Saving Account</strong></Typography>
-                                <Typography variant="subtitle2">Saving Account -{this.state.savingAccountNumber}</Typography>
+                                <Typography variant="subtitle2">Saving Account: {this.state.savingAccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <form onSubmit={this.onSubmit2}>
