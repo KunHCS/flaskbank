@@ -84,9 +84,11 @@ class Login extends React.Component {
         return (
           <div>
               <div> <img src={cards} alt="card" style = {center}/> </div>
-              {/*<div> <img src={card2} alt="card" style = {center2}/> </div>*/}
-              {/*<div> <img src={card3} alt="card" style = {center3}/> </div>*/}
-              <p style= {para}> </p>
+              {/*{<p style= {para}> </p>}*/}
+              <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+
+
+
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
@@ -143,12 +145,12 @@ const wrapper = {
     alignItems: 'center',
     flexDirection:'column',
     justifyContent:'center',
-    minHeight: '100%',
+    minHeight: '150%',
     width:'100%',
     padding: '20px',
     border: '3px solid blue',
     opacity: '.9',
-    paddingTop: '35px',
+    paddingTop: '20px',
     WebkitBorderRadius:'10px 10px 10px 10px',
 }
 
@@ -163,15 +165,15 @@ const formContent = {
 }
 
 const formFooter = {
-    position: 'relative',
+    position: 'flex',
     padding:'25px',
     textAlign:'center',
     WebkitBorderRadius:'10px 10px 10px 10px',
     borderRadius: '10px 10px 10px 10px',
 }
 const paperStyle = {
-    height: '20%',
-    width:  '60%',
+    height: '100%',
+    width:  '70%',
     boxShadow: '5px 1px 10px, 5px 1px 10px',
     WebkitBorderRadius:'10px 10px 10px 10px',
     textAlign:'center',
@@ -182,38 +184,13 @@ const paperStyle = {
 const center = {
     margin: '0',
     position: 'absolute',
-    paddingTop: '15px',
+    paddingTop: '20px',
     whiteSpace: 'nowrap',
     paddingLeft:'200px',
     paddingBottom: '30px',
-    height:'40%',
+    height:'30%',
     width: '50%',
     opacity: '0.98'
-}
-
-const center2 = {
-    margin: '50px',
-    position: 'absolute',
-    paddingTop: '20px',
-    whiteSpace: 'nowrap',
-    paddingLeft:'225px',
-    paddingBottom: '30px',
-    height:'25%',
-    width: '38%',
-    opacity: '0.98'
-}
-
-const center3 = {
-    margin: '100px',
-    position: 'absolute',
-    paddingTop: '20px',
-    whiteSpace: 'nowrap',
-    paddingLeft:'250px',
-    paddingBottom: '30px',
-    height:'25%',
-    width: '40%',
-    opacity: '0.98'
-
 }
 
 const para = {

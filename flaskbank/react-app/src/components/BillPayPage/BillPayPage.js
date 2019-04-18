@@ -23,7 +23,7 @@ const styles = theme => ({
         position: 'flex',
         font: 'Helvetica',
         width: '100%',
-        height: theme.spacing.unit * 40,
+        height: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -102,10 +102,10 @@ class BillPay extends React.Component{
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"30%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="subtitle1">SJSP Platinum Visa Card $: {this.props.myInfo.accounts[2].account_number}</Typography>
-                                <Typography variant="subtitle1">Current Balance $: {this.props.myInfo.accounts[2].balance}</Typography>
-                                <Typography variant="subtitle1">Credit Limit $: {this.props.myInfo.accounts[2].credit_limit}</Typography>
-                                <Typography variant="subtitle1">Available Credit $: {this.props.myInfo.accounts[2].available_credit}</Typography>
+                                <Typography variant="h6">SJSP Platinum Visa Card: </Typography> <Typography variant="subtitle1">${this.props.myInfo.accounts[2].account_number}</Typography>
+                                <Typography variant="h6">Current Balance: </Typography><Typography variant="subtitle1">${this.props.myInfo.accounts[2].balance}</Typography>
+                                <Typography variant="h6">Credit Limit: </Typography> <Typography variant="subtitle1">${this.props.myInfo.accounts[2].credit_limit}</Typography>
+                                <Typography variant="h6">Available Credit: </Typography> <Typography variant="subtitle1">${this.props.myInfo.accounts[2].available_credit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <Typography variant="h5"><strong>Amount</strong></Typography>
@@ -144,11 +144,6 @@ const activeElement = {
 }
 
 const checkingContainerStyle = {
-    // height: "auto",
-    // width:  500,
-    //
-    // boxShadow: '-2px 5px 25px, 2px 5px 25px',
-    // margin: '20px'
     height: '100%',
     width:  '100%',
     textAlign:'center',

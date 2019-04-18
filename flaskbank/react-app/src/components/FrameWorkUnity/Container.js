@@ -24,7 +24,7 @@ const Left = () => {
     textAlign: 'center',
     fontWeight: 'bold',
     boxShadow: '0 30px 60px 0 rgba(0,0,255,0.3)',
-    paddingBottom: '30px',
+    paddingBottom: '15px',
   }
   const text2 = {
     display: "block",
@@ -35,11 +35,11 @@ const Left = () => {
     fontSize: '25px',
     textAlign: 'center',
     fontWeight: 'bold',
-    paddingBottom: '20px',
+    paddingBottom: '15px',
     boxShadow: '30 30 0 30 rgba(0,0,255,0.3)',
   }
   const text3 = {
-    lineHeight: '130%',
+    lineHeight: '105ç%',
     font: 'Helvetica',
     position: 'flex',
     color: 'white',
@@ -48,10 +48,10 @@ const Left = () => {
   }
 
   const center3 = {
-    marginLeft: '9px',
+    marginLeft: '18%',
     position: 'flex',
-    height:'90%',
-    width: '95%',
+    height:'50%',
+    width: '65%',
     opacity: '0.98',
     textAlign: 'center',
     WebkitBorderRadius:'5px 5px 5px 5px',
@@ -84,6 +84,7 @@ const Right = (props) => {
     opacity: '0.98',
     borderRadius: '10px 10px 10px 10px',
     border: '2px solid blue',
+    float: 'right',
   }
 
   return (
