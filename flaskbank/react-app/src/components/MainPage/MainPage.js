@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button'
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
 import {loginAction,logInRequest} from "../../actions/LoginAction/loginAction";
+import jwt_decode from "jwt-decode";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
@@ -31,6 +32,9 @@ const mainPage = (props) => {
             </div>
 
         );}
+      //if (prop.type == "manager") {
+      //     <Redirect to={'/manager'} />
+      // }
       else return (
           <Redirect to={'/overview'} />
       )
@@ -66,6 +70,8 @@ class Login extends React.Component {
             password: this.state.password
         }).then(response => {
             if (response.status === 201) {
+                console.log(jwt_decode(response.data.access_token).identity.user_type);
+
                 this.props.props.logInRequest(response)
                 this.props.props.logInAction()
             }

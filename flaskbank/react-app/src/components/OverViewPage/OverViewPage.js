@@ -33,11 +33,7 @@ const styles = theme => ({
 });
 
 class OverViewPage extends React.Component{
-    state={
-        checkingAccount : "",
-        savingAccount :"",
-        creditAccount:"",
-    };
+    state={ };
 
 
     componentDidMount() {
@@ -48,32 +44,46 @@ class OverViewPage extends React.Component{
             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
-                console.log(this.props.myInfo.accounts[0]);
-
-                this.setState({checkingAccount : this.props.myInfo.accounts[0]});
-                this.setState({savingAccount : this.props.myInfo.accounts[1]});
-                this.setState({creditAccount : this.props.myInfo.accounts[2]});
-
 
             }).catch (error => console.log(error.response.data.msg));
 
-
     }
 
+    renderAccount() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                return (
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                            <Typography
+                                className={classes.heading}><strong> {account.alias} : {account.account_number}</strong>
+                            </Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            <div style={{width: '90%'}}>
+                                <Typography style={{float: 'left'}}>
+                                    Balance: ${account.balance}
+                                </Typography>
+                                <Link to="/overview/account_detail"
+                                      onClick={() => this.props.accountDetailAction(account)}>
+                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
+                                            className={classes.margin}>Transactions</Button>
+                                </Link>
+                            </div>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                );
+            });
+        }else { return (<div/>);}
+
+    }
 
 
     render() {
         const { classes } = this.props;
         console.log("I am in overview page");
         console.log(this.props.myInfo);
-        console.log(this.state.checkingAccount);
-
-        const cNumber =this.state.checkingAccount.account_number;
-        const sNumber =this.state.savingAccount.account_number;
-        const creditNumber = this.state.creditAccount.account_number;
-        const cBalance=this.state.checkingAccount.balance;
-        const sBalance=this.state.savingAccount.balance;
-        const creditBalance= this.state.creditAccount.balance;
 
         return (
             <div >
@@ -82,54 +92,7 @@ class OverViewPage extends React.Component{
                 <Container>
                     <InnerNavigationBar active ={activeElement}/>
                     <div className={classes.root}>
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Checking Account: {cNumber}</strong></Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <div style={{width: '90%'}}>
-                                    <Typography style={{float: 'left'}}>
-                                        Balance: ${cBalance}
-                                    </Typography>
-                                    <Link to = "/overview/account_detail"  onClick={()=>this.props.accountDetailAction(ACTION.CHECKING_DETAIL)}>
-                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
-                                            className={classes.margin}>Transactions</Button>
-                                    </Link>
-                                </div>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Saving Account: {sNumber}</strong></Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <div style={{width: '90%'}}>
-                                    <Typography style={{float: 'left'}}>
-                                        Balance: ${sBalance}
-                                    </Typography>
-                                    <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.SAVING_DETAIL)} >
-                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
-                                            className={classes.margin}>Transactions</Button>
-                                    </Link>
-                                </div>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card: {creditNumber}</strong></Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <div style={{width: '90%'}}>
-                                    <Typography style={{float: 'left'}}>
-                                        Balance: ${creditBalance}
-                                    </Typography>
-                                    <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.CREDIT_DETAIL)}>
-                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
-                                            className={classes.margin}>Transactions</Button>
-                                    </Link>
-                                </div>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                        {this.renderAccount()}
                     </div>
                 </Container>
             </div>
