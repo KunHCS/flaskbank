@@ -5,24 +5,13 @@ import AddAccount from "../../../components/AddAccount/AddAccount";
 import Modal from '@material-ui/core/Modal';
 import {connect} from "react-redux";
 import {openPopWindow, closePopWindow} from "../../../actions/PopWindowStateAction/popWindowStateAction";
+import Select from '@material-ui/core/Select';
 
 
 
 class AddAccountBar extends React.Component {
-    state = {
-        open:false,
-    };
-
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
 
     render() {
-
         console.log(this.props);
         return (
             <Paper style={navbarStyle}>
@@ -51,7 +40,6 @@ const navbarStyle = {
     margin: '20px'
 
 };
-
 
 
 const mapStateToProps = (state) => {

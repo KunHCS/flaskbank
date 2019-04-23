@@ -5,6 +5,13 @@ import {withStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {closePopWindow, openPopWindow} from "../../actions/PopWindowStateAction/popWindowStateAction";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from "@material-ui/core/Typography";
+import Button from '@material-ui/core/Button';
+import * as ACTION from "../../static/action_type";
 
 
 function getModalStyle() {
@@ -32,7 +39,8 @@ const styles = theme => ({
 class AddAccount extends React.Component {
     state = {
         account_name: "",
-        account_type:""
+        account_type:"",
+        open: false,
     };
 
 
@@ -46,6 +54,23 @@ class AddAccount extends React.Component {
         this.props.closePopWindow();
 
     }
+
+
+    selectAccountOne = (event) =>{
+        const labelFrom = document.getElementById('firstLabel');
+        labelFrom.innerHTML = event.currentTarget.innerHTML;
+        this.setState({open: false});
+    };
+
+
+    panOneHandler = () =>{
+        if(this.state.open){
+            this.setState({open: false});
+        }
+        else{
+            this.setState({open: true});
+        }
+    };
 
     render() {
         const {classes} = this.props;
@@ -66,7 +91,36 @@ class AddAccount extends React.Component {
                         />
                     </div>
 
+                    <label htmlFor="name">Account Type</label>
 
+
+                        <ExpansionPanel expanded={this.state.open}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                                <Typography className={classes.heading} id="firstLabel">Select Account Type</Typography>
+                            </ExpansionPanelSummary>
+
+                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                <Button className={classes.button}
+                                        onClick={() => this.setState({account_type: ACTION.CHECKING})}>
+                                    Checking Account</Button>
+                            </ExpansionPanelDetails>
+
+                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                <Button className={classes.button}
+                                        onClick={() => this.setState({account_type: ACTION.SAVING})}>
+                                    Saving Account</Button>
+                            </ExpansionPanelDetails>
+
+                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                                <Button className={classes.button}
+                                        onClick={() => this.setState({account_type: ACTION.CREDIT})}>
+                                    Credit Card Account</Button>
+                            </ExpansionPanelDetails>
+
+                        </ExpansionPanel>
+
+
+                    <hr/>
                     <button
                         type="submit"
                         className="btn btn-lg btn-primary btn-block"
@@ -79,6 +133,11 @@ class AddAccount extends React.Component {
         );
     }
 }
+
+
+
+
+
 AddAccount.propTypes = {
     classes: PropTypes.object.isRequired,
 };
