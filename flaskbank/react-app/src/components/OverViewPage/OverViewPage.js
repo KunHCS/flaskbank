@@ -33,11 +33,7 @@ const styles = theme => ({
 });
 
 class OverViewPage extends React.Component{
-    state={
-        checkingAccount : "",
-        savingAccount :"",
-        creditAccount:"",
-    };
+    state={ };
 
 
     componentDidMount() {
@@ -48,11 +44,6 @@ class OverViewPage extends React.Component{
             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
-                console.log(this.props.myInfo.accounts[0]);
-
-                this.setState({checkingAccount : this.props.myInfo.accounts[0]});
-                this.setState({savingAccount : this.props.myInfo.accounts[1]});
-                this.setState({creditAccount : this.props.myInfo.accounts[2]});
 
             }).catch (error => console.log(error.response.data.msg));
 
@@ -93,7 +84,6 @@ class OverViewPage extends React.Component{
         const { classes } = this.props;
         console.log("I am in overview page");
         console.log(this.props.myInfo);
-        console.log(this.state.checkingAccount);
 
         return (
             <div >
