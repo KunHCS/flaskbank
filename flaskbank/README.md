@@ -348,6 +348,56 @@ Status: 200 OK
 
 Status: 400 BAD REQUEST
 
+## *Set Up Autopay*
+#### http://127.0.0.1:5000/api/autopay (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"from": <account>,
+		"to": <account>,
+		"amount": <amount>,
+		"interval": <minute>
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Stop Autopay*
+stops all autopay for the user
+#### http://127.0.0.1:5000/api/autopay/stop (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Get Autopay*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/autopay/get (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+
 
 ## Database Structure
 #### Clients collection
