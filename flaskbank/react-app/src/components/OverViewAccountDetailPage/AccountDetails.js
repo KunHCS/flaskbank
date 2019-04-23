@@ -17,9 +17,7 @@ class AccountDetails extends React.Component{
     };
 
     componentDidMount() {
-
         this.setState({myCurrentAccount : this.props.myDetail})
-
     }
 
 

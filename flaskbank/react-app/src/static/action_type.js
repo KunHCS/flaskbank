@@ -23,3 +23,4 @@ export const IMAGE_UPLOAD_CLEAN = "image_upload_clean";
 
 export const CHECKING = "checking";
 export const SAVING = "saving";
+export const CREDIT ="credit"
