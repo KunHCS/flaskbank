@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 import * as ACTION from "../../static/action_type";
-
+import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
 
 function getModalStyle() {
     const top = 50 ;
@@ -38,7 +38,7 @@ const styles = theme => ({
 
 class AddAccount extends React.Component {
     state = {
-        account_name: "",
+        account_name:"New Account",
         account_type:"",
         open: false,
     };
@@ -47,10 +47,32 @@ class AddAccount extends React.Component {
     onSubmit =(e) => {
         console.log("I just submit");
         e.preventDefault();
+        console.log(this.props);
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        console.log(this.props);
+
+        axios.post('api/accounts/open',
+            {alias: this.state.account_name,
+                  type: this.state.account_type,
+                  deposit: 0},
+            {headers: req_headers}
+        )
+            .then(response => {
+                console.log(response);
+                alert("Account Open Success")
+
+                   axios.get("/api/client/all",{headers: req_headers})
+                       .then(response => {
+                        console.log(response);
+                        this.props.getProfile(response.data);
+                       }).catch (error => console.log(error.response.data.msg));
+
+            }).catch (error => {
+            console.log(error.response.data.msg);
+            alert("Account Open Fail --"+error.response.data.msg);
+        });
+
         this.props.closePopWindow();
 
     }
@@ -151,4 +173,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{openPopWindow, closePopWindow})(withStyles(styles)(AddAccount));
+export default connect(mapStateToProps,{openPopWindow, closePopWindow,getProfile})(withStyles(styles)(AddAccount));
