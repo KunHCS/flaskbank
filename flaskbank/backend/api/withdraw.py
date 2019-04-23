@@ -17,8 +17,8 @@ def withdraw_route():
     except KeyError:
         return am.make_response('Bad Request, missing/misspelled key', 400)
 
-    if not am.verify(acc_num):
-        return am.jsonify({'msg': 'invalid account number'}), 400
+    if not am.verify(acc_num) or not acc_num:
+        return am.jsonify({'msg': 'invalid/empty account number'}), 400
 
     current_user = am.get_jwt_identity()['username']
     post_update_client = withdraw(current_user, acc_num, amount,
