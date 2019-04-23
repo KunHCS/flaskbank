@@ -59,7 +59,6 @@ class OverViewPage extends React.Component{
     }
 
     renderAccount() {
-        console.log(this.props.myInfo);
         const { classes } = this.props;
         if (this.props.myInfo !== " ") {
             return this.props.myInfo.accounts.map(account => {

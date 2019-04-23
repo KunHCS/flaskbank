@@ -14,6 +14,7 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 
@@ -22,27 +23,18 @@ class Transfer extends React.Component{
         open1: false,
         open2: false,
         transferAmount: 0,
-        checkingAccount : "",
-        savingAccount: "",
-        creditAccount: "",
         selectFrom: "",
         selectTo:"",
     };
 
 
     componentDidMount() {
-        this.setState({checkingAccount:  this.props.myInfo.accounts[0]})
-        this.setState({savingAccount:    this.props.myInfo.accounts[1]})
-        this.setState({creditAccount:    this.props.myInfo.accounts[2]})
 
     }
 
-
     onSubmit  =(e) => {
-
         e.preventDefault();
         console.log("I just submit");
-
 
         if(this.state.transferAmount === 0) {
             alert("The Transfer Amount Cant be 0, Please Try Again");
@@ -62,7 +54,7 @@ class Transfer extends React.Component{
                 alert("Money Transfer success");
 
             }).catch (error => {
-                 alert("Money Transfer fail");
+                 alert("Money Transfer Fail!! ---" + (error.response.data.msg));
                 console.log(error.response.data.msg);
             });
 
@@ -80,6 +72,7 @@ class Transfer extends React.Component{
         labelFrom.innerHTML = event.currentTarget.innerHTML;
         this.setState({open2: false});
     };
+
     panOneHandler = () =>{
         if(this.state.open1){
             this.setState({open1: false});
@@ -110,8 +103,41 @@ class Transfer extends React.Component{
         const accountChoice = document.getElementById("accountChoice");
         accountChoice.style.display = 'none';
     }
-    render() {
 
+
+    renderAccount1() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                return (
+                    <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                        <Button className={classes.button} onClick={this.selectAccount}
+                                onClick={()=>this.setState({selectFrom:account.account_number})}>
+                            {account.alias}: {account.account_number}</Button>
+                    </ExpansionPanelDetails>
+                );
+            });
+        }else { return (<div/>);}
+    }
+
+
+    renderAccount2() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                return (
+                    <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+                        <Button className={classes.button} onClick={this.selectAccount}
+                                onClick={()=>this.setState({selectTo:account.account_number})}>
+                            {account.alias}: {account.account_number}</Button>
+                    </ExpansionPanelDetails>
+
+                );
+            });
+        }else { return (<div/>);}
+    }
+
+    render() {
         const {classes} = this.props;
         console.log("I am in Transfer Page")
         console.log(this.props);
@@ -119,9 +145,7 @@ class Transfer extends React.Component{
         console.log(this.state.selectFrom);
         console.log(this.state.selectTo);
         console.log(this.state.transferAmount);
-        const cNumber =  this.state.checkingAccount.account_number;
-        const sNumber =  this.state.savingAccount.account_number;
-        const creditNumber =  this.state.creditAccount.account_number;
+
 
         return (
             <div>
@@ -142,8 +166,7 @@ class Transfer extends React.Component{
                                 </Typography>
                                 <br/>
                                 <button onClick={this.choiceHandler}>Chase Bank Card Transfer</button>
-                                <br/>
-                                <br/>
+                                <br/>  <br/>
                                 <button onClick={this.choiceHandler}>Other Bank(s) Card Transfer</button>
                             </Paper>
                         </div>
@@ -153,52 +176,31 @@ class Transfer extends React.Component{
                             <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
                                 <br/>
                             <ExpansionPanel expanded={this.state.open1}>
+
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
                                     <Typography
                                         className={classes.heading}
                                         id="firstLabel"
                                     >Select Account</Typography>
                                 </ExpansionPanelSummary>
-                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                    <Button className={classes.button} onClick={this.selectAccount}
-                                             onClick={()=>this.setState({selectFrom:cNumber})}>
-                                        Checking Account: {cNumber}</Button>
-                                </ExpansionPanelDetails>
-                                <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                    <Button className={classes.button}
-                                            onClick={()=>this.setState({selectFrom:sNumber})}
-                                           >Saving Account: {sNumber}</Button>
-                                </ExpansionPanelDetails>
-                                {/*<ExpansionPanelDetails onClick={this.selectAccountOne}>*/}
-                                    {/*<Button className={classes.button}*/}
-                                            {/*onClick={()=>this.setState({selectFrom:creditNumber})}*/}
-                                         {/*>SJSP Platinum Visa Card -{creditNumber}</Button>*/}
-                                {/*</ExpansionPanelDetails>*/}
+
+                                {this.renderAccount1()}
                             </ExpansionPanel>
                                 <br/>
+
                             <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
                                 <br/>
+
                             <ExpansionPanel expanded={this.state.open2}>
+
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
                                     <Typography
                                         className={classes.heading}
                                         id="secondLabel"
                                     >Select Account</Typography>
                                 </ExpansionPanelSummary>
-                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}
-                                            onClick={()=>this.setState({selectTo:cNumber})}>Checking Account: {cNumber}</Button>
-                                </ExpansionPanelDetails>
-                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}
-                                            onClick={()=>this.setState({selectTo:sNumber})}
-                                    >Saving Account: {sNumber}</Button>
-                                </ExpansionPanelDetails>
-                                <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                                    <Button className={classes.button}
-                                            onClick={()=>this.setState({selectTo:creditNumber})}
-                                    >SJSP Platinum Visa Card: {creditNumber}</Button>
-                                </ExpansionPanelDetails>
+                                {this.renderAccount2()}
+
                             </ExpansionPanel>
                             <br/>
                             <div>
