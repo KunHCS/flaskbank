@@ -45,7 +45,7 @@ class ChangePasswordForm extends React.Component {
 
         axios.post('/api/client/changepassword',
             {
-                username: this.state.username,
+                account_name: this.state.username,
                 email: this.state.email,
                 oldPassword: this.state.oldPassword,
                 newPasswordOne: this.state.newPasswordOne,
@@ -64,7 +64,7 @@ class ChangePasswordForm extends React.Component {
     }
     render() {
         const {classes} = this.props;
-        // const {username,email,oldPassword,newPasswordOne,newPasswordTwo,classes} = this.props.myInfo;
+        // const {account_name,email,oldPassword,newPasswordOne,newPasswordTwo,classes} = this.props.myInfo;
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
@@ -77,7 +77,7 @@ class ChangePasswordForm extends React.Component {
                         name="username"
                         placeholder="Username"
                         value={this.state.username}
-                        onChange ={e=>this.setState({username:e.target.value})}
+                        onChange ={e=>this.setState({account_name:e.target.value})}
                     />
                     </div>
                     {/*<div className="form-group">*/}
