@@ -84,12 +84,12 @@ class OverViewPage extends React.Component{
                     <div className={classes.root}>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Checking Account - {cNumber}</strong></Typography>
+                                <Typography className={classes.heading}><strong>Checking Account: {cNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {cBalance}
+                                        Balance: ${cBalance}
                                     </Typography>
                                     <Link to = "/overview/account_detail"  onClick={()=>this.props.accountDetailAction(ACTION.CHECKING_DETAIL)}>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
@@ -100,12 +100,12 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>Saving Account - {sNumber}</strong></Typography>
+                                <Typography className={classes.heading}><strong>Saving Account: {sNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {sBalance}
+                                        Balance: ${sBalance}
                                     </Typography>
                                     <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.SAVING_DETAIL)} >
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
@@ -116,12 +116,12 @@ class OverViewPage extends React.Component{
                         </ExpansionPanel>
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card - {creditNumber}</strong></Typography>
+                                <Typography className={classes.heading}><strong>SJSP Platinum Visa Card: {creditNumber}</strong></Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <div style={{width: '90%'}}>
                                     <Typography style={{float: 'left'}}>
-                                        Balance: $ {creditBalance}
+                                        Balance: ${creditBalance}
                                     </Typography>
                                     <Link to = "/overview/account_detail" onClick={()=>this.props.accountDetailAction(ACTION.CREDIT_DETAIL)}>
                                     <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"

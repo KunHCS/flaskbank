@@ -197,16 +197,14 @@ class Transfer extends React.Component{
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
                                     <Button className={classes.button}
                                             onClick={()=>this.setState({selectTo:creditNumber})}
-                                    >SJSP Platinum Visa Card -{creditNumber}</Button>
+                                    >SJSP Platinum Visa Card: {creditNumber}</Button>
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
                             <br/>
                             <div>
 
                                 <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
-                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>
-                                        Amount: $
-                                    </Typography>
+                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:</Typography>
                                     <input
                                         type="number"
                                         className={classes.button}
