@@ -162,12 +162,12 @@ class Transfer extends React.Component{
                                 <ExpansionPanelDetails onClick={this.selectAccountOne}>
                                     <Button className={classes.button} onClick={this.selectAccount}
                                              onClick={()=>this.setState({selectFrom:cNumber})}>
-                                        Checking Account - {cNumber}</Button>
+                                        Checking Account: {cNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountOne}>
                                     <Button className={classes.button}
                                             onClick={()=>this.setState({selectFrom:sNumber})}
-                                           >Saving Account -{sNumber}</Button>
+                                           >Saving Account: {sNumber}</Button>
                                 </ExpansionPanelDetails>
                                 {/*<ExpansionPanelDetails onClick={this.selectAccountOne}>*/}
                                     {/*<Button className={classes.button}*/}
@@ -187,12 +187,12 @@ class Transfer extends React.Component{
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
                                     <Button className={classes.button}
-                                            onClick={()=>this.setState({selectTo:cNumber})}>Checking Account -{cNumber}</Button>
+                                            onClick={()=>this.setState({selectTo:cNumber})}>Checking Account: {cNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
                                     <Button className={classes.button}
                                             onClick={()=>this.setState({selectTo:sNumber})}
-                                    >Saving Account -{sNumber}</Button>
+                                    >Saving Account: {sNumber}</Button>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
                                     <Button className={classes.button}
