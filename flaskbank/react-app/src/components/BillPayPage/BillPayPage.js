@@ -108,7 +108,7 @@ class BillPay extends React.Component{
                                 <Typography variant="h6">Available Credit: </Typography> <Typography variant="subtitle1">${this.props.myInfo.accounts[2].available_credit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
-                                <Typography variant="h5"><strong>Amount</strong></Typography>
+                                <Typography variant="h5"><strong>Amount:</strong></Typography>
                                 <input
                                     type="number"
                                     className="form-control"

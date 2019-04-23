@@ -175,7 +175,7 @@ class DepositPage extends React.Component{
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <form onSubmit={this.onSubmit1}>
-                                <Typography variant="h5"><strong>Amount</strong></Typography>
+                                <Typography variant="h5"><strong>Amount:</strong></Typography>
                                 <input
                                     type="number"
                                     className="form-control"

@@ -173,7 +173,7 @@ const formFooter = {
 }
 const paperStyle = {
     height: '100%',
-    width:  '70%',
+    width:  '50%',
     boxShadow: '5px 1px 10px, 5px 1px 10px',
     WebkitBorderRadius:'10px 10px 10px 10px',
     textAlign:'center',
