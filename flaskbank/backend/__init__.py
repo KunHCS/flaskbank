@@ -6,10 +6,12 @@ from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from .config import DevelopmentConfig
 from flask_jwt_extended import JWTManager
+# from flask_talisman import Talisman
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
 f_jwt = JWTManager()
+# talisman = Talisman()
 
 
 def create_app(current_config=DevelopmentConfig):
