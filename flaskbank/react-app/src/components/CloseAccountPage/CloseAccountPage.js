@@ -38,7 +38,7 @@ class CloseAccountDetails extends React.Component {
         console.log("i just submit")
 
         axios.delete("/api/accounts/delete",
-            { data:{username: this.state.username,
+            { data:{account_name: this.state.username,
                           password: this.state.password,
                           email:this.state.email}} )
             .then(response => {
@@ -75,7 +75,7 @@ class CloseAccountDetails extends React.Component {
                                             name="username"
                                             placeholder="Enter your user name"
                                             value={this.state.username}
-                                            onChange ={e=>this.setState({username:e.target.value})}
+                                            onChange ={e=>this.setState({account_name:e.target.value})}
                                         />
                                     </div>
 

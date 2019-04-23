@@ -16,7 +16,9 @@ import {connect} from "react-redux";
 import axios from "axios";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
 import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
+import Paper from '@material-ui/core/Paper';
 import * as ACTION from "../../static/action_type";
+import AddAccountBar from "../FrameWorkUnity/AddAccountBar/AddAccountBar";
 
 
 const styles = theme => ({
@@ -41,10 +43,9 @@ class OverViewPage extends React.Component{
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
         axios.get("/api/client/all",{headers: req_headers})
-            .then(response => {
+             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
-
             }).catch (error => console.log(error.response.data.msg));
 
     }
@@ -90,7 +91,10 @@ class OverViewPage extends React.Component{
                 <Navigation/>
                 <Search/>
                 <Container>
+                    <div class="row">
                     <InnerNavigationBar active ={activeElement}/>
+                    <AddAccountBar/>
+                    </div>
                     <div className={classes.root}>
                         {this.renderAccount()}
                     </div>
@@ -100,6 +104,7 @@ class OverViewPage extends React.Component{
         );
     }
 }
+
 
 const activeElement = {
     act1: "nav-link active",

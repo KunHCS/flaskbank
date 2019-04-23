@@ -237,8 +237,6 @@ class BillPay extends React.Component{
     }
 }
 
-
-
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit * 3,
