@@ -17,15 +17,8 @@ class AccountDetails extends React.Component{
     };
 
     componentDidMount() {
-        switch(this.props.myDetail) {
-            case ACTION.CHECKING_DETAIL : this.setState({myCurrentAccount : this.props.myInfo.accounts[0]} )
-                break;
-            case ACTION.SAVING_DETAIL   : this.setState({myCurrentAccount : this.props.myInfo.accounts[1]} )
-                break;
-            case ACTION.CREDIT_DETAIL   : this.setState({myCurrentAccount : this.props.myInfo.accounts[2]} )
-                break;
-            default : this.setState({myCurrentAccount : null} )
-        }
+
+        this.setState({myCurrentAccount : this.props.myDetail})
 
     }
 
@@ -47,6 +40,7 @@ class AccountDetails extends React.Component{
         });
 
     }
+
     render() {
         console.log("I am in AccountDetails");
         console.log(this.props.myDetail);
