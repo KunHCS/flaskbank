@@ -3,6 +3,8 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import {withStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {closePopWindow, openPopWindow} from "../../actions/PopWindowStateAction/popWindowStateAction";
 
 
 function getModalStyle() {
@@ -34,6 +36,17 @@ class AddAccount extends React.Component {
     };
 
 
+    onSubmit =(e) => {
+        console.log("I just submit");
+        e.preventDefault();
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        console.log(this.props);
+        this.props.closePopWindow();
+
+    }
+
     render() {
         const {classes} = this.props;
         return (
@@ -42,7 +55,7 @@ class AddAccount extends React.Component {
                     <h1 className="h3 mb-3 font-weight-normal">Add New Account</h1>
 
                     <div className="form-group">
-                        <label htmlFor="name">Username</label>
+                        <label htmlFor="name">Account Name</label>
                         <input
                             type="text"
                             className="form-control"
@@ -71,4 +84,12 @@ AddAccount.propTypes = {
 };
 
 
-export default withStyles(styles)(AddAccount);
+
+const mapStateToProps = (state) => {
+    console.log("I'm in map State to Props");
+    console.log(state);
+    return state;
+}
+
+
+export default connect(mapStateToProps,{openPopWindow, closePopWindow})(withStyles(styles)(AddAccount));

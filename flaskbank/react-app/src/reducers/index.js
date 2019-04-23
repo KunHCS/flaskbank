@@ -4,7 +4,7 @@ import {authenticationRequestReducer, authenticationStateReducer} from "./Authen
 import {profileReducer} from "./ProfileReducer/profileReducer";
 import {accountDetailsReducer} from "./AccountDetailReducer/accountDetailsReducer";
 import {imageUpLoadReducer} from "./ImageUpLoadReducer/imageUpLoadReducer";
-
+import {windowOpenCloseReducer} from "./WindowOpenCloseReducer/windowOpenCloseReducer"
 
 export default combineReducers( {
     myInfo   :  profileReducer,
@@ -12,6 +12,7 @@ export default combineReducers( {
     myKey    :  authenticationRequestReducer,
     myDetail :  accountDetailsReducer,
     myImage  :  imageUpLoadReducer,
+    popWindowState : windowOpenCloseReducer,
 });
 
 

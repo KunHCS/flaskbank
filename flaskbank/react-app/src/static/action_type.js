@@ -29,3 +29,6 @@ export const CREDIT ="credit"
 export const USERTYPE ="usertype";
 export const MANAGER  ="manager";
 export const CLIENT   ="client";
+
+
+export const WINDOWSTATE = "window_state";
