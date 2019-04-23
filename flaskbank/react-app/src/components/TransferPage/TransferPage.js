@@ -14,6 +14,7 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
+import * as ACTION from "../../static/action_type";
 import {Link} from "react-router-dom";
 
 
