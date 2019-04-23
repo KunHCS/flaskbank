@@ -102,7 +102,7 @@ class BillPay extends React.Component{
         console.log('it just submit');
         console.log(this.props);
 
-        if(this.state.payAmountCredit === 0) {
+        if(this.state.payAmountCredit == 0) {
             alert("Bill Pay Amount Can't be 0, try again");
             return
         }
@@ -140,31 +140,33 @@ class BillPay extends React.Component{
 
     AutoPay(con) {
 
-        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+       const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+         if (con == "start") {
+              axios.post('/api/autopay', {
+                   amount: parseFloat(this.state.autoPayAmount),
+                   from: this.state.selectFrom,
+                   to: this.state.creditAccountNumber,
+                   interval: 0.5 },
+                  {headers: req_headers}
+               ).then(response => {
+                   console.log(response);
+                   alert("Start Auto Pay Success")
 
-        axios.post('/api/autopay',
-            {amount: parseFloat(this.state.autoPayAmount),
-                from: this.state.selectFrom,
-                to: this.state.creditAccountNumber,
-                interval: 0.5 },
-            {headers: req_headers}
-        )
-            .then(response => {
-                console.log(response);
-                alert("Auto Pay Success")
-
-                   axios.get("/api/client/all",{headers: req_headers})
-                        .then(response => {
-                            console.log(response);
-                            this.props.getProfile(response.data);
-                    }).catch (error => console.log(error.response.data.msg));
-
-
-            }).catch (error => {
-            console.log(error.response.data.msg);
-            alert("Auto Pay Fail");
-        });
-    }
+               }).catch(error => {
+               console.log(error.response.data.msg);
+               alert("Start Auto Pay Fail");
+           });
+       } else {
+             axios.delete('api/autopay/stop', {headers: req_headers}
+             ).then(response => {
+                 console.log(response);
+                 alert("Stop Auto Pay Success")
+             }).catch(error => {
+                 console.log(error.response.data.msg);
+                 alert("Stop Auto Pay Fail");
+             });
+         }
+   }
 
     render() {
         let index = 0;
@@ -228,7 +230,7 @@ class BillPay extends React.Component{
                                 Start
                             </Button>
 
-                            <Button onClick={()=>this.AutoPay("stop")}>
+                            <Button onClick={()=>this.AutoPay()}>
                                 Stop
                             </Button>
 
