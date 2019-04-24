@@ -92,27 +92,26 @@ class BillPay extends React.Component{
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.post('/api/deposit',
-            {amount: parseFloat(this.state.payAmountCredit),
-                account_num: this.state.creditAccountNumber},
+
+        axios.post('/api/transfer ',
+            { account_from: this.state.selectFrom,
+                account_to: this.state.creditAccountNumber,
+                amount : parseFloat(this.state.payAmountCredit)},
             {headers: req_headers}
         )
             .then(response => {
                 console.log(response);
-                alert("Bill Pay Success")
-
+                alert("Bill Pay Success");
                 axios.get("/api/client/all",{headers: req_headers})
                     .then(response => {
                         console.log(response);
                         this.props.getProfile(response.data);
                     }).catch (error => console.log(error.response.data.msg));
 
-
             }).catch (error => {
-                console.log(error.response.data.msg);
-               alert("Bill Pay Fail");
-            });
-
+            alert("Bill Pay Fail!! ---" + (error.response.data.msg));
+            console.log(error.response.data.msg);
+        });
 
         this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
     }
@@ -200,6 +199,15 @@ class BillPay extends React.Component{
                                 <input type="number"  className="form-control"  name="amount" step="0.01"
                                        placeholder= "$ Please Enter Your Amount" value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
+                                <hr/>
+                                <Typography variant="h6"><strong>Select Account</strong></Typography>
+                                <ExpansionPanel expanded={this.state.open}>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                                        <Typography className={classes.heading} id="firstLabel">Select Account</Typography>
+                                    </ExpansionPanelSummary>
+                                    {this.renderAccount()}
+
+                                </ExpansionPanel>
                                 <Button  type = "submit"  className={classes.button}  variant="contained" color="primary">
                                     Submit
                                 </Button>
@@ -213,14 +221,7 @@ class BillPay extends React.Component{
 
                             <div style={{float: 'left', width:"100%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>Auto Payment</strong></Typography>
-                                <br/>
-                            <ExpansionPanel expanded={this.state.open}>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                                    <Typography className={classes.heading} id="firstLabel">Select Account</Typography>
-                                </ExpansionPanelSummary>
-                                 {this.renderAccount()}
-                            </ExpansionPanel>
-                                <br/>
+
                             </div>
 
                             <div style={{float: 'left', width:"50%"}}>
@@ -266,7 +267,7 @@ const styles = theme => ({
         position: 'flex',
         font: 'Helvetica',
         width: '100%',
-        height: theme.spacing.unit * 40,
+        height: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
