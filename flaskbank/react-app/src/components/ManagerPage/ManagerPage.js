@@ -3,13 +3,26 @@ import Navigation from "../FrameWorkUnity/DynamicNavBar";
 import {Redirect} from "react-router-dom";
 import Container from "../FrameWorkUnity/Container";
 import Search from "../FrameWorkUnity/Search";
+import axios from "axios";
+import {connect} from "react-redux";
+import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
+
 
 class ManagerPage extends React.Component {
 
-    render() {
-        console.log('I am in main page props ');
-        console.log(this.props);
+    componentDidMount() {
+        console.log(" ManagerPage Component Did Mount")
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
+        axios.get("/api/client/all",{headers: req_headers})
+            .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
+    }
+
+    render() {
+        console.log(this.props);
             return (
                 <div>
                     <Navigation/>
@@ -23,4 +36,11 @@ class ManagerPage extends React.Component {
 
 }
 
-export default ManagerPage;
+
+const mapStateToProps = (state) => {
+    console.log("I'm in map State to Props");
+    console.log(state);
+    return state;
+}
+
+export default connect(mapStateToProps,{ getProfile})(ManagerPage);
