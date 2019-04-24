@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
+import * as ACTION from "../../static/action_type";
 
 
 
@@ -138,20 +139,39 @@ class Statement extends React.Component {
     }
 }
 
-const ProfileSettingPage = (props) => {
-    return (
-        <div >
-            <Navigation/>
-            <Search/>
-            <Container>
-                <InnerNavigationBar active={activeElement}/>
-                <Statement myInfo={props.myInfo}
-                           myKey ={props.myKey}
-                           />
-            </Container>
-        </div>
+class ProfileSettingPage extends React.Component {
 
-    );
+    render() {
+
+        if (this.props.userType == ACTION.CLIENT) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <InnerNavigationBar active={activeElement}/>
+                        <Statement myInfo={this.props.myInfo}
+                                   myKey={this.props.myKey}
+                        />
+                    </Container>
+                </div>
+
+            );
+        }
+        else if (this.props.userType == ACTION.MANAGER) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <Statement myInfo={this.props.myInfo}
+                                   myKey={this.props.myKey}
+                        />
+                    </Container>
+                </div>
+            )
+        }
+    }
 }
 
 
