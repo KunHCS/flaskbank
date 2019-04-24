@@ -1,11 +1,18 @@
 import React from "react";
 import Navigation from "../FrameWorkUnity/DynamicNavBar";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Container from "../FrameWorkUnity/Container";
 import Search from "../FrameWorkUnity/Search";
 import axios from "axios";
 import {connect} from "react-redux";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
+import * as ACTION from "../../static/action_type";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 
 class ManagerPage extends React.Component {
@@ -28,7 +35,7 @@ class ManagerPage extends React.Component {
                     <Navigation/>
                     <Search/>
                     <Container>
-
+                        <DashBoard props={this.props} />
                     </Container>
                 </div>
             );
@@ -36,6 +43,7 @@ class ManagerPage extends React.Component {
 
 }
 
+/******************************* DashBoard Component ******************************************/
 
 class DashBoard extends React.Component {
 
@@ -43,11 +51,44 @@ class DashBoard extends React.Component {
 
     }
 
+    renderAccount() {
+        const { classes } = this.props;
+        console.log(this.props.props.myInfo,"INNNNNNN");
+        if (this.props.myInfo !== undefined) {
+
+            return this.props.myInfo.accounts.map(account => {
+                return (
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                            <Typography
+                                className={classes.heading}><strong> {account.alias} : {account.account_number} -- (Account Type: {account.type})</strong>
+                            </Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            <div style={{width: '90%'}}>
+                                <Typography style={{float: 'left'}}>
+                                    Balance: ${account.balance}
+                                </Typography>
+                                <Link to="/overview/account_detail"
+                                      onClick={() => this.props.accountDetailAction(account)}>
+                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
+                                            className={classes.margin}>Transactions</Button>
+                                </Link>
+                            </div>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                );
+            });
+        } else { return (<div/>);}
+
+    }
+
+
     render() {
         console.log(this.props);
         return (
             <div>
-                I am DASHBOARD
+                {this.renderAccount()}
             </div>
         );
     }
