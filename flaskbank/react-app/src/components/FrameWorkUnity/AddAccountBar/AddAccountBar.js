@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 import AddAccount from "../../../components/AddAccount/AddAccount";
 import Modal from '@material-ui/core/Modal';
 import {connect} from "react-redux";
-import {openPopWindow, closePopWindow} from "../../../actions/PopWindowStateAction/popWindowStateAction";
-import Select from '@material-ui/core/Select';
+import {openPopWindow1,openPopWindow2,closePopWindow} from "../../../actions/PopWindowStateAction/popWindowStateAction";
+import RemoveSingleAccount from "../../../components/RemoveSingleAccount/RemoveSingleAccount";
 
 
 
@@ -17,15 +17,20 @@ class AddAccountBar extends React.Component {
             <Paper style={navbarStyle}>
                 <ul className="nav nav-pills nav-fill">
                     <li className="nav-item">
-                        <Link className="nav-link " to="/overview" onClick={this.props.openPopWindow} > Add Account</Link>
+                        <Link className="nav-link " to="/overview" onClick={this.props.openPopWindow1} > Add Account</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link " to="/overview"> Close Account</Link>
+                        <Link className="nav-link " to="/overview" onClick={this.props.openPopWindow2} > Close Account</Link>
                     </li>
                 </ul>
                 <Modal aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description"
-                       open={this.props.popWindowState}  onClose={this.props.closePopWindow}>
+                       open={this.props.popWindowState.state1 }  onClose={this.props.closePopWindow}>
                     <AddAccount/>
+                </Modal>
+
+                <Modal aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description"
+                       open={this.props.popWindowState.state2}  onClose={this.props.closePopWindow}>
+                    <RemoveSingleAccount/>
                 </Modal>
             </Paper>
         );
@@ -49,4 +54,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{openPopWindow, closePopWindow})(AddAccountBar);
+export default connect(mapStateToProps,{openPopWindow1, openPopWindow2, closePopWindow})(AddAccountBar);

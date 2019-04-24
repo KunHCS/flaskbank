@@ -36,10 +36,9 @@ const styles = theme => ({
     },
 });
 
-class AddAccount extends React.Component {
+class RemoveSingleAccount extends React.Component {
     state = {
-        account_name:"",
-        account_type:"",
+        currentAccount:"",
         open: false,
     };
 
@@ -51,26 +50,24 @@ class AddAccount extends React.Component {
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
+        console.log(this.state.currentAccount);
 
-        axios.post('api/accounts/open',
-            {alias: this.state.account_name,
-                  type: this.state.account_type,
-                  deposit: 0},
+        axios.delete('api/accounts/close/'+this.state.currentAccount,
             {headers: req_headers}
         )
             .then(response => {
                 console.log(response);
-                alert("Account Open Success")
+                alert("Account Close Success")
 
-                   axios.get("/api/client/all",{headers: req_headers})
-                       .then(response => {
+                axios.get("/api/client/all",{headers: req_headers})
+                    .then(response => {
                         console.log(response);
                         this.props.getProfile(response.data);
-                       }).catch (error => console.log(error.response.data.msg));
+                    }).catch (error => console.log(error.response.data.msg));
 
             }).catch (error => {
             console.log(error.response.data.msg);
-            alert("Account Open Fail --"+error.response.data.msg);
+            alert("Account Close Fail --"+error.response.data.msg);
         });
 
         this.props.closePopWindow();
@@ -94,52 +91,39 @@ class AddAccount extends React.Component {
         }
     };
 
+    renderAccount() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                    return (
+                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                            <Button className={classes.button}
+                                    onClick={() => this.setState({currentAccount: account.account_number})}>
+                                {account.alias}: {account.account_number}</Button>
+                        </ExpansionPanelDetails>
+                    );
+            });
+        }else { return (<div/>);}
+    }
+
+
     render() {
         const {classes} = this.props;
+        console.log(this.state.currentAccount);
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Add New Account</h1>
-
-                    <div className="form-group">
-                        <label htmlFor="name">Account Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="name"
-                            placeholder="Enter New Account Name"
-                            value={this.state.account_name}
-                            onChange ={e=>this.setState({account_name:e.target.value})}
-                        />
-                    </div>
+                    <h1 className="h3 mb-3 font-weight-normal">Remove Account</h1>
 
                     <label htmlFor="name">Account Type</label>
 
+                    <ExpansionPanel expanded={this.state.open}>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                            <Typography className={classes.heading} id="firstLabel">Select Account To Remove</Typography>
+                        </ExpansionPanelSummary>
 
-                        <ExpansionPanel expanded={this.state.open}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                                <Typography className={classes.heading} id="firstLabel">Select Account Type</Typography>
-                            </ExpansionPanelSummary>
-
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button}
-                                        onClick={() => this.setState({account_type: ACTION.CHECKING})}>
-                                    Checking Account</Button>
-                            </ExpansionPanelDetails>
-
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button}
-                                        onClick={() => this.setState({account_type: ACTION.SAVING})}>
-                                    Saving Account</Button>
-                            </ExpansionPanelDetails>
-
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                                <Button className={classes.button}
-                                        onClick={() => this.setState({account_type: ACTION.CREDIT})}>
-                                    Credit Card Account</Button>
-                            </ExpansionPanelDetails>
-
-                        </ExpansionPanel>
+                        {this.renderAccount()}
+                    </ExpansionPanel>
 
 
                     <hr/>
@@ -159,11 +143,9 @@ class AddAccount extends React.Component {
 
 
 
-
-AddAccount.propTypes = {
+RemoveSingleAccount.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 
 const mapStateToProps = (state) => {
@@ -172,5 +154,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-
-export default connect(mapStateToProps,{ closePopWindow,getProfile})(withStyles(styles)(AddAccount));
+export default connect(mapStateToProps,{closePopWindow,getProfile})(withStyles(styles)(RemoveSingleAccount));

@@ -31,4 +31,6 @@ export const MANAGER  ="manager";
 export const CLIENT   ="client";
 
 
-export const WINDOWSTATE = "window_state";
+export const WINDOWSTATE_1 = "window_state1";
+export const WINDOWSTATE_2 = "window_state2";
+export const WINDOWSTATE_CLEAN = "window_state_clean";

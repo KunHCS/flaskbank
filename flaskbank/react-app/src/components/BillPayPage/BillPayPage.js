@@ -153,7 +153,9 @@ class BillPay extends React.Component{
    /************************************************************************************ */
 
     render() {
-        let index = 0;
+       const {classes} = this.props;
+
+       let index = null;
         for (let i = 0 ; i < this.props.myInfo.accounts.length ; i++) {
             console.log("index i is : "+i);
             if (this.props.myInfo.accounts[i].type == "credit") {
@@ -162,7 +164,14 @@ class BillPay extends React.Component{
             }
         }
 
-        const {classes} = this.props;
+        if (index === null) {
+            return (
+                <div>
+                    <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Account</strong></Typography>
+                </div>
+            )
+        }
+
         return (
             <div >
                 <Navigation/>
