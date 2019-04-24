@@ -1,5 +1,4 @@
 import React from "react";
-//import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
@@ -29,99 +28,72 @@ const styles = theme => ({
 class ChangePasswordForm extends React.Component {
     state = {
         username: "",
-        oldPassword: "",
-        newPasswordOne: "",
-        newPasswordTwo: "",
+        email: "",
+        password: "",
     };
 
     onSubmit =(e) => {
         console.log("I just submit");
         e.preventDefault();
 
-        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
-
         console.log(this.props);
 
 
-        axios.post('/api/client/changepassword',
+        axios.post('/api/reset',
             {
-                account_name: this.state.username,
+                username: this.state.username,
                 email: this.state.email,
-                oldPassword: this.state.oldPassword,
-                newPasswordOne: this.state.newPasswordOne,
-                newPasswordTwo: this.state.newPasswordTwo,
+                password: this.state.password,
             },
-            {headers: req_headers}
         )
             .then(response => {
-                alert("Update Success")
+                alert("Change password Success")
                 console.log(response);
 
             }).catch(error => {
-            alert("Update Fail");
+            alert("Change password Fail");
             console.log(error.response.data.msg);
         });
     }
     render() {
         const {classes} = this.props;
-        // const {account_name,email,oldPassword,newPasswordOne,newPasswordTwo,classes} = this.props.myInfo;
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
+                    <div style={{textAlign: 'center'}}>
+                        <h1 className="h3 mb-3 font-weight-normal">Forget Password</h1>
+                    </div>
                     <div className="form-group">
-                    <label htmlFor="name">Username</label>
+                    <label htmlFor="name">Username:</label>
                     <input
                         type="text"
                         className="form-control"
                         name="username"
                         placeholder="Username"
                         value={this.state.username}
-                        onChange ={e=>this.setState({account_name:e.target.value})}
+                        onChange ={e=>this.setState({username:e.target.value})}
                     />
                     </div>
-                    {/*<div className="form-group">*/}
-                        {/*<label htmlFor="email">Email address</label>*/}
-                        {/*<input*/}
-                            {/*type="email"*/}
-                            {/*className="form-control"*/}
-                            {/*name="email"*/}
-                            {/*placeholder={this.state.email}*/}
-                            {/*value={this.state.email}*/}
-                            {/*onChange ={e=>this.setState({email:e.target.value})}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
                     <div className="form-group">
-                        <label htmlFor="password">Old Password</label>
+                        <label htmlFor="email">Email:</label>
                         <input
-                            type="password"
+                            type="email"
                             className="form-control"
                             name="password"
-                            placeholder="Old Password"
-                            value={this.state.oldPassword}
-                            onChange ={e=>this.setState({oldPassword:e.target.value})}
+                            placeholder="email"
+                            value={this.state.email}
+                            onChange ={e=>this.setState({email:e.target.value})}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">New Password</label>
+                        <label htmlFor="password">New Password:</label>
                         <input
                             type="password"
                             className="form-control"
                             name="password"
                             placeholder="New Passwrod"
-                            value={this.state.newPasswordOne}
-                            onChange ={e=>this.setState({newPasswordOne:e.target.value})}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Enter Password Again</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            placeholder="Enter again"
-                            value={this.state.newPasswordTwo}
-                            onChange ={e=>this.setState({newPasswordTwo:e.target.value})}
+                            value={this.state.password}
+                            onChange ={e=>this.setState({password:e.target.value})}
                         />
                     </div>
                     <button
@@ -140,5 +112,4 @@ ChangePasswordForm.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
 export default withStyles(styles)(ChangePasswordForm);
