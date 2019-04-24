@@ -34,11 +34,7 @@ class App extends Component {
           <SecretRoute exact path="/pay" component={BillPayPage} />
           <SecretRoute exact path="/transfer" component={TransferPage} />
           <SecretRoute exact path="/deposit" component={DepositPage} />
-          <SecretRoute
-            exact
-            path="/overview/account_detail"
-            component={CheckingAccountDetail}
-          />
+          <SecretRoute exact path="/overview/account_detail" component={CheckingAccountDetail}/>
         </div>
       </Router>
     );
