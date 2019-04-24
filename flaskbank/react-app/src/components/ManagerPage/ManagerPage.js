@@ -37,6 +37,23 @@ class ManagerPage extends React.Component {
 }
 
 
+class DashBoard extends React.Component {
+
+    componentDidMount() {
+
+    }
+
+    render() {
+        console.log(this.props);
+        return (
+            <div>
+                I am DASHBOARD
+            </div>
+        );
+    }
+
+}
+
 const mapStateToProps = (state) => {
     console.log("I'm in map State to Props");
     console.log(state);

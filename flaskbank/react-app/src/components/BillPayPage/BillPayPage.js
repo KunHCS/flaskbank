@@ -166,8 +166,14 @@ class BillPay extends React.Component{
 
         if (index === null) {
             return (
-                <div>
+                <div >
+                <Navigation/>
+                <Search/>
+                <Container>
+                    <InnerNavigationBar active={activeElement}/>
                     <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Account</strong></Typography>
+                </Container>
+
                 </div>
             )
         }
