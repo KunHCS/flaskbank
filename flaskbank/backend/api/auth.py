@@ -1,4 +1,5 @@
 from .. import all_module as am
+
 login_bp = am.Blueprint('login', __name__)
 
 
@@ -32,6 +33,32 @@ def login_user():
     token = am.create_access_token(identity={'username': username,
                                              'user_type': user['user_type']})
     return am.jsonify({'access_token': token}), 201
+
+
+@login_bp.route('/reset', methods=['POST'])
+def reset_password():
+    data = am.request.get_json()
+    if not data:
+        return am.jsonify({'msg': 'Bad Request, no data passed'}), 400
+    try:
+        username = data['username']
+        email = data['email']
+        newpw = data['password']
+    except KeyError:
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+
+    client = am.clients.find_one({'$and': [{'username': username},
+                                           {'email': email}]})
+    if not client:
+        return am.jsonify({'msg': 'invalid information'})
+
+    new_hash = am.bcrypt.generate_password_hash(newpw.encode('UTF-8'))
+    result = am.clients.update_one({'username': username},
+                                   {'$set': {'password': new_hash}})
+    if not result.modified_count:
+        return am.jsonify({'msg': 'Failed to update'}), 503
+
+    return am.jsonify({'msg': 'password changed successful'}), 200
 
 
 @login_bp.route('/logout', methods=['DELETE'])
