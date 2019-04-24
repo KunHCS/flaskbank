@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logOutAction,logOutRequest} from "../../actions/LoginAction/loginAction";
 import {cleanProfile} from "../../actions/GetProfileAction/getProfileAction"
+import {cleanUserType} from "../../actions/ChangeUserTypeAction/changeUserTypeAction"
 import axios from "axios";
 
 const dynamicNavBar = (props) =>{
@@ -26,6 +27,7 @@ const dynamicNavBar = (props) =>{
             .then(response => {
                  if(response.status === 200) {
                      console.log(response.data.msg);
+                     alert(response.data.msg);
                  }
             }).catch (error => console.log(error.response.data.msg));
     }
@@ -51,6 +53,7 @@ const dynamicNavBar = (props) =>{
               onClick={ ()=> {props.logOutRequest();
                               props.cleanProfile();
                               props.logOutAction();
+                              props.cleanUserType();
                               logout(); }  }>
             Sign Out
         </Link> |
@@ -64,5 +67,5 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps,{logOutAction,logOutRequest,cleanProfile})(dynamicNavBar);
+export default connect(mapStateToProps,{logOutAction,logOutRequest,cleanProfile,cleanUserType})(dynamicNavBar);
 
