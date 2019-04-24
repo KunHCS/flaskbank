@@ -7,3 +7,11 @@ export const changeUserType= (payload) =>{
         payload: payload,
     };
 };
+
+
+export const cleanUserType= () =>{
+    return {
+        type: ACTION.USERTYPE,
+        payload: "",
+    };
+};

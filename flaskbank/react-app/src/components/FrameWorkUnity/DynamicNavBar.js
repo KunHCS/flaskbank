@@ -3,7 +3,9 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logOutAction,logOutRequest} from "../../actions/LoginAction/loginAction";
 import {cleanProfile} from "../../actions/GetProfileAction/getProfileAction"
+import {cleanUserType} from "../../actions/ChangeUserTypeAction/changeUserTypeAction"
 import axios from "axios";
+import * as ACTION from "../../static/action_type";
 
 const dynamicNavBar = (props) =>{
     const navTextStyle = {
@@ -26,6 +28,7 @@ const dynamicNavBar = (props) =>{
             .then(response => {
                  if(response.status === 200) {
                      console.log(response.data.msg);
+                     alert(response.data.msg);
                  }
             }).catch (error => console.log(error.response.data.msg));
     }
@@ -42,7 +45,7 @@ const dynamicNavBar = (props) =>{
             </nav>
         )
     }
-    else if (props.auth==true) {
+    else if (props.auth==true && props.userType == ACTION.CLIENT) {
         return (
         <nav className="Navigation"style={navBarStyle}>
         <Link className="Nav-text" style={navTextStyle} to="/overview">Hello! {props.myInfo.first_name}</Link> |
@@ -51,11 +54,28 @@ const dynamicNavBar = (props) =>{
               onClick={ ()=> {props.logOutRequest();
                               props.cleanProfile();
                               props.logOutAction();
+                              props.cleanUserType();
                               logout(); }  }>
             Sign Out
         </Link> |
         </nav>
     ) }
+
+    else if (props.auth==true && props.userType == ACTION.MANAGER) {
+        return (
+            <nav className="Navigation"style={navBarStyle}>
+                <Link className="Nav-text" style={navTextStyle} to="/manager">Hello! {props.myInfo.first_name}</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/"
+                      onClick={ ()=> {props.logOutRequest();
+                          props.cleanProfile();
+                          props.logOutAction();
+                          props.cleanUserType();
+                          logout(); }  }>
+                    Sign Out
+                </Link> |
+            </nav>
+        ) }
 }
 
 const mapStateToProps = (state) => {
@@ -64,5 +84,5 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps,{logOutAction,logOutRequest,cleanProfile})(dynamicNavBar);
+export default connect(mapStateToProps,{logOutAction,logOutRequest,cleanProfile,cleanUserType})(dynamicNavBar);
 

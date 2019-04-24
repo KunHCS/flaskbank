@@ -16,6 +16,7 @@ import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
 import PopUpWindow from "../FrameWorkUnity/DynamicPopUpWindow/PopUpWindow";
 import {changeUserType} from '../../actions/ChangeUserTypeAction/changeUserTypeAction';
+import * as ACTION from "../../static/action_type";
 
 
 
@@ -35,10 +36,10 @@ class mainPage extends React.Component {
                 </div>
             );
         }
-        else if (this.props.userType == 'manager' && this.props.auth == true) {
-            return (<Redirect to={'/m'}/>)
+        else if (this.props.userType == ACTION.MANAGER && this.props.auth == true) {
+            return (<Redirect to={'/manager'}/>)
         }
-        else if (this.props.userType == 'client' && this.props.auth == true) {
+        else if (this.props.userType == ACTION.CLIENT && this.props.auth == true) {
             return (<Redirect to={'/overview'}/>)}
     }
 }

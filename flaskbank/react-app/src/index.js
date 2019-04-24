@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 import CheckingAccountDetail from "./components/OverViewAccountDetailPage/AccountDetails";
+import ManagerPage from "./components/ManagerPage/ManagerPage";
 
 import MapV2 from "./components/ATMLocationPage/MapV2";
 
@@ -35,6 +36,8 @@ class App extends Component {
           <SecretRoute exact path="/transfer" component={TransferPage} />
           <SecretRoute exact path="/deposit" component={DepositPage} />
           <SecretRoute exact path="/overview/account_detail" component={CheckingAccountDetail}/>
+
+          <SecretRoute exact path="/manager" component={ManagerPage} />
         </div>
       </Router>
     );
