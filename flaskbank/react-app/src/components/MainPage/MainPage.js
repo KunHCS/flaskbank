@@ -15,32 +15,32 @@ import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
 import PopUpWindow from "../FrameWorkUnity/DynamicPopUpWindow/PopUpWindow";
+import {changeUserType} from '../../actions/ChangeUserTypeAction/changeUserTypeAction';
 
 
 
-const mainPage = (props) => {
-    console.log('I am in main page props ');
-    console.log(props);
-      if (props.auth == false) {
-        return (
-            <div>
-                <Navigation/>
-                <Search/>
-                <Container>
-                    <Login props={props}/>
-                </Container>
-            </div>
+class mainPage extends React.Component {
 
-        );}
-      //if (prop.type == "manager") {
-      //     <Redirect to={'/manager'} />
-      // }
-      else return (
-          <Redirect to={'/overview'} />
-      )
-
-
-
+    render() {
+        console.log('I am in main page props ');
+        console.log(this.props);
+        if (this.props.auth == false) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <Login props={this.props}/>
+                    </Container>
+                </div>
+            );
+        }
+        else if (this.props.userType == 'manager' && this.props.auth == true) {
+            return (<Redirect to={'/m'}/>)
+        }
+        else if (this.props.userType == 'client' && this.props.auth == true) {
+            return (<Redirect to={'/overview'}/>)}
+    }
 }
 
 
@@ -71,7 +71,7 @@ class Login extends React.Component {
         }).then(response => {
             if (response.status === 201) {
                 console.log(jwt_decode(response.data.access_token).identity.user_type);
-
+                this.props.props.changeUserType(jwt_decode(response.data.access_token).identity.user_type)
                 this.props.props.logInRequest(response)
                 this.props.props.logInAction()
             }
@@ -211,4 +211,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,{logInAction: loginAction,logInRequest})(mainPage);
+export default connect(mapStateToProps,{logInAction: loginAction,logInRequest,changeUserType})(mainPage);

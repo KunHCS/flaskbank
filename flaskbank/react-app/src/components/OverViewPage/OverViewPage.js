@@ -16,8 +16,6 @@ import {connect} from "react-redux";
 import axios from "axios";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
 import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
-import Paper from '@material-ui/core/Paper';
-import * as ACTION from "../../static/action_type";
 import AddAccountBar from "../FrameWorkUnity/AddAccountBar/AddAccountBar";
 
 
