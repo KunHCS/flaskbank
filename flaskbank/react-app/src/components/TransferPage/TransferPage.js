@@ -92,12 +92,13 @@ class Transfer extends React.Component{
         }
     };
 
-    choiceHandler = () => {
+    choiceHandler = () =>{
         const bankChoice = document.getElementById("bankChoice");
         bankChoice.style.display = 'none';
         const accountChoice = document.getElementById("accountChoice");
         accountChoice.style.display = 'block';
     }
+
     previousHanlder = () => {
         const bankChoice = document.getElementById("bankChoice");
         bankChoice.style.display = 'block';
@@ -122,21 +123,21 @@ class Transfer extends React.Component{
     }
 
 
-    renderAccount2() {
-        const { classes } = this.props;
-        if (this.props.myInfo !== " ") {
-            return this.props.myInfo.accounts.map(account => {
-                return (
-                    <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-                        <Button className={classes.button} onClick={this.selectAccount}
-                                onClick={()=>this.setState({selectTo:account.account_number})}>
-                            {account.alias}: {account.account_number}</Button>
-                    </ExpansionPanelDetails>
-
-                );
-            });
-        }else { return (<div/>);}
-    }
+    // renderAccount2() {
+    //     const { classes } = this.props;
+    //     if (this.props.myInfo !== " ") {
+    //         return this.props.myInfo.accounts.map(account => {
+    //             return (
+    //                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+    //                     <Button className={classes.button} onClick={this.selectAccount}
+    //                             onClick={()=>this.setState({selectTo:account.account_number})}>
+    //                         {account.alias}: {account.account_number}</Button>
+    //                 </ExpansionPanelDetails>
+    //
+    //             );
+    //         });
+    //     }else { return (<div/>);}
+    // }
 
     render() {
         const {classes} = this.props;
@@ -191,18 +192,15 @@ class Transfer extends React.Component{
 
                             <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
                                 <br/>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="accountNumber"
+                                    placeholder="Other Bank Account Number"
+                                    value={this.state.selectTo}
+                                    onChange ={e=>this.setState({selectTo:e.target.value})}
+                                />
 
-                            <ExpansionPanel expanded={this.state.open2}>
-
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
-                                    <Typography
-                                        className={classes.heading}
-                                        id="secondLabel"
-                                    >Select Account</Typography>
-                                </ExpansionPanelSummary>
-                                {this.renderAccount2()}
-
-                            </ExpansionPanel>
                             <br/>
                             <div>
 
@@ -231,7 +229,7 @@ class Transfer extends React.Component{
                                 </Button>
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
-                                    onClick={this.handleOpen}
+                                    //onClick={this.handleOpen}
                                         onClick={this.onSubmit}
                                     //style={{marginRight: '250px', width: '15%', float: 'right'}}>
                                    > Next
