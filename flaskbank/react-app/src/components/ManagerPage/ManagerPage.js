@@ -13,6 +13,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
+import PropTypes from "prop-types";
+import {withStyles} from "@material-ui/core";
+
 
 
 class ManagerPage extends React.Component {
@@ -28,34 +32,9 @@ class ManagerPage extends React.Component {
             }).catch (error => console.log(error.response.data.msg));
     }
 
-    render() {
-        console.log(this.props);
-            return (
-                <div>
-                    <Navigation/>
-                    <Search/>
-                    <Container>
-                        <DashBoard props={this.props} />
-                    </Container>
-                </div>
-            );
-        }
-
-}
-
-/******************************* DashBoard Component ******************************************/
-
-class DashBoard extends React.Component {
-
-    componentDidMount() {
-
-    }
-
     renderAccount() {
         const { classes } = this.props;
-        console.log(this.props.props.myInfo,"INNNNNNN");
-        if (this.props.myInfo !== undefined) {
-
+        if (this.props.myInfo !== " ") {
             return this.props.myInfo.accounts.map(account => {
                 return (
                     <ExpansionPanel>
@@ -79,21 +58,46 @@ class DashBoard extends React.Component {
                     </ExpansionPanel>
                 );
             });
-        } else { return (<div/>);}
+        }else { return (<div/>);}
 
     }
-
 
     render() {
         console.log(this.props);
-        return (
-            <div>
-                {this.renderAccount()}
-            </div>
-        );
-    }
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+
+                        {this.renderAccount()}
+                    </Container>
+                </div>
+            );
+        }
 
 }
+
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+});
+
+
+ManagerPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
 
 const mapStateToProps = (state) => {
     console.log("I'm in map State to Props");
@@ -101,4 +105,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,{ getProfile})(ManagerPage);
+export default connect(mapStateToProps,{ getProfile ,accountDetailAction})(withStyles(styles)(ManagerPage));
