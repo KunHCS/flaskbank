@@ -41,6 +41,7 @@ class BillPay extends React.Component{
                 break;
             }
         }
+
     }
 
     renderAccount() {
@@ -79,6 +80,23 @@ class BillPay extends React.Component{
         }
     };
 
+
+    getAutopayStatement= ()=>{
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.get('/api/autopay/get',{headers: req_headers}
+        )
+            .then(response => {
+                console.log(response);
+
+            }).catch (error => {
+
+            console.log(error.response.data.msg);
+        });
+
+    }
+
     onSubmit =(e) => {
         e.preventDefault();
 
@@ -108,6 +126,8 @@ class BillPay extends React.Component{
                         this.props.getProfile(response.data);
                     }).catch (error => console.log(error.response.data.msg));
 
+
+
             }).catch (error => {
             alert("Bill Pay Fail!! ---" + (error.response.data.msg));
             console.log(error.response.data.msg);
@@ -133,6 +153,7 @@ class BillPay extends React.Component{
                ).then(response => {
                    console.log(response);
                    alert("Start Auto Pay Success")
+                  this.getAutopayStatement()
 
                }).catch(error => {
                console.log(error.response.data.msg);
