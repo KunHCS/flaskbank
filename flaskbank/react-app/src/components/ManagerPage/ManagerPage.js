@@ -25,7 +25,7 @@ class ManagerPage extends React.Component {
         console.log(" ManagerPage Component Did Mount")
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.get("/api/client/all",{headers: req_headers})
+        axios.get("api/manager/get",{headers: req_headers})
             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
@@ -35,24 +35,21 @@ class ManagerPage extends React.Component {
     renderAccount() {
         const { classes } = this.props;
         if (this.props.myInfo !== " ") {
-            return this.props.myInfo.accounts.map(account => {
+            return this.props.myInfo.results.map(result => {
                 return (
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography
-                                className={classes.heading}><strong> {account.alias} : {account.account_number} -- (Account Type: {account.type})</strong>
+                                className={classes.heading}><strong> {result.first_name} {result.last_name} </strong>
                             </Typography>
                         </ExpansionPanelSummary>
+
                         <ExpansionPanelDetails>
                             <div style={{width: '90%'}}>
-                                <Typography style={{float: 'left'}}>
-                                    Balance: ${account.balance}
+                                <Typography>
+                                     Email:{result.email} <hr/> User Name:{result.username}
                                 </Typography>
-                                <Link to="/overview/account_detail"
-                                      onClick={() => this.props.accountDetailAction(account)}>
-                                    <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
-                                            className={classes.margin}>Transactions</Button>
-                                </Link>
+
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -71,6 +68,7 @@ class ManagerPage extends React.Component {
                     <Container>
 
                         {this.renderAccount()}
+
                     </Container>
                 </div>
             );

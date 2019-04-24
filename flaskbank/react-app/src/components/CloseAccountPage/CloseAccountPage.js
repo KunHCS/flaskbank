@@ -7,9 +7,6 @@ import axios from "axios";
 import {connect} from "react-redux";
 
 
-
-
-
 const CloseAccountPage = () => {
     return (
         <div >
@@ -50,9 +47,7 @@ class CloseAccountDetails extends React.Component {
                 alert("Fail to Close the Account");
             });
 
-
     }
-
 
 
     render(){

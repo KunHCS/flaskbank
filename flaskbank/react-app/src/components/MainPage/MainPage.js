@@ -122,8 +122,6 @@ class Login extends React.Component {
                               Sign On
                         </Button>
 
-                         
-
                         <div id="formFooter" style={formFooter}>
                             <a className="underlineHover" href= "#" onClick={this.handleOpen}>Forgot Password?</a>
                         </div>
