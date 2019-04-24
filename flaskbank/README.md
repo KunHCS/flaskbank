@@ -244,7 +244,7 @@ Status: 201 CREATED
 Status: 400 BAD REQUEST
 
 ## *Close Specific Account*
-#### http://127.0.0.1:5000/api/accounts/close/{account_number}(POST)
+#### http://127.0.0.1:5000/api/accounts/close/{account_number} (DELETE)
 ##### Request header:
 	{
 		"Authorization": "Bearer  <access_token>"
