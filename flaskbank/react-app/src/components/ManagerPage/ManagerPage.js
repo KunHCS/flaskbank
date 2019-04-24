@@ -69,6 +69,7 @@ class ManagerPage extends React.Component {
                     <Navigation/>
                     <Search/>
                     <Container>
+
                         {this.renderAccount()}
                     </Container>
                 </div>
