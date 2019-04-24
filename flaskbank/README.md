@@ -396,6 +396,21 @@ Status: 200 OK
 
 Status: 400 BAD REQUEST
 
+## *Reset Password*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/reset (POST)
+	{
+		"username": "<string>",
+		"email": "<string>",
+		"password" : "<string>",
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+Status: 503 SERVICE UNAVAILABLE
 
 
 
