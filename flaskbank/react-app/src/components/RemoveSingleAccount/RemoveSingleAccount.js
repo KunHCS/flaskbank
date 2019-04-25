@@ -113,13 +113,13 @@ class RemoveSingleAccount extends React.Component {
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Remove Account</h1>
+                    <h1 className="h3 mb-3 font-weight-normal"><strong>Remove Account</strong></h1>
 
-                    <label htmlFor="name">Account Type</label>
+                  <Typography variant={"h6"}> <label htmlFor="name">Account Type:</label> </Typography>
 
                     <ExpansionPanel expanded={this.state.open}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                            <Typography className={classes.heading} id="firstLabel">Select Account To Remove</Typography>
+                            <Typography className={classes.heading} id="firstLabel">Select an Account To Remove</Typography>
                         </ExpansionPanelSummary>
 
                         {this.renderAccount()}

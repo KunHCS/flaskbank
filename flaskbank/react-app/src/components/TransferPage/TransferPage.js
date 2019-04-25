@@ -167,9 +167,9 @@ class Transfer extends React.Component{
                                     you want to transfer to.
                                 </Typography>
                                 <br/>
-                                <button onClick={this.choiceHandler}>Chase Bank Card Transfer</button>
+                                <button onClick={this.choiceHandler}>Transfer $ to Your Other Accounts</button>
                                 <br/>  <br/>
-                                <button onClick={this.choiceHandler}>Other Bank(s) Card Transfer</button>
+                                <button onClick={this.choiceHandler}>Transfer $ to Other Users' Accounts</button>
                             </Paper>
                         </div>
                         <div id="accountChoice" style={{display:'none', margin: 'auto'}}>
@@ -196,7 +196,7 @@ class Transfer extends React.Component{
                                     type="text"
                                     className="form-control"
                                     name="accountNumber"
-                                    placeholder="Other Bank Account Number"
+                                    placeholder="Enter a Bank Account Number"
                                     value={this.state.selectTo}
                                     onChange ={e=>this.setState({selectTo:e.target.value})}
                                 />
@@ -205,13 +205,14 @@ class Transfer extends React.Component{
                             <div>
 
                                 <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
-                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:</Typography>
+                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '180px'}}>Amount:</Typography>
                                     <input
+                                        style={{float: 'left', width:'210%', marginLeft: '180px'}}
                                         type="number"
                                         className={classes.button}
                                         name="amount"
-                                        step="0.01"
-                                        placeholder= {this.state.transferAmount}
+                                        step="5"
+                                        placeholder= "$ Enter Your Amount"
                                         value = {this.state.transferAmount}
                                         onChange ={e=>this.setState({transferAmount:e.target.value})}
                                     />
@@ -219,19 +220,16 @@ class Transfer extends React.Component{
                             </div>
                             <br/>
                             <div>
-                                <br/>
+                                <br/> <br/> <br/>
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
                                     onClick={this.previousHanlder}
-                                    //style={{marginLeft: '250px', width: '15%', float: 'left'}}
                                 >
                                     Previous
                                 </Button>
                                 <Button variant="contained" color="primary"
                                     className={classes.button}
-                                    //onClick={this.handleOpen}
                                         onClick={this.onSubmit}
-                                    //style={{marginRight: '250px', width: '15%', float: 'right'}}>
                                    > Next
                                 </Button>
                             </div>
@@ -266,7 +264,7 @@ const styles = theme => ({
     innerPaper:{
         position: 'flex',
         width: '100%',
-        height: theme.spacing.unit * 35,
+        height: '100%',
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 2,
         textAlign: 'center',

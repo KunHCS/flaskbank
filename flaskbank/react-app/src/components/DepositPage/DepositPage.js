@@ -143,13 +143,12 @@ class DepositPage extends React.Component{
                 }
 
             });
-        }else { return (<div/>);}
+        }
+        else { return (<div/>);}
     }
-
 
     render() {
         const {classes} = this.props;
-
         return (
             <div >
                 <Navigation/>
@@ -158,24 +157,24 @@ class DepositPage extends React.Component{
                     <InnerNavigationBar active={activeElement}/>
                     <div className={classes.bgDiv}>
                         <div className={classes.top}>
-                            <div style={{float: 'left', width:"50%"}}>
+                            <div style={{float: 'left', width:"60%"}}>
                               <Typography variant="h4" color="secondary"><strong>Deposit to Account</strong></Typography>
                                 <Typography variant="subtitle2">Account: { this.state.AccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
                                 <form onSubmit={this.onSubmit}>
-                                <Typography variant="h5"><strong>Amount:</strong></Typography>
+                                <Typography variant="h6">Amount:</Typography>
                                 <input
                                     type="number"
                                     className="form-control"
                                     name="amount"
-                                    step="0.01"
+                                    step="5"
                                     placeholder= "$ Enter the Amount"
                                     value = {this.state.payAmount}
                                     onChange ={e=>this.setState({payAmount:e.target.value})}
                                 />
                                     <hr/>
-                                    <Typography variant="h6"><strong>Select Account</strong></Typography>
+                                    <Typography variant="h6">Select Account:</Typography>
 
                                     <ExpansionPanel expanded={this.state.open}>
                                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
@@ -204,8 +203,6 @@ class DepositPage extends React.Component{
 
         );
     }
-
-
 }
 
 const activeElement = {
@@ -218,7 +215,6 @@ const activeElement = {
 DepositPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 const mapStateToProps = (state) => {
     console.log("I'm in map State to Props");
