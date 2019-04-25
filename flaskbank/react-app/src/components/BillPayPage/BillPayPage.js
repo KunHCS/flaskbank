@@ -41,7 +41,6 @@ class BillPay extends React.Component{
                 break;
             }
         }
-
     }
 
     renderAccount() {
@@ -55,21 +54,17 @@ class BillPay extends React.Component{
                                     onClick={() => this.setState({selectFrom: account.account_number})}>
                                 {account.alias}: {account.account_number}</Button>
                         </ExpansionPanelDetails>
-
                     );
                 }
-
             });
         }else { return (<div/>);}
     }
-
 
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
         labelFrom.innerHTML = event.currentTarget.innerHTML;
         this.setState({open: false});
     };
-
 
     panOneHandler = () =>{
         if(this.state.open){
@@ -80,26 +75,19 @@ class BillPay extends React.Component{
         }
     };
 
-
     getAutopayStatement= ()=>{
-
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
-
         axios.get('/api/autopay/get',{headers: req_headers}
         )
             .then(response => {
                 console.log(response);
-
             }).catch (error => {
-
             console.log(error.response.data.msg);
         });
-
     }
 
     onSubmit =(e) => {
         e.preventDefault();
-
         console.log('it just submit');
         console.log(this.props);
 
@@ -109,8 +97,6 @@ class BillPay extends React.Component{
         }
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
-
-
         axios.post('/api/transfer ',
             { account_from: this.state.selectFrom,
                 account_to: this.state.creditAccountNumber,
@@ -125,23 +111,16 @@ class BillPay extends React.Component{
                         console.log(response);
                         this.props.getProfile(response.data);
                     }).catch (error => console.log(error.response.data.msg));
-
-
-
             }).catch (error => {
             alert("Bill Pay Fail!! ---" + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
-
         this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
     }
-
-
 
     /************************************************************************************ */
 
     AutoPay(con) {
-
        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
          if (con == "start") {
               axios.post('/api/autopay', {
@@ -154,7 +133,6 @@ class BillPay extends React.Component{
                    console.log(response);
                    alert("Start Auto Pay Success")
                   this.getAutopayStatement()
-
                }).catch(error => {
                console.log(error.response.data.msg);
                alert("Start Auto Pay Fail");
@@ -174,7 +152,6 @@ class BillPay extends React.Component{
 
     render() {
        const {classes} = this.props;
-
        let index = null;
         for (let i = 0 ; i < this.props.myInfo.accounts.length ; i++) {
             console.log("index i is : "+i);
@@ -195,7 +172,6 @@ class BillPay extends React.Component{
                     <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Account</strong></Typography>
                     </div>
                 </Container>
-
                 </div>
             )
         }
@@ -208,57 +184,62 @@ class BillPay extends React.Component{
                     <form onSubmit={this.onSubmit}>
                         <InnerNavigationBar active={activeElement}/>
                         <div className={classes.paper}>
-                            <div style={{float: 'left', width:"40%"}}>
+                            <div style={{float: 'left', width:"60%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="h6">SJSP Platinum Visa Card: # {this.props.myInfo.accounts[index].account_number}</Typography>
-                                <Typography variant="h6">Current Balance: $ {this.props.myInfo.accounts[index].balance}</Typography>
-                                <Typography variant="h6">Credit Limit: $ {this.props.myInfo.accounts[index].credit_limit}</Typography>
-                                <Typography variant="h6">Available Credit: $ {this.props.myInfo.accounts[index].available_credit}</Typography>
+                                <Typography variant="h6">SJSP Platinum Visa Card: </Typography>
+                                <Typography variant="subtitle1"> {this.props.myInfo.accounts[index].account_number}</Typography>
+                                <Typography variant="h6">Current Balance: </Typography>
+                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].balance}</Typography>
+                                <Typography variant="h6">Credit Limit: </Typography>
+                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].credit_limit}</Typography>
+                                <Typography variant="h6">Available Credit: </Typography>
+                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].available_credit}</Typography>
                             </div>
-                            <div style={{float: 'right', width:"30%"}}>
-                                <Typography variant="h5"><strong>Amount:</strong></Typography>
-                                <input type="number"  className="form-control"  name="amount" step="0.01"
-                                       placeholder= "$ Please Enter Your Amount" value = {this.state.payAmountCredit}
+                            <div style={{float: 'right', width:"40%"}}>
+                                <Typography variant="h6">Amount:</Typography>
+                                <input type="number"
+                                       className="form-control"
+                                       name="amount"
+                                       step="5"
+                                       placeholder= "$ Enter Your Amount" value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
-                                <Typography variant="h6"><strong>Select Account</strong></Typography>
+                                <Typography variant="h6">Select Account:</Typography>
                                 <ExpansionPanel expanded={this.state.open}>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                                        <Typography className={classes.heading} id="firstLabel">Select Account</Typography>
+                                        <Typography className={classes.heading}  id="firstLabel">Select Account</Typography>
                                     </ExpansionPanelSummary>
                                     {this.renderAccount()}
-
                                 </ExpansionPanel>
                                 <Button  type = "submit"  className={classes.button}  variant="contained" color="primary">
                                     Submit
                                 </Button>
-
                             </div>
                         </div>
-
                         <br/>
                         <div className={classes.paper}>
-
-
                             <div style={{float: 'left', width:"100%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>Auto Payment</strong></Typography>
-
                             </div>
-
                             <div style={{float: 'left', width:"50%"}}>
-                                <input type="number" className="form-control" name="amount" step="0.01"
-                                       placeholder= "$ Please Enter Your Amount" value = {this.state.autoPayAmount}
+                                <input type="number"
+                                       className="form-control"
+                                       name="amount"
+                                       step="5"
+                                       placeholder= "$ Enter Your Amount"
+                                       value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
                             </div>
-
                             <div style={{float: 'right', width:"50%"}}>
-
                                 <input
-                                    type="number" className="form-control" name="amount" step="0.01"
-                                    placeholder= "Please Enter The Time Interval in Minutes" value = {this.state.time}
+                                    type="number"
+                                    className="form-control"
+                                    name="amount"
+                                    step="0.01"
+                                    placeholder= "Enter The Time Interval in Minutes"
+                                    value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>
                             </div>
-
                             <Button className={classes.button} variant="contained" color="primary"
                                     onClick={()=>this.AutoPay("start")}>
                                 Start
@@ -271,7 +252,6 @@ class BillPay extends React.Component{
                     </form>
                 </Container>
             </div>
-
         );
     }
 }
@@ -298,8 +278,6 @@ const styles = theme => ({
     },
 });
 
-
-
 const activeElement = {
     act1: "nav-link ",
     act2: "nav-link active",
@@ -316,7 +294,6 @@ const checkingContainerStyle = {
     fontWeight: 'bold',
     font: 'Helvetica',
 }
-
 
 BillPay.propTypes = {
     classes: PropTypes.object.isRequired,
