@@ -21,7 +21,7 @@ import {Link} from "react-router-dom";
 
 class Transfer extends React.Component{
     state = {
-        open1: false,
+        open: false,
         open2: false,
         transferAmount: 0,
         selectFrom: "",
@@ -65,7 +65,7 @@ class Transfer extends React.Component{
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
         labelFrom.innerHTML = event.currentTarget.innerHTML;
-        this.setState({open1: false});
+        this.setState({open: false});
     };
 
     selectAccountTwo = (event) =>{
@@ -75,11 +75,11 @@ class Transfer extends React.Component{
     };
 
     panOneHandler = () =>{
-        if(this.state.open1){
-            this.setState({open1: false});
+        if(this.state.open){
+            this.setState({open: false});
         }
         else{
-            this.setState({open1: true});
+            this.setState({open: true});
         }
     };
 
@@ -177,7 +177,7 @@ class Transfer extends React.Component{
                                 <br/>
                             <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
                                 <br/>
-                            <ExpansionPanel expanded={this.state.open1}>
+                            <ExpansionPanel expanded={this.state.open}>
 
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
                                     <Typography

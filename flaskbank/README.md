@@ -413,6 +413,36 @@ Status: 400 BAD REQUEST
 Status: 503 SERVICE UNAVAILABLE
 
 
+## *Manager Query Client*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/manager/query/{Attribute}/{Query} (GET)
+	Attritubes: {'email', 'username', 'first', 'last', 'account'}
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Manager Get all Client*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/manager/get (GET)
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
 
 ## Database Structure
 #### Clients collection

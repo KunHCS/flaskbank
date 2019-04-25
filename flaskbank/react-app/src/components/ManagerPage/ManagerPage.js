@@ -1,11 +1,22 @@
 import React from "react";
 import Navigation from "../FrameWorkUnity/DynamicNavBar";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Container from "../FrameWorkUnity/Container";
 import Search from "../FrameWorkUnity/Search";
 import axios from "axios";
 import {connect} from "react-redux";
 import { getProfile } from "../../actions/GetProfileAction/getProfileAction";
+import * as ACTION from "../../static/action_type";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
+import PropTypes from "prop-types";
+import {withStyles} from "@material-ui/core";
+
 
 
 class ManagerPage extends React.Component {
@@ -14,11 +25,38 @@ class ManagerPage extends React.Component {
         console.log(" ManagerPage Component Did Mount")
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        axios.get("/api/client/all",{headers: req_headers})
+        axios.get("api/manager/get",{headers: req_headers})
             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
             }).catch (error => console.log(error.response.data.msg));
+    }
+
+    renderAccount() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.results.map(result => {
+                return (
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                            <Typography
+                                className={classes.heading}><strong> {result.first_name} {result.last_name} </strong>
+                            </Typography>
+                        </ExpansionPanelSummary>
+
+                        <ExpansionPanelDetails>
+                            <div style={{width: '90%'}}>
+                                <Typography>
+                                     Email:{result.email} <hr/> User Name:{result.username}
+                                </Typography>
+
+                            </div>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                );
+            });
+        }else { return (<div/>);}
+
     }
 
     render() {
@@ -29,6 +67,8 @@ class ManagerPage extends React.Component {
                     <Search/>
                     <Container>
 
+                        {this.renderAccount()}
+
                     </Container>
                 </div>
             );
@@ -37,10 +77,30 @@ class ManagerPage extends React.Component {
 }
 
 
+const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+});
+
+
+ManagerPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
+
 const mapStateToProps = (state) => {
     console.log("I'm in map State to Props");
     console.log(state);
     return state;
 }
 
-export default connect(mapStateToProps,{ getProfile})(ManagerPage);
+export default connect(mapStateToProps,{ getProfile ,accountDetailAction})(withStyles(styles)(ManagerPage));
