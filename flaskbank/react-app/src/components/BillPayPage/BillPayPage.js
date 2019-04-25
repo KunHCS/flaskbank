@@ -266,7 +266,7 @@ class BillPay extends React.Component{
                                 <Typography variant="h4" color= "secondary" style={{textAlign:'center'}}><strong>Auto Payment</strong></Typography>
                                 <hr/>
                             </div>
-                            <div style={{float: 'left', width:"40%"}}>
+                            <div style={{float: 'left', width:"49%"}}>
                                 <input type="number"
                                        className="form-control"
                                        name="amount"
@@ -275,7 +275,7 @@ class BillPay extends React.Component{
                                        value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
                             </div>
-                            <div style={{float: 'right', width:"40%"}}>
+                            <div style={{float: 'right', width:"49%"}}>
                                 <input
                                     type="number"
                                     className="form-control"
@@ -286,16 +286,17 @@ class BillPay extends React.Component{
                                     onChange ={e=>this.setState({time:e.target.value})}/>
                             </div>
 
-                            <div style={{float: 'left', width:"100%"}}>
+                            <div style={{float: 'right', width:"40%"}}>
                             <Button className={classes.button} variant="contained" color="primary"
                                     onClick={()=>this.AutoPay("start")}
-                                    style={{float: 'left', width:"30%"}}>
-                                Start
+                                    >
+                                Start AutoPay
                             </Button>
+
                             <Button className={classes.button} variant="contained" color="primary"
                                     onClick={()=>this.AutoPay()}
-                                    style={{float: 'right', width:"30%"}}>
-                                Stop
+                                     >
+                                Stop AutoPay
                             </Button>
                             </div>
 
