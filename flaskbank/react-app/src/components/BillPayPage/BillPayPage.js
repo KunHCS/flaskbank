@@ -15,6 +15,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import * as ACTION from "../../static/action_type";
+import Paper from '@material-ui/core/Paper';
 
 
 class BillPay extends React.Component{
@@ -28,6 +29,7 @@ class BillPay extends React.Component{
         selectFrom: undefined,
         open: false,
         time: undefined,
+        currentAutoPayState: undefined,
     };
 
     componentDidMount() {
@@ -41,6 +43,7 @@ class BillPay extends React.Component{
                 break;
             }
         }
+        this.getAutopayStatement()
     }
 
     renderAccount() {
@@ -59,6 +62,8 @@ class BillPay extends React.Component{
             });
         }else { return (<div/>);}
     }
+
+
 
     selectAccountOne = (event) =>{
         const labelFrom = document.getElementById('firstLabel');
@@ -81,9 +86,26 @@ class BillPay extends React.Component{
         )
             .then(response => {
                 console.log(response);
+                this.setState({currentAutoPayState: response.data.auto_pay})
             }).catch (error => {
             console.log(error.response.data.msg);
         });
+    }
+
+    renderAutoPayState() {
+           if (this.state.currentAutoPayState !== undefined) {
+               return this.state.currentAutoPayState.map(account => {
+                   return (
+                       <div>
+                           {account.job_name}
+                       </div>
+                   );
+
+               });
+           } else {return ( <Typography variant="h8" color= "secondary">
+                            <strong>No Current AutoPayment SetUp</strong>
+                            </Typography>);}
+
     }
 
     onSubmit =(e) => {
@@ -127,19 +149,22 @@ class BillPay extends React.Component{
 
     AutoPay(con) {
 
-        if(this.state.selectFrom == undefined ) {
-            alert("Selected Account can't be Empty ");
-            return
-        }
+        if (con == "start") {
 
-        if( this.state.autoPayAmount == 0 || this.state.autoPayAmount == "$ Please Enter Your Amount") {
-            alert("Auto Pay Amount can't be 0 or Empty ");
-            return
-        }
+             if (this.state.selectFrom == undefined) {
+                 alert("Selected Account can't be Empty ");
+                 return
+             }
 
-        if(this.state.time == undefined ) {
-            alert("Time Interval Can't Be Empty");
-            return
+             if (this.state.autoPayAmount == 0 || this.state.autoPayAmount == "$ Please Enter Your Amount") {
+                 alert("Auto Pay Amount can't be 0 or Empty ");
+                 return
+             }
+
+             if (this.state.time == undefined) {
+                 alert("Time Interval Can't Be Empty");
+                 return
+             }
         }
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
@@ -152,20 +177,21 @@ class BillPay extends React.Component{
                   {headers: req_headers}
                ).then(response => {
                    console.log(response);
-                   alert("Start Auto Pay Success")
+                   alert("Start Auto Pay Success --" +response.data.msg)
                   this.getAutopayStatement()
                }).catch(error => {
                console.log(error.response.data.msg);
-               alert("Start Auto Pay Fail");
+               alert("Start Auto Pay Fail" +error.response.data.msg);
            });
        } else {
              axios.delete('api/autopay/stop', {headers: req_headers}
              ).then(response => {
                  console.log(response);
-                 alert("Stop Auto Pay Success")
+                 alert("Stop Auto Pay Success --" +response.data.msg)
+                 this.setState({currentAutoPayState:undefined})
              }).catch(error => {
                  console.log(error.response.data.msg);
-                 alert("Stop Auto Pay Fail");
+                 alert("Stop Auto Pay Fail --" +error.response.data.msg);
              });
          }
    }
@@ -206,22 +232,19 @@ class BillPay extends React.Component{
                         <InnerNavigationBar active={activeElement}/>
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"60%"}}>
-                                <Typography variant="h4" color= "secondary"><strong>SJSP Credit Card</strong></Typography>
-                                <Typography variant="h6">SJSP Platinum Visa Card: </Typography>
-                                <Typography variant="subtitle1"> {this.props.myInfo.accounts[index].account_number}</Typography>
-                                <Typography variant="h6">Current Balance: </Typography>
-                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].balance}</Typography>
-                                <Typography variant="h6">Credit Limit: </Typography>
-                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].credit_limit}</Typography>
-                                <Typography variant="h6">Available Credit: </Typography>
-                                <Typography variant="subtitle1"> ${this.props.myInfo.accounts[index].available_credit}</Typography>
+                                <Typography variant="h4" color= "secondary" style={{textAlign:'center'}}><strong>SJSP Credit Card</strong></Typography>
+                                <br/>
+                                <Typography variant="h6">SJSP Platinum Visa Card: {this.props.myInfo.accounts[index].account_number}</Typography>
+                                <Typography variant="h6">Current Balance: ${this.props.myInfo.accounts[index].balance}</Typography>
+                                <Typography variant="h6">Credit Limit: ${this.props.myInfo.accounts[index].credit_limit}</Typography>
+                                <Typography variant="h6">Available Credit: ${this.props.myInfo.accounts[index].available_credit}</Typography>
                             </div>
                             <div style={{float: 'right', width:"40%"}}>
                                 <Typography variant="h6">Amount:</Typography>
                                 <input type="number"
                                        className="form-control"
                                        name="amount"
-                                       step="5"
+                                       step="0.01"
                                        placeholder= "$ Enter Your Amount" value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
@@ -240,19 +263,19 @@ class BillPay extends React.Component{
                         <br/>
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"100%"}}>
-                                <Typography variant="h4" color= "secondary"><strong>Auto Payment</strong></Typography>
+                                <Typography variant="h4" color= "secondary" style={{textAlign:'center'}}><strong>Auto Payment</strong></Typography>
                                 <hr/>
                             </div>
-                            <div style={{float: 'left', width:"50%"}}>
+                            <div style={{float: 'left', width:"40%"}}>
                                 <input type="number"
                                        className="form-control"
                                        name="amount"
-                                       step="5"
+                                       step="0.01"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
                             </div>
-                            <div style={{float: 'right', width:"50%"}}>
+                            <div style={{float: 'right', width:"40%"}}>
                                 <input
                                     type="number"
                                     className="form-control"
@@ -262,15 +285,31 @@ class BillPay extends React.Component{
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>
                             </div>
+
+                            <div style={{float: 'left', width:"100%"}}>
                             <Button className={classes.button} variant="contained" color="primary"
-                                    onClick={()=>this.AutoPay("start")}>
+                                    onClick={()=>this.AutoPay("start")}
+                                    style={{float: 'left', width:"30%"}}>
                                 Start
                             </Button>
                             <Button className={classes.button} variant="contained" color="primary"
-                                    onClick={()=>this.AutoPay()}>
+                                    onClick={()=>this.AutoPay()}
+                                    style={{float: 'right', width:"30%"}}>
                                 Stop
                             </Button>
+                            </div>
+
+                            <div style={{float: 'left', width:"100%"}}>
+                            <Paper className="paper" style={detailStyle} >
+                                <Typography variant="h6" color= "secondary"><strong>Current Auto Payment List </strong></Typography>
+                                <div>
+                                    {this.renderAutoPayState()}
+                                </div>
+                            </Paper>
+                            </div>
+
                         </div>
+
                     </form>
                 </Container>
             </div>
@@ -295,10 +334,21 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
-        textAlign: 'center',
+        textAlign: 'left',
         WebkitBorderRadius:'10px 10px 10px 10px',
     },
 });
+
+const detailStyle = {
+    height: 'auto',
+    width:  '100%',
+    fontWeight: 'bold',
+    WebkitBorderRadius:'10px 10px 10px 10px',
+    textAlign:'center',
+    font: 'Helvetica',
+    margin: 'auto',
+
+};
 
 const activeElement = {
     act1: "nav-link ",
@@ -307,15 +357,7 @@ const activeElement = {
     act4: "nav-link ",
 }
 
-const checkingContainerStyle = {
-    height: '100%',
-    width:  '100%',
-    textAlign:'center',
-    margin: 'auto',
-    WebkitBorderRadius:'10px 10px 10px 10px',
-    fontWeight: 'bold',
-    font: 'Helvetica',
-}
+
 
 BillPay.propTypes = {
     classes: PropTypes.object.isRequired,
