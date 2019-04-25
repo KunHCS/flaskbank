@@ -168,7 +168,7 @@ class DepositPage extends React.Component{
                                     type="number"
                                     className="form-control"
                                     name="amount"
-                                    step="5"
+                                    step="0.01"
                                     placeholder= "$ Enter the Amount"
                                     value = {this.state.payAmount}
                                     onChange ={e=>this.setState({payAmount:e.target.value})}

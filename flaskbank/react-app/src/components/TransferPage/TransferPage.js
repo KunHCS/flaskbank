@@ -39,11 +39,11 @@ class Transfer extends React.Component{
                                 <br/>
 
                                 <button onClick={() => this.props.history.push('/transfer/innerTransfer')}>
-                                   Chase Bank Card Transfer
+                                    Account Transfer to/from Internal Accounts
                                 </button>
                                 <br/>  <br/>
                                 <button onClick={() => this.props.history.push('/transfer/outerTransfer')}>
-                                    Other Bank(s) Card Transfer
+                                    Account Transfer to/from External Accounts
                                 </button>
                             </Paper>
                     </div>

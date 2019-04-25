@@ -23,10 +23,9 @@ class InnerAccountTransfer extends React.Component{
     state = {
         open: false,
         open2: false,
-        transferAmount: 0,
-        selectFrom: "",
-        selectTo:"",
-        ifInnerTransfer: false
+        transferAmount: "$ Enter Your Amount",
+        selectFrom: undefined,
+        selectTo:undefined,
     };
 
 
@@ -36,10 +35,17 @@ class InnerAccountTransfer extends React.Component{
         e.preventDefault();
         console.log("I just submit");
 
-        if(this.state.transferAmount === 0) {
+        if(this.state.selectFrom == undefined || this.state.selectTo == undefined) {
+            alert("Selected Account can't be empty ");
+            return
+        }
+
+        if(this.state.transferAmount === 0 || this.state.transferAmount== "$ Enter Your Amount") {
             alert("The Transfer Amount Cant be 0, Please Try Again");
             return
         }
+
+
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
@@ -58,7 +64,7 @@ class InnerAccountTransfer extends React.Component{
             console.log(error.response.data.msg);
         });
 
-        this.setState({transferAmount: 0})
+        this.setState({transferAmount: "$ Enter Your Amount"})
     }
 
     selectAccountOne = (event) =>{
@@ -143,7 +149,8 @@ class InnerAccountTransfer extends React.Component{
 
 
                             <Paper className={classes.innerPaper2} style={{position: 'flex'}}>
-                                <br/>
+                                <Typography variant="h4" color = "secondary"><strong>Internal Accounts Transfer</strong></Typography>
+                                <hr/>
                                 <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
                                 <br/>
 
@@ -184,7 +191,7 @@ class InnerAccountTransfer extends React.Component{
                                             className={classes.button}
                                             name="amount"
                                             step="0.01"
-                                            placeholder= {this.state.transferAmount}
+                                            placeholder= "$ Enter Your Amount"
                                             value = {this.state.transferAmount}
                                             onChange ={e=>this.setState({transferAmount:e.target.value})}
                                         />
