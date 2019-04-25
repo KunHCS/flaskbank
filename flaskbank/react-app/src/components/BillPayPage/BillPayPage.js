@@ -216,7 +216,7 @@ class BillPay extends React.Component{
                 <Container>
                     <InnerNavigationBar active={activeElement}/>
                     <div className={classes.paper}>
-                    <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Account</strong></Typography>
+                    <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Card Account</strong></Typography>
                     </div>
                 </Container>
                 </div>
