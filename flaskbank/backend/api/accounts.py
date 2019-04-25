@@ -55,7 +55,7 @@ def close_account(account_num):
 
     current_user = am.get_jwt_identity()['username']
 
-    pre_update = am.clients.find_one_and_update(
+    result = am.clients.update_one(
         {'username': current_user},
         {
             '$pull': {
@@ -63,13 +63,8 @@ def close_account(account_num):
             }
         }
     )
-    exist = next((index for (index, d) in enumerate(pre_update['accounts'])
-                  if d['account_number'] == account_num), None)
-
-    if not exist:
-        return am.jsonify({'msg': f'User {current_user} does not own '
-                          f'account: {account_num}'}), 409
-
+    if not result.modified_count:
+        return am.jsonify({'msg': 'Failed to close account'}), 409
     return am.jsonify({'msg': f'Account {account_num} closed'}), 200
 
 
