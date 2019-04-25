@@ -20,14 +20,14 @@ import * as ACTION from "../../static/action_type";
 class BillPay extends React.Component{
     state = {
         payAmountCredit: " ",
-        autoPayAmount:"",
+        autoPayAmount:"$ Please Enter Your Amount",
         creditAccountNumber: "",
         availableCredit :"",
         currentBalance:"",
         creditLimit:"",
-        selectFrom:"",
+        selectFrom: undefined,
         open: false,
-        time:"",
+        time: undefined,
     };
 
     componentDidMount() {
@@ -91,7 +91,12 @@ class BillPay extends React.Component{
         console.log('it just submit');
         console.log(this.props);
 
-        if(this.state.payAmountCredit == 0) {
+        if(this.state.selectFrom == undefined ) {
+            alert("Selected Account can't be empty ");
+            return
+        }
+
+        if(this.state.payAmountCredit == 0 || this.state.payAmountCredit == "$ Please Enter Your Amount") {
             alert("Bill Pay Amount Can't be 0, try again");
             return
         }
@@ -121,7 +126,23 @@ class BillPay extends React.Component{
     /************************************************************************************ */
 
     AutoPay(con) {
-       const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        if(this.state.selectFrom == undefined ) {
+            alert("Selected Account can't be Empty ");
+            return
+        }
+
+        if( this.state.autoPayAmount == 0 || this.state.autoPayAmount == "$ Please Enter Your Amount") {
+            alert("Auto Pay Amount can't be 0 or Empty ");
+            return
+        }
+
+        if(this.state.time == undefined ) {
+            alert("Time Interval Can't Be Empty");
+            return
+        }
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
          if (con == "start") {
               axios.post('/api/autopay', {
                    amount: parseFloat(this.state.autoPayAmount),
@@ -220,6 +241,7 @@ class BillPay extends React.Component{
                         <div className={classes.paper}>
                             <div style={{float: 'left', width:"100%"}}>
                                 <Typography variant="h4" color= "secondary"><strong>Auto Payment</strong></Typography>
+                                <hr/>
                             </div>
                             <div style={{float: 'left', width:"50%"}}>
                                 <input type="number"
