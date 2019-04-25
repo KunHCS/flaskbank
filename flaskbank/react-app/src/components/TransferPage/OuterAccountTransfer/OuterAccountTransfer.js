@@ -7,14 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Navigation from "../FrameWorkUnity/DynamicNavBar";
-import Search from "../FrameWorkUnity/Search";
-import Container from "../FrameWorkUnity/Container";
-import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
+import Navigation from "../../FrameWorkUnity/DynamicNavBar";
+import Search from "../../FrameWorkUnity/Search";
+import Container from "../../FrameWorkUnity/Container";
+import InnerNavigationBar from "../../FrameWorkUnity/StaticNavBar"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
-import * as ACTION from "../../static/action_type";
+import * as ACTION from "../../../static/action_type";
 import {Link} from "react-router-dom";
 
 

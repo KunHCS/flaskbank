@@ -5,7 +5,7 @@ import MainPage from "./components/MainPage/MainPage";
 import OpenAccountPage from "./components/OpenAccountPage/OpenAccountPage";
 import OverViewPage from "./components/OverViewPage/OverViewPage";
 import BillPayPage from "./components/BillPayPage/BillPayPage";
-import TransferPage from "./components/TransferPage/TransferPage";
+import TransferPage from "./components/TransferPage/TransferMainPage/TransferPage";
 import DepositPage from "./components/DepositPage/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage/ATMLocationPage";
@@ -16,8 +16,8 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 import CheckingAccountDetail from "./components/OverViewAccountDetailPage/AccountDetails";
 import ManagerPage from "./components/ManagerPage/ManagerPage";
-import InnerAccountTransfer from "./components/TransferPage/InnerAccountTransfer"
-import OuterAccountTransfer from "./components/TransferPage/OuterAccountTransfer"
+import InnerAccountTransfer from "./components/TransferPage/InnerAccountTransfer/InnerAccountTransfer"
+import OuterAccountTransfer from "./components/TransferPage/OuterAccountTransfer/OuterAccountTransfer"
 
 
 import MapV2 from "./components/ATMLocationPage/MapV2";
