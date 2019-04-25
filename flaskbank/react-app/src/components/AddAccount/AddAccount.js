@@ -104,21 +104,21 @@ class AddAccount extends React.Component {
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Add New Account</h1>
+                    <h1 className="h3 mb-3 font-weight-normal"><strong>Add a New Account</strong></h1>
 
                     <div className="form-group">
-                        <label htmlFor="name">Account Name</label>
+                        <Typography variant={"h6"}> <label htmlFor="name">Account Name:</label> </Typography>
                         <input
                             type="text"
                             className="form-control"
                             name="name"
-                            placeholder="Enter New Account Name"
+                            placeholder="Enter a New Account Name"
                             value={this.state.account_name}
                             onChange ={e=>this.setState({account_name:e.target.value})}
                         />
                     </div>
 
-                    <label htmlFor="name">Account Type</label>
+                    <Typography variant={"h6"}>  <label htmlFor="name">Account Type:</label> </Typography>
 
 
                         <ExpansionPanel expanded={this.state.open}>

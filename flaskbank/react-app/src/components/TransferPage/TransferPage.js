@@ -221,6 +221,7 @@ class Transfer extends React.Component{
                                         placeholder="Other Bank Account Number"
                                         value={this.state.selectTo}
                                         onChange ={e=>this.setState({selectTo:e.target.value})}
+
                                     />
                                 )}
 
@@ -290,7 +291,7 @@ const styles = theme => ({
     innerPaper:{
         position: 'flex',
         width: '100%',
-        height: theme.spacing.unit * 35,
+        height: '100%',
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 2,
         textAlign: 'center',

@@ -91,8 +91,10 @@ class Login extends React.Component {
         return (
           <div>
               <div> <img src={cards} alt="card" style = {center}/> </div>
-              {/*{<p style= {para}> </p>}*/}
-              <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+              <div> {<p style= {para}> </p>}
+                  {/*<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>*/}
+              </div>
+
 
 
 
@@ -100,7 +102,7 @@ class Login extends React.Component {
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
                 <form onSubmit={this.onSubmit}>
-                    <Typography variant="h6" >Sign On</Typography>
+                    <Typography variant="h6" >Sign In</Typography>
                         <div style={{margin: '50px'}}>
                             <input
                                 style={{margin: '20px'}}
@@ -119,7 +121,7 @@ class Login extends React.Component {
                         </div>
 
                         <Button variant="contained" type="submit" style={{margin:'10px'}}>
-                              Sign On
+                              Sign In
                         </Button>
 
                         <div id="formFooter" style={formFooter}>
@@ -177,8 +179,8 @@ const formFooter = {
     borderRadius: '10px 10px 10px 10px',
 }
 const paperStyle = {
-    height: '100%',
-    width:  '50%',
+    height: '80%',
+    width:  '40%',
     boxShadow: '5px 1px 10px, 5px 1px 10px',
     WebkitBorderRadius:'10px 10px 10px 10px',
     textAlign:'center',
@@ -199,8 +201,8 @@ const center = {
 }
 
 const para = {
-    paddingTop: '380px',
-    position: 'relative',
+    paddingTop: '250px',
+    position: 'flex',
 }
 
 
