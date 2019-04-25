@@ -26,6 +26,7 @@ class Transfer extends React.Component{
         transferAmount: 0,
         selectFrom: "",
         selectTo:"",
+        ifInnerTransfer: false
     };
 
 
@@ -46,8 +47,8 @@ class Transfer extends React.Component{
 
         axios.post('/api/transfer ',
             { account_from: this.state.selectFrom,
-                   account_to: this.state.selectTo,
-                   amount : parseFloat(this.state.transferAmount)},
+                account_to: this.state.selectTo,
+                amount : parseFloat(this.state.transferAmount)},
             {headers: req_headers}
         )
             .then(response => {
@@ -55,9 +56,9 @@ class Transfer extends React.Component{
                 alert("Money Transfer success");
 
             }).catch (error => {
-                 alert("Money Transfer Fail!! ---" + (error.response.data.msg));
-                console.log(error.response.data.msg);
-            });
+            alert("Money Transfer Fail!! ---" + (error.response.data.msg));
+            console.log(error.response.data.msg);
+        });
 
         this.setState({transferAmount: 0})
     }
@@ -98,6 +99,14 @@ class Transfer extends React.Component{
         const accountChoice = document.getElementById("accountChoice");
         accountChoice.style.display = 'block';
     }
+    innerTransfer = () =>{
+        this.setState({ifInnerTransfer: true})
+        this.choiceHandler()
+    }
+    outterTransfer = () =>{
+        this.setState({ifInnerTransfer: false})
+        this.choiceHandler()
+    }
 
     previousHanlder = () => {
         const bankChoice = document.getElementById("bankChoice");
@@ -123,21 +132,21 @@ class Transfer extends React.Component{
     }
 
 
-    // renderAccount2() {
-    //     const { classes } = this.props;
-    //     if (this.props.myInfo !== " ") {
-    //         return this.props.myInfo.accounts.map(account => {
-    //             return (
-    //                 <ExpansionPanelDetails onClick={this.selectAccountTwo}>
-    //                     <Button className={classes.button} onClick={this.selectAccount}
-    //                             onClick={()=>this.setState({selectTo:account.account_number})}>
-    //                         {account.alias}: {account.account_number}</Button>
-    //                 </ExpansionPanelDetails>
-    //
-    //             );
-    //         });
-    //     }else { return (<div/>);}
-    // }
+    renderAccount2() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                return (
+                    <ExpansionPanelDetails onClick={this.selectAccountTwo}>
+                        <Button className={classes.button} onClick={this.selectAccount}
+                                onClick={()=>this.setState({selectTo:account.account_number})}>
+                            {account.alias}: {account.account_number}</Button>
+                    </ExpansionPanelDetails>
+
+                );
+            });
+        }else { return (<div/>);}
+    }
 
     render() {
         const {classes} = this.props;
@@ -167,74 +176,89 @@ class Transfer extends React.Component{
                                     you want to transfer to.
                                 </Typography>
                                 <br/>
-                                <button onClick={this.choiceHandler}>Chase Bank Card Transfer</button>
+                                <button onClick={this.innerTransfer}>Chase Bank Card Transfer</button>
                                 <br/>  <br/>
-                                <button onClick={this.choiceHandler}>Other Bank(s) Card Transfer</button>
+                                <button onClick={this.outterTransfer}>Other Bank(s) Card Transfer</button>
                             </Paper>
                         </div>
                         <div id="accountChoice" style={{display:'none', margin: 'auto'}}>
                             <Paper className={classes.innerPaper2} style={{position: 'flex'}}>
                                 <br/>
-                            <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
+                                <Typography variant="h6" color = "secondary"><strong>Transfer From:</strong></Typography>
                                 <br/>
-                            <ExpansionPanel expanded={this.state.open}>
+                                <ExpansionPanel expanded={this.state.open}>
 
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
-                                    <Typography
-                                        className={classes.heading}
-                                        id="firstLabel"
-                                    >Select Account</Typography>
-                                </ExpansionPanelSummary>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                                        <Typography
+                                            className={classes.heading}
+                                            id="firstLabel"
+                                        >Select Account</Typography>
+                                    </ExpansionPanelSummary>
 
-                                {this.renderAccount1()}
-                            </ExpansionPanel>
+                                    {this.renderAccount1()}
+                                </ExpansionPanel>
                                 <br/>
 
-                            <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
+                                <Typography variant="h6" color = "secondary"><strong>Transfer To:</strong></Typography>
                                 <br/>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="accountNumber"
-                                    placeholder="Other Bank Account Number"
-                                    value={this.state.selectTo}
-                                    onChange ={e=>this.setState({selectTo:e.target.value})}
-                                />
+                                {this.state.ifInnerTransfer ? (
+                                    <ExpansionPanel expanded={this.state.open2}>
 
-                            <br/>
-                            <div>
+                                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
+                                            <Typography
+                                                className={classes.heading}
+                                                id="firstLabel"
+                                            >Select Account</Typography>
+                                        </ExpansionPanelSummary>
 
-                                <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
-                                    <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:</Typography>
+                                        {this.renderAccount2()}
+                                    </ExpansionPanel>
+                                ) : (
                                     <input
-                                        type="number"
-                                        className={classes.button}
-                                        name="amount"
-                                        step="0.01"
-                                        placeholder= {this.state.transferAmount}
-                                        value = {this.state.transferAmount}
-                                        onChange ={e=>this.setState({transferAmount:e.target.value})}
+                                        type="text"
+                                        className="form-control"
+                                        name="accountNumber"
+                                        placeholder="Other Bank Account Number"
+                                        value={this.state.selectTo}
+                                        onChange ={e=>this.setState({selectTo:e.target.value})}
                                     />
-                                </div>
-                            </div>
-                            <br/>
-                            <div>
+                                )}
+
+
                                 <br/>
-                                <Button variant="contained" color="primary"
-                                    className={classes.button}
-                                    onClick={this.previousHanlder}
-                                    //style={{marginLeft: '250px', width: '15%', float: 'left'}}
-                                >
-                                    Previous
-                                </Button>
-                                <Button variant="contained" color="primary"
-                                    className={classes.button}
-                                    //onClick={this.handleOpen}
-                                        onClick={this.onSubmit}
-                                    //style={{marginRight: '250px', width: '15%', float: 'right'}}>
-                                   > Next
-                                </Button>
-                            </div>
+                                <div>
+
+                                    <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
+                                        <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:</Typography>
+                                        <input
+                                            type="number"
+                                            className={classes.button}
+                                            name="amount"
+                                            step="0.01"
+                                            placeholder= {this.state.transferAmount}
+                                            value = {this.state.transferAmount}
+                                            onChange ={e=>this.setState({transferAmount:e.target.value})}
+                                        />
+                                    </div>
+                                </div>
+                                <br/>
+                                <div>
+                                    <br/>
+                                    <Button variant="contained" color="primary"
+                                            className={classes.button}
+                                            onClick={this.previousHanlder}
+                                        //style={{marginLeft: '250px', width: '15%', float: 'left'}}
+                                    >
+                                        Previous
+                                    </Button>
+                                    <Button variant="contained" color="primary"
+                                            className={classes.button}
+                                        //onClick={this.handleOpen}
+                                            onClick={this.onSubmit}
+                                        //style={{marginRight: '250px', width: '15%', float: 'right'}}>
+                                    > Next
+                                    </Button>
+                                </div>
                             </Paper>
                         </div>
                     </div>
