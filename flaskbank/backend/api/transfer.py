@@ -5,6 +5,7 @@ transfer_bp = am.Blueprint('transfer', __name__)
 
 
 @transfer_bp.route('/transfer', methods=['POST'])
+@am.jwt_required
 def transfer():
     data = am.request.get_json()
 
@@ -17,13 +18,23 @@ def transfer():
         amount = data['amount']
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
-
+    account_from = str(account_from)
+    account_to = str(account_to)
     if str(account_from) == str(account_to):
         return am.jsonify({'msg': 'accounts cannot be the same'}), 400
 
+    if not am.clients.find_one({'accounts.account_number': account_from}) or \
+            not \
+            am.clients.find_one({'accounts.account_number': account_to}):
+        return am.jsonify({'msg': 'Account does not exist'})
+
+    current_user = am.get_jwt_identity()['username']
+
     from_description = f'Transfer to {account_to[-4:]}'
-    acc_from = withdraw({'$exists': True}, account_from, amount,
+    acc_from = withdraw(current_user, account_from, amount,
                         from_description)
+    if not acc_from:
+        return am.jsonify({'msg': 'withdraw from account failed'}), 409
 
     to_description = f'Transfer from {account_from[-4:]}'
     if account_to[0] == '4':
