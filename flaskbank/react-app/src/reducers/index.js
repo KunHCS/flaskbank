@@ -4,7 +4,8 @@ import {authenticationRequestReducer, authenticationStateReducer,authenticationU
 import {profileReducer} from "./ProfileReducer/profileReducer";
 import {accountDetailsReducer} from "./AccountDetailReducer/accountDetailsReducer";
 import {imageUpLoadReducer} from "./ImageUpLoadReducer/imageUpLoadReducer";
-import {windowOpenCloseReducer} from "./WindowOpenCloseReducer/windowOpenCloseReducer"
+import {windowOpenCloseReducer} from "./WindowOpenCloseReducer/windowOpenCloseReducer";
+import {ManagerQueryResultReducer} from "./ManagerQueryResultReducer/ManagerQueryResultReducer";
 
 export default combineReducers( {
     myInfo   :  profileReducer,
@@ -14,6 +15,7 @@ export default combineReducers( {
     myImage  :  imageUpLoadReducer,
     popWindowState : windowOpenCloseReducer,
     userType : authenticationUserTypeReducer,
+    queryResult : ManagerQueryResultReducer,
 });
 
 

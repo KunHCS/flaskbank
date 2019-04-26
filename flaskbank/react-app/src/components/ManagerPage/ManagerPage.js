@@ -20,6 +20,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from "@material-ui/core/InputBase";
 import {fade} from "@material-ui/core/styles/colorManipulator";
 import Paper from '@material-ui/core/Paper';
+import {saveQueryResult,cleanQueryResult} from "../../actions/ManagerQueryAction/ManagerQueryAction";
 
 
 class ManagerPage extends React.Component {
@@ -90,9 +91,11 @@ class ManagerPage extends React.Component {
                 console.log(response);
                 console.log(response.data.results.length )
                 if (response.data.results.length == 0) {
+                    this.props.cleanQueryResult();
                     alert("Nothing Found");}
                 else {
                     alert("Query Success")
+                    this.props.saveQueryResult(response.data.results);
                 }
 
             }).catch(error => {
@@ -259,4 +262,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps, {getProfile, accountDetailAction})(withStyles(styles)(ManagerPage));
+export default connect(mapStateToProps, {getProfile, accountDetailAction,saveQueryResult,cleanQueryResult})(withStyles(styles)(ManagerPage));
