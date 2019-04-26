@@ -34,3 +34,7 @@ export const CLIENT   ="client";
 export const WINDOWSTATE_1 = "window_state1";
 export const WINDOWSTATE_2 = "window_state2";
 export const WINDOWSTATE_CLEAN = "window_state_clean";
+
+
+export const QUERY = "query"
+export const CLEAN_QUERY = "clean_query"
