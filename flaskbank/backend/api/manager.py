@@ -1,13 +1,18 @@
 from .. import all_module as am
 from .utils import make_serializable
+import re
 
 manager_bp = am.Blueprint('manager', __name__)
 
 
+@manager_bp.route('/manager/query/<string:attribute>/', defaults={
+    'query_param': ''}, methods=['GET'])
 @manager_bp.route('/manager/query/<string:attribute>/<string:query_param>',
                   methods=['GET'])
 @am.jwt_required
 def manager_query(attribute, query_param):
+    if not query_param:
+        return am.jsonify({'msg': 'Empty query'}), 422
     user_type = am.get_jwt_identity()['user_type']
     if user_type != 'manager':
         return am.jsonify({'msg': 'unauthorized'}), 401
@@ -23,9 +28,10 @@ def manager_query(attribute, query_param):
         query = 'first_name'
     elif query == 'last':
         query = 'last_name'
-
-    result = am.clients.find({query: query_param}, {'_id': False,
-                                                    'password': False})
+    query_param = query_param.lower()
+    regex = re.compile(fr'.*{query_param}.*', re.IGNORECASE)
+    result = am.clients.find({query: regex}, {'_id': False,
+                                              'password': False})
     out = []
     for item in result:
         make_serializable(item)
