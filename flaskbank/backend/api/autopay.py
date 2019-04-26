@@ -41,8 +41,17 @@ def autopay_route():
             not am.clients.find_one({'accounts.account_number': to_acc}):
         return am.jsonify({'msg': 'account does not exist'}), 400
     amount = round(amount, 2)
-    client = am.clients.find_one({'username': current_user})
+    exist = am.clients.find_one({'$and': [{'username': current_user},
+                                          {'auto_pay.from': from_acc}]},
+                                {'auto_pay': {'$elemMatch': {
+                                    'from': from_acc}}})
+    if exist:
+        print(exist)
+        scheduler.remove_job(exist['auto_pay'][0]['job_id'], jobstore='mongo')
+        am.clients.update_one({'username': current_user},
+                              {'$pull': {'auto_pay': {'from': from_acc}}})
 
+    client = am.clients.find_one({'username': current_user})
     jobs = client.get('auto_pay', [])
 
     check = hl.md5((from_acc + to_acc + str(amount)).encode()).hexdigest()
@@ -90,7 +99,6 @@ def get_autopay():
 @autopay_bp.route('/autopay/stop', methods=['DELETE'])
 @am.jwt_required
 def remove_autopay():
-
     current_user = am.get_jwt_identity()['username']
     pre_update = am.clients.find_one_and_update(
         {'username': current_user},
