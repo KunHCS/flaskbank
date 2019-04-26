@@ -126,11 +126,11 @@ class ManagerPage extends React.Component {
                 <Navigation/>
                 <Search/>
                 <Container>
-                    <div class="row">
-                        <Paper className="paper" style={detailStyle}>
-                            <form onSubmit={this.onSubmit}>
-                                <div className={classes.grow} style={{}}/>
 
+                    <Paper className="paper" style={detailStyle}>
+                        <form onSubmit={this.onSubmit}>
+                            <div className={classes.grow}/>
+                            <div className="row">
                                 <div className={classes.search}>
                                     <div className={classes.searchIcon}>
                                         <SearchIcon/>
@@ -146,20 +146,21 @@ class ManagerPage extends React.Component {
                                 </div>
                                 <Button type="submit" style={{visibility: "hidden"}}/>
 
+                                <div><Typography variant="h8">Select Attribute to Query Information--></Typography></div>
                                 <div>
-                                    <Typography variant="h8">Select Attribute to Query Information</Typography>
                                     <select onChange={e => this.setState({value: e.target.value})}>
-                                        <option className="dropdown-item" value="email">Email</option>
-                                        <option className="dropdown-item" value="username">UserName</option>
-                                        <option className="dropdown-item" value="first">First Name</option>
-                                        <option className="dropdown-item" value="last">Last Name</option>
-                                        <option className="dropdown-item" value="account">Account</option>
+                                        <option value="email">Email</option>
+                                        <option value="username">UserName</option>
+                                        <option value="first">First Name</option>
+                                        <option value="last">Last Name</option>
+                                        <option value="account">Account</option>
                                     </select>
                                 </div>
-                            </form>
-                        </Paper>
+                            </div>
+                        </form>
+                    </Paper>
 
-                    </div>
+
                     <hr/>
                     {this.renderAccount()}
                 </Container>
