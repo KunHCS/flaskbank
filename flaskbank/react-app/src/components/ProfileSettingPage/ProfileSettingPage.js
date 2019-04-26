@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import axios from "axios";
+import * as ACTION from "../../static/action_type";
 
 
 
@@ -31,7 +32,7 @@ class Statement extends React.Component {
         axios.post('/api/client/update',
             { first_name: this.state.first_name,
                    last_name:  this.state.last_name,
-                   username: this.state.username,
+                   account_name: this.state.username,
                    password: this.state.password,
                    email:    this.state.email,
                 },
@@ -52,7 +53,7 @@ class Statement extends React.Component {
         console.log("I am in the Statement page");
         console.log(this.props);
         const {first_name,last_name,email,username} = this.props.myInfo;
-        //const {first_name,last_name,email,username} = "";
+        //const {first_name,last_name,email,account_name} = "";
 
 
 
@@ -93,10 +94,10 @@ class Statement extends React.Component {
                                     {/*<input*/}
                                         {/*type="text"*/}
                                         {/*className="form-control"*/}
-                                        {/*name="username"*/}
-                                        {/*placeholder={username}*/}
-                                        {/*value={this.state.username}*/}
-                                        {/*onChange ={e=>this.setState({username:e.target.value})}*/}
+                                        {/*name="account_name"*/}
+                                        {/*placeholder={account_name}*/}
+                                        {/*value={this.state.account_name}*/}
+                                        {/*onChange ={e=>this.setState({account_name:e.target.value})}*/}
                                     {/*/>*/}
                                 {/*</div>*/}
 
@@ -138,20 +139,39 @@ class Statement extends React.Component {
     }
 }
 
-const ProfileSettingPage = (props) => {
-    return (
-        <div >
-            <Navigation/>
-            <Search/>
-            <Container>
-                <InnerNavigationBar active={activeElement}/>
-                <Statement myInfo={props.myInfo}
-                           myKey ={props.myKey}
-                           />
-            </Container>
-        </div>
+class ProfileSettingPage extends React.Component {
 
-    );
+    render() {
+
+        if (this.props.userType == ACTION.CLIENT) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <InnerNavigationBar active={activeElement}/>
+                        <Statement myInfo={this.props.myInfo}
+                                   myKey={this.props.myKey}
+                        />
+                    </Container>
+                </div>
+
+            );
+        }
+        else if (this.props.userType == ACTION.MANAGER) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <Statement myInfo={this.props.myInfo}
+                                   myKey={this.props.myKey}
+                        />
+                    </Container>
+                </div>
+            )
+        }
+    }
 }
 
 

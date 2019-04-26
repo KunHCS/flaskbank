@@ -10,66 +10,80 @@ import Paper from '@material-ui/core/Paper';
 import * as ACTION from "../../static/action_type";
 
 
-class AccountDetails extends React.Component{
+class AccountDetails extends React.Component {
 
-    state={
-        myCurrentAccount : "",
+    state = {
+        myCurrentAccount: "",
     };
 
     componentDidMount() {
-        switch(this.props.myDetail) {
-            case ACTION.CHECKING_DETAIL : this.setState({myCurrentAccount : this.props.myInfo.accounts[0]} )
-                break;
-            case ACTION.SAVING_DETAIL   : this.setState({myCurrentAccount : this.props.myInfo.accounts[1]} )
-                break;
-            case ACTION.CREDIT_DETAIL   : this.setState({myCurrentAccount : this.props.myInfo.accounts[2]} )
-                break;
-            default : this.setState({myCurrentAccount : null} )
-        }
-
+        this.setState({myCurrentAccount: this.props.myDetail})
     }
 
 
     renderList() {
-        return this.state.myCurrentAccount.transactions.map(post =>{
+        return this.state.myCurrentAccount.transactions.map(post => {
             return (
-                <div className ="item" key={post.time}>
+                <div className="item" key={post.time}>
                     <i className="large left aligned icon user"/>
-                    <div className ="content">
+                    <div className="content">
                         <div className="description">
                             <h4>Amount: {post.amount} | <span/>
-                             Type: {post.description} | <span/>
-                             Time:  {post.time}</h4>
+                                Type: {post.description} | <span/>
+                                Time: {post.time}</h4>
+                        </div>
                     </div>
-                </div>
                 </div>
             );
         });
 
     }
+
     render() {
         console.log("I am in AccountDetails");
         console.log(this.props.myDetail);
         console.log(this.state.myCurrentAccount);
 
 
-        if ( (this.state.myCurrentAccount !== "")) {
+        if ((this.state.myCurrentAccount !== "" && this.props.userType == ACTION.CLIENT)) {
             return (
-            <div>
-                <Navigation/>
-                <Search/>
-                <Container>
-                    <InnerNavigationBar active={activeElement}/>
-                    <Paper className="paper" style={detailStyle}>
-                        <h1>{this.state.myCurrentAccount.alias} Details </h1>
-                        <div>
-                        {this.renderList()}
-                        </div>
-                    </Paper>
-                </Container>
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <InnerNavigationBar active={activeElement}/>
+                        <Paper className="paper" style={detailStyle}>
+                            <h1>{this.state.myCurrentAccount.alias} Details </h1>
+                            <div>
+                                {this.renderList()}
+                            </div>
+                        </Paper>
+                    </Container>
 
-            </div>
-        ); } else { return (<div/>);}
+                </div>
+            );
+        } else if ((this.state.myCurrentAccount !== "" && this.props.userType === ACTION.MANAGER)) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <InnerNavigationBar active={activeElement}/>
+                        <Paper className="paper" style={detailStyle}>
+                            <h1>{this.state.myCurrentAccount.alias} Details </h1>
+                            <div>
+                                {this.renderList()}
+                            </div>
+                        </Paper>
+                    </Container>
+
+                </div>
+            );
+        } else {
+            return (<div/>);
+        }
+
+
     }
 
 
@@ -85,10 +99,10 @@ const activeElement = {
 
 const detailStyle = {
     height: 'auto',
-    width:  '100%',
+    width: '100%',
     fontWeight: 'bold',
-    WebkitBorderRadius:'10px 10px 10px 10px',
-    textAlign:'center',
+    WebkitBorderRadius: '10px 10px 10px 10px',
+    textAlign: 'center',
     font: 'Helvetica',
     margin: 'auto',
 
@@ -97,7 +111,6 @@ const detailStyle = {
 AccountDetails.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 
 const mapStateToProps = (state) => {

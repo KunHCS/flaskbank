@@ -5,9 +5,7 @@ import Container from "../FrameWorkUnity/Container";
 import Paper from '@material-ui/core/Paper';
 import axios from "axios";
 import {connect} from "react-redux";
-
-
-
+import {Redirect} from "react-router-dom";
 
 
 const CloseAccountPage = () => {
@@ -29,6 +27,7 @@ class CloseAccountDetails extends React.Component {
         username: "",
         email: "",
         password: "",
+        flag:false,
     };
 
 
@@ -42,23 +41,27 @@ class CloseAccountDetails extends React.Component {
                           password: this.state.password,
                           email:this.state.email}} )
             .then(response => {
-                alert("Account Closed");
+                alert("Account Successfully Closed");
                 console.log(response);
+                this.setState({flag:true})
 
             }).catch (error => {
                 console.log(error.response.data.msg);
                 alert("Fail to Close the Account");
             });
 
-
     }
-
 
 
     render(){
         console.log("I m in CloseAccountDetails Page")
         console.log(this.state.username);
         console.log(this.state.password);
+
+        if (this.state.flag == true) {
+            return (<Redirect to={'/'}/>)
+        }
+
         return (
                 <Paper className ="paper" style={paperStyle} >
                     <div className="container">

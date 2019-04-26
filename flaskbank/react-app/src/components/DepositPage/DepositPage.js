@@ -10,9 +10,12 @@ import InnerNavigationBar from "../FrameWorkUnity/StaticNavBar"
 import {connect} from "react-redux";
 import ImageUpLoader from "../FrameWorkUnity/ImageUpLoader/ImageUpLoader"
 import {imageUpLoadAction_Clean} from "../../actions/ImageUpLoadAction/ImageUpLoadAction_Check";
-import * as ACTION from "../../static/action_type";
 import axios from "axios";
-
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import * as ACTION from "../../static/action_type";
 
 const styles = theme => ({
     button: {
@@ -57,24 +60,20 @@ const styles = theme => ({
 
 class DepositPage extends React.Component{
     state = {
-        payAmount_checking: 0,
-        payAmount_saving: 0,
-        checkingAccountNumber :0,
-        savingAccountNumber : 0,
+        payAmount: 0,
+        AccountNumber :"You need select a checking account",
+        open : false,
+
     };
 
-
     componentDidMount() {
-        this.setState({checkingAccountNumber:  this.props.myInfo.accounts[0].account_number})
-        this.setState({savingAccountNumber:  this.props.myInfo.accounts[1].account_number})
     }
 
 
-
-    onSubmit1 =(e) => {
+    onSubmit =(e) => {
         e.preventDefault();
 
-        if(this.state.payAmount_checking === 0) {
+        if(this.state.payAmount === 0) {
             alert("Amount Can't be 0, try again");
             return
         }
@@ -86,81 +85,70 @@ class DepositPage extends React.Component{
 
         console.log('it just submit');
         console.log(e);
-        console.log(this.state.payAmount_checking);
+        console.log(this.state.payAmount);
         console.log(this.props);
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
-        // axios.post('/api/deposit',
-        //     {amount: parseFloat(this.state.payAmount_checking),
-        //         account_num: this.state.checkingAccountNumber},
-        //     {headers: req_headers}
-        // )
-        //     .then(response => {
-        //         console.log(response);
-        //
-        //     }).catch (error => console.log(error.response.data.msg));
 
         let formData = new FormData();
 
         formData.append("image", this.props.myImage.check);
-        formData.append("account", this.state.checkingAccountNumber);
-        formData.append("amount", parseFloat(this.state.payAmount_checking));
+        formData.append("account", this.state.AccountNumber);
+        formData.append("amount", parseFloat(this.state.payAmount));
 
         axios.post('api/deposit/check', formData, {headers: req_headers}
         ).then(response => {
            console.log(response);
-            alert("Checking Account Deposit Success");
+            alert("Account Deposit Success");
         }).catch(error => {
             console.log(error.response);
-            alert("Checking Account Deposit Fail");
+            alert("Account Deposit Fail");
         });
 
-        this.setState({payAmount_checking: 0})
+        this.setState({payAmount: "Please Enter Your Amount"})
         this.props.imageUpLoadAction_Clean()
     }
 
-    onSubmit2 =(e) => {
-        e.preventDefault();
 
-        if(this.state.payAmount_saving === 0) {
-            alert("Amount Can't be 0, try again");
-            return
+    selectAccountOne = (event) =>{
+        const labelFrom = document.getElementById('firstLabel');
+        labelFrom.innerHTML = event.currentTarget.innerHTML;
+        this.setState({open: false});
+    };
+
+
+    panOneHandler = () =>{
+        if(this.state.open){
+            this.setState({open: false});
         }
-
-        if(this.props.myImage.save === "") {
-            alert("The Check Image at Deposit to Saving Can't be Empty")
-            return
+        else{
+            this.setState({open: true});
         }
+    };
 
-        console.log('it just submit222');
-        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+    renderAccountOne() {
+        const { classes } = this.props;
+        if (this.props.myInfo !== " ") {
+            return this.props.myInfo.accounts.map(account => {
+                if (account.type !== ACTION.CREDIT ) {
+                    return (
+                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                            <Button className={classes.button}
+                                    onClick={() => this.setState({AccountNumber: account.account_number})}>
+                                {account.alias}: {account.account_number} --(Type: {account.type})</Button>
+                        </ExpansionPanelDetails>
 
-        let formData = new FormData();
+                    );
+                }
 
-        formData.append("image", this.props.myImage.save);
-        formData.append("account", this.state.savingAccountNumber);
-        formData.append("amount", parseFloat(this.state.payAmount_saving));
-
-
-        axios.post('api/deposit/check', formData, {headers: req_headers}
-        ).then(response => {
-            console.log(response);
-            alert("Saving Account Deposit Success");
-        }).catch(error => {
-            alert("Saving Account Deposit Fail");
-            console.log(error.response);
-        });
-
-        this.setState({payAmount_save: 0})
-        this.props.imageUpLoadAction_Clean()
-
-
+            });
+        }
+        else { return (<div/>);}
     }
 
     render() {
         const {classes} = this.props;
-
         return (
             <div >
                 <Navigation/>
@@ -169,22 +157,32 @@ class DepositPage extends React.Component{
                     <InnerNavigationBar active={activeElement}/>
                     <div className={classes.bgDiv}>
                         <div className={classes.top}>
-                            <div style={{float: 'left', width:"50%"}}>
-                              <Typography variant="h4" color="secondary"><strong>Deposit to Checking Account</strong></Typography>
-                                <Typography variant="subtitle2">Checking Account -{ this.state.checkingAccountNumber}</Typography>
+                            <div style={{float: 'left', width:"60%"}}>
+                              <Typography variant="h4" color="secondary"><strong>Deposit to Account</strong></Typography>
+                                <Typography variant="subtitle2">Account: { this.state.AccountNumber}</Typography>
                             </div>
                             <div style={{float: 'right', width:"30%"}}>
-                                <form onSubmit={this.onSubmit1}>
-                                <Typography variant="h5"><strong>Amount</strong></Typography>
+                                <form onSubmit={this.onSubmit}>
+                                <Typography variant="h6">Amount:</Typography>
                                 <input
                                     type="number"
                                     className="form-control"
                                     name="amount"
                                     step="0.01"
                                     placeholder= "$ Enter the Amount"
-                                    value = {this.state.payAmount_checking}
-                                    onChange ={e=>this.setState({payAmount_checking:e.target.value})}
+                                    value = {this.state.payAmount}
+                                    onChange ={e=>this.setState({payAmount:e.target.value})}
                                 />
+                                    <hr/>
+                                    <Typography variant="h6">Select Account:</Typography>
+
+                                    <ExpansionPanel expanded={this.state.open}>
+                                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panOneHandler}>
+                                            <Typography className={classes.heading} id="firstLabel">Select Account</Typography>
+                                        </ExpansionPanelSummary>
+                                        {this.renderAccountOne()}
+
+                                    </ExpansionPanel>
                                 <Button
                                     className={classes.button}
                                     type = "submit"
@@ -198,50 +196,13 @@ class DepositPage extends React.Component{
                                 <div style={{float: 'left', width:"50%"}}>
                                     <ImageUpLoader checkType = {ACTION.CHECKING}/>
                                 </div>
-
                         </div>
-
-                        <div className={classes.bottom}>
-                            <div style={{float: 'left', width:"50%"}}>
-                              <Typography variant="h4" color="secondary"><strong>Deposit to Saving Account</strong></Typography>
-                                <Typography variant="subtitle2">Saving Account -{this.state.savingAccountNumber}</Typography>
-                            </div>
-                            <div style={{float: 'right', width:"30%"}}>
-                                <form onSubmit={this.onSubmit2}>
-                                <Typography variant="h5"><strong>Amount</strong></Typography>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    name="amount"
-                                    step="0.01"
-                                    placeholder= "$ Enter the Amount"
-                                    value = {this.state.payAmount_saving}
-                                    onChange ={e=>this.setState({payAmount_saving:e.target.value})}
-                                />
-                                <Button
-                                    className={classes.button}
-                                    type = "submit"
-                                    variant="contained"
-                                    color="primary"
-                                >
-                                    Submit
-                                </Button>
-                                </form>
-                            </div>
-                            <div style={{float: 'left', width:"50%"}}>
-                                <ImageUpLoader checkType = {ACTION.SAVING}/>
-                            </div>
-                        </div>
-
                     </div>
-
                 </Container>
             </div>
 
         );
     }
-
-
 }
 
 const activeElement = {
@@ -254,7 +215,6 @@ const activeElement = {
 DepositPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 const mapStateToProps = (state) => {
     console.log("I'm in map State to Props");

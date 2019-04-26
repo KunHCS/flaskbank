@@ -10,33 +10,38 @@ import Button from '@material-ui/core/Button'
 import ChangePassword from "../ChangePassword/ChangePassword";
 import {connect} from "react-redux";
 import {loginAction,logInRequest} from "../../actions/LoginAction/loginAction";
+import jwt_decode from "jwt-decode";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
 import PopUpWindow from "../FrameWorkUnity/DynamicPopUpWindow/PopUpWindow";
+import {changeUserType} from '../../actions/ChangeUserTypeAction/changeUserTypeAction';
+import * as ACTION from "../../static/action_type";
 
 
 
-const mainPage = (props) => {
-    console.log('I am in main page props ');
-    console.log(props);
-      if (props.auth == false) {
-        return (
-            <div>
-                <Navigation/>
-                <Search/>
-                <Container>
-                    <Login props={props}/>
-                </Container>
-            </div>
+class mainPage extends React.Component {
 
-        );}
-      else return (
-          <Redirect to={'/overview'} />
-      )
-
-
-
+    render() {
+        console.log('I am in main page props ');
+        console.log(this.props);
+        if (this.props.auth == false) {
+            return (
+                <div>
+                    <Navigation/>
+                    <Search/>
+                    <Container>
+                        <Login props={this.props}/>
+                    </Container>
+                </div>
+            );
+        }
+        else if (this.props.userType == ACTION.MANAGER && this.props.auth == true) {
+            return (<Redirect to={'/manager'}/>)
+        }
+        else if (this.props.userType == ACTION.CLIENT && this.props.auth == true) {
+            return (<Redirect to={'/overview'}/>)}
+    }
 }
 
 
@@ -66,6 +71,8 @@ class Login extends React.Component {
             password: this.state.password
         }).then(response => {
             if (response.status === 201) {
+                console.log(jwt_decode(response.data.access_token).identity.user_type);
+                this.props.props.changeUserType(jwt_decode(response.data.access_token).identity.user_type)
                 this.props.props.logInRequest(response)
                 this.props.props.logInAction()
             }
@@ -84,14 +91,18 @@ class Login extends React.Component {
         return (
           <div>
               <div> <img src={cards} alt="card" style = {center}/> </div>
-              {/*<div> <img src={card2} alt="card" style = {center2}/> </div>*/}
-              {/*<div> <img src={card3} alt="card" style = {center3}/> </div>*/}
-              <p style= {para}> </p>
+              <div> {<p style= {para}> </p>}
+                  {/*<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>*/}
+              </div>
+
+
+
+
             <Paper style ={paperStyle}>
             <div className ="wrapper fadeInDown" style={wrapper}>
             <div id="formContent">
                 <form onSubmit={this.onSubmit}>
-                    <Typography variant="h6" >Sign On</Typography>
+                    <Typography variant="h6" >Sign In</Typography>
                         <div style={{margin: '50px'}}>
                             <input
                                 style={{margin: '20px'}}
@@ -110,10 +121,8 @@ class Login extends React.Component {
                         </div>
 
                         <Button variant="contained" type="submit" style={{margin:'10px'}}>
-                              Sign On
+                              Sign In
                         </Button>
-
-
 
                         <div id="formFooter" style={formFooter}>
                             <a className="underlineHover" href= "#" onClick={this.handleOpen}>Forgot Password?</a>
@@ -143,12 +152,12 @@ const wrapper = {
     alignItems: 'center',
     flexDirection:'column',
     justifyContent:'center',
-    minHeight: '100%',
+    minHeight: '150%',
     width:'100%',
     padding: '20px',
     border: '3px solid blue',
     opacity: '.9',
-    paddingTop: '35px',
+    paddingTop: '20px',
     WebkitBorderRadius:'10px 10px 10px 10px',
 }
 
@@ -163,15 +172,15 @@ const formContent = {
 }
 
 const formFooter = {
-    position: 'relative',
+    position: 'flex',
     padding:'25px',
     textAlign:'center',
     WebkitBorderRadius:'10px 10px 10px 10px',
     borderRadius: '10px 10px 10px 10px',
 }
 const paperStyle = {
-    height: '20%',
-    width:  '60%',
+    height: '80%',
+    width:  '40%',
     boxShadow: '5px 1px 10px, 5px 1px 10px',
     WebkitBorderRadius:'10px 10px 10px 10px',
     textAlign:'center',
@@ -182,43 +191,18 @@ const paperStyle = {
 const center = {
     margin: '0',
     position: 'absolute',
-    paddingTop: '15px',
+    paddingTop: '20px',
     whiteSpace: 'nowrap',
     paddingLeft:'200px',
     paddingBottom: '30px',
-    height:'40%',
+    height:'30%',
     width: '50%',
     opacity: '0.98'
 }
 
-const center2 = {
-    margin: '50px',
-    position: 'absolute',
-    paddingTop: '20px',
-    whiteSpace: 'nowrap',
-    paddingLeft:'225px',
-    paddingBottom: '30px',
-    height:'25%',
-    width: '38%',
-    opacity: '0.98'
-}
-
-const center3 = {
-    margin: '100px',
-    position: 'absolute',
-    paddingTop: '20px',
-    whiteSpace: 'nowrap',
-    paddingLeft:'250px',
-    paddingBottom: '30px',
-    height:'25%',
-    width: '40%',
-    opacity: '0.98'
-
-}
-
 const para = {
-    paddingTop: '380px',
-    position: 'relative',
+    paddingTop: '250px',
+    position: 'flex',
 }
 
 
@@ -228,4 +212,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,{logInAction: loginAction,logInRequest})(mainPage);
+export default connect(mapStateToProps,{logInAction: loginAction,logInRequest,changeUserType})(mainPage);

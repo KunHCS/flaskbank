@@ -4,6 +4,7 @@ import Search from "../FrameWorkUnity/Search";
 import Container from "../FrameWorkUnity/Container";
 import axios from "axios";
 import Paper from '@material-ui/core/Paper';
+import {Redirect} from "react-router-dom";
 
 
 
@@ -21,61 +22,51 @@ const openAccountPage = () => {
 
 
 
-const register = newUser => {
-    return axios
-        .post("/api/register", {
-            first_name: newUser.first_name,
-            last_name: newUser.last_name,
-            email: newUser.email,
-            username: newUser.username,
-            password: newUser.password
-        })
-        .then(response => {
-            console.log(response);
-            alert("New Account Created");
-        })
-        .catch(error => {
-        alert("Register Fail, Please Try Again");
-        this.props.props.logInRequest(error.response)
-
-    });
-};
-
 class Register extends Component {
-    constructor() {
-        super();
-        this.state = {
+
+        state = {
             first_name: "",
             last_name: "",
             username: "",
             email: "",
             password: "",
-            errors: {}
-        };
+            errors: {},
+            flag: false,
+        }
 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onChange(e) {
+    onChange =(e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    onSubmit(e) {
+
+    onSubmit =(e) =>{
         e.preventDefault();
-
-        const newUser = {
-            first_name :  this.state.first_name,
-            last_name  :  this.state.last_name,
-            email      :  this.state.email,
-            username   :  this.state.username,
-            password   :  this.state.password
-        };
-
-        register(newUser);
-    }
+        console.log("i just submit")
+       axios .post("/api/register", {
+                first_name: this.state.first_name,
+                last_name:  this.state.last_name,
+                email:      this.state.email,
+                username:   this.state.username,
+                password:   this.state.password
+            })
+            .then(response => {
+                console.log(response);
+                alert("New Account Successfully Created");
+                this.setState({flag:true})
+            })
+            .catch(error => {
+                console.log(error.response.data.msg)
+                alert("Register Fail, Please Try Again");
+                //this.props.logInRequest(error.response)
+            });
+    };
 
     render() {
+
+        if (this.state.flag == true) {
+            return (<Redirect to={'/'}/>)
+        }
+
         return (
             <Paper className ="paper" style={paperStyle} >
                 <div className="container">
@@ -86,6 +77,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">First name</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="first_name"
@@ -97,6 +89,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">Last name</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="last_name"
@@ -109,6 +102,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">Username</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="username"
@@ -121,6 +115,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="email">Email address</label>
                                     <input
+                                        required
                                         type="email"
                                         className="form-control"
                                         name="email"
@@ -132,6 +127,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <input
+                                        required
                                         type="password"
                                         className="form-control"
                                         name="password"

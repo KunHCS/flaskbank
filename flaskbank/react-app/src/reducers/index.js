@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux'
 import * as ACTION from "../static/action_type";
-import {authenticationRequestReducer, authenticationStateReducer} from "./AuthenticationReducer/authenticationReducer";
+import {authenticationRequestReducer, authenticationStateReducer,authenticationUserTypeReducer} from "./AuthenticationReducer/authenticationReducer";
 import {profileReducer} from "./ProfileReducer/profileReducer";
 import {accountDetailsReducer} from "./AccountDetailReducer/accountDetailsReducer";
 import {imageUpLoadReducer} from "./ImageUpLoadReducer/imageUpLoadReducer";
-
+import {windowOpenCloseReducer} from "./WindowOpenCloseReducer/windowOpenCloseReducer";
+import {ManagerQueryResultReducer} from "./ManagerQueryResultReducer/ManagerQueryResultReducer";
+import {clientInformation} from "./ClientsInformation/clientsInformation";
 
 export default combineReducers( {
     myInfo   :  profileReducer,
@@ -12,6 +14,11 @@ export default combineReducers( {
     myKey    :  authenticationRequestReducer,
     myDetail :  accountDetailsReducer,
     myImage  :  imageUpLoadReducer,
+    popWindowState : windowOpenCloseReducer,
+    userType : authenticationUserTypeReducer,
+    queryResult : ManagerQueryResultReducer,
+    myClientsInfo : clientInformation,
+
 });
 
 

@@ -1,7 +1,7 @@
 import React from "react";
-//import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import axios from "axios";
 
 function getModalStyle() {
     const top = 50 ;
@@ -26,37 +26,74 @@ const styles = theme => ({
 });
 
 class ChangePasswordForm extends React.Component {
+    state = {
+        username: "",
+        email: "",
+        password: "",
+    };
+
+    onSubmit =(e) => {
+        console.log("I just submit");
+        e.preventDefault();
+
+        console.log(this.props);
+
+
+        axios.post('/api/reset',
+            {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+            },
+        )
+            .then(response => {
+                alert("Change password Success")
+                console.log(response);
+
+            }).catch(error => {
+            alert("Change password Fail");
+            console.log(error.response.data.msg);
+        });
+    }
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
+                    <div style={{textAlign: 'center'}}>
+                        <h1 className="h3 mb-3 font-weight-normal">Forget Password</h1>
+                    </div>
                     <div className="form-group">
-                        <label htmlFor="name">Old password</label>
+                    <label htmlFor="name">Username:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="username"
+                        placeholder="Username"
+                        value={this.state.username}
+                        onChange ={e=>this.setState({username:e.target.value})}
+                    />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email:</label>
                         <input
-                            type="password"
+                            type="email"
                             className="form-control"
-                            name="OldPassword"
-                            placeholder="Enter your user name"
+                            name="password"
+                            placeholder="email"
+                            value={this.state.email}
+                            onChange ={e=>this.setState({email:e.target.value})}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">New Password</label>
+                        <label htmlFor="password">New Password:</label>
                         <input
                             type="password"
                             className="form-control"
-                            name="NewPassword"
-                            placeholder="Enter new passwrod"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Enter Password Again</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="Newpassword2"
-                            placeholder="Please again"
+                            name="password"
+                            placeholder="New Passwrod"
+                            value={this.state.password}
+                            onChange ={e=>this.setState({password:e.target.value})}
                         />
                     </div>
                     <button
@@ -75,5 +112,4 @@ ChangePasswordForm.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
 export default withStyles(styles)(ChangePasswordForm);

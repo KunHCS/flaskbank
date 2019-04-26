@@ -244,7 +244,7 @@ Status: 201 CREATED
 Status: 400 BAD REQUEST
 
 ## *Close Specific Account*
-#### http://127.0.0.1:5000/api/accounts/close/{account_number}(POST)
+#### http://127.0.0.1:5000/api/accounts/close/{account_number} (DELETE)
 ##### Request header:
 	{
 		"Authorization": "Bearer  <access_token>"
@@ -341,6 +341,101 @@ Status: 400 BAD REQUEST
 		"account_from": <account number>,
 		"account_to": <account number>,
 		"amount": <float>
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+## *Set Up Autopay*
+#### http://127.0.0.1:5000/api/autopay (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+##### Request body:
+	{
+		"from": <account>,
+		"to": <account>,
+		"amount": <amount>,
+		"interval": <minute>
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Stop Autopay*
+stops all autopay for the user
+#### http://127.0.0.1:5000/api/autopay/stop (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Get Autopay*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/autopay/get (POST)
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+## *Reset Password*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/reset (POST)
+	{
+		"username": "<string>",
+		"email": "<string>",
+		"password" : "<string>",
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+Status: 503 SERVICE UNAVAILABLE
+
+
+## *Manager Query Client*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/manager/query/{Attribute}/{Query} (GET)
+	Attritubes: {'email', 'username', 'first', 'last', 'account'}
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
+	}
+
+### Responses:
+Status: 200 OK
+
+Status: 400 BAD REQUEST
+
+
+## *Manager Get all Client*
+return all the currently active autopay
+#### http://127.0.0.1:5000/api/manager/get (GET)
+
+##### Request header:
+	{
+		"Authorization": "Bearer  <access_token>"
 	}
 
 ### Responses:

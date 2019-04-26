@@ -7,6 +7,13 @@ export const authenticationStateReducer = ( authState=false, action) => {
     return authState;
 };
 
+export const authenticationUserTypeReducer = ( state=" ", action) => {
+    if (action.type === ACTION.USERTYPE) {
+        return action.payload;
+    }
+    return state;
+};
+
 
 export const authenticationRequestReducer = (state = '', action) => {
 

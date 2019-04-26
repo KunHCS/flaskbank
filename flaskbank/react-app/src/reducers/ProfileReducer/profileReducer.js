@@ -6,7 +6,7 @@ export const profileReducer = ( profile = " ", action) => {
         case ACTION.GET_PROFILE :
             return action.payload;
         case ACTION.CLEAN_PROFILE:
-            console.log("clean profiel");
+            console.log("clean profile");
             return " ";
         default :
             return profile;

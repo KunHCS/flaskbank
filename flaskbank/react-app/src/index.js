@@ -5,7 +5,7 @@ import MainPage from "./components/MainPage/MainPage";
 import OpenAccountPage from "./components/OpenAccountPage/OpenAccountPage";
 import OverViewPage from "./components/OverViewPage/OverViewPage";
 import BillPayPage from "./components/BillPayPage/BillPayPage";
-import TransferPage from "./components/TransferPage/TransferPage";
+import TransferPage from "./components/TransferPage/TransferMainPage/TransferPage";
 import DepositPage from "./components/DepositPage/DepositPage";
 import CloseAccountPage from "./components/CloseAccountPage/CloseAccountPage";
 import ATMLocationPage from "./components/ATMLocationPage/ATMLocationPage";
@@ -15,6 +15,11 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 import CheckingAccountDetail from "./components/OverViewAccountDetailPage/AccountDetails";
+import ManagerPage from "./components/ManagerPage/ManagerPage";
+import QueryResultPage from "./components/QueryResultPage/QueryResultPage";
+import InnerAccountTransfer from "./components/TransferPage/InnerAccountTransfer/InnerAccountTransfer"
+import OuterAccountTransfer from "./components/TransferPage/OuterAccountTransfer/OuterAccountTransfer"
+
 
 import MapV2 from "./components/ATMLocationPage/MapV2";
 
@@ -33,12 +38,15 @@ class App extends Component {
           <SecretRoute exact path="/overview" component={OverViewPage} />
           <SecretRoute exact path="/pay" component={BillPayPage} />
           <SecretRoute exact path="/transfer" component={TransferPage} />
+          <SecretRoute exact path="/transfer/innerTransfer" component={InnerAccountTransfer} />
+          <SecretRoute exact path="/transfer/outerTransfer" component={OuterAccountTransfer} />
           <SecretRoute exact path="/deposit" component={DepositPage} />
-          <SecretRoute
-            exact
-            path="/overview/account_detail"
-            component={CheckingAccountDetail}
-          />
+          <SecretRoute exact path="/overview/account_detail" component={CheckingAccountDetail}/>
+
+          <SecretRoute exact path="/manager" component={ManagerPage} />
+          <SecretRoute exact path="/manager/queryResult" component = {QueryResultPage}/>
+
+
         </div>
       </Router>
     );
