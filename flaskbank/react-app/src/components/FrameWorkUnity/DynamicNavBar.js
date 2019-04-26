@@ -1,40 +1,40 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {logOutAction,logOutRequest} from "../../actions/LoginAction/loginAction";
+import {logOutAction, logOutRequest} from "../../actions/LoginAction/loginAction";
 import {cleanProfile} from "../../actions/GetProfileAction/getProfileAction"
 import {cleanUserType} from "../../actions/ChangeUserTypeAction/changeUserTypeAction"
 import axios from "axios";
 import * as ACTION from "../../static/action_type";
 
-const dynamicNavBar = (props) =>{
+const dynamicNavBar = (props) => {
     const navTextStyle = {
         color: 'white',
     };
 
     const navBarStyle = {
-        height:'100',
+        height: '100',
         backgroundColor: '#404040',
-        textAlign:'right',
+        textAlign: 'right',
         margin: "auto",
         letterSpacing: '1px',
-        wordSpacing:'4px'
+        wordSpacing: '4px'
     };
 
     const logout = () => {
         const req_headers = {Authorization: 'Bearer ' + props.myKey};
 
-        axios.delete("/api/logout ",{headers: req_headers})
+        axios.delete("/api/logout ", {headers: req_headers})
             .then(response => {
-                 if(response.status === 200) {
-                     console.log(response.data.msg);
-                     alert(response.data.msg);
-                 }
-            }).catch (error => console.log(error.response.data.msg));
+                if (response.status === 200) {
+                    console.log(response.data.msg);
+                    alert(response.data.msg);
+                }
+            }).catch(error => console.log(error.response.data.msg));
     }
 
 
-    if (props.auth==false) {
+    if (props.auth == false) {
         return (
 
             <nav className="Navigation" style={navBarStyle}>
@@ -44,38 +44,41 @@ const dynamicNavBar = (props) =>{
                 <Link className="Nav-text" style={navTextStyle} to="/closeAcc">Close an Account</Link> |
             </nav>
         )
-    }
-    else if (props.auth==true && props.userType == ACTION.CLIENT) {
+    } else if (props.auth == true && props.userType == ACTION.CLIENT) {
         return (
-        <nav className="Navigation"style={navBarStyle}>
-        <Link className="Nav-text" style={navTextStyle} to="/overview">Hello! {props.myInfo.first_name}</Link> |
-        <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
-        <Link className="Nav-text" style={navTextStyle} to="/"
-              onClick={ ()=> {props.logOutRequest();
-                              props.cleanProfile();
-                              props.logOutAction();
-                              props.cleanUserType();
-                              logout(); }  }>
-            Sign Out
-        </Link> |
-        </nav>
-    ) }
-
-    else if (props.auth==true && props.userType == ACTION.MANAGER) {
-        return (
-            <nav className="Navigation"style={navBarStyle}>
-                <Link className="Nav-text" style={navTextStyle} to="/manager">Hello! {props.myInfo.first_name}</Link> |
+            <nav className="Navigation" style={navBarStyle}>
+                <Link className="Nav-text" style={navTextStyle} to="/overview">Hello! {props.myInfo.first_name}</Link> |
                 <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
                 <Link className="Nav-text" style={navTextStyle} to="/"
-                      onClick={ ()=> {props.logOutRequest();
+                      onClick={() => {
+                          props.logOutRequest();
                           props.cleanProfile();
                           props.logOutAction();
                           props.cleanUserType();
-                          logout(); }  }>
+                          logout();
+                      }}>
                     Sign Out
                 </Link> |
             </nav>
-        ) }
+        )
+    } else if (props.auth == true && props.userType == ACTION.MANAGER) {
+        return (
+            <nav className="Navigation" style={navBarStyle}>
+                <Link className="Nav-text" style={navTextStyle} to="/manager">Hello! {props.myInfo.first_name}</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/profile">Profile Setting</Link> |
+                <Link className="Nav-text" style={navTextStyle} to="/"
+                      onClick={() => {
+                          props.logOutRequest();
+                          props.cleanProfile();
+                          props.logOutAction();
+                          props.cleanUserType();
+                          logout();
+                      }}>
+                    Sign Out
+                </Link> |
+            </nav>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -83,6 +86,5 @@ const mapStateToProps = (state) => {
 }
 
 
-
-export default connect(mapStateToProps,{logOutAction,logOutRequest,cleanProfile,cleanUserType})(dynamicNavBar);
+export default connect(mapStateToProps, {logOutAction, logOutRequest, cleanProfile, cleanUserType})(dynamicNavBar);
 

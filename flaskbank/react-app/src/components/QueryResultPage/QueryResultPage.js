@@ -55,10 +55,12 @@ class QueryResultPage extends React.Component {
                     <ExpansionPanelDetails>
                         <div style={{width: '90%'}}>
                             <Typography style={{float: 'left'}}>
-                                UserName:{client.username}
-                                <br/>
-                                Email:{client.email}
-                                <br/>
+                                <strong>
+                                    Username:{client.username}
+                                    <br/>
+                                    Email:{client.email}
+                                    <br/>
+                                </strong>
                                 {this.renderAccount(client.accounts)}
                             </Typography>
 
@@ -85,6 +87,10 @@ class QueryResultPage extends React.Component {
                             <Typography style={{float: 'left'}}>
                                 <br/>
                                 Balance:{account.balance}
+                                <br/>
+                                Type: {account.type}
+                                <br/>
+                                Active: {account.active}
                             </Typography>
 
                             <Link to="/overview/account_detail"
@@ -100,8 +106,6 @@ class QueryResultPage extends React.Component {
     }
 
 
-
-
     render() {
         const {classes} = this.props;
         console.log("I am in overview page");
@@ -112,6 +116,7 @@ class QueryResultPage extends React.Component {
                 <Navigation/>
                 <Search/>
                 <Container>
+                    <InnerNavigationBar active ={activeElement}/>
                     <div className={classes.root}>
                         {this.renderUser()}
                     </div>
@@ -122,6 +127,12 @@ class QueryResultPage extends React.Component {
     }
 }
 
+
+
+const activeElement = {
+    act1: "nav-link",
+    act2: "nav-link active",
+}
 
 QueryResultPage.propTypes = {
     classes: PropTypes.object.isRequired,
