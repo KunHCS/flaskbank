@@ -20,20 +20,28 @@ def open_account():
 
     current_user = am.get_jwt_identity()['username']
     account_num = am.get_account_num(acc_type)
+    if acc_type not in ('credit', 'checking', 'saving'):
+        return am.jsonify({'msg': 'Invalid Account Type'}), 400
+    if acc_type == 'credit':
+        client = am.clients.find_one({'$and': [{'username': current_user},
+                                               {'accounts.type': 'credit'}]})
+        if client:
+            return am.jsonify({'msg': 'credit account already exist'}), 409
+
     am.clients.update_one(
         {'username': current_user},
         {
             '$push':
-            {
-                'accounts': {
-                    'account_number': account_num,
-                    'alias': alias,
-                    'balance': am.to_d128(deposit),
-                    'type': acc_type,
-                    'active': True,
-                    'transactions': []
+                {
+                    'accounts': {
+                        'account_number': account_num,
+                        'alias': alias,
+                        'balance': am.to_d128(deposit),
+                        'type': acc_type,
+                        'active': True,
+                        'transactions': []
+                    }
                 }
-            }
         }
     )
 
@@ -49,7 +57,6 @@ def open_account():
 @accounts_bp.route('/accounts/close/<string:account_num>', methods=['DELETE'])
 @am.jwt_required
 def close_account(account_num):
-
     if not am.verify(account_num):
         return am.jsonify({'msg': 'Invalid account number checksum'}), 422
 
@@ -86,7 +93,7 @@ def delete_one_client():
 
     valid = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
                                           password)
-    
+
     if not valid or email != client['email']:
         return am.jsonify({'msg': 'Invalid username/email/password'}), 409
 
