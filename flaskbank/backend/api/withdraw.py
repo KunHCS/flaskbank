@@ -15,7 +15,7 @@ def withdraw_route():
         amount = data['amount']
         acc_num = str(data['account_number'])
     except KeyError:
-        return am.make_response('Bad Request, missing/misspelled key', 400)
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
     if not am.verify(acc_num) or not acc_num:
         return am.jsonify({'msg': 'invalid/empty account number'}), 400
@@ -24,7 +24,7 @@ def withdraw_route():
     post_update_client = withdraw(current_user, acc_num, amount,
                                   'Cash withdraw')
     if not post_update_client:
-        return am.jsonify({'msg': 'Client does not own the account'}), 400
+        return am.jsonify({'msg': 'Withdraw declined'}), 400
 
     post_acc = next(acc for acc in post_update_client[
         'accounts'] if acc['account_number'] == str(acc_num))

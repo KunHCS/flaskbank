@@ -16,7 +16,7 @@ def transfer():
         account_to = data['account_to']
         amount = data['amount']
     except KeyError:
-        return am.make_response('Bad Request, missing/misspelled key', 400)
+        return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
     if str(account_from) == str(account_to):
         return am.jsonify({'msg': 'accounts cannot be the same'}), 400
