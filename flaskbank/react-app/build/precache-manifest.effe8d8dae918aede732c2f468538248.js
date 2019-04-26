@@ -4,24 +4,24 @@ self.__precacheManifest = [
     "url": "/static/media/bg.3856dd4f.jpeg"
   },
   {
-    "revision": "c335f82a78735b0455e0",
+    "revision": "6f4a8af02dd08fe8b173",
     "url": "/static/css/main.eaa95357.chunk.css"
   },
   {
-    "revision": "fdfcfda2d9b1bf31db52",
-    "url": "/static/js/runtime~main.c5541365.js"
+    "revision": "42ac5946195a7306e2a5",
+    "url": "/static/js/runtime~main.a8a9905a.js"
   },
   {
-    "revision": "afb76d13beb19d06481a",
-    "url": "/static/js/2.91290656.chunk.js"
+    "revision": "9d08a99af41636a3bc3d",
+    "url": "/static/js/2.f25d2a14.chunk.js"
   },
   {
     "revision": "7c36297fb8d6edcf17b428cb90950426",
     "url": "/static/media/logo.7c36297f.png"
   },
   {
-    "revision": "c335f82a78735b0455e0",
-    "url": "/static/js/main.44420bf8.chunk.js"
+    "revision": "6f4a8af02dd08fe8b173",
+    "url": "/static/js/main.c2545867.chunk.js"
   },
   {
     "revision": "dbd7f220578d42c09bb05f6627fc1a9a",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/static/media/cards1.09cdc4fd.png"
   },
   {
-    "revision": "33a77c69366fb298b069bc2ec6842ae9",
+    "revision": "b45319adbae327a6535240a54dac5672",
     "url": "/index.html"
   }
 ];
