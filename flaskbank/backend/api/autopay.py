@@ -4,6 +4,7 @@ from .. import mongo
 from .. import all_module as am
 from .utils import deposit, withdraw
 from datetime import datetime
+import hashlib as hl
 
 autopay_bp = am.Blueprint('autopay', __name__)
 
@@ -17,7 +18,8 @@ def add_autopay(client, from_acc, to_acc, amount):
                         f'autopay from {from_acc[-4:]}'):
         print('autopay failed', datetime.now())
         return
-    print('autopay success', datetime.now())
+    print(f'autopay success {from_acc} to {to_acc} for ${amount}',
+          datetime.now())
 
 
 @autopay_bp.route('/autopay', methods=['POST'])
@@ -38,9 +40,19 @@ def autopay_route():
     if not am.clients.find_one({'accounts.account_number': from_acc}) or \
             not am.clients.find_one({'accounts.account_number': to_acc}):
         return am.jsonify({'msg': 'account does not exist'}), 400
+    amount = round(amount, 2)
+    client = am.clients.find_one({'username': current_user})
 
-    job_name = f'autopay {amount:.2f} from {from_acc} to {to_acc} at ' \
-        f'{interval} interval'
+    jobs = client.get('auto_pay', [])
+
+    check = hl.md5((from_acc + to_acc + str(amount)).encode()).hexdigest()
+    print(check)
+    for job in jobs:
+        if job['check'] == check:
+            return am.jsonify({'msg': 'autopay already exist'}), 409
+
+    job_name = f'autopay ${amount:.2f} from {from_acc} to {to_acc} every ' \
+        f'{interval} minutes'
 
     job = scheduler.add_job(add_autopay, 'interval', minutes=interval,
                             name=job_name,
@@ -55,6 +67,7 @@ def autopay_route():
             'job_id': job.id,
             'from': from_acc,
             'to': to_acc,
+            'check': check,
             'amount': amount
         }}}
     )
