@@ -42,11 +42,11 @@ class ManagerPage extends React.Component {
                 this.props.getClientsInfo(response.data);
             }).catch(error => console.log(error.response.data.msg));
 
-        axios.get("/api/client/all",{headers: req_headers})
+        axios.get("/api/client/all", {headers: req_headers})
             .then(response => {
                 console.log(response);
                 this.props.getProfile(response.data);
-            }).catch (error => console.log(error.response.data.msg));
+            }).catch(error => console.log(error.response.data.msg));
     }
 
     renderAccount() {
@@ -126,38 +126,40 @@ class ManagerPage extends React.Component {
                 <Navigation/>
                 <Search/>
                 <Container>
-                    <Paper className="paper" style={detailStyle}>
-                        <form onSubmit={this.onSubmit}>
-                            <div className={classes.grow} style={{}}/>
+                    <div class="row">
+                        <Paper className="paper" style={detailStyle}>
+                            <form onSubmit={this.onSubmit}>
+                                <div className={classes.grow} style={{}}/>
 
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon/>
+                                <div className={classes.search}>
+                                    <div className={classes.searchIcon}>
+                                        <SearchIcon/>
+                                    </div>
+                                    <InputBase
+                                        placeholder="Search…"
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput,
+                                        }}
+                                        value={this.state.search_value}
+                                        onChange={e => this.setState({search_value: e.target.value})}/>
                                 </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                    value={this.state.search_value}
-                                    onChange={e => this.setState({search_value: e.target.value})}/>
-                            </div>
-                            <Typography variant="h8">Select Attribute to Query Information</Typography>
-                            <select onChange={e => this.setState({value: e.target.value})}>
-                                <option className="dropdown-item" value="email">Email</option>
-                                <option className="dropdown-item" value="username">UserName</option>
-                                <option className="dropdown-item" value="first">First Name</option>
-                                <option className="dropdown-item" value="last">Last Name</option>
-                                <option className="dropdown-item" value="account">Account</option>
-                            </select>
+                                <Button type="submit" style={{visibility: "hidden"}}/>
 
-                            <Button type="submit" style={{visibility: "hidden"}}/>
+                                <div>
+                                    <Typography variant="h8">Select Attribute to Query Information</Typography>
+                                    <select onChange={e => this.setState({value: e.target.value})}>
+                                        <option className="dropdown-item" value="email">Email</option>
+                                        <option className="dropdown-item" value="username">UserName</option>
+                                        <option className="dropdown-item" value="first">First Name</option>
+                                        <option className="dropdown-item" value="last">Last Name</option>
+                                        <option className="dropdown-item" value="account">Account</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </Paper>
 
-                        </form>
-
-
-                    </Paper>
+                    </div>
                     <hr/>
                     {this.renderAccount()}
                 </Container>
@@ -248,7 +250,7 @@ const styles = theme => ({
 
 const detailStyle = {
     height: 'auto',
-    width: '50%',
+    width: 'auto',
     fontWeight: 'bold',
     WebkitBorderRadius: '10px 10px 10px 10px',
     textAlign: 'center',
