@@ -235,7 +235,7 @@ class BillPay extends React.Component{
                                 <Typography variant="h4" color= "secondary" style={{textAlign:'center'}}><strong>SJSP Credit Card</strong></Typography>
                                 <br/>
                                 <Typography variant="h6">SJSP Platinum Visa Card: {this.props.myInfo.accounts[index].account_number}</Typography>
-                                <Typography variant="h6">Current Balance: ${this.props.myInfo.accounts[index].balance}</Typography>
+                                <Typography variant="h6">Current Balance: ${this.props.myInfo.accounts[index].balance * -1}</Typography>
                                 <Typography variant="h6">Credit Limit: ${this.props.myInfo.accounts[index].credit_limit}</Typography>
                                 <Typography variant="h6">Available Credit: ${this.props.myInfo.accounts[index].available_credit}</Typography>
                             </div>

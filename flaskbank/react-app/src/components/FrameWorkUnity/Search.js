@@ -83,24 +83,25 @@ const search = (props) =>{
                     <a href="/">
                     <img src={Pic} alt="mypic" style={{witdh:50 ,height:50}}/>
                     </a>
-                    <div className={classes.grow} />
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                        />
-                    </div>
+                    {/*<div className={classes.grow} />*/}
+                    {/*<div className={classes.search}>*/}
+                        {/*<div className={classes.searchIcon}>*/}
+                            {/*<SearchIcon />*/}
+                        {/*</div>*/}
+                        {/*<InputBase*/}
+                            {/*placeholder="Search…"*/}
+                            {/*classes={{*/}
+                                {/*root: classes.inputRoot,*/}
+                                {/*input: classes.inputInput,*/}
+                            {/*}}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
+
 
 search.propTypes = {
     classes: PropTypes.object.isRequired,
