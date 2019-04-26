@@ -6,6 +6,9 @@ import {cleanProfile} from "../../actions/GetProfileAction/getProfileAction"
 import {cleanUserType} from "../../actions/ChangeUserTypeAction/changeUserTypeAction"
 import axios from "axios";
 import * as ACTION from "../../static/action_type";
+import {cleanClientsInfo} from "../../actions/ClientsInfoAction/ClientsInfoAction";
+import {accountDetailAction} from "../../actions/AccountDetailsAction/accountDetailsAction";
+import {cleanQueryResult} from"../../actions/ManagerQueryAction/ManagerQueryAction";
 
 const dynamicNavBar = (props) => {
     const navTextStyle = {
@@ -55,6 +58,7 @@ const dynamicNavBar = (props) => {
                           props.cleanProfile();
                           props.logOutAction();
                           props.cleanUserType();
+                          props.accountDetailAction("")
                           logout();
                       }}>
                     Sign Out
@@ -72,6 +76,9 @@ const dynamicNavBar = (props) => {
                           props.cleanProfile();
                           props.logOutAction();
                           props.cleanUserType();
+                          props.cleanClientsInfo();
+                          props.cleanQueryResult();
+                          props.accountDetailAction("")
                           logout();
                       }}>
                     Sign Out
@@ -86,5 +93,10 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {logOutAction, logOutRequest, cleanProfile, cleanUserType})(dynamicNavBar);
+export default connect(mapStateToProps, {
+    logOutAction, logOutRequest,
+    cleanProfile, cleanUserType,
+    cleanClientsInfo, accountDetailAction,
+    cleanQueryResult,
+})(dynamicNavBar);
 
