@@ -129,6 +129,24 @@ def withdraw(user, account_number, withdraw_amount, description=None):
     """
     amount = float(withdraw_amount)
     # if account is credit account
+    client = am.clients.find_one({
+        'username': user,
+        'accounts.account_number': str(account_number)},
+        {'accounts': {'$elemMatch': {'account_number': str(account_number)}}})
+    if not client:
+        return am.jsonify({'msg': 'account not found'})
+    current_balance = float(client['accounts'][0]['balance'].to_decimal())
+    available_credit = client['accounts'][0].get('available_credit', None)
+    available_credit = (float(available_credit.to_decimal()) if
+                        available_credit else None)
+    print(available_credit)
+    if (current_balance - amount) < -100.0 and str(account_number)[0] != '4':
+        return False
+    elif str(account_number)[0] == '4' and ((available_credit - amount) <
+                                            -100.0):
+        return False
+
+    print(client['accounts'][0]['balance'])
     if am.verify(str(account_number)) and str(account_number)[0] == '4':
         d128_amount = to_d128(abs(amount) * -1)
         pos_d128 = to_d128(abs(amount))
@@ -139,6 +157,7 @@ def withdraw(user, account_number, withdraw_amount, description=None):
                       'accounts.$.available_credit': d128_amount}},
             return_document=ReturnDocument.AFTER)
     else:
+
         d128_amount = to_d128(abs(amount) * -1)
         client = am.clients.find_one_and_update({
             'username': user,

@@ -28,6 +28,26 @@ def open_account():
         if client:
             return am.jsonify({'msg': 'credit account already exist'}), 409
 
+        am.clients.update_one(
+            {'username': current_user},
+            {
+                '$push':
+                    {
+                        'accounts': {
+                            'account_number': am.get_account_num('credit'),
+                            'alias': 'Credit Card Account',
+                            'balance': am.to_d128(0),
+                            'available_credit': am.to_d128(5000.00),
+                            'credit_limit': am.to_d128(5000.00),
+                            'type': 'credit',
+                            'active': True,
+                            'transactions': []
+                        }
+                    }
+            }
+        )
+        return am.jsonify({'msg': 'credit account opened'}), 200
+
     am.clients.update_one(
         {'username': current_user},
         {
