@@ -16,6 +16,7 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 import CheckingAccountDetail from "./components/OverViewAccountDetailPage/AccountDetails";
 import ManagerPage from "./components/ManagerPage/ManagerPage";
+import QueryResultPage from "./components/QueryResultPage/QueryResultPage";
 import InnerAccountTransfer from "./components/TransferPage/InnerAccountTransfer/InnerAccountTransfer"
 import OuterAccountTransfer from "./components/TransferPage/OuterAccountTransfer/OuterAccountTransfer"
 
@@ -43,6 +44,7 @@ class App extends Component {
           <SecretRoute exact path="/overview/account_detail" component={CheckingAccountDetail}/>
 
           <SecretRoute exact path="/manager" component={ManagerPage} />
+          <SecretRoute exact path="/manager/queryResult" component = {QueryResultPage}/>
 
 
         </div>

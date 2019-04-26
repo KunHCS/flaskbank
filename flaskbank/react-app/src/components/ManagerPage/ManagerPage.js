@@ -28,6 +28,7 @@ class ManagerPage extends React.Component {
     state = {
         value: 'email',
         search_value: "",
+        flag : false,
     };
 
     componentDidMount() {
@@ -72,12 +73,6 @@ class ManagerPage extends React.Component {
 
     }
 
-    handleChange = event => {
-        this.setState({value: event.target.value});
-        console.log(this.state.value)
-    };
-
-
     onSubmit = (e) => {
         e.preventDefault();
         console.log("I submit")
@@ -96,6 +91,7 @@ class ManagerPage extends React.Component {
                 else {
                     alert("Query Success")
                     this.props.saveQueryResult(response.data.results);
+                    this.setState({flag:true})
                 }
 
             }).catch(error => {
@@ -113,12 +109,16 @@ class ManagerPage extends React.Component {
         console.log(this.state.value);
         console.log(this.state.search_value);
         const {classes} = this.props;
+
+        if (this.state.flag == true) {
+            return (<Redirect to={'/manager/queryResult'}/>)
+        }
+
         return (
             <div>
                 <Navigation/>
                 <Search/>
                 <Container>
-
                     <Paper className="paper" style={detailStyle}>
                         <form onSubmit={this.onSubmit}>
                             <div className={classes.grow} style={{}}/>
