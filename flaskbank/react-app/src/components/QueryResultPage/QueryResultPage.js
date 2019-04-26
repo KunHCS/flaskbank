@@ -41,7 +41,7 @@ class QueryResultPage extends React.Component {
 
     }
 
-    renderAccount() {
+    renderUser() {
         const {classes} = this.props;
 
         return this.props.queryResult.map(client => {
@@ -58,10 +58,37 @@ class QueryResultPage extends React.Component {
                                 UserName:{client.username}
                                 <br/>
                                 Email:{client.email}
+                                <br/>
+                                {this.renderAccount(client.accounts)}
+                            </Typography>
+
+                        </div>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            );
+        });
+    }
+
+    renderAccount(props) {
+        const {classes} = this.props;
+
+        return props.map(account => {
+            return (
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                        <Typography
+                            className={classes.heading}><strong>  {account.alias} :{account.account_number}  </strong>
+                        </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <div style={{width: '90%'}}>
+                            <Typography style={{float: 'left'}}>
+                                <br/>
+                                Balance:{account.balance}
                             </Typography>
 
                             <Link to="/overview/account_detail"
-                                  onClick={() => this.props.accountDetailAction(client)}>
+                                  onClick={() => this.props.accountDetailAction(account)}>
                                 <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                         className={classes.margin}>Transactions</Button>
                             </Link>
@@ -70,15 +97,15 @@ class QueryResultPage extends React.Component {
                 </ExpansionPanel>
             );
         });
-
-
     }
+
+
 
 
     render() {
         const {classes} = this.props;
         console.log("I am in overview page");
-        console.log(this.props.myInfo);
+        console.log(this.props);
 
         return (
             <div>
@@ -86,7 +113,7 @@ class QueryResultPage extends React.Component {
                 <Search/>
                 <Container>
                     <div className={classes.root}>
-                        {this.renderAccount()}
+                        {this.renderUser()}
                     </div>
                 </Container>
             </div>

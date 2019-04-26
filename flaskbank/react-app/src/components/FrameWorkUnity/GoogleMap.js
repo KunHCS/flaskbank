@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Button from '@material-ui/core/Button';
 import {AxiosInstance as axios} from "axios";
@@ -51,7 +51,7 @@ const groupMarkers = [];
 // }
 class MapContainer extends Component {
     state = {
-        center:[37.335186, -121.881073],
+        center: [37.335186, -121.881073],
         zoom: 15,
         mapOpen: false,
         markers: [],
@@ -62,12 +62,13 @@ class MapContainer extends Component {
         windowOpen: false,
     };
 
-    onMarkerClick = (props, marker, e) =>{
+    onMarkerClick = (props, marker, e) => {
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
             showingInfoWindow: true
-        })};
+        })
+    };
 
     onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
@@ -81,7 +82,7 @@ class MapContainer extends Component {
     //     this.setState({windowOpen: true})
     // }
 
-    getMyLocation = (props) =>{
+    getMyLocation = (props) => {
         this.setState({mapOpen: true});
         const location = window.navigator && window.navigator.geolocation;
         if (location) {
@@ -90,7 +91,7 @@ class MapContainer extends Component {
                     center: [position.coords.latitude, position.coords.longitude],
                 });
             }, (error) => {
-                this.setState({center: [ 'err-latitude', 'err-longitude' ],});
+                this.setState({center: ['err-latitude', 'err-longitude'],});
             })
         }
     };
@@ -100,7 +101,7 @@ class MapContainer extends Component {
     //         atm
     //     }
     // }
-    getNearestATMsLocation = () =>{
+    getNearestATMsLocation = () => {
         const url = `${"https://maps.googleapis.com/maps/api/place/nearbysearch/json"}?location=${this.state.center[0]},${this.state.center[1]}&radius=1000&type=bank&keyword=chase+bank+atm&key=${"AIzaSyA0WRCYbwOJlu78I0uwsOuj54l8X9RIJqw"}`
 
         axios.get(url)
@@ -108,7 +109,6 @@ class MapContainer extends Component {
                 response.data.results.map((atm) => {
                     this.state.markers.push(atm.geometry.location);
                 })
-
 
 
                 // return async (dispatch) => {

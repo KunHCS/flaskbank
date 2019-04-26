@@ -2,9 +2,9 @@ import React from "react";
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 
-const Nav =(props)=> {
+const Nav = (props) => {
     return (
-        <Paper style ={navbarStyle}>
+        <Paper style={navbarStyle}>
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
                     <Link className={props.active.act1} to="/overview">Account Balance</Link>
@@ -28,12 +28,11 @@ const Nav =(props)=> {
 
 const navbarStyle = {
     height: "auto",
-    width:  500,
+    width: 500,
     boxShadow: '-2px 5px 25px, 2px 5px 25px',
     margin: '20px'
 
 };
-
 
 
 export default Nav;
