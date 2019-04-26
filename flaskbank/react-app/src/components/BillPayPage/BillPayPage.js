@@ -33,6 +33,8 @@ class BillPay extends React.Component{
     };
 
     componentDidMount() {
+
+
         for (let i = 0 ; i < this.props.myInfo.accounts.length ; i++) {
             console.log("111"+i);
             if (this.props.myInfo.accounts[i].type == ACTION.CREDIT) {
@@ -43,6 +45,15 @@ class BillPay extends React.Component{
                 break;
             }
         }
+
+        const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
+
+        axios.get("/api/client/all",{headers: req_headers})
+            .then(response => {
+                console.log(response);
+                this.props.getProfile(response.data);
+            }).catch (error => console.log(error.response.data.msg));
+
         this.getAutopayStatement()
     }
 

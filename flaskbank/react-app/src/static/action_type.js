@@ -36,5 +36,9 @@ export const WINDOWSTATE_2 = "window_state2";
 export const WINDOWSTATE_CLEAN = "window_state_clean";
 
 
-export const QUERY = "query"
-export const CLEAN_QUERY = "clean_query"
+export const QUERY = "query";
+export const CLEAN_QUERY = "clean_query";
+
+
+export const GET_CLIENT_INFO = "get_client_info";
+export const CLEAN_CLIENT_INFO = "clean_client_info";

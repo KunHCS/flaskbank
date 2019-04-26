@@ -41,7 +41,7 @@ class QueryResultPage extends React.Component {
 
     }
 
-    renderAccount() {
+    renderUser() {
         const {classes} = this.props;
 
         return this.props.queryResult.map(client => {
@@ -55,13 +55,46 @@ class QueryResultPage extends React.Component {
                     <ExpansionPanelDetails>
                         <div style={{width: '90%'}}>
                             <Typography style={{float: 'left'}}>
-                                UserName:{client.username}
+                                <strong>
+                                    Username:{client.username}
+                                    <br/>
+                                    Email:{client.email}
+                                    <br/>
+                                </strong>
+                                {this.renderAccount(client.accounts)}
+                            </Typography>
+
+                        </div>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            );
+        });
+    }
+
+    renderAccount(props) {
+        const {classes} = this.props;
+
+        return props.map(account => {
+            return (
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                        <Typography
+                            className={classes.heading}><strong>  {account.alias} :{account.account_number}  </strong>
+                        </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <div style={{width: '90%'}}>
+                            <Typography style={{float: 'left'}}>
                                 <br/>
-                                Email:{client.email}
+                                Balance:{account.balance}
+                                <br/>
+                                Type: {account.type}
+                                <br/>
+                                Active: {account.active}
                             </Typography>
 
                             <Link to="/overview/account_detail"
-                                  onClick={() => this.props.accountDetailAction(client)}>
+                                  onClick={() => this.props.accountDetailAction(account)}>
                                 <Button style={{float: 'right'}} variant="outlined" size="medium" color="primary"
                                         className={classes.margin}>Transactions</Button>
                             </Link>
@@ -70,23 +103,22 @@ class QueryResultPage extends React.Component {
                 </ExpansionPanel>
             );
         });
-
-
     }
 
 
     render() {
         const {classes} = this.props;
         console.log("I am in overview page");
-        console.log(this.props.myInfo);
+        console.log(this.props);
 
         return (
             <div>
                 <Navigation/>
                 <Search/>
                 <Container>
+                    <InnerNavigationBar active ={activeElement}/>
                     <div className={classes.root}>
-                        {this.renderAccount()}
+                        {this.renderUser()}
                     </div>
                 </Container>
             </div>
@@ -95,6 +127,12 @@ class QueryResultPage extends React.Component {
     }
 }
 
+
+
+const activeElement = {
+    act1: "nav-link",
+    act2: "nav-link active",
+}
 
 QueryResultPage.propTypes = {
     classes: PropTypes.object.isRequired,

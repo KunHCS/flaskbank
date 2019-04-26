@@ -6,6 +6,7 @@ import {accountDetailsReducer} from "./AccountDetailReducer/accountDetailsReduce
 import {imageUpLoadReducer} from "./ImageUpLoadReducer/imageUpLoadReducer";
 import {windowOpenCloseReducer} from "./WindowOpenCloseReducer/windowOpenCloseReducer";
 import {ManagerQueryResultReducer} from "./ManagerQueryResultReducer/ManagerQueryResultReducer";
+import {clientInformation} from "./ClientsInformation/clientsInformation";
 
 export default combineReducers( {
     myInfo   :  profileReducer,
@@ -16,6 +17,8 @@ export default combineReducers( {
     popWindowState : windowOpenCloseReducer,
     userType : authenticationUserTypeReducer,
     queryResult : ManagerQueryResultReducer,
+    myClientsInfo : clientInformation,
+
 });
 
 

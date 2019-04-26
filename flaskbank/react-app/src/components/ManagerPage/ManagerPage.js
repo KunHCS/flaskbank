@@ -20,7 +20,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from "@material-ui/core/InputBase";
 import {fade} from "@material-ui/core/styles/colorManipulator";
 import Paper from '@material-ui/core/Paper';
-import {saveQueryResult,cleanQueryResult} from "../../actions/ManagerQueryAction/ManagerQueryAction";
+import {saveQueryResult, cleanQueryResult} from "../../actions/ManagerQueryAction/ManagerQueryAction";
+import {getClientsInfo, cleanClientsInfo} from "../../actions/ClientsInfoAction/ClientsInfoAction";
 
 
 class ManagerPage extends React.Component {
@@ -28,7 +29,7 @@ class ManagerPage extends React.Component {
     state = {
         value: 'email',
         search_value: "",
-        flag : false,
+        flag: false,
     };
 
     componentDidMount() {
@@ -38,14 +39,20 @@ class ManagerPage extends React.Component {
         axios.get("api/manager/get", {headers: req_headers})
             .then(response => {
                 console.log(response);
+                this.props.getClientsInfo(response.data);
+            }).catch(error => console.log(error.response.data.msg));
+
+        axios.get("/api/client/all", {headers: req_headers})
+            .then(response => {
+                console.log(response);
                 this.props.getProfile(response.data);
             }).catch(error => console.log(error.response.data.msg));
     }
 
     renderAccount() {
         const {classes} = this.props;
-        if (this.props.myInfo !== " ") {
-            return this.props.myInfo.results.map(result => {
+        if (this.props.myClientsInfo !== " ") {
+            return this.props.myClientsInfo.results.map(result => {
                 return (
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
@@ -84,14 +91,14 @@ class ManagerPage extends React.Component {
         )
             .then(response => {
                 console.log(response);
-                console.log(response.data.results.length )
+                console.log(response.data.results.length)
                 if (response.data.results.length == 0) {
                     this.props.cleanQueryResult();
-                    alert("Nothing Found");}
-                else {
+                    alert("Nothing Found");
+                } else {
                     alert("Query Success")
                     this.props.saveQueryResult(response.data.results);
-                    this.setState({flag:true})
+                    this.setState({flag: true})
                 }
 
             }).catch(error => {
@@ -119,38 +126,41 @@ class ManagerPage extends React.Component {
                 <Navigation/>
                 <Search/>
                 <Container>
+
                     <Paper className="paper" style={detailStyle}>
                         <form onSubmit={this.onSubmit}>
-                            <div className={classes.grow} style={{}}/>
-
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon/>
+                            <div className={classes.grow}/>
+                            <div className="row">
+                                <div className={classes.search}>
+                                    <div className={classes.searchIcon}>
+                                        <SearchIcon/>
+                                    </div>
+                                    <InputBase
+                                        placeholder="Search…"
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput,
+                                        }}
+                                        value={this.state.search_value}
+                                        onChange={e => this.setState({search_value: e.target.value})}/>
                                 </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                    value={this.state.search_value}
-                                    onChange={e => this.setState({search_value: e.target.value})}/>
+                                <Button type="submit" style={{visibility: "hidden"}}/>
+
+                                <div><Typography variant="h8">Select Attribute to Query Information--></Typography></div>
+                                <div>
+                                    <select onChange={e => this.setState({value: e.target.value})}>
+                                        <option value="email">Email</option>
+                                        <option value="username">UserName</option>
+                                        <option value="first">First Name</option>
+                                        <option value="last">Last Name</option>
+                                        <option value="account">Account</option>
+                                    </select>
+                                </div>
                             </div>
-                            <Typography variant="h8">Select Attribute to Query Information</Typography>
-                            <select onChange={e => this.setState({value: e.target.value})}>
-                                <option className="dropdown-item" value="email">Email</option>
-                                <option className="dropdown-item" value="username">UserName</option>
-                                <option className="dropdown-item" value="first">First Name</option>
-                                <option className="dropdown-item" value="last">Last Name</option>
-                                <option className="dropdown-item" value="account">Account</option>
-                            </select>
-
-                            <Button type="submit" style={{visibility: "hidden"}}/>
-
                         </form>
-
-
                     </Paper>
+
+
                     <hr/>
                     {this.renderAccount()}
                 </Container>
@@ -241,7 +251,7 @@ const styles = theme => ({
 
 const detailStyle = {
     height: 'auto',
-    width: '50%',
+    width: 'auto',
     fontWeight: 'bold',
     WebkitBorderRadius: '10px 10px 10px 10px',
     textAlign: 'center',
@@ -262,4 +272,8 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps, {getProfile, accountDetailAction,saveQueryResult,cleanQueryResult})(withStyles(styles)(ManagerPage));
+export default connect(mapStateToProps, {
+    getProfile, accountDetailAction,
+    saveQueryResult, cleanQueryResult,
+    getClientsInfo, cleanClientsInfo
+})(withStyles(styles)(ManagerPage));

@@ -77,6 +77,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">First name</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="first_name"
@@ -88,6 +89,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">Last name</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="last_name"
@@ -100,6 +102,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="name">Username</label>
                                     <input
+                                        required
                                         type="text"
                                         className="form-control"
                                         name="username"
@@ -112,6 +115,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="email">Email address</label>
                                     <input
+                                        required
                                         type="email"
                                         className="form-control"
                                         name="email"
@@ -123,6 +127,7 @@ class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <input
+                                        required
                                         type="password"
                                         className="form-control"
                                         name="password"
