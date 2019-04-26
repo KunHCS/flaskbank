@@ -61,8 +61,10 @@ class OverViewPage extends React.Component{
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <div style={{width: '90%'}}>
+
                                 <Typography style={{float: 'left'}}>
-                                    Balance: ${account.balance}
+
+                                    Balance: ${ account.type =="credit" ? account.balance *-1 : account.balance}
                                 </Typography>
                                 <Link to="/overview/account_detail"
                                       onClick={() => this.props.accountDetailAction(account)}>
