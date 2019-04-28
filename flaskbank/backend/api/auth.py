@@ -50,7 +50,7 @@ def reset_password():
     client = am.clients.find_one({'$and': [{'username': username},
                                            {'email': email}]})
     if not client:
-        return am.jsonify({'msg': 'invalid information'})
+        return am.jsonify({'msg': 'invalid information'}), 409
 
     new_hash = am.bcrypt.generate_password_hash(newpw.encode('UTF-8'))
     result = am.clients.update_one({'username': username},
