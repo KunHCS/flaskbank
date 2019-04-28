@@ -74,7 +74,7 @@ class Statement extends React.Component {
                             <form noValidate onSubmit={this.onSubmit}>
                                 <h1 className="h3 mb-3 font-weight-bold f font-weight-normal">Personal Information</h1>
                                 <div className="form-group">
-                                    <label htmlFor="name">First name</label>
+                                    <label htmlFor="name">First Name:</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -86,7 +86,7 @@ class Statement extends React.Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name">Last name</label>
+                                    <label htmlFor="name">Last Name:</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -98,7 +98,7 @@ class Statement extends React.Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="email">Email address</label>
+                                    <label htmlFor="email">Email Address:</label>
                                     <input
                                         type="email"
                                         className="form-control"
@@ -109,7 +109,9 @@ class Statement extends React.Component {
                                     />
                                 </div>
                                 <div className="form-group">
+
                                     <label htmlFor="password">Old Password</label>
+
                                     <input
                                         type="password"
                                         className="form-control"

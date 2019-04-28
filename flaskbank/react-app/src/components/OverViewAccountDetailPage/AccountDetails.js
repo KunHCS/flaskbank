@@ -28,9 +28,9 @@ class AccountDetails extends React.Component {
                     <i className="large left aligned icon user"/>
                     <div className="content">
                         <div className="description">
-                            <h4>Amount: {post.amount} | <span/>
-                                Type: {post.description} | <span/>
-                                Time: {post.time}</h4>
+                            <body style={{textAlign: 'center'}}><strong>Amount: </strong> {post.amount} | <span/>
+                            <strong>Type: </strong>{post.description} | <span/>
+                            <strong>Time: </strong>{post.time}</body>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ class AccountDetails extends React.Component {
                     <Container>
                         <InnerNavigationBar active={activeElement}/>
                         <Paper className="paper" style={detailStyle}>
-                            <h1>{this.state.myCurrentAccount.alias} Details </h1>
+                            <h3>{this.state.myCurrentAccount.alias} Details </h3>
                             <div>
                                 {this.renderList()}
                             </div>

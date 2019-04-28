@@ -41,13 +41,13 @@ class CloseAccountDetails extends React.Component {
                           password: this.state.password,
                           email:this.state.email}} )
             .then(response => {
-                alert("Account Successfully Closed");
+                alert("Your account is Successfully Closed");
                 console.log(response);
                 this.setState({flag:true})
 
             }).catch (error => {
                 console.log(error.response.data.msg);
-                alert("Fail to Close the Account");
+                alert("Fail to Close an Account");
             });
 
     }
@@ -68,10 +68,10 @@ class CloseAccountDetails extends React.Component {
                         <div className="row">
                             <div className="col-md-6 mt-5 mx-auto">
                                 <form noValidate onSubmit={this.onSubmit}>
-                                    <h1 className="h3 mb-3 font-weight-bold font-weight-normal">Close Account</h1>
+                                    <h1 className="h3 mb-3 font-weight-bold font-weight-normal">Close An Account</h1>
 
                                     <div className="form-group">
-                                        <label htmlFor="name">Username</label>
+                                        <label htmlFor="name">Username:</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -83,7 +83,7 @@ class CloseAccountDetails extends React.Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="email">Email address</label>
+                                        <label htmlFor="email">Email Address:</label>
                                         <input
                                             type="email"
                                             className="form-control"
@@ -94,7 +94,7 @@ class CloseAccountDetails extends React.Component {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="password">Password</label>
+                                        <label htmlFor="password">Password:</label>
                                         <input
                                             type="password"
                                             className="form-control"

@@ -201,7 +201,7 @@ const center = {
 }
 
 const para = {
-    paddingTop: '250px',
+    paddingTop: '300px',
     position: 'flex',
 }
 
