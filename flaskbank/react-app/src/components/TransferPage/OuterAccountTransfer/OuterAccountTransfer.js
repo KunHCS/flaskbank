@@ -155,6 +155,7 @@ class OuterAccountTransfer extends React.Component{
                             <div style={{float: 'right', width:'10%', marginRight: '280px'}}>
                                 <Typography variant="h6" style={{float: 'left', width:'30%', marginLeft: '200px'}}>Amount:</Typography>
                                 <input
+                                    style={{float: 'left', width:'180%', marginLeft: '200px'}}
                                     type="number"
                                     className={classes.button}
                                     name="amount"

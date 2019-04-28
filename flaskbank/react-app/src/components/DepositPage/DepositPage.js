@@ -61,7 +61,7 @@ const styles = theme => ({
 class DepositPage extends React.Component{
     state = {
         payAmount: 0,
-        AccountNumber :"You need select a checking account",
+        AccountNumber :"You need to select a checking/saving account",
         open : false,
 
     };

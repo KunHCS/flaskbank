@@ -56,7 +56,7 @@ class Register extends Component {
             })
             .catch(error => {
                 console.log(error.response.data.msg)
-                alert("Register Fail, Please Try Again");
+                alert("Register Fail, Please Try Again--"+error.response.data.msg);
                 //this.props.logInRequest(error.response)
             });
     };
@@ -73,65 +73,65 @@ class Register extends Component {
                     <div className="row">
                         <div className="col-md-6 mt-5 mx-auto">
                             <form noValidate onSubmit={this.onSubmit}>
-                                <h1 className="h3 mb-3 font-weight-bold f font-weight-normal">Register</h1>
+                                <h1 className="h3 mb-3 font-weight-bold f font-weight-normal">Open an Account</h1>
                                 <div className="form-group">
-                                    <label htmlFor="name">First name</label>
+                                    <label htmlFor="name">First Name:</label>
                                     <input
                                         required
                                         type="text"
                                         className="form-control"
                                         name="first_name"
-                                        placeholder="Enter your first name"
+                                        placeholder="Enter Your First Name"
                                         value={this.state.first_name}
                                         onChange={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name">Last name</label>
+                                    <label htmlFor="name">Last Name:</label>
                                     <input
                                         required
                                         type="text"
                                         className="form-control"
                                         name="last_name"
-                                        placeholder="Enter your last name"
+                                        placeholder="Enter Your Last Name"
                                         value={this.state.last_name}
                                         onChange={this.onChange}
                                     />
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="name">Username</label>
+                                    <label htmlFor="name">Username:</label>
                                     <input
                                         required
                                         type="text"
                                         className="form-control"
                                         name="username"
-                                        placeholder="Enter your user name"
+                                        placeholder="Enter Your User Name"
                                         value={this.state.username}
                                         onChange={this.onChange}
                                     />
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="email">Email address</label>
+                                    <label htmlFor="email">Email Address:</label>
                                     <input
                                         required
                                         type="email"
                                         className="form-control"
                                         name="email"
-                                        placeholder="Enter email"
+                                        placeholder="Enter an Email"
                                         value={this.state.email}
                                         onChange={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="password">Password</label>
+                                    <label htmlFor="password">Password:</label>
                                     <input
                                         required
                                         type="password"
                                         className="form-control"
                                         name="password"
-                                        placeholder="Password"
+                                        placeholder="Enter a Password"
                                         value={this.state.password}
                                         onChange={this.onChange}
                                     />
