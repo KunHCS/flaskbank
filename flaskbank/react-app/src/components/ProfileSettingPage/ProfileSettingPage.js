@@ -17,7 +17,8 @@ class Statement extends React.Component {
         last_name: "",
         username: "",
         email: "",
-        password: "",
+        current_password: "",
+        password:"",
     };
 
     onSubmit =(e) => {
@@ -31,20 +32,27 @@ class Statement extends React.Component {
 
         axios.post('/api/client/update',
             { first_name: this.state.first_name,
-                   last_name:  this.state.last_name,
-                   account_name: this.state.username,
-                   password: this.state.password,
-                   email:    this.state.email,
-                },
-                {headers: req_headers}
-            )
-                .then(response => {
-                    alert("Update Success")
-                    console.log(response);
+                last_name:  this.state.last_name,
+                account_name: this.state.username,
+                current_password: this.state.current_password,
+                password: this.state.password,
+                email:    this.state.email,
+            },
+            {headers: req_headers}
+        )
+            .then(response => {
+                alert("Update Success")
+                console.log(response);
 
-                }).catch (error => {
-                    alert("Update Fail");
-                    console.log(error.response.data.msg);});
+                axios.get("/api/client/all",{headers: req_headers})
+                    .then(response => {
+                        console.log(response);
+                        this.props.getProfile(response.data);
+                    }).catch (error => console.log(error.response.data.msg));
+
+            }).catch (error => {
+            alert("Update Fail");
+            console.log(error.response.data.msg);});
     }
 
 
@@ -88,18 +96,6 @@ class Statement extends React.Component {
                                         onChange ={e=>this.setState({last_name:e.target.value})}
                                     />
                                 </div>
-                                       {/* Do NOT DELETE THIS COMMENT SECTION !!!  */}
-                                {/*<div className="form-group">*/}
-                                    {/*<label htmlFor="name">Username</label>*/}
-                                    {/*<input*/}
-                                        {/*type="text"*/}
-                                        {/*className="form-control"*/}
-                                        {/*name="account_name"*/}
-                                        {/*placeholder={account_name}*/}
-                                        {/*value={this.state.account_name}*/}
-                                        {/*onChange ={e=>this.setState({account_name:e.target.value})}*/}
-                                    {/*/>*/}
-                                {/*</div>*/}
 
                                 <div className="form-group">
                                     <label htmlFor="email">Email address</label>
@@ -113,17 +109,29 @@ class Statement extends React.Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="password">Password</label>
+                                    <label htmlFor="password">Old Password</label>
                                     <input
                                         type="password"
                                         className="form-control"
                                         name="password"
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        onChange ={e=>this.setState({password:e.target.value})}
+                                        placeholder="Old Password"
+                                        value={this.state.current_password}
+                                        onChange ={e=>this.setState({current_password:e.target.value})}
                                     />
                                 </div>
 
+
+                                <div className="form-group">
+                                    <label htmlFor="name">New Password</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="account_name"
+                                        placeholder="New Password"
+                                        value={this.state.password}
+                                        onChange={e => this.setState({password: e.target.value})}
+                                    />
+                                </div>
                                 <button
                                     type="submit"
                                     className="btn btn-lg btn-primary btn-block"
