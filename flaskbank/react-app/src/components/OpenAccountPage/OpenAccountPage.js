@@ -56,7 +56,7 @@ class Register extends Component {
             })
             .catch(error => {
                 console.log(error.response.data.msg)
-                alert("Register Fail, Please Try Again");
+                alert("Register Fail, Please Try Again--"+error.response.data.msg);
                 //this.props.logInRequest(error.response)
             });
     };
