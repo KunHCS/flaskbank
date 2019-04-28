@@ -2,10 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
-import {connect} from "react-redux";
-import {loginAction, logInRequest} from "../../actions/LoginAction/loginAction";
-import {changeUserType} from "../../actions/ChangeUserTypeAction/changeUserTypeAction";
-import {closePopWindow, openPopWindow1} from "../../actions/PopWindowStateAction/popWindowStateAction";
 
 function getModalStyle() {
     const top = 50 ;
@@ -58,8 +54,6 @@ class ChangePasswordForm extends React.Component {
             alert("Change password Fail");
             console.log(error.response.data.msg);
         });
-        this.props.closePopWindow();
-
     }
     render() {
         const {classes} = this.props;
@@ -118,14 +112,4 @@ ChangePasswordForm.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-
-
-
-const mapStateToProps = (state) => {
-    console.log("I'm in map State to Props");
-    console.log(state);
-    return state;
-}
-
-export default withStyles(styles)(connect(mapStateToProps, {closePopWindow})(ChangePasswordForm));
-
+export default withStyles(styles)(ChangePasswordForm);

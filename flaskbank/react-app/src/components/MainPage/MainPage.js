@@ -14,7 +14,7 @@ import jwt_decode from "jwt-decode";
 import {Link}from "react-router-dom";
 import cards from '../../images/cards1.png';
 import {BrowserRouter as Router, Redirect,Route} from "react-router-dom";
-import {openPopWindow1,closePopWindow} from "../../actions/PopWindowStateAction/popWindowStateAction";
+import PopUpWindow from "../FrameWorkUnity/DynamicPopUpWindow/PopUpWindow";
 import {changeUserType} from '../../actions/ChangeUserTypeAction/changeUserTypeAction';
 import * as ACTION from "../../static/action_type";
 
@@ -49,17 +49,17 @@ class Login extends React.Component {
     state = {
         username:"",
         password:"",
-        // open:false,
+        open:false,
         message:"",
     };
 
-    // handleOpen = () => {
-    //     this.setState({ open: true });
-    // };
-    //
-    // handleClose = () => {
-    //     this.setState({ open: false });
-    // };
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
 
     onSubmit =(e) => {
         e.preventDefault();
@@ -125,15 +125,15 @@ class Login extends React.Component {
                         </Button>
 
                         <div id="formFooter" style={formFooter}>
-                            <a className="underlineHover" href= "#" onClick={this.props.props.openPopWindow1}>Forgot Password?</a>
+                            <a className="underlineHover" href= "#" onClick={this.handleOpen}>Forgot Password?</a>
                         </div>
                 </form>
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
-                    open={this.props.props.popWindowState.state1}
-                    onClose={this.props.props.closePopWindow}
-                >
+                    open={this.state.open}
+                    onClose={this.handleClose}>
+
                     <ChangePassword/>
                 </Modal>
             </div>
@@ -212,5 +212,4 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps,
-    {loginAction,logInRequest,changeUserType, openPopWindow1, closePopWindow})(mainPage);
+export default connect(mapStateToProps,{logInAction: loginAction,logInRequest,changeUserType})(mainPage);
