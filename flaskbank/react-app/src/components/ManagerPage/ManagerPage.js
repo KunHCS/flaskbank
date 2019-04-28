@@ -96,7 +96,6 @@ class ManagerPage extends React.Component {
                     this.props.cleanQueryResult();
                     alert("Nothing Found");
                 } else {
-                    alert("Query Success")
                     this.props.saveQueryResult(response.data.results);
                     this.setState({flag: true})
                 }
