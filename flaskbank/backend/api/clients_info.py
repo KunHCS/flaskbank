@@ -17,17 +17,23 @@ def client_info_update_route():
         last = data["last_name"].lower()
         email = data["email"].lower()
         username = data.get('username', None)
-        password = data['password']
+        current_password = data['current_password']
+        password = data.get('password', None)
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
     current_user = am.get_jwt_identity()['username']
 
-    key_list = {'first_name': first, 'last_name': last, 'email': email,
-                'username': username}
-
     client = am.clients.find_one({'username': current_user})
     if not client:
         return am.jsonify({'msg': 'user not found'}), 409
+
+    valid = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
+                                          current_password)
+    if not valid:
+        return am.jsonify({'msg': 'Incorrect Password'}), 401
+
+    key_list = {'first_name': first, 'last_name': last, 'email': email,
+                'username': username}
 
     for key in key_list:
         if not key_list[key]:
@@ -44,17 +50,18 @@ def client_info_update_route():
             }
         }
     )
-    same = am.bcrypt.check_password_hash(client['password'].decode('UTF-8'),
-                                         password)
-    if not same:
+    extra_msg = ''
+    if password:
         new_pw = am.bcrypt.generate_password_hash(password.encode('UTF-8'))
         am.clients.update_one(
             {'username': current_user},
             {'$set': {'password': new_pw}}
         )
+        jti = am.get_raw_jwt()['jti']
+        am.jti_blacklist.add(jti)
+        extra_msg = ', password changed, re-login required.'
 
-    extra_msg = ''
-    if not username == client['username']:
+    if username and username != client['username']:
         jti = am.get_raw_jwt()['jti']
         am.jti_blacklist.add(jti)
         extra_msg = ', username changed, re-login required.'
