@@ -124,7 +124,7 @@ class Statement extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="name">New Password</label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         className="form-control"
                                         name="account_name"
                                         placeholder="New Password"
