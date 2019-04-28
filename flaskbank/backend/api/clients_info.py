@@ -16,7 +16,7 @@ def client_info_update_route():
         first = data["first_name"].lower()
         last = data["last_name"].lower()
         email = data["email"].lower()
-        username = data["username"].lower()
+        username = data.get('username', None)
         password = data['password']
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
