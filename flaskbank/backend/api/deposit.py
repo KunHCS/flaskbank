@@ -49,7 +49,7 @@ def check_deposit():
     account = str(am.request.form['account'])
     if not am.verify(account):
         return am.jsonify({'msg': 'invalid account number'}), 400
-    deposit_amount = float(am.request.form['amount'])
+    deposit_amount = round(float(am.request.form['amount']), 3)
     if not file or not file.filename.lower().endswith(allowed_extension):
         return am.jsonify({'msg': 'No file or invalid file type. File '
                                   'must be an images in .png .jpg .jpeg '
