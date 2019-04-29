@@ -1,5 +1,6 @@
 from .. import all_module as am
 from .utils import to_d128, deposit
+
 register_bp = am.Blueprint('register', __name__)
 
 
@@ -19,6 +20,12 @@ def register_user():
 
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+
+    # validation
+    if not isinstance(first, str) or not isinstance(last, str) or \
+            not isinstance(email, str) or not isinstance(username, str) or \
+            not isinstance(password, str) or not isinstance(user_type, str):
+        return am.jsonify({'msg': 'Invalid Input'}), 400
 
     deposit_saving = data.get('deposit_saving', 0.0)
     deposit_checking = data.get('deposit_checking', 0.0)

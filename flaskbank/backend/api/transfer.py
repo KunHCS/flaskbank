@@ -11,15 +11,19 @@ def transfer():
 
     if not data:
         return am.make_response("Bad Request, no data passed", 400)
-
     try:
         account_from = data['account_from']
         account_to = data['account_to']
         amount = data['amount']
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+
+    if not isinstance(amount, float) and not isinstance(amount, int):
+        return am.jsonify({'msg': 'Invalid input'}), 400
+
     account_from = str(account_from)
     account_to = str(account_to)
+
     if str(account_from) == str(account_to):
         return am.jsonify({'msg': 'accounts cannot be the same'}), 400
 
