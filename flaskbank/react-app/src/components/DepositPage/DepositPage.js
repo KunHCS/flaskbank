@@ -61,7 +61,7 @@ const styles = theme => ({
 class DepositPage extends React.Component{
     state = {
         payAmount: 0,
-        AccountNumber :"You need select a checking account",
+        AccountNumber :"You need to select a checking/saving account",
         open : false,
 
     };
@@ -103,7 +103,7 @@ class DepositPage extends React.Component{
             alert("Account Deposit Success");
         }).catch(error => {
             console.log(error.response);
-            alert("Account Deposit Fail");
+            alert("Account Deposit Fail"+error.response.data.msg);
         });
 
         this.setState({payAmount: "Please Enter Your Amount"})

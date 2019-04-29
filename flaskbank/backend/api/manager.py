@@ -34,8 +34,9 @@ def manager_query(attribute, query_param):
                                               'password': False})
     out = []
     for item in result:
-        make_serializable(item)
-        out.append(item)
+        if item['user_type'] != 'manager':
+            make_serializable(item)
+            out.append(item)
 
     return am.jsonify({'results': out}), 200
 
@@ -49,10 +50,13 @@ def get_all_client():
 
     results = am.clients.find({'username': {'$exists': True}},
                               {'username': True, 'first_name': True,
-                               'last_name': True, 'email': True})
+                               'last_name': True, 'email': True,
+                               'user_type': True})
     out = []
     for result in results:
         result.pop('_id')
-        out.append(result)
+        if not result['user_type'] == 'manager':
+            result.pop('user_type')
+            out.append(result)
 
     return am.jsonify({'results': out}), 200

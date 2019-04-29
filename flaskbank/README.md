@@ -62,7 +62,8 @@ Status: 400 BAD REQUEST
 		"last_name": <string>,
 		"username": "<string>",
 		"email": "<string>",
-		"password" : "<string>",
+		"current_password": "<string>",
+		"password" : "<string>"
 	}
 #### Responses:
 

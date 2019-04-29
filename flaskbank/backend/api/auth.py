@@ -20,6 +20,10 @@ def login_user():
         password = data['password']
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
+
+    if not isinstance(username, str) or not isinstance(password, str):
+        return am.jsonify({'msg': 'Invalid input'}), 400
+
     user = am.clients.find_one({'username': username})
 
     if not user:
@@ -50,7 +54,7 @@ def reset_password():
     client = am.clients.find_one({'$and': [{'username': username},
                                            {'email': email}]})
     if not client:
-        return am.jsonify({'msg': 'invalid information'})
+        return am.jsonify({'msg': 'invalid information'}), 409
 
     new_hash = am.bcrypt.generate_password_hash(newpw.encode('UTF-8'))
     result = am.clients.update_one({'username': username},

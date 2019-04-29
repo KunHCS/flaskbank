@@ -17,6 +17,10 @@ def withdraw_route():
     except KeyError:
         return am.jsonify({'msg': 'Bad Request, missing/misspelled key'}), 400
 
+    if (not isinstance(amount, float) and not isinstance(amount, int)) or not \
+            isinstance(acc_num, str):
+        return am.jsonify({'msg': 'Invalid Input'}), 400
+
     if not am.verify(acc_num) or not acc_num:
         return am.jsonify({'msg': 'invalid/empty account number'}), 400
 

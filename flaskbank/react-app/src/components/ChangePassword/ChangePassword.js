@@ -51,7 +51,7 @@ class ChangePasswordForm extends React.Component {
                 console.log(response);
 
             }).catch(error => {
-            alert("Change password Fail");
+            alert("Change password Fail --"+ error.response.data.msg);
             console.log(error.response.data.msg);
         });
     }

@@ -114,7 +114,7 @@ class BillPay extends React.Component{
 
                });
            } else {return ( <Typography variant="h8" color= "secondary">
-                            <strong>No Current AutoPayment SetUp</strong>
+                            <strong>No Current Auto Payment SetUp</strong>
                             </Typography>);}
 
     }
@@ -227,7 +227,7 @@ class BillPay extends React.Component{
                 <Container>
                     <InnerNavigationBar active={activeElement}/>
                     <div className={classes.paper}>
-                    <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have Credit Card Account</strong></Typography>
+                    <Typography variant="h4" color= "secondary"><strong>You Currently Don't Have a Credit Card Account</strong></Typography>
                     </div>
                 </Container>
                 </div>
@@ -245,18 +245,19 @@ class BillPay extends React.Component{
                             <div style={{float: 'left', width:"60%"}}>
                                 <Typography variant="h4" color= "secondary" style={{textAlign:'center'}}><strong>SJSP Credit Card</strong></Typography>
                                 <br/>
-                                <Typography variant="h6">SJSP Platinum Visa Card: {this.props.myInfo.accounts[index].account_number}</Typography>
-                                <Typography variant="h6">Current Balance: ${this.props.myInfo.accounts[index].balance * -1}</Typography>
-                                <Typography variant="h6">Credit Limit: ${this.props.myInfo.accounts[index].credit_limit}</Typography>
-                                <Typography variant="h6">Available Credit: ${this.props.myInfo.accounts[index].available_credit}</Typography>
+                                <Typography variant="body1"><strong>SJSP Platinum Visa Card: </strong> {this.props.myInfo.accounts[index].account_number}</Typography>
+                                <Typography variant="body1"><strong>Current Balance: </strong>${this.props.myInfo.accounts[index].balance * -1}</Typography>
+                                <Typography variant="body1"><strong>Credit Limit: </strong> ${this.props.myInfo.accounts[index].credit_limit}</Typography>
+                                <Typography variant="body1"><strong>Available Credit: </strong>${this.props.myInfo.accounts[index].available_credit}</Typography>
                             </div>
-                            <div style={{float: 'right', width:"40%"}}>
+                            <div style={{float: 'right', width:"30%"}}>
                                 <Typography variant="h6">Amount:</Typography>
                                 <input type="number"
                                        className="form-control"
                                        name="amount"
                                        step="0.01"
-                                       placeholder= "$ Enter Your Amount" value = {this.state.payAmountCredit}
+                                       placeholder= "$ Enter Your Amount"
+                                       value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
                                 <Typography variant="h6">Select Account:</Typography>
@@ -266,7 +267,11 @@ class BillPay extends React.Component{
                                     </ExpansionPanelSummary>
                                     {this.renderAccount()}
                                 </ExpansionPanel>
-                                <Button  type = "submit"  className={classes.button}  variant="contained" color="primary">
+                                <Button
+                                         className={classes.button}
+                                         type = "submit"
+                                         variant="contained"
+                                         color="primary">
                                     Submit
                                 </Button>
                             </div>

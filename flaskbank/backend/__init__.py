@@ -6,11 +6,13 @@ from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from .config import DevelopmentConfig
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 # from flask_talisman import Talisman
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
 f_jwt = JWTManager()
+cors = CORS()
 # talisman = Talisman()
 
 
@@ -22,6 +24,7 @@ def create_app(current_config=DevelopmentConfig):
     mongo.init_app(app)
     bcrypt.init_app(app)
     f_jwt.init_app(app)
+    cors.init_app(app)
 
     # Blueprints
     from flaskbank.backend.api import API_BLUEPRINTS
