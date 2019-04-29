@@ -64,9 +64,9 @@ class ManagerPage extends React.Component {
                         <ExpansionPanelDetails>
                             <div style={{width: '90%'}}>
                                 <Typography>
-                                    Email:{result.email}
+                                    <strong>Email: </strong>{result.email}
                                     <hr/>
-                                    User Name:{result.username}
+                                    <strong>Username: </strong>{result.username}
                                 </Typography>
 
                             </div>
@@ -149,7 +149,7 @@ class ManagerPage extends React.Component {
                                 <div>
                                     <select onChange={e => this.setState({value: e.target.value})}>
                                         <option value="email">Email</option>
-                                        <option value="username">UserName</option>
+                                        <option value="username">Username</option>
                                         <option value="first">First Name</option>
                                         <option value="last">Last Name</option>
                                         <option value="account">Account</option>

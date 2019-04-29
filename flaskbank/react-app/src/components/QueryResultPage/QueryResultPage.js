@@ -55,12 +55,10 @@ class QueryResultPage extends React.Component {
                     <ExpansionPanelDetails>
                         <div style={{width: '90%'}}>
                             <Typography style={{float: 'left'}}>
-                                <strong>
-                                    Username:{client.username}
+                                <strong>Username: </strong>{client.username}
                                     <br/>
-                                    Email:{client.email}
+                                    <strong>Email: </strong>{client.email}
                                     <br/>
-                                </strong>
                                 {this.renderAccount(client.accounts)}
                             </Typography>
 
@@ -79,18 +77,18 @@ class QueryResultPage extends React.Component {
                 <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography
-                            className={classes.heading}><strong>  {account.alias} :{account.account_number}  </strong>
+                            className={classes.heading}><strong>  {account.alias}: {account.account_number}  </strong>
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <div style={{width: '90%'}}>
                             <Typography style={{float: 'left'}}>
                                 <br/>
-                                Balance:{account.balance}
+                                <strong>Balance: </strong>${account.balance}
                                 <br/>
-                                Type: {account.type}
+                                <strong>Type: </strong>{account.type}
                                 <br/>
-                                Active: {account.active}
+                                <strong>Active</strong>{account.active}
                             </Typography>
 
                             <Link to="/overview/account_detail"
@@ -108,7 +106,7 @@ class QueryResultPage extends React.Component {
 
     render() {
         const {classes} = this.props;
-        console.log("I am in overview page");
+        console.log("I am in Overview Page");
         console.log(this.props);
 
         return (
