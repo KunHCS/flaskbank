@@ -57,9 +57,9 @@ def client_info_update_route():
             {'username': current_user},
             {'$set': {'password': new_pw}}
         )
-        jti = am.get_raw_jwt()['jti']
-        am.jti_blacklist.add(jti)
-        extra_msg = ', password changed, re-login required.'
+        # jti = am.get_raw_jwt()['jti']
+        # am.jti_blacklist.add(jti)
+        # extra_msg = ', password changed, re-login required.'
 
     if username and username != client['username']:
         jti = am.get_raw_jwt()['jti']
