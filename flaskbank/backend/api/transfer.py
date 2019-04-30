@@ -23,6 +23,7 @@ def transfer():
 
     account_from = str(account_from)
     account_to = str(account_to)
+    amount = abs(amount)
 
     if str(account_from) == str(account_to):
         return am.jsonify({'msg': 'accounts cannot be the same'}), 400
