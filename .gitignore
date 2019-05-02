@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 venv/
 bankenv/
+.vscode/
 
 .eslintrc
 .DS_Store
