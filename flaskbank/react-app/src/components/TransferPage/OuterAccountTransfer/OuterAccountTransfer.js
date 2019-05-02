@@ -115,6 +115,7 @@ class OuterAccountTransfer extends React.Component{
                 <Navigation/>
                 <Search/>
                 <Container>
+                    <form onSubmit={this.onSubmit}>
                     <InnerNavigationBar active={activeElement}/>
 
 
@@ -160,6 +161,8 @@ class OuterAccountTransfer extends React.Component{
                                     className={classes.button}
                                     name="amount"
                                     step="0.01"
+                                    min="0"
+                                    max="999999999"
                                     placeholder= "$ Enter Your Amount"
                                     value = {this.state.transferAmount}
                                     onChange ={e=>this.setState({transferAmount:e.target.value})}
@@ -175,15 +178,15 @@ class OuterAccountTransfer extends React.Component{
                             >
                                 Previous
                             </Button>
-                            <Button variant="contained" color="primary"
+                            <Button
+                                    type ="submit"
+                                    variant="contained" color="primary"
                                     className={classes.button}
-
-                                    onClick={this.onSubmit}
                             > Next
                             </Button>
                         </div>
                     </Paper>
-
+                    </form>
                 </Container>
             </div>
         );

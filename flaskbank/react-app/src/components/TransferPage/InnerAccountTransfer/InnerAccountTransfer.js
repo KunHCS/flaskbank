@@ -145,8 +145,8 @@ class InnerAccountTransfer extends React.Component{
                 <Navigation/>
                 <Search/>
                 <Container>
+                    <form onSubmit={this.onSubmit}>
                     <InnerNavigationBar active={activeElement}/>
-
 
                             <Paper className={classes.innerPaper2} style={{position: 'flex'}}>
                                 <Typography variant="h4" color = "secondary"><strong>Internal Accounts Transfer</strong></Typography>
@@ -170,7 +170,6 @@ class InnerAccountTransfer extends React.Component{
                                 <br/>
 
                                     <ExpansionPanel expanded={this.state.open2}>
-
                                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={this.panTwoHandler}>
                                             <Typography
                                                 className={classes.heading}
@@ -192,6 +191,8 @@ class InnerAccountTransfer extends React.Component{
                                             className={classes.button}
                                             name="amount"
                                             step="0.01"
+                                            min="0"
+                                            max="999999999"
                                             placeholder= "$ Enter Your Amount"
                                             value = {this.state.transferAmount}
                                             onChange ={e=>this.setState({transferAmount:e.target.value})}
@@ -200,6 +201,7 @@ class InnerAccountTransfer extends React.Component{
                                 </div>
                                 <br/>
                                 <div>
+
                                     <br/>
                                     <Button variant="contained" color="primary"
                                             className={classes.button}
@@ -207,15 +209,16 @@ class InnerAccountTransfer extends React.Component{
                                     >
                                         Previous
                                     </Button>
-                                    <Button variant="contained" color="primary"
+                                    <Button type = "submit"
+                                            variant="contained" color="primary"
                                             className={classes.button}
 
-                                            onClick={this.onSubmit}
                                     > Next
                                     </Button>
+
                                 </div>
                             </Paper>
-
+                    </form>
                 </Container>
             </div>
         );

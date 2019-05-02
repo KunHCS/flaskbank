@@ -103,7 +103,7 @@ class DepositPage extends React.Component{
             alert("Account Deposit Success");
         }).catch(error => {
             console.log(error.response);
-            alert("Account Deposit Fail"+error.response.data.msg);
+            alert("Account Deposit Fail "+error.response.data.msg);
         });
 
         this.setState({payAmount: "Please Enter Your Amount"})
@@ -170,7 +170,10 @@ class DepositPage extends React.Component{
                                     name="amount"
                                     step="0.01"
                                     placeholder= "$ Enter the Amount"
+                                    min="0"
+                                    max="999999999"
                                     value = {this.state.payAmount}
+                                    onkeydown="return event.keyCode !== 69"
                                     onChange ={e=>this.setState({payAmount:e.target.value})}
                                 />
                                     <hr/>
