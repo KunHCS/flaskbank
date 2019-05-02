@@ -66,10 +66,8 @@ class Login extends React.Component {
 
         console.log('it just submit');
 
-        axios.post('api/login', {
-            username: this.state.username,
-            password: this.state.password
-        }).then(response => {
+        axios.post('api/login', {username: this.state.username, password: this.state.password}
+        ).then(response => {
             if (response.status === 201) {
                 console.log(jwt_decode(response.data.access_token).identity.user_type);
                 this.props.props.changeUserType(jwt_decode(response.data.access_token).identity.user_type)
