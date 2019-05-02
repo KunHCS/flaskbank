@@ -21,6 +21,8 @@ def transfer():
     if not isinstance(amount, float) and not isinstance(amount, int):
         return am.jsonify({'msg': 'Invalid input'}), 400
 
+    amount = round(amount, 3)
+
     account_from = str(account_from)
     account_to = str(account_to)
     amount = abs(amount)
