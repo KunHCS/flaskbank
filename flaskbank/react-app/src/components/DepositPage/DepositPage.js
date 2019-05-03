@@ -60,7 +60,7 @@ const styles = theme => ({
 
 class DepositPage extends React.Component{
     state = {
-        payAmount: 0,
+        payAmount: "",
         AccountNumber :"You need to select a checking/saving account",
         open : false,
 
@@ -73,7 +73,7 @@ class DepositPage extends React.Component{
     onSubmit =(e) => {
         e.preventDefault();
 
-        if(this.state.payAmount === 0) {
+        if(this.state.payAmount == 0 || this.state.payAmount == "Please Enter Your Amount") {
             alert("Amount Can't be 0, try again");
             return
         }
