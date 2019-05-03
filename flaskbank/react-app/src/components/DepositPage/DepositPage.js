@@ -73,8 +73,8 @@ class DepositPage extends React.Component{
     onSubmit =(e) => {
         e.preventDefault();
 
-        if(this.state.payAmount == 0 || this.state.payAmount == "Please Enter Your Amount") {
-            alert("Amount Can't be 0, try again");
+        if(this.state.payAmount <= 0 || this.state.payAmount == "Please Enter Your Amount") {
+            alert("Amount Can't be 0 or negative, Please try again");
             return
         }
 
@@ -82,6 +82,8 @@ class DepositPage extends React.Component{
             alert("The Check Image at Deposit to Checking Can't be Empty")
             return
         }
+
+
 
         console.log('it just submit');
         console.log(e);
