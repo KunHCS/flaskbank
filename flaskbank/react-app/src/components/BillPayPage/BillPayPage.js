@@ -63,7 +63,9 @@ class BillPay extends React.Component{
             return this.props.myInfo.accounts.map(account => {
                 if (account.type !== ACTION.CREDIT) {
                     return (
-                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                        <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                            this.setState({selectFrom: account.account_number});}}
+                                               >
                             <Button className={classes.button}
                                     onClick={() => this.setState({selectFrom: account.account_number})}>
                                 {account.alias}: {account.account_number}</Button>
@@ -134,6 +136,12 @@ class BillPay extends React.Component{
             return
         }
 
+        if (this.state.payAmountCredit<0) {
+            alert("Bill Pay Amount Can't negative, try again");
+            return
+        }
+
+
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
         axios.post('/api/transfer ',
             { account_from: this.state.selectFrom,
@@ -176,6 +184,16 @@ class BillPay extends React.Component{
                  alert("Time Interval Can't Be Empty");
                  return
              }
+
+            if (this.state.autoPayAmount<0) {
+                alert("Bill AutoPay Amount Can't negative, try again");
+                return
+            }
+
+            if (this.state.time<0) {
+                alert("Time Can't negative, try again");
+                return
+            }
         }
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}

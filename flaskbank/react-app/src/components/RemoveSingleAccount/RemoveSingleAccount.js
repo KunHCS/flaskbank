@@ -39,13 +39,34 @@ const styles = theme => ({
 class RemoveSingleAccount extends React.Component {
     state = {
         currentAccount:"",
+        currentBalance: "",
+        myAccount:"",
+
         open: false,
     };
+
 
 
     onSubmit =(e) => {
         console.log("I just submit");
         e.preventDefault();
+
+        console.log(this.state.currentBalance);
+
+        if (this.state.myAccount.type !=="credit" && parseFloat(this.state.currentBalance)<0 ) {
+            alert("Account Can't be Close while it has negative balance")
+            return;
+        }
+
+
+        if(this.state.myAccount.type=="credit" && parseFloat(this.state.myAccount.balance)>0) {
+             alert("Credit Account Can't be Close while it has negative balance")
+             return;
+        }
+
+
+
+
         console.log(this.props);
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
@@ -96,9 +117,13 @@ class RemoveSingleAccount extends React.Component {
         if (this.props.myInfo !== " ") {
             return this.props.myInfo.accounts.map(account => {
                     return (
-                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                        <ExpansionPanelDetails  onClick={(e)=>{this.selectAccountOne(e);
+                            this.setState({currentAccount: account.account_number,
+                                currentBalance: account.balance ,myAccount:account});}}>
+
                             <Button className={classes.button}
-                                    onClick={() => this.setState({currentAccount: account.account_number})}>
+                                    onClick={() => this.setState({currentAccount: account.account_number,
+                                        currentBalance: account.balance ,myAccount:account})}>
                                 {account.alias}: {account.account_number}</Button>
                         </ExpansionPanelDetails>
                     );
@@ -110,6 +135,7 @@ class RemoveSingleAccount extends React.Component {
     render() {
         const {classes} = this.props;
         console.log(this.state.currentAccount);
+        console.log(this.state.currentBalance);
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>

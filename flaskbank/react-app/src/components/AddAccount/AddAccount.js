@@ -127,19 +127,23 @@ class AddAccount extends React.Component {
                                 <Typography className={classes.heading} id="firstLabel">Select Account Type</Typography>
                             </ExpansionPanelSummary>
 
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                            <ExpansionPanelDetails  onClick={(e)=>{this.selectAccountOne(e);
+                                      this.setState({account_type: ACTION.CHECKING});}}>
                                 <Button className={classes.button}
                                         onClick={() => this.setState({account_type: ACTION.CHECKING})}>
                                     Checking Account</Button>
                             </ExpansionPanelDetails>
 
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+
+                            <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                                this.setState({account_type: ACTION.SAVING});}}>
                                 <Button className={classes.button}
                                         onClick={() => this.setState({account_type: ACTION.SAVING})}>
                                     Saving Account</Button>
                             </ExpansionPanelDetails>
 
-                            <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                            <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                                this.setState({account_type: ACTION.CREDIT});}}>
                                 <Button className={classes.button}
                                         onClick={() => this.setState({account_type: ACTION.CREDIT})}>
                                     Credit Card Account</Button>

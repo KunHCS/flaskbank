@@ -35,13 +35,19 @@ class OuterAccountTransfer extends React.Component{
         e.preventDefault();
         console.log("I just submit");
 
-        if(this.state.selectFrom == undefined || this.state.selectTo == undefined) {
+        if(this.state.selectFrom === undefined || this.state.selectTo === undefined) {
             alert("Selected Account can't be empty ");
             return
         }
 
-        if(this.state.transferAmount === 0 || this.state.transferAmount== "$ Enter Your Amount") {
+        if(this.state.transferAmount === 0 || this.state.transferAmount === "$ Enter Your Amount") {
             alert("The Transfer Amount Cant be 0, Please Try Again");
+            return
+        }
+
+
+        if (this.state.transferAmount<0) {
+            alert("The Transfer Amount Can't negative, try again");
             return
         }
 
@@ -89,10 +95,13 @@ class OuterAccountTransfer extends React.Component{
         if (this.props.myInfo !== " ") {
             return this.props.myInfo.accounts.map(account => {
                 return (
-                    <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                    <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                    this.setState({selectFrom: account.account_number});}}>
+
                         <Button className={classes.button} onClick={this.selectAccount}
                                 onClick={()=>this.setState({selectFrom:account.account_number})}>
                             {account.alias}: {account.account_number}</Button>
+
                     </ExpansionPanelDetails>
                 );
             });

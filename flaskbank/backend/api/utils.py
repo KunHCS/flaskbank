@@ -140,7 +140,7 @@ def withdraw(user, account_number, withdraw_amount, description=None):
     available_credit = (float(available_credit.to_decimal()) if
                         available_credit else None)
     print(available_credit)
-    if (current_balance - amount) < -100.0 and str(account_number)[0] != '4':
+    if (current_balance - amount) < 0.0 and str(account_number)[0] != '4':
         return False
     elif str(account_number)[0] == '4' and ((available_credit - amount) <
                                             -100.0):

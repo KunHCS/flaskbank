@@ -25,6 +25,12 @@ class Statement extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert('Invalid email format');
+            return;
+        }
+
+
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
         console.log(this.props);
