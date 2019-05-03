@@ -259,6 +259,7 @@ class BillPay extends React.Component{
                                        min="0"
                                        max="999999999"
                                        placeholder= "$ Enter Your Amount"
+                                       onkeydown="return event.keyCode !== 69"
                                        value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
@@ -291,6 +292,7 @@ class BillPay extends React.Component{
                                        step="0.01"
                                        min="0"
                                        max="999999999"
+                                       onkeydown="return event.keyCode !== 69"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
@@ -303,6 +305,7 @@ class BillPay extends React.Component{
                                     step="0.01"
                                     min="0"
                                     max="999999999"
+                                    onkeydown="return event.keyCode !== 69"
                                     placeholder= "Enter The Time Interval in Minutes"
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>
