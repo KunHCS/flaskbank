@@ -51,7 +51,7 @@ class Statement extends React.Component {
                     }).catch (error => console.log(error.response.data.msg));
 
             }).catch (error => {
-            alert("Update Fail"+error.response.data.msg);
+            alert("Update Fail---"+error.response.data.msg);
             console.log(error.response.data.msg);});
     }
 

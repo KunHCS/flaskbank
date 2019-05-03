@@ -47,7 +47,7 @@ class CloseAccountDetails extends React.Component {
 
             }).catch (error => {
                 console.log(error.response.data.msg);
-                alert("Fail to Close an Account");
+                alert("Fail to Close an Account ---" +error.response.data.msg);
             });
 
     }
