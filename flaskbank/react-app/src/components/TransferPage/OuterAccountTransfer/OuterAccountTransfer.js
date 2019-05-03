@@ -40,8 +40,14 @@ class OuterAccountTransfer extends React.Component{
             return
         }
 
-        if(this.state.transferAmount === 0 || this.state.transferAmount== "$ Enter Your Amount") {
+        if(this.state.transferAmount == 0 || this.state.transferAmount== "$ Enter Your Amount") {
             alert("The Transfer Amount Cant be 0, Please Try Again");
+            return
+        }
+
+
+        if (this.state.transferAmount<0) {
+            alert("The Transfer Amount Can't negative, try again");
             return
         }
 

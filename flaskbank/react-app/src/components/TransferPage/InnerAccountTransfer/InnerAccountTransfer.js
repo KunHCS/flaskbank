@@ -46,6 +46,11 @@ class InnerAccountTransfer extends React.Component{
         }
 
 
+        if (this.state.transferAmount<0) {
+            alert("The Transfer Amount Can't negative, try again");
+            return
+        }
+
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
