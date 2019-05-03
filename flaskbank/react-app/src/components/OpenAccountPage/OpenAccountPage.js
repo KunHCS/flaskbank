@@ -32,6 +32,7 @@ class Register extends Component {
             password: "",
             errors: {},
             flag: false,
+
         }
 
     onChange =(e) => {
@@ -39,9 +40,19 @@ class Register extends Component {
     }
 
 
+
+
     onSubmit =(e) =>{
         e.preventDefault();
         console.log("i just submit")
+
+
+
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert('Invalid email format');
+            return;
+        }
+
        axios .post("/api/register", {
                 first_name: this.state.first_name,
                 last_name:  this.state.last_name,
