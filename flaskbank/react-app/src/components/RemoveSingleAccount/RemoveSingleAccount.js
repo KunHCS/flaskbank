@@ -40,6 +40,8 @@ class RemoveSingleAccount extends React.Component {
     state = {
         currentAccount:"",
         currentBalance: "",
+        myAccount:"",
+
         open: false,
     };
 
@@ -51,10 +53,19 @@ class RemoveSingleAccount extends React.Component {
 
         console.log(this.state.currentBalance);
 
-        if (parseFloat(this.state.currentBalance)<0 ) {
+        if (this.state.myAccount.type !=="credit" && parseFloat(this.state.currentBalance)<0 ) {
             alert("Account Can't be Close while it has negative balance")
             return;
         }
+
+
+        if(this.state.myAccount.type=="credit" && parseFloat(this.state.myAccount.balance)>0) {
+             alert("Credit Account Can't be Close while it has negative balance")
+             return;
+        }
+
+
+
 
         console.log(this.props);
 
@@ -108,7 +119,8 @@ class RemoveSingleAccount extends React.Component {
                     return (
                         <ExpansionPanelDetails onClick={this.selectAccountOne}>
                             <Button className={classes.button}
-                                    onClick={() => this.setState({currentAccount: account.account_number, currentBalance: account.balance})}>
+                                    onClick={() => this.setState({currentAccount: account.account_number,
+                                        currentBalance: account.balance ,myAccount:account})}>
                                 {account.alias}: {account.account_number}</Button>
                         </ExpansionPanelDetails>
                     );
@@ -120,6 +132,7 @@ class RemoveSingleAccount extends React.Component {
     render() {
         const {classes} = this.props;
         console.log(this.state.currentAccount);
+        console.log(this.state.currentBalance);
         return (
             <div style={getModalStyle()} className={classes.paper}>
                 <form noValidate onSubmit={this.onSubmit}>
