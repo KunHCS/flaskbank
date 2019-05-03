@@ -66,10 +66,8 @@ class Login extends React.Component {
 
         console.log('it just submit');
 
-        axios.post('api/login', {
-            username: this.state.username,
-            password: this.state.password
-        }).then(response => {
+        axios.post('api/login', {username: this.state.username, password: this.state.password}
+        ).then(response => {
             if (response.status === 201) {
                 console.log(jwt_decode(response.data.access_token).identity.user_type);
                 this.props.props.changeUserType(jwt_decode(response.data.access_token).identity.user_type)
@@ -77,7 +75,7 @@ class Login extends React.Component {
                 this.props.props.logInAction()
             }
         }).catch(error => {
-            alert("Log In Fail, Please Try Again");
+            alert("Log In Fail, Please Try Again--- "+error.response);
             this.props.props.logInRequest(error.response)
 
         });
@@ -108,6 +106,7 @@ class Login extends React.Component {
                                 style={{margin: '20px'}}
                                 type = "text"
                                 placeholder="User Name"
+                                maxlength="30"
                                 value = {this.state.username}
                                 onChange ={e=>this.setState({username:e.target.value})}
                             />
@@ -115,6 +114,7 @@ class Login extends React.Component {
 
                                 type = "password"
                                 placeholder="Password"
+                                maxlength="30"
                                 value = {this.state.password}
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />

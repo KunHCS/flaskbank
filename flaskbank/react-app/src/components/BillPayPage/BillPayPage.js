@@ -256,6 +256,8 @@ class BillPay extends React.Component{
                                        className="form-control"
                                        name="amount"
                                        step="0.01"
+                                       min="0"
+                                       max="999999999"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
@@ -287,6 +289,8 @@ class BillPay extends React.Component{
                                        className="form-control"
                                        name="amount"
                                        step="0.01"
+                                       min="0"
+                                       max="999999999"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
@@ -297,6 +301,8 @@ class BillPay extends React.Component{
                                     className="form-control"
                                     name="amount"
                                     step="0.01"
+                                    min="0"
+                                    max="999999999"
                                     placeholder= "Enter The Time Interval in Minutes"
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>

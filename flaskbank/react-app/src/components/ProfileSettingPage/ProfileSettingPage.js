@@ -51,7 +51,7 @@ class Statement extends React.Component {
                     }).catch (error => console.log(error.response.data.msg));
 
             }).catch (error => {
-            alert("Update Fail"+error.response.data.msg);
+            alert("Update Fail---"+error.response.data.msg);
             console.log(error.response.data.msg);});
     }
 
@@ -79,6 +79,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="first_name"
+                                        maxlength="50"
                                         placeholder={first_name}
                                         value={this.state.first_name}
                                         onChange ={e=>this.setState({first_name:e.target.value})}
@@ -91,6 +92,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="last_name"
+                                        maxlength="50"
                                         placeholder={last_name}
                                         value={this.state.last_name}
                                         onChange ={e=>this.setState({last_name:e.target.value})}
@@ -103,6 +105,7 @@ class Statement extends React.Component {
                                         type="email"
                                         className="form-control"
                                         name="email"
+                                        maxlength="50"
                                         placeholder={email}
                                         value={this.state.email}
                                         onChange ={e=>this.setState({email:e.target.value})}
@@ -117,6 +120,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="password"
                                         placeholder="Old Password"
+                                        maxlength="50"
                                         value={this.state.current_password}
                                         onChange ={e=>this.setState({current_password:e.target.value})}
                                     />
@@ -130,6 +134,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="account_name"
                                         placeholder="New Password"
+                                        maxlength="50"
                                         value={this.state.password}
                                         onChange={e => this.setState({password: e.target.value})}
                                     />

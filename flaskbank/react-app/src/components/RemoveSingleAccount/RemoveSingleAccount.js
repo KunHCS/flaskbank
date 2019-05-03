@@ -67,7 +67,7 @@ class RemoveSingleAccount extends React.Component {
 
             }).catch (error => {
             console.log(error.response.data.msg);
-            alert("Account Close Fail --"+error.response.data.msg);
+            alert("Account Close Fail ---"+error.response.data.msg);
         });
 
         this.props.closePopWindow();

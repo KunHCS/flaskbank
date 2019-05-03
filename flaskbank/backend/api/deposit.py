@@ -1,5 +1,6 @@
 from .. import all_module as am
 from .utils import deposit
+import re
 
 deposit_bp = am.Blueprint('deposit', __name__)
 
@@ -51,8 +52,8 @@ def check_deposit():
         return am.jsonify({'msg': 'invalid account number'}), 400
 
     amount = am.request.form['amount']
-    if not isinstance(amount, float) and not isinstance(amount, int):
-        return am.jsonify({'msg': 'invalid number'}), 400
+    # if not isinstance(amount, float) and not isinstance(amount, int):
+    #     return am.jsonify({'msg': 'invalid number'}), 400
 
     deposit_amount = round(float(amount), 3)
     if not file or not file.filename.lower().endswith(allowed_extension):
