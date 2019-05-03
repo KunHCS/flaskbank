@@ -82,6 +82,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="first_name"
                                         placeholder="Enter Your First Name"
+                                        maxlength="50"
                                         value={this.state.first_name}
                                         onChange={this.onChange}
                                     />
@@ -94,6 +95,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="last_name"
                                         placeholder="Enter Your Last Name"
+                                        maxlength="50"
                                         value={this.state.last_name}
                                         onChange={this.onChange}
                                     />
@@ -107,6 +109,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="username"
                                         placeholder="Enter Your User Name"
+                                        maxlength="50"
                                         value={this.state.username}
                                         onChange={this.onChange}
                                     />
@@ -120,6 +123,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="email"
                                         placeholder="Enter an Email"
+                                        maxlength="50"
                                         value={this.state.email}
                                         onChange={this.onChange}
                                     />
@@ -132,6 +136,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="password"
                                         placeholder="Enter a Password"
+                                        maxlength="50"
                                         value={this.state.password}
                                         onChange={this.onChange}
                                     />
