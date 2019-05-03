@@ -135,9 +135,10 @@ class DepositPage extends React.Component{
             return this.props.myInfo.accounts.map(account => {
                 if (account.type !== ACTION.CREDIT ) {
                     return (
-                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
-                            <Button className={classes.button}
-                                    onClick={() => this.setState({AccountNumber: account.account_number})}>
+                        <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                            this.setState({AccountNumber: account.account_number});}}>
+
+                            <Button className={classes.button}>
                                 {account.alias}: {account.account_number} --(Type: {account.type})</Button>
                         </ExpansionPanelDetails>
 
