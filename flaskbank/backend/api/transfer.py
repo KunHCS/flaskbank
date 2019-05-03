@@ -33,7 +33,7 @@ def transfer():
     if not am.clients.find_one({'accounts.account_number': account_from}) or \
             not \
             am.clients.find_one({'accounts.account_number': account_to}):
-        return am.jsonify({'msg': 'Account does not exist'})
+        return am.jsonify({'msg': 'Account does not exist'}), 400
 
     current_user = am.get_jwt_identity()['username']
 
