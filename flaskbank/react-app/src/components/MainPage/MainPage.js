@@ -75,7 +75,7 @@ class Login extends React.Component {
                 this.props.props.logInAction()
             }
         }).catch(error => {
-            alert("Log In Fail, Please Try Again");
+            alert("Log In Fail, Please Try Again--- "+error.response);
             this.props.props.logInRequest(error.response)
 
         });
