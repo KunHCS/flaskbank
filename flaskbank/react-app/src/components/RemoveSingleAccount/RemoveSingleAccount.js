@@ -117,7 +117,10 @@ class RemoveSingleAccount extends React.Component {
         if (this.props.myInfo !== " ") {
             return this.props.myInfo.accounts.map(account => {
                     return (
-                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                        <ExpansionPanelDetails  onClick={(e)=>{this.selectAccountOne(e);
+                            this.setState({currentAccount: account.account_number,
+                                currentBalance: account.balance ,myAccount:account});}}>
+
                             <Button className={classes.button}
                                     onClick={() => this.setState({currentAccount: account.account_number,
                                         currentBalance: account.balance ,myAccount:account})}>

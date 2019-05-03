@@ -63,7 +63,9 @@ class BillPay extends React.Component{
             return this.props.myInfo.accounts.map(account => {
                 if (account.type !== ACTION.CREDIT) {
                     return (
-                        <ExpansionPanelDetails onClick={this.selectAccountOne}>
+                        <ExpansionPanelDetails onClick={(e)=>{this.selectAccountOne(e);
+                            this.setState({selectFrom: account.account_number});}}
+                                               >
                             <Button className={classes.button}
                                     onClick={() => this.setState({selectFrom: account.account_number})}>
                                 {account.alias}: {account.account_number}</Button>
