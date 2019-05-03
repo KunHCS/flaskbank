@@ -113,6 +113,7 @@ class AddAccount extends React.Component {
                             className="form-control"
                             name="name"
                             placeholder="Enter a New Account Name"
+                            maxlength="50"
                             value={this.state.account_name}
                             onChange ={e=>this.setState({account_name:e.target.value})}
                         />

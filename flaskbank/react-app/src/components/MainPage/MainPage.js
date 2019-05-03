@@ -106,6 +106,7 @@ class Login extends React.Component {
                                 style={{margin: '20px'}}
                                 type = "text"
                                 placeholder="User Name"
+                                maxlength="30"
                                 value = {this.state.username}
                                 onChange ={e=>this.setState({username:e.target.value})}
                             />
@@ -113,6 +114,7 @@ class Login extends React.Component {
 
                                 type = "password"
                                 placeholder="Password"
+                                maxlength="30"
                                 value = {this.state.password}
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />

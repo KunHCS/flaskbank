@@ -77,6 +77,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="username"
                                             placeholder="Enter your user name"
+                                            maxlength="50"
                                             value={this.state.username}
                                             onChange ={e=>this.setState({username:e.target.value})}
                                         />
@@ -89,6 +90,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="email"
                                             placeholder="Enter email"
+                                            maxlength="50"
                                             value={this.state.email}
                                             onChange ={e=>this.setState({email:e.target.value})}
                                         />
@@ -100,6 +102,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="password"
                                             placeholder="Password"
+                                            maxlength="50"
                                             value={this.state.password}
                                             onChange ={e=>this.setState({password:e.target.value})}
                                         />

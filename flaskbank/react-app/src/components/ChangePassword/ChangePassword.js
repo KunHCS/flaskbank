@@ -70,6 +70,7 @@ class ChangePasswordForm extends React.Component {
                         className="form-control"
                         name="username"
                         placeholder="Username"
+                        maxlength="30"
                         value={this.state.username}
                         onChange ={e=>this.setState({username:e.target.value})}
                     />
@@ -79,8 +80,9 @@ class ChangePasswordForm extends React.Component {
                         <input
                             type="email"
                             className="form-control"
-                            name="password"
+                            name="email"
                             placeholder="email"
+                            maxlength="30"
                             value={this.state.email}
                             onChange ={e=>this.setState({email:e.target.value})}
                         />
@@ -92,6 +94,7 @@ class ChangePasswordForm extends React.Component {
                             className="form-control"
                             name="password"
                             placeholder="New Passwrod"
+                            maxlength="30"
                             value={this.state.password}
                             onChange ={e=>this.setState({password:e.target.value})}
                         />
