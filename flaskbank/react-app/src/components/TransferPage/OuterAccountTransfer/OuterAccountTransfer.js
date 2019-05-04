@@ -150,9 +150,11 @@ class OuterAccountTransfer extends React.Component{
                         <br/>
 
                         <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             name="accountNumber"
+                            min="0"
+                            max="99999999999999"
                             placeholder="Other Bank Account Number"
                             value={this.state.selectTo}
                             onChange ={e=>this.setState({selectTo:e.target.value})}
