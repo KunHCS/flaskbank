@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/bg.3856dd4f.jpeg"
   },
   {
-    "revision": "d88bf4b9a4c7aab738ef",
+    "revision": "14691732fdd6ab75ef1f",
     "url": "/static/css/main.eaa95357.chunk.css"
   },
   {
@@ -12,16 +12,16 @@ self.__precacheManifest = [
     "url": "/static/js/runtime~main.a8a9905a.js"
   },
   {
-    "revision": "9d08a99af41636a3bc3d",
-    "url": "/static/js/2.f25d2a14.chunk.js"
+    "revision": "9319c8da229c686b2522",
+    "url": "/static/js/2.a175ff2d.chunk.js"
   },
   {
     "revision": "7c36297fb8d6edcf17b428cb90950426",
     "url": "/static/media/logo.7c36297f.png"
   },
   {
-    "revision": "d88bf4b9a4c7aab738ef",
-    "url": "/static/js/main.9c659978.chunk.js"
+    "revision": "14691732fdd6ab75ef1f",
+    "url": "/static/js/main.cb9f8f92.chunk.js"
   },
   {
     "revision": "dbd7f220578d42c09bb05f6627fc1a9a",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/static/media/cards1.09cdc4fd.png"
   },
   {
-    "revision": "6e2cd2c3bfb9a67cb46071130c004515",
+    "revision": "5a69dd371f36ebd38bae8fcc6091ade9",
     "url": "/index.html"
   }
 ];
