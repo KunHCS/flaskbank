@@ -34,8 +34,6 @@ class Register extends Component {
     }
 
     onChange = (e) => {
-        console.log(e.target.name);
-        console.log(e.target.value);
 
         if(e.target.name==='first_name' ||e.target.name === 'last_name') {
             if (/^[a-zA-Z_]+$/.test(e.target.value)) {
@@ -77,14 +75,7 @@ class Register extends Component {
             });
     };
 
-    handelKeyPress = (e) =>  {
-        // if(event.key > 64 && event.key < 91){
-        //     console.log('enter press here! ')
-        // }
-        // event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)
-        return (e.charCode > 64 && e.charCode < 91) ||
-            (e.charCode > 96 && e.charCode < 123)
-    }
+
     render() {
 
         if (this.state.flag == true) {
