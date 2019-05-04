@@ -7,10 +7,9 @@ import Paper from '@material-ui/core/Paper';
 import {Redirect} from "react-router-dom";
 
 
-
 const openAccountPage = () => {
     return (
-        <div >
+        <div>
             <Navigation/>
             <Search/>
             <Container>
@@ -21,31 +20,35 @@ const openAccountPage = () => {
 }
 
 
-
 class Register extends Component {
 
-        state = {
-            first_name: "",
-            last_name: "",
-            username: "",
-            email: "",
-            password: "",
-            errors: {},
-            flag: false,
+    state = {
+        first_name: "",
+        last_name: "",
+        username: "",
+        email: "",
+        password: "",
+        errors: {},
+        flag: false,
 
+    }
+
+    onChange = (e) => {
+
+        if(e.target.name==='first_name' ||e.target.name === 'last_name') {
+            if (/^[a-zA-Z_\s]+$/.test(e.target.value) ) {
+                this.setState({[e.target.name]: e.target.value});
+            }
+        }else {
+            this.setState({[e.target.name]: e.target.value});
         }
 
-    onChange =(e) => {
-        this.setState({ [e.target.name]: e.target.value });
     }
 
 
-
-
-    onSubmit =(e) =>{
+    onSubmit = (e) => {
         e.preventDefault();
         console.log("i just submit")
-
 
 
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
@@ -53,24 +56,25 @@ class Register extends Component {
             return;
         }
 
-       axios .post("/api/register", {
-                first_name: this.state.first_name,
-                last_name:  this.state.last_name,
-                email:      this.state.email,
-                username:   this.state.username,
-                password:   this.state.password
-            })
+        axios.post("/api/register", {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password
+        })
             .then(response => {
                 console.log(response);
                 alert("New Account Successfully Created");
-                this.setState({flag:true})
+                this.setState({flag: true})
             })
             .catch(error => {
                 console.log(error.response.data.msg)
-                alert("Register Fail, Please Try Again---"+error.response.data.msg);
+                alert("Register Fail, Please Try Again---" + error.response.data.msg);
                 //this.props.logInRequest(error.response)
             });
     };
+
 
     render() {
 
@@ -79,7 +83,7 @@ class Register extends Component {
         }
 
         return (
-            <Paper className ="paper" style={paperStyle} >
+            <Paper className="paper" style={paperStyle}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 mt-5 mx-auto">
@@ -170,10 +174,10 @@ class Register extends Component {
 
 const paperStyle = {
     height: '100%',
-    width:  '100%',
+    width: '100%',
     fontWeight: 'bold',
-    WebkitBorderRadius:'10px 10px 10px 10px',
-    textAlign:'center',
+    WebkitBorderRadius: '10px 10px 10px 10px',
+    textAlign: 'center',
     font: 'Helvetica',
     margin: 'auto',
 };
