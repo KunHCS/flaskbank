@@ -62,6 +62,20 @@ class Statement extends React.Component {
     }
 
 
+    onChange = (e) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+
+        if(e.target.name==='first_name' ||e.target.name === 'last_name') {
+            if (/^[a-zA-Z_]+$/.test(e.target.value)) {
+                this.setState({[e.target.name]: e.target.value});
+            }
+        }else {
+            this.setState({[e.target.name]: e.target.value});
+        }
+
+    }
+
     render() {
 
         console.log("I am in the Statement page");
@@ -88,7 +102,7 @@ class Statement extends React.Component {
                                         maxlength="50"
                                         placeholder={first_name}
                                         value={this.state.first_name}
-                                        onChange ={e=>this.setState({first_name:e.target.value})}
+                                        onChange ={this.onChange}
 
                                     />
                                 </div>
@@ -101,7 +115,7 @@ class Statement extends React.Component {
                                         maxlength="50"
                                         placeholder={last_name}
                                         value={this.state.last_name}
-                                        onChange ={e=>this.setState({last_name:e.target.value})}
+                                        onChange ={this.onChange}
                                     />
                                 </div>
 
@@ -114,7 +128,7 @@ class Statement extends React.Component {
                                         maxlength="50"
                                         placeholder={email}
                                         value={this.state.email}
-                                        onChange ={e=>this.setState({email:e.target.value})}
+                                        onChange ={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -124,11 +138,11 @@ class Statement extends React.Component {
                                     <input
                                         type="password"
                                         className="form-control"
-                                        name="password"
+                                        name="current_password"
                                         placeholder="Old Password"
                                         maxlength="50"
                                         value={this.state.current_password}
-                                        onChange ={e=>this.setState({current_password:e.target.value})}
+                                        onChange ={this.onChange}
                                     />
                                 </div>
 
@@ -138,11 +152,11 @@ class Statement extends React.Component {
                                     <input
                                         type="password"
                                         className="form-control"
-                                        name="account_name"
+                                        name="password"
                                         placeholder="New Password"
                                         maxlength="50"
                                         value={this.state.password}
-                                        onChange={e => this.setState({password: e.target.value})}
+                                        onChange={this.onChange}
                                     />
                                 </div>
                                 <button
