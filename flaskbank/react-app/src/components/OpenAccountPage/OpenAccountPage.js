@@ -36,7 +36,7 @@ class Register extends Component {
     onChange = (e) => {
 
         if(e.target.name==='first_name' ||e.target.name === 'last_name') {
-            if (/^[a-zA-Z_\s]+$/.test(e.target.value) ) {
+            if (/^[a-zA-Z_\-\s]+$/.test(e.target.value) ) {
                 this.setState({[e.target.name]: e.target.value});
             }
         }else {
