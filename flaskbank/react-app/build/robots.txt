@@ -1,4 +1,0 @@
-# Notice: No Crawling
-
-User-agent: *
-Disallow: /
