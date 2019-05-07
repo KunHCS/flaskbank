@@ -25,6 +25,7 @@ class Statement extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
+
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
             alert('Invalid email format');
             return;
@@ -67,7 +68,7 @@ class Statement extends React.Component {
         console.log(e.target.value);
 
         if(e.target.name==='first_name' ||e.target.name === 'last_name') {
-            if (/^[a-zA-Z_\-\s]+$/.test(e.target.value)) {
+            if (/^[a-zA-Z_\-\s]+$/.test(e.target.value) || e.target.value==="") {
                 this.setState({[e.target.name]: e.target.value});
             }
         }else {
