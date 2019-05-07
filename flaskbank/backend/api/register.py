@@ -14,7 +14,7 @@ def register_user():
         first = data["first_name"].lower()
         last = data["last_name"].lower()
         email = data["email"].lower()
-        username = data["username"].lower()
+        username = data["username"]
         password = data['password']
         user_type = data.get('user_type', 'client')
 
