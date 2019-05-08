@@ -75,7 +75,7 @@ class AddAccount extends React.Component {
 
             }).catch (error => {
             console.log(error.response.data.msg);
-            alert("Account Open Failed---"+error.response.data.msg);
+            alert("Account Open Failed---");//+error.response.data.msg);
         });
 
         this.props.closePopWindow();
@@ -113,6 +113,7 @@ class AddAccount extends React.Component {
                             className="form-control"
                             name="name"
                             placeholder="Enter a New Account Name"
+                            minLength={"1"}
                             maxLength={"50"}
                             value={this.state.account_name}
                             onChange ={e=>this.setState({account_name:e.target.value})}

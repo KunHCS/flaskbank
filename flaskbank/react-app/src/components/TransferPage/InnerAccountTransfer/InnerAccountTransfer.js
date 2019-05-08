@@ -65,7 +65,7 @@ class InnerAccountTransfer extends React.Component{
                 alert("Money Transfer Succeeded---");
 
             }).catch (error => {
-            alert("Money Transfer Failed---" + (error.response.data.msg));
+            alert("Money Transfer Failed---");// + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
 

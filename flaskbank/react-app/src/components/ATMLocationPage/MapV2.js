@@ -38,7 +38,7 @@ export class MapV2 extends Component {
         getNearby(new_pos);
       });
     } else {
-      alert("Browser does not support geolocation");
+      alert("Browser Does Not Support Geolocation");
     }
     initSearchBox();
 
@@ -64,7 +64,7 @@ export class MapV2 extends Component {
 
     function createUserWindow(pos) {
       map.setCenter(pos);
-      userWindow.setContent("You are here");
+      userWindow.setContent("Your Starting Location");
       userWindow.setPosition(pos);
       userWindow.open(map, this);
     }

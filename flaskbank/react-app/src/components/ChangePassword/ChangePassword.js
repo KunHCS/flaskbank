@@ -36,6 +36,21 @@ class ChangePasswordForm extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
+        if (this.state.username == "") {
+            alert("Username Can't be Empty")
+            return;
+        }
+
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert("Email Can't be Empty or Invalid Email Format");
+            return;
+        }
+
+        if (this.state.password == "") {
+            alert("Password Can't be Empty")
+            return;
+        }
+
         console.log(this.props);
 
 
@@ -51,7 +66,7 @@ class ChangePasswordForm extends React.Component {
                 console.log(response);
 
             }).catch(error => {
-            alert("Change Password Failed---"+ error.response.data.msg);
+            alert("Change Password Failed---");//+ error.response.data.msg);
             console.log(error.response.data.msg);
         });
     }
@@ -94,6 +109,7 @@ class ChangePasswordForm extends React.Component {
                             className="form-control"
                             name="password"
                             placeholder="New Password"
+                            minLength={"1"}
                             maxLength={"50"}
                             value={this.state.password}
                             onChange ={e=>this.setState({password:e.target.value})}

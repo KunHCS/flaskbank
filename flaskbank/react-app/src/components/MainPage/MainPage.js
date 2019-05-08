@@ -66,6 +66,14 @@ class Login extends React.Component {
 
         console.log('it just submit');
 
+        if (this.state.username == "") {
+            alert("Username Can't be Empty")
+            return;
+        }
+        if (this.state.password == "") {
+            alert("Password Can't be Empty")
+            return;
+        }
         axios.post('api/login', {username: this.state.username, password: this.state.password}
         ).then(response => {
             if (response.status === 201) {
@@ -75,10 +83,9 @@ class Login extends React.Component {
                 this.props.props.logInAction()
             }
         }).catch(error => {
-            alert("Log In Failed, Please Try Again---"+error.response);
+            alert("Log In Failed, Please Try Again---");//+error.response);
             this.props.props.logInRequest(error.response)
-
-        });
+});
 
 
     }
