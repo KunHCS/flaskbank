@@ -141,6 +141,7 @@ class ManagerPage extends React.Component {
                                             input: classes.inputInput,
                                         }}
                                         value={this.state.search_value}
+                                        minLength = "1"
                                         maxlength="50"
                                         onChange={e => this.setState({search_value: e.target.value})}/>
                                 </div>
