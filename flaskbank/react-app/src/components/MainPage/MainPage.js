@@ -25,7 +25,7 @@ class mainPage extends React.Component {
     render() {
         console.log('I am in main page props ');
         console.log(this.props);
-        if (this.props.auth == false) {
+        if (this.props.auth === false) {
             return (
                 <div>
                     <Navigation/>
@@ -36,10 +36,10 @@ class mainPage extends React.Component {
                 </div>
             );
         }
-        else if (this.props.userType == ACTION.MANAGER && this.props.auth == true) {
+        else if (this.props.userType === ACTION.MANAGER && this.props.auth === true) {
             return (<Redirect to={'/manager'}/>)
         }
-        else if (this.props.userType == ACTION.CLIENT && this.props.auth == true) {
+        else if (this.props.userType === ACTION.CLIENT && this.props.auth === true) {
             return (<Redirect to={'/overview'}/>)}
     }
 }
@@ -66,11 +66,11 @@ class Login extends React.Component {
 
         console.log('it just submit');
 
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             alert("Username Can't be Empty")
             return;
         }
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             alert("Password Can't be Empty")
             return;
         }

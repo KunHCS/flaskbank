@@ -64,7 +64,7 @@ class OverViewPage extends React.Component{
 
                                 <Typography style={{float: 'left'}}>
 
-                                    <strong> Balance: </strong> ${ account.type =="credit" ? account.balance *-1 : account.balance}
+                                    <strong> Balance: </strong> ${ account.type ==="credit" ? account.balance *-1 : account.balance}
                                 </Typography>
                                 <Link to="/overview/account_detail"
                                       onClick={() => this.props.accountDetailAction(account)}>

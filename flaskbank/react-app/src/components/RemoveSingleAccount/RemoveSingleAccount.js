@@ -59,7 +59,7 @@ class RemoveSingleAccount extends React.Component {
         }
 
 
-        if(this.state.myAccount.type=="credit" && parseFloat(this.state.myAccount.balance)>0) {
+        if(this.state.myAccount.type==="credit" && parseFloat(this.state.myAccount.balance)>0) {
              alert("Credit Account Can't be Closed While It Has a Negative Balance")
              return;
         }

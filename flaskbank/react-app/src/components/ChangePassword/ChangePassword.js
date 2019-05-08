@@ -36,7 +36,7 @@ class ChangePasswordForm extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             alert("Username Can't be Empty")
             return;
         }
@@ -46,7 +46,7 @@ class ChangePasswordForm extends React.Component {
             return;
         }
 
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             alert("Password Can't be Empty")
             return;
         }

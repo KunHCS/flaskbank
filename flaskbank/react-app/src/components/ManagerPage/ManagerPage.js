@@ -92,7 +92,7 @@ class ManagerPage extends React.Component {
             .then(response => {
                 console.log(response);
                 console.log(response.data.results.length)
-                if (response.data.results.length == 0) {
+                if (response.data.results.length === 0) {
                     this.props.cleanQueryResult();
                     alert("Nothing Found");
                 } else {
@@ -116,7 +116,7 @@ class ManagerPage extends React.Component {
         console.log(this.state.search_value);
         const {classes} = this.props;
 
-        if (this.state.flag == true) {
+        if (this.state.flag === true) {
             return (<Redirect to={'/manager/queryResult'}/>)
         }
 

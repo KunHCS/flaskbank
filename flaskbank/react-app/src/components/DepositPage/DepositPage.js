@@ -73,8 +73,8 @@ class DepositPage extends React.Component{
     onSubmit =(e) => {
         e.preventDefault();
 
-        if(this.state.payAmount <= 0 || this.state.payAmount == "Please Enter Your Amount") {
-            alert("Amount Can't be 0 or Negative, Please Try Again");
+        if(this.state.payAmount <= 0 || this.state.payAmount === "Enter Your Amount" || this.state.payAmount > 1000000) {
+            alert("Amount Can't be Negative, 0, Over $1,000,000, or Empty. Try Again");
             return
         }
 
@@ -108,7 +108,7 @@ class DepositPage extends React.Component{
             alert("Account Deposit Failed---");//+error.response.data.msg);
         });
 
-        this.setState({payAmount: "Please Enter Your Amount"})
+        this.setState({payAmount: "Enter Your Amount"})
         this.props.imageUpLoadAction_Clean()
     }
 

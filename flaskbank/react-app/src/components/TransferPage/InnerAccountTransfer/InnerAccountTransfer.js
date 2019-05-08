@@ -35,19 +35,13 @@ class InnerAccountTransfer extends React.Component{
         e.preventDefault();
         console.log("I just submit");
 
-        if(this.state.selectFrom == undefined || this.state.selectTo == undefined) {
+        if(this.state.selectFrom === undefined || this.state.selectTo === undefined) {
             alert("Selected Account Can't be Empty ");
             return
         }
 
-        if(this.state.transferAmount === 0 || this.state.transferAmount== "$ Enter Your Amount") {
-            alert("The Transfer Amount Can't be 0, Please Try Again");
-            return
-        }
-
-
-        if (this.state.transferAmount<0) {
-            alert("The Transfer Amount Can't Negative, Please Try Again");
+        if(this.state.transferAmount <= 0 || this.state.transferAmount === "$ Enter Your Amount" || this.state.transferAmount > 1000000) {
+            alert("The Transfer Amount Can't be Negative, 0, Over $1,000,000 or Empty. Try Again");
             return
         }
 

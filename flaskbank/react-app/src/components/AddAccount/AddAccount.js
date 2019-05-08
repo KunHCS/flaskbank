@@ -49,7 +49,7 @@ class AddAccount extends React.Component {
         e.preventDefault();
         console.log(this.props);
 
-         if (this.state.account_name == "") {
+        if (this.state.account_name === "") {
              alert("Account Name Can't be Empty")
              return;
          }

@@ -35,7 +35,7 @@ class CloseAccountDetails extends React.Component {
 
         e.preventDefault();
         console.log("i just submit")
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             alert("Username Can't be Empty")
             return;
         }
@@ -45,7 +45,7 @@ class CloseAccountDetails extends React.Component {
             return;
         }
 
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             alert("Password Can't be Empty")
             return;
         }

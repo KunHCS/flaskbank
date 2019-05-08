@@ -50,26 +50,25 @@ class Register extends Component {
         e.preventDefault();
         console.log("i just submit")
 
-        if (this.state.first_name == "") {
+        if (this.state.first_name === "") {
             alert("First Name Can't be Empty")
             return;
         }
-        if (this.state.last_name == "") {
+        if (this.state.last_name === "") {
             alert("Last Name Can't be Empty")
             return;
         }
 
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             alert("Username Can't be Empty")
             return;
         }
-
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
             alert("Email Can't be Empty or Invalid Email Format");
             return;
         }
 
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             alert("Password Can't be Empty")
             return;
         }
@@ -98,7 +97,7 @@ class Register extends Component {
 
     render() {
 
-        if (this.state.flag == true) {
+        if (this.state.flag === true) {
             return (<Redirect to={'/'}/>)
         }
 

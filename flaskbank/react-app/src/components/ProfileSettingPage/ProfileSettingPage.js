@@ -25,11 +25,11 @@ class Statement extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
-        if (this.state.first_name == "") {
+        if (this.state.first_name === "") {
             alert("First Name Can't be Empty")
             return;
         }
-        if (this.state.last_name == "") {
+        if (this.state.last_name === "") {
             alert("Last Name Can't be Empty")
             return;
         }
@@ -39,11 +39,11 @@ class Statement extends React.Component {
             return;
         }
 
-        if (this.state.current_password == "") {
+        if (this.state.current_password === "") {
             alert("Old Password Can't be Empty")
             return;
         }
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             alert("New Password Can't be Empty")
             return;
         }
@@ -202,7 +202,7 @@ class ProfileSettingPage extends React.Component {
 
     render() {
 
-        if (this.props.userType == ACTION.CLIENT) {
+        if (this.props.userType === ACTION.CLIENT) {
             return (
                 <div>
                     <Navigation/>
@@ -217,7 +217,7 @@ class ProfileSettingPage extends React.Component {
 
             );
         }
-        else if (this.props.userType == ACTION.MANAGER) {
+        else if (this.props.userType === ACTION.MANAGER) {
             return (
                 <div>
                     <Navigation/>

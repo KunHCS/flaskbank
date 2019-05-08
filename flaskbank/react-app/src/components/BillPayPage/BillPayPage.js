@@ -21,7 +21,7 @@ import Paper from '@material-ui/core/Paper';
 class BillPay extends React.Component{
     state = {
         payAmountCredit: " ",
-        autoPayAmount:"$ Please Enter Your Amount",
+        autoPayAmount:"$ Enter Your Amount",
         creditAccountNumber: "",
         availableCredit :"",
         currentBalance:"",
@@ -37,7 +37,7 @@ class BillPay extends React.Component{
 
         for (let i = 0 ; i < this.props.myInfo.accounts.length ; i++) {
             console.log("111"+i);
-            if (this.props.myInfo.accounts[i].type == ACTION.CREDIT) {
+            if (this.props.myInfo.accounts[i].type === ACTION.CREDIT) {
                 this.setState({creditAccountNumber: this.props.myInfo.accounts[i].account_number});
                 this.setState({currentBalance: this.props.myInfo.accounts[i].balance});
                 this.setState({availableCredit: this.props.myInfo.accounts[i].available_credit});
@@ -126,18 +126,13 @@ class BillPay extends React.Component{
         console.log('it just submit');
         console.log(this.props);
 
-        if(this.state.selectFrom == undefined ) {
+        if(this.state.selectFrom === undefined ) {
             alert("Selected Account Can't be Empty");
             return
         }
 
-        if(this.state.payAmountCredit == 0 || this.state.payAmountCredit == "$ Please Enter Your Amount") {
-            alert("Bill Pay Amount Can't be 0, Try Again");
-            return
-        }
-
-        if (this.state.payAmountCredit<0) {
-            alert("Bill Pay Amount Can't Negative, Try Again");
+        if(this.state.payAmountCredit <= 0 || this.state.payAmountCredit === "$ Enter Your Amount" || this.state.payAmountCredit > 1000000) {
+            alert("Bill Pay Amount Can't be Negative, 0, Over $1,000,000 or Empty. Try Again");
             return
         }
 
@@ -158,46 +153,41 @@ class BillPay extends React.Component{
                         this.props.getProfile(response.data);
                     }).catch (error => console.log(error.response.data.msg));
             }).catch (error => {
-            alert("Bill Pay Failed---" + (error.response.data.msg));
+            alert("Bill Pay Failed---");// + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
-        this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
+        this.setState({payAmountCredit:  "$ Enter Your Amount"});
     }
 
     /************************************************************************************ */
 
     AutoPay(con) {
 
-        if (con == "start") {
+        if (con === "start") {
 
-             if (this.state.selectFrom == undefined) {
+             if (this.state.selectFrom === undefined) {
                  alert("Selected Account Can't be Empty ");
                  return
              }
 
-             if (this.state.autoPayAmount == 0 || this.state.autoPayAmount == "$ Please Enter Your Amount") {
-                 alert("AutoPay Amount Can't be 0 or Empty ");
+             if (this.state.autoPayAmount <= 0 || this.state.autoPayAmount === "$ Enter Your Amount" || this.state.autoPayAmount > 1000000) {
+                 alert("AutoPay Amount Can't be Negative, 0, Over $1,000,000 or Empty. Try Again");
                  return
              }
 
-             if (this.state.time == undefined) {
-                 alert("Time Interval Can't Be Empty");
+             if (this.state.time === undefined) {
+                 alert("Time Interval Can't Be Empty. Try Again");
                  return
              }
 
-            if (this.state.autoPayAmount<0) {
-                alert("Bill AutoPay Amount Can't Negative, Try Again");
-                return
-            }
-
-            if (this.state.time<0) {
-                alert("Time Can't Negative, Try Again");
+            if (this.state.time<0 || this.state.time > 525600) {
+                alert("Time Can't Negative or Over Minutes in a Year. Try Again");
                 return
             }
         }
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
-         if (con == "start") {
+         if (con === "start") {
               axios.post('/api/autopay', {
                    amount: parseFloat(this.state.autoPayAmount),
                    from: this.state.selectFrom,
@@ -206,21 +196,21 @@ class BillPay extends React.Component{
                   {headers: req_headers}
                ).then(response => {
                    console.log(response);
-                   alert("Start AutoPay Succeeded--" +response.data.msg)
+                   alert("Start AutoPay Succeeded--");// +response.data.msg)
                   this.getAutopayStatement()
                }).catch(error => {
                console.log(error.response.data.msg);
-               alert("Start AutoPay Failed---" +error.response.data.msg);
+               alert("Start AutoPay Failed---");// +error.response.data.msg);
            });
        } else {
              axios.delete('api/autopay/stop', {headers: req_headers}
              ).then(response => {
                  console.log(response);
-                 alert("Stop AutoPay Succeeded---" +response.data.msg)
+                 alert("Stop AutoPay Succeeded---");// +response.data.msg)
                  this.setState({currentAutoPayState:undefined})
              }).catch(error => {
                  console.log(error.response.data.msg);
-                 alert("Stop AutoPay Failed---" +error.response.data.msg);
+                 alert("Stop AutoPay Failed---");// +error.response.data.msg);
              });
          }
    }
@@ -231,7 +221,7 @@ class BillPay extends React.Component{
        let index = null;
         for (let i = 0 ; i < this.props.myInfo.accounts.length ; i++) {
             console.log("index i is : "+i);
-            if (this.props.myInfo.accounts[i].type == "credit") {
+            if (this.props.myInfo.accounts[i].type === "credit") {
                 index =i;
                 break;
             }
