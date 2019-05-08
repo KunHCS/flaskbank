@@ -25,11 +25,29 @@ class Statement extends React.Component {
         console.log("I just submit");
         e.preventDefault();
 
-
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
-            alert('Invalid Email Format');
+        if (this.state.first_name == "") {
+            alert("First Name Can't be Empty")
             return;
         }
+        if (this.state.last_name == "") {
+            alert("Last Name Can't be Empty")
+            return;
+        }
+
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert("Email Can't be Empty or Invalid Email Format");
+            return;
+        }
+
+        if (this.state.current_password == "") {
+            alert("Old Password Can't be Empty")
+            return;
+        }
+        if (this.state.password == "") {
+            alert("New Password Can't be Empty")
+            return;
+        }
+
 
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
@@ -58,7 +76,7 @@ class Statement extends React.Component {
                     }).catch (error => console.log(error.response.data.msg));
 
             }).catch (error => {
-            alert("Update Failed---"+error.response.data.msg);
+            alert("Update Failed---");//+error.response.data.msg);
             console.log(error.response.data.msg);});
     }
 
@@ -100,6 +118,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="first_name"
+                                        minLength={"1"}
                                         maxLength={"50"}
                                         placeholder={first_name}
                                         value={this.state.first_name}
@@ -113,6 +132,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="last_name"
+                                        minLength={"1"}
                                         maxLength={"50"}
                                         placeholder={last_name}
                                         value={this.state.last_name}
@@ -126,6 +146,7 @@ class Statement extends React.Component {
                                         type="email"
                                         className="form-control"
                                         name="email"
+                                        minLength={"7"}
                                         maxLength="50"
                                         placeholder={email}
                                         value={this.state.email}
@@ -141,6 +162,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="current_password"
                                         placeholder="Old Password"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.current_password}
                                         onChange ={this.onChange}
@@ -155,6 +177,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="password"
                                         placeholder="New Password"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.password}
                                         onChange={this.onChange}

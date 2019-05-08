@@ -216,7 +216,7 @@ class BillPay extends React.Component{
              axios.delete('api/autopay/stop', {headers: req_headers}
              ).then(response => {
                  console.log(response);
-                 alert("Stop AutoPay Succeed---" +response.data.msg)
+                 alert("Stop AutoPay Succeeded---" +response.data.msg)
                  this.setState({currentAutoPayState:undefined})
              }).catch(error => {
                  console.log(error.response.data.msg);

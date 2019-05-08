@@ -105,7 +105,7 @@ class DepositPage extends React.Component{
             alert("Account Deposit Succeeded---");
         }).catch(error => {
             console.log(error.response);
-            alert("Account Deposit Failed---"+error.response.data.msg);
+            alert("Account Deposit Failed---");//+error.response.data.msg);
         });
 
         this.setState({payAmount: "Please Enter Your Amount"})

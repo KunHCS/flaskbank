@@ -101,7 +101,7 @@ class ManagerPage extends React.Component {
                 }
 
             }).catch(error => {
-            alert("Query Failed---" + (error.response.data.msg));
+            alert("Query Failed---");// + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
 

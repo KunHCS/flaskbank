@@ -50,11 +50,31 @@ class Register extends Component {
         e.preventDefault();
         console.log("i just submit")
 
-
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
-            alert('Invalid Email Format');
+        if (this.state.first_name == "") {
+            alert("First Name Can't be Empty")
             return;
         }
+        if (this.state.last_name == "") {
+            alert("Last Name Can't be Empty")
+            return;
+        }
+
+        if (this.state.username == "") {
+            alert("Username Can't be Empty")
+            return;
+        }
+
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert("Email Can't be Empty or Invalid Email Format");
+            return;
+        }
+
+        if (this.state.password == "") {
+            alert("Password Can't be Empty")
+            return;
+        }
+
+
 
         axios.post("/api/register", {
             first_name: this.state.first_name,
@@ -70,7 +90,7 @@ class Register extends Component {
             })
             .catch(error => {
                 console.log(error.response.data.msg)
-                alert("Register Failed, Please Try Again---" + error.response.data.msg);
+                alert("Register Failed, Please Try Again---");// + error.response.data.msg);
                 //this.props.logInRequest(error.response)
             });
     };
@@ -97,6 +117,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="first_name"
                                         placeholder="Enter Your First Name"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.first_name}
                                         onChange={this.onChange}
@@ -110,6 +131,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="last_name"
                                         placeholder="Enter Your Last Name"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.last_name}
                                         onChange={this.onChange}
@@ -124,6 +146,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="username"
                                         placeholder="Enter Your Username"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.username}
                                         onChange={this.onChange}
@@ -138,6 +161,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="email"
                                         placeholder="Enter an Email"
+                                        minLength={"7"}
                                         maxLength="50"
                                         value={this.state.email}
                                         onChange={this.onChange}
@@ -151,6 +175,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="password"
                                         placeholder="Enter a Password"
+                                        minLength={"1"}
                                         maxLength="50"
                                         value={this.state.password}
                                         onChange={this.onChange}

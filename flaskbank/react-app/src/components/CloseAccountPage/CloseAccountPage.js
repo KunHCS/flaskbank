@@ -35,7 +35,20 @@ class CloseAccountDetails extends React.Component {
 
         e.preventDefault();
         console.log("i just submit")
+        if (this.state.username == "") {
+            alert("Username Can't be Empty")
+            return;
+        }
 
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+            alert("Email Can't be Empty or Invalid Email Format");
+            return;
+        }
+
+        if (this.state.password == "") {
+            alert("Password Can't be Empty")
+            return;
+        }
         axios.delete("/api/accounts/delete",
             { data:{username: this.state.username,
                           password: this.state.password,
@@ -47,7 +60,7 @@ class CloseAccountDetails extends React.Component {
 
             }).catch (error => {
                 console.log(error.response.data.msg);
-                alert("Failed to Close an Account---" +error.response.data.msg);
+                alert("Failed to Close an Account---");// +error.response.data.msg);
             });
 
     }
@@ -77,6 +90,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="username"
                                             placeholder="Enter Your Username"
+                                            minLength={"1"}
                                             maxLength={"50"}
                                             value={this.state.username}
                                             onChange ={e=>this.setState({username:e.target.value})}
@@ -90,6 +104,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="email"
                                             placeholder="Enter Your Email"
+                                            minLength={"7"}
                                             maxLength={"50"}
                                             value={this.state.email}
                                             onChange ={e=>this.setState({email:e.target.value})}
@@ -102,6 +117,7 @@ class CloseAccountDetails extends React.Component {
                                             className="form-control"
                                             name="password"
                                             placeholder="Enter Your Password"
+                                            minLength={"1"}
                                             maxLength={"50"}
                                             value={this.state.password}
                                             onChange ={e=>this.setState({password:e.target.value})}
