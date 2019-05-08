@@ -65,7 +65,7 @@ class AddAccount extends React.Component {
         )
             .then(response => {
                 console.log(response);
-                alert("Account Open Success")
+                alert("Account Open Succeeded---")
 
                    axios.get("/api/client/all",{headers: req_headers})
                        .then(response => {
@@ -75,7 +75,7 @@ class AddAccount extends React.Component {
 
             }).catch (error => {
             console.log(error.response.data.msg);
-            alert("Account Open Fail --"+error.response.data.msg);
+            alert("Account Open Failed---"+error.response.data.msg);
         });
 
         this.props.closePopWindow();
@@ -113,7 +113,7 @@ class AddAccount extends React.Component {
                             className="form-control"
                             name="name"
                             placeholder="Enter a New Account Name"
-                            maxlength="50"
+                            maxLength={"50"}
                             value={this.state.account_name}
                             onChange ={e=>this.setState({account_name:e.target.value})}
                         />

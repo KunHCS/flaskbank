@@ -127,17 +127,17 @@ class BillPay extends React.Component{
         console.log(this.props);
 
         if(this.state.selectFrom == undefined ) {
-            alert("Selected Account can't be empty ");
+            alert("Selected Account Can't be Empty");
             return
         }
 
         if(this.state.payAmountCredit == 0 || this.state.payAmountCredit == "$ Please Enter Your Amount") {
-            alert("Bill Pay Amount Can't be 0, try again");
+            alert("Bill Pay Amount Can't be 0, Try Again");
             return
         }
 
         if (this.state.payAmountCredit<0) {
-            alert("Bill Pay Amount Can't negative, try again");
+            alert("Bill Pay Amount Can't Negative, Try Again");
             return
         }
 
@@ -151,14 +151,14 @@ class BillPay extends React.Component{
         )
             .then(response => {
                 console.log(response);
-                alert("Bill Pay Success");
+                alert("Bill Pay Succeeded---");
                 axios.get("/api/client/all",{headers: req_headers})
                     .then(response => {
                         console.log(response);
                         this.props.getProfile(response.data);
                     }).catch (error => console.log(error.response.data.msg));
             }).catch (error => {
-            alert("Bill Pay Fail!! ---" + (error.response.data.msg));
+            alert("Bill Pay Failed---" + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
         this.setState({payAmountCredit:  "$ Please Enter Your Amount"});
@@ -171,12 +171,12 @@ class BillPay extends React.Component{
         if (con == "start") {
 
              if (this.state.selectFrom == undefined) {
-                 alert("Selected Account can't be Empty ");
+                 alert("Selected Account Can't be Empty ");
                  return
              }
 
              if (this.state.autoPayAmount == 0 || this.state.autoPayAmount == "$ Please Enter Your Amount") {
-                 alert("Auto Pay Amount can't be 0 or Empty ");
+                 alert("AutoPay Amount Can't be 0 or Empty ");
                  return
              }
 
@@ -186,12 +186,12 @@ class BillPay extends React.Component{
              }
 
             if (this.state.autoPayAmount<0) {
-                alert("Bill AutoPay Amount Can't negative, try again");
+                alert("Bill AutoPay Amount Can't Negative, Try Again");
                 return
             }
 
             if (this.state.time<0) {
-                alert("Time Can't negative, try again");
+                alert("Time Can't Negative, Try Again");
                 return
             }
         }
@@ -206,21 +206,21 @@ class BillPay extends React.Component{
                   {headers: req_headers}
                ).then(response => {
                    console.log(response);
-                   alert("Start Auto Pay Success --" +response.data.msg)
+                   alert("Start AutoPay Succeeded--" +response.data.msg)
                   this.getAutopayStatement()
                }).catch(error => {
                console.log(error.response.data.msg);
-               alert("Start Auto Pay Fail" +error.response.data.msg);
+               alert("Start AutoPay Failed---" +error.response.data.msg);
            });
        } else {
              axios.delete('api/autopay/stop', {headers: req_headers}
              ).then(response => {
                  console.log(response);
-                 alert("Stop Auto Pay Success --" +response.data.msg)
+                 alert("Stop AutoPay Succeed---" +response.data.msg)
                  this.setState({currentAutoPayState:undefined})
              }).catch(error => {
                  console.log(error.response.data.msg);
-                 alert("Stop Auto Pay Fail --" +error.response.data.msg);
+                 alert("Stop AutoPay Failed---" +error.response.data.msg);
              });
          }
    }
@@ -275,9 +275,10 @@ class BillPay extends React.Component{
                                        name="amount"
                                        step="0.01"
                                        min="0"
-                                       max="999999999"
+                                       max="1000000"
+                                       maxLength={7}
                                        placeholder= "$ Enter Your Amount"
-                                       onkeydown="return event.keyCode !== 69"
+                                       onKeyDown="return event.keyCode !== 69"
                                        value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
@@ -309,8 +310,9 @@ class BillPay extends React.Component{
                                        name="amount"
                                        step="0.01"
                                        min="0"
-                                       max="999999999"
-                                       onkeydown="return event.keyCode !== 69"
+                                       max="1000000"
+                                       maxLength={7}
+                                       onKeyDown="return event.keyCode !== 69"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
                                        onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
@@ -322,8 +324,9 @@ class BillPay extends React.Component{
                                     name="amount"
                                     step="0.01"
                                     min="0"
-                                    max="999999999"
-                                    onkeydown="return event.keyCode !== 69"
+                                    max="525600"
+                                    maxLength={6}
+                                    onKeyDown="return event.keyCode !== 69"
                                     placeholder= "Enter The Time Interval in Minutes"
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>

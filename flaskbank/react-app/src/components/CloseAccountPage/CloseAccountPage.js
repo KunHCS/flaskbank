@@ -41,13 +41,13 @@ class CloseAccountDetails extends React.Component {
                           password: this.state.password,
                           email:this.state.email}} )
             .then(response => {
-                alert("Your account is Successfully Closed");
+                alert("Your Account is Successfully Closed---");
                 console.log(response);
                 this.setState({flag:true})
 
             }).catch (error => {
                 console.log(error.response.data.msg);
-                alert("Fail to Close an Account ---" +error.response.data.msg);
+                alert("Failed to Close an Account---" +error.response.data.msg);
             });
 
     }
@@ -76,8 +76,8 @@ class CloseAccountDetails extends React.Component {
                                             type="text"
                                             className="form-control"
                                             name="username"
-                                            placeholder="Enter your user name"
-                                            maxlength="50"
+                                            placeholder="Enter Your Username"
+                                            maxLength={"50"}
                                             value={this.state.username}
                                             onChange ={e=>this.setState({username:e.target.value})}
                                         />
@@ -89,8 +89,8 @@ class CloseAccountDetails extends React.Component {
                                             type="email"
                                             className="form-control"
                                             name="email"
-                                            placeholder="Enter email"
-                                            maxlength="50"
+                                            placeholder="Enter Your Email"
+                                            maxLength={"50"}
                                             value={this.state.email}
                                             onChange ={e=>this.setState({email:e.target.value})}
                                         />
@@ -101,8 +101,8 @@ class CloseAccountDetails extends React.Component {
                                             type="password"
                                             className="form-control"
                                             name="password"
-                                            placeholder="Password"
-                                            maxlength="50"
+                                            placeholder="Enter Your Password"
+                                            maxLength={"50"}
                                             value={this.state.password}
                                             onChange ={e=>this.setState({password:e.target.value})}
                                         />
