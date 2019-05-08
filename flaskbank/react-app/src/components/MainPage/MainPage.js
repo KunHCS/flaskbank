@@ -75,7 +75,7 @@ class Login extends React.Component {
                 this.props.props.logInAction()
             }
         }).catch(error => {
-            alert("Log In Fail, Please Try Again--- "+error.response);
+            alert("Log In Failed, Please Try Again---"+error.response);
             this.props.props.logInRequest(error.response)
 
         });
@@ -105,8 +105,8 @@ class Login extends React.Component {
                             <input
                                 style={{margin: '20px'}}
                                 type = "text"
-                                placeholder="User Name"
-                                maxlength="30"
+                                placeholder="Username"
+                                maxLength={"50"}
                                 value = {this.state.username}
                                 onChange ={e=>this.setState({username:e.target.value})}
                             />
@@ -114,7 +114,7 @@ class Login extends React.Component {
 
                                 type = "password"
                                 placeholder="Password"
-                                maxlength="30"
+                                maxLength={"50"}
                                 value = {this.state.password}
                                 onChange ={e=>this.setState({password:e.target.value})}
                             />

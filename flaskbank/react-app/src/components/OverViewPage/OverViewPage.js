@@ -56,7 +56,7 @@ class OverViewPage extends React.Component{
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography
-                                className={classes.heading}><strong> {account.alias} : {account.account_number} -- (Account Type: {account.type})</strong>
+                                className={classes.heading}><strong> {account.alias} : {account.account_number} --(Account Type: {account.type})</strong>
                             </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>

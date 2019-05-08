@@ -36,18 +36,18 @@ class InnerAccountTransfer extends React.Component{
         console.log("I just submit");
 
         if(this.state.selectFrom == undefined || this.state.selectTo == undefined) {
-            alert("Selected Account can't be empty ");
+            alert("Selected Account Can't be Empty ");
             return
         }
 
         if(this.state.transferAmount === 0 || this.state.transferAmount== "$ Enter Your Amount") {
-            alert("The Transfer Amount Cant be 0, Please Try Again");
+            alert("The Transfer Amount Can't be 0, Please Try Again");
             return
         }
 
 
         if (this.state.transferAmount<0) {
-            alert("The Transfer Amount Can't negative, try again");
+            alert("The Transfer Amount Can't Negative, Please Try Again");
             return
         }
 
@@ -62,10 +62,10 @@ class InnerAccountTransfer extends React.Component{
         )
             .then(response => {
                 console.log(response);
-                alert("Money Transfer success");
+                alert("Money Transfer Succeeded---");
 
             }).catch (error => {
-            alert("Money Transfer Fail!! ---" + (error.response.data.msg));
+            alert("Money Transfer Failed---" + (error.response.data.msg));
             console.log(error.response.data.msg);
         });
 
@@ -199,7 +199,8 @@ class InnerAccountTransfer extends React.Component{
                                             name="amount"
                                             step="0.01"
                                             min="0"
-                                            max="999999999"
+                                            max="1000000"
+                                            maxLength={"7"}
                                             placeholder= "$ Enter Your Amount"
                                             value = {this.state.transferAmount}
                                             onChange ={e=>this.setState({transferAmount:e.target.value})}

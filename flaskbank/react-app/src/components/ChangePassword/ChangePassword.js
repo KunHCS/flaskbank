@@ -47,11 +47,11 @@ class ChangePasswordForm extends React.Component {
             },
         )
             .then(response => {
-                alert("Change password Success")
+                alert("Change Password Succeeded---")
                 console.log(response);
 
             }).catch(error => {
-            alert("Change password Fail --"+ error.response.data.msg);
+            alert("Change Password Failed---"+ error.response.data.msg);
             console.log(error.response.data.msg);
         });
     }
@@ -70,7 +70,7 @@ class ChangePasswordForm extends React.Component {
                         className="form-control"
                         name="username"
                         placeholder="Username"
-                        maxlength="30"
+                        maxLength={"50"}
                         value={this.state.username}
                         onChange ={e=>this.setState({username:e.target.value})}
                     />
@@ -81,8 +81,8 @@ class ChangePasswordForm extends React.Component {
                             type="email"
                             className="form-control"
                             name="email"
-                            placeholder="email"
-                            maxlength="30"
+                            placeholder="Email"
+                            maxLength={"50"}
                             value={this.state.email}
                             onChange ={e=>this.setState({email:e.target.value})}
                         />
@@ -93,8 +93,8 @@ class ChangePasswordForm extends React.Component {
                             type="password"
                             className="form-control"
                             name="password"
-                            placeholder="New Passwrod"
-                            maxlength="30"
+                            placeholder="New Password"
+                            maxLength={"50"}
                             value={this.state.password}
                             onChange ={e=>this.setState({password:e.target.value})}
                         />

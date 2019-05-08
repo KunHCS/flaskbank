@@ -27,7 +27,7 @@ class Statement extends React.Component {
 
 
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
-            alert('Invalid email format');
+            alert('Invalid Email Format');
             return;
         }
 
@@ -58,7 +58,7 @@ class Statement extends React.Component {
                     }).catch (error => console.log(error.response.data.msg));
 
             }).catch (error => {
-            alert("Update Fail---"+error.response.data.msg);
+            alert("Update Failed---"+error.response.data.msg);
             console.log(error.response.data.msg);});
     }
 
@@ -100,7 +100,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="first_name"
-                                        maxlength="50"
+                                        maxLength={"50"}
                                         placeholder={first_name}
                                         value={this.state.first_name}
                                         onChange ={this.onChange}
@@ -113,7 +113,7 @@ class Statement extends React.Component {
                                         type="text"
                                         className="form-control"
                                         name="last_name"
-                                        maxlength="50"
+                                        maxLength={"50"}
                                         placeholder={last_name}
                                         value={this.state.last_name}
                                         onChange ={this.onChange}
@@ -126,7 +126,7 @@ class Statement extends React.Component {
                                         type="email"
                                         className="form-control"
                                         name="email"
-                                        maxlength="50"
+                                        maxLength="50"
                                         placeholder={email}
                                         value={this.state.email}
                                         onChange ={this.onChange}
@@ -141,7 +141,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="current_password"
                                         placeholder="Old Password"
-                                        maxlength="50"
+                                        maxLength="50"
                                         value={this.state.current_password}
                                         onChange ={this.onChange}
                                     />
@@ -155,7 +155,7 @@ class Statement extends React.Component {
                                         className="form-control"
                                         name="password"
                                         placeholder="New Password"
-                                        maxlength="50"
+                                        maxLength="50"
                                         value={this.state.password}
                                         onChange={this.onChange}
                                     />

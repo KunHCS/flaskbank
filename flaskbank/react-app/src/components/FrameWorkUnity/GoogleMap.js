@@ -111,16 +111,6 @@ class MapContainer extends Component {
                 })
 
 
-                // return async (dispatch) => {
-                //     const { data } = await axios.get(url)
-                //     //const current = {lat, lng}
-                //     const allLocations = data.results.map((atm) => {
-                //         this.state.markers.push(atm.geometry.location);
-                //         return atm.geometry.location
-                //     })
-                //     dispatch(this.gotNearestATMsLocation(allLocations))
-                // }
-            })
             .catch(error => console.log(error.response))
         alert(this.state.markers.forEach((e) => e.toString()))
     }

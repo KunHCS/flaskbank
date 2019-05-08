@@ -74,7 +74,7 @@ class DepositPage extends React.Component{
         e.preventDefault();
 
         if(this.state.payAmount <= 0 || this.state.payAmount == "Please Enter Your Amount") {
-            alert("Amount Can't be 0 or negative, Please try again");
+            alert("Amount Can't be 0 or Negative, Please Try Again");
             return
         }
 
@@ -102,10 +102,10 @@ class DepositPage extends React.Component{
         axios.post('api/deposit/check', formData, {headers: req_headers}
         ).then(response => {
            console.log(response);
-            alert("Account Deposit Success");
+            alert("Account Deposit Succeeded---");
         }).catch(error => {
             console.log(error.response);
-            alert("Account Deposit Fail "+error.response.data.msg);
+            alert("Account Deposit Failed---"+error.response.data.msg);
         });
 
         this.setState({payAmount: "Please Enter Your Amount"})
@@ -174,9 +174,10 @@ class DepositPage extends React.Component{
                                     step="0.01"
                                     placeholder= "$ Enter the Amount"
                                     min="0"
-                                    max="999999999"
+                                    max="1000000"
+                                    maxLength={"7"}
                                     value = {this.state.payAmount}
-                                    onkeydown="return event.keyCode !== 69"
+                                    onKeyDown={"return event.keyCode !== 69"}
                                     onChange ={e=>this.setState({payAmount:e.target.value})}
                                 />
                                     <hr/>

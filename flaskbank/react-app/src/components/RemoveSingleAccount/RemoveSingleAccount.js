@@ -54,13 +54,13 @@ class RemoveSingleAccount extends React.Component {
         console.log(this.state.currentBalance);
 
         if (this.state.myAccount.type !=="credit" && parseFloat(this.state.currentBalance)<0 ) {
-            alert("Account Can't be Close while it has negative balance")
+            alert("Account Can't be Closed While It Has a Negative Balance")
             return;
         }
 
 
         if(this.state.myAccount.type=="credit" && parseFloat(this.state.myAccount.balance)>0) {
-             alert("Credit Account Can't be Close while it has negative balance")
+             alert("Credit Account Can't be Closed While It Has a Negative Balance")
              return;
         }
 
@@ -78,7 +78,7 @@ class RemoveSingleAccount extends React.Component {
         )
             .then(response => {
                 console.log(response);
-                alert("Account Close Success")
+                alert("Account Close Succeeded---")
 
                 axios.get("/api/client/all",{headers: req_headers})
                     .then(response => {
@@ -88,7 +88,7 @@ class RemoveSingleAccount extends React.Component {
 
             }).catch (error => {
             console.log(error.response.data.msg);
-            alert("Account Close Fail ---"+error.response.data.msg);
+            alert("Account Close Failed---"+error.response.data.msg);
         });
 
         this.props.closePopWindow();
