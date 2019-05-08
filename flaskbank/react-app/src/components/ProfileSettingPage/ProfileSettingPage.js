@@ -86,7 +86,7 @@ class Statement extends React.Component {
         console.log(e.target.value);
 
         if(e.target.name==='first_name' ||e.target.name === 'last_name') {
-            if (/^[a-zA-Z_\-\s]+$/.test(e.target.value) || e.target.value==="") {
+            if (/^[a-zA-Z]+$/.test(e.target.value) || e.target.value==="") {
                 this.setState({[e.target.name]: e.target.value});
             }
         }else {
