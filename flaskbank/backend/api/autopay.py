@@ -37,6 +37,13 @@ def autopay_route():
     if not am.verify(from_acc) or not am.verify(to_acc):
         return am.jsonify({'msg': 'invalid account number'}), 400
 
+    from_account = am.clients.find_one({'username': current_user,
+                                        'accounts.account_number':
+                                            str(from_acc)},
+                                       {'accounts.$': True})
+    if float(from_account['accounts'][0]['balance'].to_decimal()) <= 0:
+        return am.jsonify({'msg': 'Not enough balance'}), 409
+
     if not am.clients.find_one({'accounts.account_number': from_acc}) or \
             not am.clients.find_one({'accounts.account_number': to_acc}):
         return am.jsonify({'msg': 'account does not exist'}), 400
