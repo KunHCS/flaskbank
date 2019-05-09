@@ -42,3 +42,7 @@ export const CLEAN_QUERY = "clean_query";
 
 export const GET_CLIENT_INFO = "get_client_info";
 export const CLEAN_CLIENT_INFO = "clean_client_info";
+
+
+export const IMAGE_ON = "image_on";
+export const IMAGE_OFF = "image_off"

@@ -16,6 +16,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import * as ACTION from "../../static/action_type";
+import {uploadImageOff} from "../../actions/MyUpLoadImageAction/MyUpLoadImageAction";
 
 const styles = theme => ({
     button: {
@@ -63,7 +64,6 @@ class DepositPage extends React.Component{
         payAmount: "",
         AccountNumber :"You need to select a checking/saving account",
         open : false,
-        clear: false,
     };
 
     componentDidMount() {
@@ -110,6 +110,7 @@ class DepositPage extends React.Component{
 
         this.setState({payAmount: "Please Enter Your Amount"})
         this.props.imageUpLoadAction_Clean()
+        this.props.uploadImageOff();
     }
 
 
@@ -129,9 +130,6 @@ class DepositPage extends React.Component{
         }
     };
 
-    clearImage = () => {
-        this.setState({clear: true})
-    }
 
     renderAccountOne() {
         const { classes } = this.props;
@@ -181,7 +179,6 @@ class DepositPage extends React.Component{
                                     max="1000000"
                                     maxLength={"7"}
                                     value = {this.state.payAmount}
-                                    onKeyDown={"return event.keyCode !== 69"}
                                     onChange ={e=>this.setState({payAmount:e.target.value})}
                                 />
                                     <hr/>
@@ -199,14 +196,13 @@ class DepositPage extends React.Component{
                                     type = "submit"
                                     variant="contained"
                                     color="primary"
-                                    onClick={this.clearImage}
                                 >
                                     Submit
                                 </Button>
                                 </form>
                             </div>
                                 <div style={{float: 'left', width:"50%"}}>
-                                    <ImageUpLoader checkType = {ACTION.CHECKING} clear={this.state.clear}/>
+                                    <ImageUpLoader checkType = {ACTION.CHECKING}/>
                                 </div>
                         </div>
                     </div>
@@ -235,4 +231,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{imageUpLoadAction_Clean})(withStyles(styles)(DepositPage));
+export default connect(mapStateToProps,{uploadImageOff,imageUpLoadAction_Clean})(withStyles(styles)(DepositPage));

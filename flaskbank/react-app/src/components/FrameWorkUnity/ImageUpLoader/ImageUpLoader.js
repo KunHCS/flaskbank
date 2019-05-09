@@ -5,6 +5,7 @@ import {
     imageUpLoadAction_Save
 } from "../../../actions/ImageUpLoadAction/ImageUpLoadAction_Check";
 import * as ACTION from "../../../static/action_type";
+import {uploadImageOn} from "../../../actions/MyUpLoadImageAction/MyUpLoadImageAction";
 import myStyle from "./style.css";
 import axios from "axios";
 import {loginAction, logInRequest} from "../../../actions/LoginAction/loginAction";
@@ -44,6 +45,7 @@ class ImageUpload extends React.Component {
     _handleImageChange(e) {
         e.preventDefault();
 
+
         let reader = new FileReader();
         let file = e.target.files[0];
 
@@ -62,23 +64,27 @@ class ImageUpload extends React.Component {
             this.props.imageUpLoadAction_Save(file);
         }
 
+        this.props.uploadImageOn();
+
     }
 
     render() {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
-        if (imagePreviewUrl) {
+        if (imagePreviewUrl && this.props.myImageState === true) {
             $imagePreview = (<img src={imagePreviewUrl}/>);
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
+
         // console.log("fgdgdgdgdgdgdfgdgd");
         // console.log(this.state);
         // console.log(this.props);
-        if(this.props.clear){
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
+
+
+
+
         return (
 
             <div className="previewComponent">
@@ -90,6 +96,7 @@ class ImageUpload extends React.Component {
 
                 <form onSubmit={(e) => this._handleSubmit(e)}>
                     <input className="fileInput"
+
                            type="file"
                            onChange={(e) => this._handleImageChange(e)}/>
                     {/*<button className="submitButton"*/}
@@ -109,4 +116,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {imageUpLoadAction_Check, imageUpLoadAction_Save})(ImageUpload);
+export default connect(mapStateToProps, {imageUpLoadAction_Check, imageUpLoadAction_Save,uploadImageOn})(ImageUpload);
