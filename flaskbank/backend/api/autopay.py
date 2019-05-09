@@ -41,7 +41,7 @@ def autopay_route():
                                         'accounts.account_number':
                                             str(from_acc)},
                                        {'accounts.$': True})
-    if float(from_account['accounts'][0]['balance'].to_decimal()) <= 0:
+    if float(from_account['accounts'][0]['balance'].to_decimal())-amount <= 0:
         return am.jsonify({'msg': 'Not enough balance'}), 409
 
     if not am.clients.find_one({'accounts.account_number': from_acc}) or \
