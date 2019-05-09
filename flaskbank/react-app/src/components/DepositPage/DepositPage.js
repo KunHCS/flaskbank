@@ -63,7 +63,7 @@ class DepositPage extends React.Component{
         payAmount: "",
         AccountNumber :"You need to select a checking/saving account",
         open : false,
-
+        clear: false,
     };
 
     componentDidMount() {
@@ -128,6 +128,10 @@ class DepositPage extends React.Component{
             this.setState({open: true});
         }
     };
+
+    clearImage = () => {
+        this.setState({clear: true})
+    }
 
     renderAccountOne() {
         const { classes } = this.props;
@@ -195,13 +199,14 @@ class DepositPage extends React.Component{
                                     type = "submit"
                                     variant="contained"
                                     color="primary"
+                                    onClick={this.clearImage}
                                 >
                                     Submit
                                 </Button>
                                 </form>
                             </div>
                                 <div style={{float: 'left', width:"50%"}}>
-                                    <ImageUpLoader checkType = {ACTION.CHECKING}/>
+                                    <ImageUpLoader checkType = {ACTION.CHECKING} clear={this.state.clear}/>
                                 </div>
                         </div>
                     </div>
