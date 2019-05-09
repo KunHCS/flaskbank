@@ -1,5 +1,6 @@
 from .. import all_module as am
 from .utils import record_transaction
+from .autopay import scheduler
 
 accounts_bp = am.Blueprint('accounts_bp', __name__)
 
@@ -81,6 +82,28 @@ def close_account(account_num):
         return am.jsonify({'msg': 'Invalid account number checksum'}), 422
 
     current_user = am.get_jwt_identity()['username']
+
+    if account_num[0] == '4':
+        pre_update = am.clients.find_one_and_update(
+            {'username': current_user},
+            {'$unset': {'auto_pay': ''}}
+        )
+        jobs = pre_update.get('auto_pay', [])
+        for job in jobs:
+            scheduler.remove_job(job['job_id'], jobstore='mongo')
+
+    else:
+        query = {'username': current_user,
+                 'auto_pay.from': account_num}
+        autopay = am.clients.find_one(query,
+                                      {'auto_pay.$': True})
+        if autopay:
+            current_job = autopay['auto_pay'][0]
+            scheduler.remove_job(current_job['job_id'], jobstore='mongo')
+            am.clients.update_one(query,
+                                  {'$pull': {
+                                      'auto_pay': {'from': account_num}
+                                  }})
 
     result = am.clients.update_one(
         {'username': current_user},
