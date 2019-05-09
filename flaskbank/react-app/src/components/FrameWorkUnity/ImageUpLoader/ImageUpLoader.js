@@ -64,7 +64,6 @@ class ImageUpload extends React.Component {
 
     }
 
-
     render() {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
@@ -77,7 +76,9 @@ class ImageUpload extends React.Component {
         // console.log("fgdgdgdgdgdgdfgdgd");
         // console.log(this.state);
         // console.log(this.props);
-
+        if(this.props.clear){
+            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
         return (
 
             <div className="previewComponent">
