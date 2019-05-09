@@ -166,6 +166,20 @@ class BillPay extends React.Component{
 
     /************************************************************************************ */
 
+
+    onChange = (e) => {
+        //console.log(e.target.value);
+        if(e.target.name==='AutoPayAmount') {
+            if ( e.target.value>=0 &&  e.target.value<= 1000000) {
+                this.setState({ autoPayAmount : e.target.value});
+            }
+        }else {
+            this.setState({[e.target.name]: e.target.value});
+        }
+
+    }
+
+
     AutoPay(con) {
 
         if (con == "start") {
@@ -278,7 +292,6 @@ class BillPay extends React.Component{
                                        max="1000000"
                                        maxLength={7}
                                        placeholder= "$ Enter Your Amount"
-                                       onKeyDown="return event.keyCode !== 69"
                                        value = {this.state.payAmountCredit}
                                        onChange ={e=>this.setState({payAmountCredit:e.target.value})}/>
                                 <hr/>
@@ -307,15 +320,16 @@ class BillPay extends React.Component{
                             <div style={{float: 'left', width:"49%"}}>
                                 <input type="number"
                                        className="form-control"
-                                       name="amount"
+                                       name="AutoPayAmount"
                                        step="0.01"
                                        min="0"
                                        max="1000000"
                                        maxLength={7}
-                                       onKeyDown="return event.keyCode !== 69"
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
-                                       onChange ={e=>this.setState({autoPayAmount:e.target.value})}/>
+                                       onChange={this.onChange}
+                                       // onChange ={e=>this.setState({autoPayAmount:e.target.value})}
+                                       />
                             </div>
                             <div style={{float: 'right', width:"49%"}}>
                                 <input
@@ -326,7 +340,6 @@ class BillPay extends React.Component{
                                     min="0"
                                     max="525600"
                                     maxLength={6}
-                                    onKeyDown="return event.keyCode !== 69"
                                     placeholder= "Enter The Time Interval in Minutes"
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>
