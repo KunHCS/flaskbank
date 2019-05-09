@@ -40,17 +40,10 @@ class OuterAccountTransfer extends React.Component{
             return
         }
 
-        if(this.state.transferAmount === 0 || this.state.transferAmount === "$ Enter Your Amount") {
-            alert("The Transfer Amount Can't be 0, Please Try Again");
+        if(this.state.transferAmount <= 0 || this.state.transferAmount === "$ Enter Your Amount" || this.state.transferAmount > 1000000) {
+            alert("The Transfer Amount Can't be Negative, 0, Over $1,000,000 or Empty. Try Again");
             return
         }
-
-
-        if (this.state.transferAmount<0) {
-            alert("The Transfer Amount Can't Negative, Please Try Again");
-            return
-        }
-
 
         const req_headers = {Authorization: 'Bearer ' + this.props.myKey}
 
@@ -153,9 +146,7 @@ class OuterAccountTransfer extends React.Component{
                             type="number"
                             className="form-control"
                             name="accountNumber"
-                            min="0"
-                            max="1000000"
-                            maxLength={"7"}
+                            maxLength={"10"}
                             placeholder="Other Bank Account Number"
                             value={this.state.selectTo}
                             onChange ={e=>this.setState({selectTo:e.target.value})}

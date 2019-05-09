@@ -220,7 +220,7 @@ class BillPay extends React.Component{
                   {headers: req_headers}
                ).then(response => {
                    console.log(response);
-                   alert("Start AutoPay Succeeded--" +response.data.msg)
+                   alert("Start AutoPay Succeeded---" +response.data.msg)
                   this.getAutopayStatement()
                }).catch(error => {
                console.log(error.response.data.msg);
