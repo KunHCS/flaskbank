@@ -339,7 +339,7 @@ class BillPay extends React.Component{
                                     step="0.01"
                                     min="0"
                                     max="525600"
-                                    maxLength={6}
+                                    maxLength={"6"}
                                     placeholder= "Enter The Time Interval in Minutes"
                                     value = {this.state.time}
                                     onChange ={e=>this.setState({time:e.target.value})}/>

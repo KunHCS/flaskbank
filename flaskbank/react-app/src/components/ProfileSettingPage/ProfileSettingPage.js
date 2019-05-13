@@ -236,7 +236,7 @@ class ProfileSettingPage extends React.Component {
 
 
 const paperStyle = {
-    height: '80%',
+    height: '87%',
     width:  '90%',
     fontWeight: 'bold',
     WebkitBorderRadius:'10px 10px 10px 10px',
