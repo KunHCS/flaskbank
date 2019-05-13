@@ -161,7 +161,7 @@ class Register extends Component {
                                         className="form-control"
                                         name="email"
                                         placeholder="Enter an Email"
-                                        minLength={"7"}
+                                        minLength="7"
                                         maxLength="50"
                                         value={this.state.email}
                                         onChange={this.onChange}
