@@ -174,7 +174,7 @@ class DepositPage extends React.Component{
                                     className="form-control"
                                     name="amount"
                                     step="0.01"
-                                    placeholder= "$ Enter the Amount"
+                                    placeholder= "$ Enter Your Amount"
                                     min="0"
                                     max="1000000"
                                     maxLength={"7"}
