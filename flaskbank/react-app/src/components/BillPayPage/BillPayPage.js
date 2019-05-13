@@ -324,7 +324,7 @@ class BillPay extends React.Component{
                                        step="0.01"
                                        min="0"
                                        max="1000000"
-                                       maxLength={7}
+                                       maxLength={"7"}
                                        placeholder= "$ Enter Your Amount"
                                        value = {this.state.autoPayAmount}
                                        onChange={this.onChange}
